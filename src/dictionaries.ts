@@ -147,7 +147,7 @@ const en = {
       },
       {
         q: "Is it on Android?",
-        a: "Yes. Kidsit AI is available for both iPhone and Android — grab it from the App Store or Google Play. Same app, same coach, either phone.",
+        a: "Yes. Kidsit AI is available for both iPhone and Android — grab it from the App Store or Google Play. Same app, same coach, either phone. Questions? Write to omer+support@kidsit.ai.",
       },
     ],
   },
@@ -160,6 +160,7 @@ const en = {
       { label: "FAQ", href: "#faq" },
       { label: "Privacy", href: "/en/privacy" },
       { label: "Terms", href: "/en/terms" },
+      { label: "Contact us", href: "mailto:omer+support@kidsit.ai" },
     ],
     disclaimer:
       "© 2026 Kidsit.ai. This app is not a substitute for professional, medical, or psychological advice. It is designed to provide parents with smart, sensitive, and practical guidance for dealing with everyday situations in real-time.",
@@ -313,7 +314,7 @@ const he: Dict = {
       },
       {
         q: "יש גרסה לאנדרואיד?",
-        a: "כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד — מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון.",
+        a: "כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד — מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון. יש שאלות? כתבו לנו: omer+support@kidsit.ai.",
       },
     ],
   },
@@ -326,6 +327,7 @@ const he: Dict = {
       { label: "שאלות נפוצות", href: "#faq" },
       { label: "פרטיות", href: "/he/privacy" },
       { label: "תנאי שימוש", href: "/he/terms" },
+      { label: "צרו קשר", href: "mailto:omer+support@kidsit.ai" },
     ],
     disclaimer:
       "© 2026 Kidsit.ai. האפליקציה אינה תחליף לייעוץ מקצועי, רפואי או פסיכולוגי. היא נועדה להעניק להורים הדרכה חכמה, רגישה ומעשית להתמודדות עם סיטואציות יומיומיות בזמן אמת.",
