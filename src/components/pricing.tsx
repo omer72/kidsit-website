@@ -3,6 +3,7 @@
 // Billing toggle pattern adapted from 21st.dev pricing-section (kokonutd/867),
 // restyled to the kidsit sticker system.
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { m, spring, useStagger, Reveal } from "./motion";
 import { STORE_URLS, type Dict } from "@/dictionaries";
 
@@ -114,9 +115,19 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
 
         <m.div variants={child}>
           <article className="relative flex h-full flex-col rounded-3xl border-2 border-ink bg-grape p-6 text-white shadow-sticker-lg md:-rotate-1">
-            <span className="absolute -top-4 right-6 rotate-2 rounded-lg border-2 border-ink bg-sunny px-3 py-1 text-sm font-extrabold text-ink shadow-sticker-sm">
-              {t.premium.badge}
-            </span>
+            <AnimatePresence>
+              {yearly && (
+                <m.span
+                  className="absolute -top-4 right-6 rotate-2 rounded-lg border-2 border-ink bg-sunny px-3 py-1 text-sm font-extrabold text-ink shadow-sticker-sm"
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.6 }}
+                  transition={spring}
+                >
+                  {t.premium.badge}
+                </m.span>
+              )}
+            </AnimatePresence>
             <h3 className="font-display text-xl font-semibold">{t.premium.name}</h3>
             <p className="mt-1 text-sm font-bold text-white/70">{t.premium.desc}</p>
             <p className="mt-4">
