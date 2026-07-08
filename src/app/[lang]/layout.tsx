@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Fredoka, Nunito, Rubik } from "next/font/google";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 import "../globals.css";
@@ -53,6 +54,17 @@ export default function RootLayout({
         style={{ "--font-body": bodyFont } as React.CSSProperties}
       >
         {children}
+        {/* afterInteractive so analytics never competes with LCP */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-MJH3YYBHJ0"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-MJH3YYBHJ0');`}
+        </Script>
       </body>
     </html>
   );
