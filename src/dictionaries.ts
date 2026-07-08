@@ -135,7 +135,7 @@ const en = {
       },
       {
         q: "Where does the advice come from?",
-        a: "The guidance is grounded in the Adlerian, Haim Ginott, and Faber–Mazlish parenting tradition: empathy first, advice last. The tone is a calm friend with a developmental-psych background — not a clinical report, not a lecture.",
+        a: "The guidance is grounded in decades of established child-development research and respected parenting practice: empathy first, advice last. The tone is a calm friend with a developmental-psych background — not a clinical report, not a lecture.",
       },
       {
         q: "What happens to what I whisper?",
@@ -301,7 +301,7 @@ const he: Dict = {
       },
       {
         q: "מאיפה מגיעות העצות?",
-        a: "ההדרכה מבוססת על מסורת ההורות של אדלר, חיים גינות ופייבר–מזליש: קודם אמפתיה, אחר כך עצה. הטון הוא של חבר רגוע עם רקע בפסיכולוגיה התפתחותית — לא דוח קליני ולא הרצאה.",
+        a: "ההדרכה מבוססת על עשרות שנים של מחקר בהתפתחות הילד ועל גישות הורות מוכרות: קודם אמפתיה, אחר כך עצה. הטון הוא של חבר רגוע עם רקע בפסיכולוגיה התפתחותית — לא דוח קליני ולא הרצאה.",
       },
       {
         q: "מה קורה עם מה שאני מספר?",
