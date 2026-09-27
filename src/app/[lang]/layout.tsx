@@ -29,10 +29,25 @@ export const dynamicParams = false;
 export function generateMetadata({ params }: { params: { lang: Lang } }): Metadata {
   const t = dictionaries[params.lang].meta;
   return {
+    metadataBase: new URL("https://kidsit.ai"),
     title: t.title,
     description: t.description,
     alternates: {
+      canonical: `/${params.lang}`,
       languages: { en: "/en", he: "/he" },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Kidsit AI",
+      url: `/${params.lang}`,
+      locale: params.lang === "he" ? "he_IL" : "en_US",
+      title: t.title,
+      description: t.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.description,
     },
   };
 }

@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { dictionaries, type Lang } from "@/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Terms of Service — Kidsit AI",
-};
+export function generateMetadata({ params }: { params: { lang: Lang } }): Metadata {
+  return {
+    title: "Terms of Service — Kidsit AI",
+    alternates: {
+      canonical: `/${params.lang}/terms`,
+      languages: { en: "/en/terms", he: "/he/terms" },
+    },
+  };
+}
 
 const SECTIONS = [
   {
