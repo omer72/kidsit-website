@@ -3,7 +3,8 @@ export type Lang = (typeof LANGS)[number];
 
 export const STORE_URLS = {
   apple: "https://apple.co/4a3XNxw",
-  play: "https://play.google.com/store/apps/details?id=ai.kidsit.app",
+  // referrer= carries the campaign into Play Console → Acquisition reports
+  play: "https://play.google.com/store/apps/details?id=ai.kidsit.app&referrer=utm_source%3Dkidsit_site%26utm_medium%3Dweb%26utm_campaign%3Dsite_cta",
 };
 
 const en = {
