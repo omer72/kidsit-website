@@ -35,7 +35,7 @@ export function SocialProof({ t }: { t: Dict["social"] }) {
       </m.div>
 
       <m.div
-        className="mt-10 grid gap-6 md:grid-cols-3"
+        className="mt-10 grid items-start gap-6 md:grid-cols-3"
         variants={parent}
         initial="hidden"
         whileInView="show"
@@ -57,7 +57,10 @@ export function SocialProof({ t }: { t: Dict["social"] }) {
               </span>
               <span>
                 <span className="block font-display font-semibold">{q.name}</span>
-                <span className="block text-sm font-bold text-ink/60">{q.role}</span>
+                <span className="block text-sm font-bold text-ink-muted">
+                  {t.sourceLabel} · “{q.role}”
+                  {t.translatedNote && ` (${t.translatedNote})`}
+                </span>
               </span>
             </figcaption>
           </m.figure>

@@ -1,18 +1,26 @@
 export const LANGS = ["en", "he"] as const;
 export type Lang = (typeof LANGS)[number];
 
-export const STORE_URLS = {
-  apple: "https://apple.co/4a3XNxw",
+// No /us/ in the Apple URL: Apple redirects to the visitor's storefront.
+// ct= labels the placement; add &pt=<provider token> to see it in App Store Connect.
+export const storeUrl = {
+  apple: (placement: string) =>
+    `https://apps.apple.com/app/id6769443099?mt=8&ct=${placement}`,
   // referrer= carries the campaign into Play Console → Acquisition reports
-  play: "https://play.google.com/store/apps/details?id=ai.kidsit.app&referrer=utm_source%3Dkidsit_site%26utm_medium%3Dweb%26utm_campaign%3Dsite_cta",
+  play: (placement: string) =>
+    `https://play.google.com/store/apps/details?id=ai.kidsit.app&referrer=${encodeURIComponent(
+      `utm_source=kidsit_site&utm_medium=web&utm_campaign=site_cta&utm_content=${placement}`,
+    )}`,
 };
+
+export type FaqItem = { q: string; a: string; link?: { label: string; href: string } };
 
 const en = {
   dir: "ltr" as "ltr" | "rtl",
   meta: {
-    title: "Kidsit AI — calm guidance for hard moments",
+    title: "Kidsit AI | Calm guidance for hard parenting moments",
     description:
-      "Whisper what just happened with your child. Get warm, science-backed guidance in seconds — without judgment, without lectures.",
+      "Whisper what just happened with your child. Get warm, science-backed guidance in about 10 seconds, without judgment and without lectures.",
   },
   nav: {
     links: [
@@ -24,13 +32,16 @@ const en = {
     cta: "Try it free",
     switchLabel: "עברית",
     switchHref: "/he",
+    switchLang: "he",
+    label: "Main",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
   },
   hero: {
-    badge: "Your AI parenting copilot · ★ 5.0 on the App Store",
-    h1a: "Smart guidance,",
-    h1b: "right",
-    h1Scribbled: "when you need it.",
-    sub: "Press and hold the mic. Describe what just happened with your kid — even when your hands are full. Ten seconds later: practical, personalized guidance in real time.",
+    badge: "AI parenting copilot for iPhone and Android",
+    h1a: "Calm help for the",
+    h1Scribbled: "hard parenting moments.",
+    sub: "Hold the mic, say what happened. Get a calm plan in about 10 seconds.",
     ctaApple: "App Store",
     ctaPlay: "Google Play",
     ctaSecondary: "Watch it work",
@@ -45,36 +56,43 @@ const en = {
     cards: [
       {
         emoji: "⚡",
-        title: "Instant help in situations",
-        desc: "Get practical, personalized guidance the moment a challenge arises with your child — whisper it or type it, even when your hands are full.",
+        title: "Instant help, in the moment",
+        desc: "Get practical, personalized guidance the moment a challenge arises with your child. Whisper it or type it, even when your hands are full.",
       },
       {
         emoji: "🧠",
         title: "Tailored to your child",
-        desc: "The system learns your child's characteristics and adapts advice accordingly. When you mark something \"didn't help,\" the next answer tries a different angle.",
+        desc: "Kidsit gets to know your child and adapts its advice. When you mark something \"didn't help,\" the next answer tries a different angle.",
       },
       {
         emoji: "🌙",
         title: "End of day report",
-        desc: "Get insights on the day's patterns and challenges, plus tips for tomorrow — so the hard moments turn into something you can actually see and plan around.",
+        desc: "Get insights on the day's patterns and challenges, plus tips for tomorrow, so the hard moments turn into something you can actually see and plan around.",
       },
     ],
   },
   showcase: {
     heading: "See a real answer",
-    sub: "Thirty seconds, one whispered moment, and what comes back.",
+    sub: "A 30-second walkthrough: one whispered moment, and what comes back.",
+    videoLabel: "30-second demo: a parent describes a hard moment and gets a calm plan",
+    alts: [
+      "Kidsit AI response screen with structured guidance: what happened, why, and what to try",
+      "Kidsit AI history screen showing logged moments for a child",
+    ],
     captions: [
-      "A kinder second look — not a lecture, not a label",
+      "A kinder second look: not a lecture, not a label",
       "Patterns become visible over time",
     ],
   },
   social: {
     heading: "Loved by parents",
     stats: [
-      { value: "5.0★", label: "on the App Store" },
+      { value: "iOS + Android", label: "one app, either phone" },
       { value: "~10 sec", label: "from whisper to plan" },
       { value: "1 kid free", label: "no time limit" },
     ],
+    sourceLabel: "App Store review",
+    translatedNote: "",
     quotes: [
       {
         quote:
@@ -99,8 +117,11 @@ const en = {
     ],
   },
   pricing: {
-    heading: "Free with one kid. Trial the rest.",
-    sub: "Premium starts with a 7-day free trial. Cancel anytime in Settings → Subscriptions.",
+    heading: "Free for one child. Premium free for 7 days.",
+    sub: "Premium starts with a 7-day free trial. Cancel anytime from your App Store or Google Play subscriptions.",
+    toggleLabel: "Billing period",
+    yearlyNote: "That's $5.00/month, billed yearly after a 7-day free trial.",
+    monthlyNote: "Billed monthly after a 7-day free trial.",
     monthly: "Monthly",
     yearly: "Yearly · save 50%",
     perMonth: "/month",
@@ -132,27 +153,32 @@ const en = {
     items: [
       {
         q: "Is this therapy or medical advice?",
-        a: "No. Kidsit AI is a reflective parenting companion for everyday moments — tantrums, bedtime standoffs, sibling battles. It does not diagnose or treat, and if something touches your child's safety, development, or mental health, it will tell you plainly to talk to a pediatrician, therapist, or licensed clinician.",
+        a: "No. Kidsit AI is a reflective parenting companion for everyday moments: tantrums, bedtime standoffs, sibling battles. It does not diagnose or treat, and if something touches your child's safety, development, or mental health, it will tell you plainly to talk to a pediatrician, therapist, or licensed clinician.",
       },
       {
         q: "Where does the advice come from?",
-        a: "The guidance is grounded in decades of established child-development research and respected parenting practice: empathy first, advice last. The tone is a calm friend with a developmental-psych background — not a clinical report, not a lecture.",
+        a: "The guidance is grounded in decades of established child-development research and respected parenting practice: empathy first, advice last. The tone is a calm friend with a developmental-psych background, not a clinical report and not a lecture.",
       },
       {
         q: "What happens to what I whisper?",
         a: "Your voice is transcribed transiently and not retained by us. Moments and child profiles live on your device. No ads, no selling data, and nothing you say is used to train models.",
+        link: { label: "Read how voice is handled", href: "/en/privacy#voice" },
       },
       {
         q: "How does the free trial work?",
-        a: "You can use Kidsit AI free with one child, no time limit. Premium (unlimited children, patterns over time) comes as a monthly or yearly plan, and both start with a 7-day free trial for new subscribers. Cancel anytime in Settings → Apple ID → Subscriptions.",
+        a: "You can use Kidsit AI free with one child, no time limit. Premium (unlimited children, patterns over time) comes as a monthly or yearly plan, and both start with a 7-day free trial for new subscribers. Cancel anytime. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
         q: "Is it on Android?",
-        a: "Yes. Kidsit AI is available for both iPhone and Android — grab it from the App Store or Google Play. Same app, same coach, either phone. Questions? Write to omer+support@kidsit.ai.",
+        a: "Yes. Kidsit AI is available for both iPhone and Android, grab it from the App Store or Google Play. Same app, same coach, either phone. Questions? Write to omer+support@kidsit.ai.",
       },
-    ],
+    ] as FaqItem[],
   },
   footer: {
+    label: "Footer",
+    switchLabel: "עברית",
+    switchHref: "/he",
+    switchLang: "he",
     tagline: "Calm guidance for hard moments. Built by a parent, for parents.",
     links: [
       { label: "Features", href: "#features" },
@@ -167,7 +193,7 @@ const en = {
       "© 2026 Kidsit.ai. This app is not a substitute for professional, medical, or psychological advice. It is designed to provide parents with smart, sensitive, and practical guidance for dealing with everyday situations in real-time.",
   },
   legal: {
-    back: "← Back to kidsit·ai",
+    back: "← Back to",
     home: "/en",
   },
 };
@@ -177,9 +203,9 @@ export type Dict = typeof en;
 const he: Dict = {
   dir: "rtl",
   meta: {
-    title: "Kidsit AI — הדרכה רגועה לרגעים הקשים",
+    title: "Kidsit AI | הדרכה רגועה לרגעים הקשים",
     description:
-      "מספרים מה קרה עכשיו עם הילד ומקבלים הדרכה חמה ומבוססת מדע תוך שניות — בלי שיפוטיות ובלי הרצאות.",
+      "מספרים מה קרה עכשיו עם הילד ומקבלים הדרכה חמה ומבוססת מדע תוך כ-10 שניות, בלי שיפוטיות ובלי הרצאות.",
   },
   nav: {
     links: [
@@ -191,13 +217,16 @@ const he: Dict = {
     cta: "נסו חינם",
     switchLabel: "English",
     switchHref: "/en",
+    switchLang: "en",
+    label: "ראשי",
+    openMenu: "פתיחת תפריט",
+    closeMenu: "סגירת תפריט",
   },
   hero: {
-    badge: "הקופיילוט ההורי שלכם · ★ 5.0 ב-App Store",
-    h1a: "הדרכה חכמה,",
-    h1b: "בדיוק",
-    h1Scribbled: "כשצריכים אותה.",
-    sub: "לוחצים על המיקרופון ומספרים מה קרה עכשיו עם הילד — גם כשהידיים מלאות. עשר שניות אחר כך: הדרכה מעשית ומותאמת אישית, בזמן אמת.",
+    badge: "קופיילוט הורות חכם לאייפון ולאנדרואיד",
+    h1a: "עזרה רגועה",
+    h1Scribbled: "לרגעים הקשים בהורות.",
+    sub: "לוחצים על המיקרופון ומספרים מה קרה. תוך כ-10 שניות מקבלים תוכנית רגועה.",
     ctaApple: "App Store",
     ctaPlay: "Google Play",
     ctaSecondary: "צפו איך זה עובד",
@@ -213,39 +242,46 @@ const he: Dict = {
       {
         emoji: "⚡",
         title: "עזרה מיידית בכל סיטואציה",
-        desc: "הדרכה מעשית ומותאמת אישית ברגע שמתעורר אתגר עם הילד — בקול או בהקלדה, גם כשהידיים מלאות.",
+        desc: "הדרכה מעשית ומותאמת אישית ברגע שמתעורר אתגר עם הילד. בקול או בהקלדה, גם כשהידיים מלאות.",
       },
       {
         emoji: "🧠",
         title: "מותאם לילד שלכם",
-        desc: "המערכת לומדת את המאפיינים של הילד ומתאימה את הייעוץ בהתאם. סימנתם ש\"לא עזר\"? התשובה הבאה תנסה כיוון אחר.",
+        desc: "Kidsit מכירה את הילד שלכם ומתאימה את העצות בהתאם. סימנתם ש\"לא עזר\"? התשובה הבאה תנסה כיוון אחר.",
       },
       {
         emoji: "🌙",
         title: "סיכום יומי",
-        desc: "תובנות על הדפוסים והאתגרים של היום, וטיפים למחר — כדי שהרגעים הקשים יהפכו למשהו שאפשר לראות ולתכנן סביבו.",
+        desc: "תובנות על הדפוסים והאתגרים של היום, וטיפים למחר, כדי שהרגעים הקשים יהפכו למשהו שאפשר לראות ולתכנן סביבו.",
       },
     ],
   },
   showcase: {
     heading: "ככה נראית תשובה אמיתית",
-    sub: "חצי דקה, רגע אחד שסיפרתם, ומה שחוזר.",
+    sub: "הדגמה של חצי דקה: רגע אחד שסיפרתם, ומה שחוזר.",
+    videoLabel: "הדגמה של 30 שניות: הורה מספר על רגע קשה ומקבל תוכנית רגועה",
+    alts: [
+      "מסך התשובה של Kidsit AI עם הדרכה מסודרת: מה קרה, למה, ומה לנסות",
+      "מסך ההיסטוריה של Kidsit AI עם רגעים שנרשמו עבור ילד",
+    ],
     captions: [
-      "מבט שני, רך יותר — לא הרצאה ולא תווית",
+      "מבט שני, רך יותר: לא הרצאה ולא תווית",
       "הדפוסים נהיים גלויים עם הזמן",
     ],
   },
   social: {
     heading: "הורים ממליצים",
     stats: [
-      { value: "5.0★", label: "ב-App Store" },
+      { value: "iOS + אנדרואיד", label: "אפליקציה אחת, כל טלפון" },
       { value: "‎~10 שניות", label: "מסיפור לתוכנית" },
       { value: "ילד אחד חינם", label: "ללא הגבלת זמן" },
     ],
+    sourceLabel: "ביקורת ב-App Store",
+    translatedNote: "תורגם מאנגלית",
     quotes: [
       {
         quote:
-          "האפליקציה לא רק אמרה לי מה לעשות ברגע עצמו — היא עזרה לי להבין את התמונה הגדולה שמאחורי ההתנהגות. ממליץ בחום לכל הורה שמחפש תמיכה ואסטרטגיות שעובדות.",
+          "האפליקציה לא רק אמרה לי מה לעשות ברגע עצמו, היא עזרה לי להבין את התמונה הגדולה שמאחורי ההתנהגות. ממליץ בחום לכל הורה שמחפש תמיכה ואסטרטגיות שעובדות.",
         name: "OzzyL10",
         role: "תמיכה הורית מועילה ומתחשבת",
         initials: "O",
@@ -266,8 +302,11 @@ const he: Dict = {
     ],
   },
   pricing: {
-    heading: "חינם עם ילד אחד. השאר בניסיון חינם.",
-    sub: "פרימיום מתחיל בשבוע ניסיון חינם. ביטול בכל רגע בהגדרות ← מנויים.",
+    heading: "חינם לילד אחד. פרימיום חינם ל-7 ימים.",
+    sub: "פרימיום מתחיל בשבוע ניסיון חינם. אפשר לבטל בכל רגע דרך המנויים ב-App Store או ב-Google Play.",
+    toggleLabel: "תקופת חיוב",
+    yearlyNote: "זה $5.00 לחודש, בחיוב שנתי אחרי 7 ימי ניסיון חינם.",
+    monthlyNote: "חיוב חודשי אחרי 7 ימי ניסיון חינם.",
     monthly: "חודשי",
     yearly: "שנתי · חוסכים 50%",
     perMonth: "לחודש",
@@ -299,27 +338,32 @@ const he: Dict = {
     items: [
       {
         q: "זה תחליף לטיפול או לייעוץ רפואי?",
-        a: "לא. Kidsit AI היא מלווה הורות רפלקטיבית לרגעים היומיומיים — התקפי זעם, מאבקי שינה, ריבים בין אחים. היא לא מאבחנת ולא מטפלת, ואם משהו נוגע לבטיחות, להתפתחות או לבריאות הנפשית של הילד — היא תגיד לכם בפירוש לפנות לרופא ילדים, למטפל או לאיש מקצוע מוסמך.",
+        a: "לא. Kidsit AI היא מלווה הורות רפלקטיבית לרגעים היומיומיים, התקפי זעם, מאבקי שינה, ריבים בין אחים. היא לא מאבחנת ולא מטפלת, ואם משהו נוגע לבטיחות, להתפתחות או לבריאות הנפשית של הילד, היא תגיד לכם בפירוש לפנות לרופא ילדים, למטפל או לאיש מקצוע מוסמך.",
       },
       {
         q: "מאיפה מגיעות העצות?",
-        a: "ההדרכה מבוססת על עשרות שנים של מחקר בהתפתחות הילד ועל גישות הורות מוכרות: קודם אמפתיה, אחר כך עצה. הטון הוא של חבר רגוע עם רקע בפסיכולוגיה התפתחותית — לא דוח קליני ולא הרצאה.",
+        a: "ההדרכה מבוססת על עשרות שנים של מחקר בהתפתחות הילד ועל גישות הורות מוכרות: קודם אמפתיה, אחר כך עצה. הטון הוא של חבר רגוע עם רקע בפסיכולוגיה התפתחותית, לא דוח קליני ולא הרצאה.",
       },
       {
         q: "מה קורה עם מה שאני מספר?",
-        a: "ההקלטה מתומללת באופן זמני ולא נשמרת אצלנו. הרגעים ופרופילי הילדים נשמרים על המכשיר שלכם בלבד. בלי פרסומות, בלי מכירת מידע — ושום דבר שאתם אומרים לא משמש לאימון מודלים.",
+        a: "ההקלטה מתומללת באופן זמני ולא נשמרת אצלנו. הרגעים ופרופילי הילדים נשמרים על המכשיר שלכם בלבד. בלי פרסומות, בלי מכירת מידע, ושום דבר שאתם אומרים לא משמש לאימון מודלים.",
+        link: { label: "איך מטפלים בקול", href: "/he/privacy#voice" },
       },
       {
         q: "איך עובד הניסיון החינמי?",
-        a: "אפשר להשתמש ב-Kidsit AI חינם עם ילד אחד, ללא הגבלת זמן. פרימיום (ילדים ללא הגבלה, דפוסים לאורך זמן) מגיע במנוי חודשי או שנתי, ושניהם מתחילים בשבוע ניסיון חינם למנויים חדשים. ביטול בכל רגע בהגדרות ← Apple ID ← מנויים.",
+        a: "אפשר להשתמש ב-Kidsit AI חינם עם ילד אחד, ללא הגבלת זמן. פרימיום (ילדים ללא הגבלה, דפוסים לאורך זמן) מגיע במנוי חודשי או שנתי, ושניהם מתחילים בשבוע ניסיון חינם למנויים חדשים. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
       },
       {
         q: "יש גרסה לאנדרואיד?",
-        a: "כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד — מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון. יש שאלות? כתבו לנו: omer+support@kidsit.ai.",
+        a: "כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד, מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון. יש שאלות? כתבו לנו: omer+support@kidsit.ai.",
       },
     ],
   },
   footer: {
+    label: "תחתית",
+    switchLabel: "English",
+    switchHref: "/en",
+    switchLang: "en",
     tagline: "הדרכה רגועה לרגעים הקשים. נבנה על ידי הורה, בשביל הורים.",
     links: [
       { label: "תכונות", href: "#features" },
@@ -334,7 +378,7 @@ const he: Dict = {
       "© 2026 Kidsit.ai. האפליקציה אינה תחליף לייעוץ מקצועי, רפואי או פסיכולוגי. היא נועדה להעניק להורים הדרכה חכמה, רגישה ומעשית להתמודדות עם סיטואציות יומיומיות בזמן אמת.",
   },
   legal: {
-    back: "→ חזרה ל-kidsit·ai",
+    back: "← חזרה ל",
     home: "/he",
   },
 };

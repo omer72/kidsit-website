@@ -1,24 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Fredoka, Nunito, Rubik } from "next/font/google";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 import "../globals.css";
-
-const fredoka = Fredoka({
-  subsets: ["latin", "hebrew"],
-  variable: "--font-fredoka",
-  weight: ["500", "600"],
-});
-const nunito = Nunito({
-  subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["400", "700", "800"],
-});
-const rubik = Rubik({
-  subsets: ["hebrew", "latin"],
-  variable: "--font-rubik",
-  weight: ["400", "700", "800"],
-});
 
 export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
@@ -34,8 +17,9 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
     description: t.description,
     alternates: {
       canonical: `/${params.lang}`,
-      languages: { en: "/en", he: "/he" },
+      languages: { en: "/en", he: "/he", "x-default": "/en" },
     },
+    other: { "apple-itunes-app": "app-id=6769443099" },
     openGraph: {
       type: "website",
       siteName: "Kidsit AI",
@@ -52,7 +36,9 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   };
 }
 
-export default function RootLayout({
+export const viewport: Viewport = { themeColor: "#F3F6FF" };
+
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
@@ -60,21 +46,30 @@ export default function RootLayout({
   params: { lang: Lang };
 }>) {
   const t = dictionaries[params.lang];
-  const bodyFont =
-    params.lang === "he" ? "var(--font-rubik)" : "var(--font-nunito)";
+  const he = params.lang === "he";
+  // Separate modules so /en never preloads Hebrew font files (and /he never Nunito).
+  const fontClass = (he ? await import("./fonts-he") : await import("./fonts-en")).fontClass;
   return (
-    <html lang={params.lang} dir={t.dir} className="scroll-smooth">
+    // suppressHydrationWarning: the inline script below adds "js" before React hydrates
+    <html lang={params.lang} dir={t.dir} className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body
-        className={`${fredoka.variable} ${nunito.variable} ${rubik.variable} bg-paper font-body text-ink antialiased`}
-        style={{ "--font-body": bodyFont } as React.CSSProperties}
+        className={`${fontClass} bg-paper font-body text-ink antialiased`}
+        style={{ "--font-body": he ? "var(--font-rubik)" : "var(--font-nunito)" } as React.CSSProperties}
       >
         {children}
-        {/* afterInteractive so analytics never competes with LCP */}
+        {/* lazyOnload so analytics never competes with LCP or hydration */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-MJH3YYBHJ0"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());

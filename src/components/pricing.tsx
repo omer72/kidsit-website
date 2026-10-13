@@ -5,31 +5,38 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { m, spring, useStagger, Reveal } from "./motion";
-import { STORE_URLS, type Dict } from "@/dictionaries";
+import { storeUrl, type Dict } from "@/dictionaries";
 
 const PREMIUM_PRICE = { monthly: "$9.99", yearly: "$59.99" };
 
-const STORES = [
-  { key: "apple", href: STORE_URLS.apple },
-  { key: "play", href: STORE_URLS.play },
-] as const;
 
-function StoreButtons({ t, variant }: { t: Dict["pricing"]; variant: "light" | "sunny" }) {
-  const labels = { apple: t.storeApple, play: t.storePlay };
+function StoreButtons({
+  t,
+  variant,
+  placement,
+}: {
+  t: Dict["pricing"];
+  variant: "light" | "sunny";
+  placement: string;
+}) {
+  const stores = [
+    { key: "apple", href: storeUrl.apple(placement), label: t.storeApple },
+    { key: "play", href: storeUrl.play(placement), label: t.storePlay },
+  ];
   return (
     <div className="mt-6 flex gap-2">
-      {STORES.map((s) => (
+      {stores.map((s) => (
         <m.a
           key={s.key}
           href={s.href}
-          className={`flex-1 rounded-xl border-2 border-ink px-2 py-3 text-center text-sm font-bold shadow-sticker-sm ${
+          className={`flex min-h-11 flex-1 items-center justify-center rounded-xl border-2 border-ink px-2 py-3 text-center text-sm font-bold shadow-sticker-sm ${
             variant === "sunny" ? "bg-sunny text-ink" : "bg-paper text-ink"
           }`}
           whileHover={{ y: -2, boxShadow: "4px 6px 0 0 #26265E" }}
           whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
           transition={spring}
         >
-          {labels[s.key]}
+          {s.label}
         </m.a>
       ))}
     </div>
@@ -46,13 +53,17 @@ function BillingToggle({
   t: Dict["pricing"];
 }) {
   return (
-    <div className="inline-flex rounded-xl border-2 border-ink bg-white p-1 shadow-sticker-sm">
+    <div
+      role="group"
+      aria-label={t.toggleLabel}
+      className="inline-flex rounded-xl border-2 border-ink bg-white p-1 shadow-sticker-sm"
+    >
       {([false, true] as const).map((isYearly) => {
         const active = yearly === isYearly;
         return (
           <button
             key={String(isYearly)}
-            className="relative px-4 py-1.5 text-sm font-extrabold"
+            className="relative min-h-11 px-4 py-2.5 text-sm font-extrabold"
             aria-pressed={active}
             onClick={() => onChange(isYearly)}
           >
@@ -77,7 +88,7 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
   const period = yearly ? "yearly" : "monthly";
 
   return (
-    <section id="pricing" className="mx-auto max-w-4xl px-5 py-20 sm:px-6">
+    <section id="pricing" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       <Reveal>
         <h2 className="font-display text-3xl font-semibold sm:text-4xl">{t.heading}</h2>
         <p className="mt-3 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
@@ -87,7 +98,7 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
       </Reveal>
 
       <m.div
-        className="mt-10 grid items-stretch gap-6 md:grid-cols-2"
+        className="mt-10 grid max-w-4xl items-stretch gap-6 md:grid-cols-2"
         variants={parent}
         initial="hidden"
         whileInView="show"
@@ -96,10 +107,10 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
         <m.div variants={child}>
           <article className="flex h-full flex-col rounded-3xl border-2 border-ink bg-white p-6 shadow-sticker">
             <h3 className="font-display text-xl font-semibold">{t.free.name}</h3>
-            <p className="mt-1 text-sm font-bold text-ink/60">{t.free.desc}</p>
+            <p className="mt-1 text-sm font-bold text-ink-muted">{t.free.desc}</p>
             <p className="mt-4">
               <span className="font-display text-4xl font-semibold">{t.free.price}</span>{" "}
-              <span className="font-bold text-ink/60">{t.free.cadence}</span>
+              <span className="font-bold text-ink-muted">{t.free.cadence}</span>
             </p>
             <ul className="mt-5 flex-1 space-y-2">
               {t.free.features.map((f) => (
@@ -109,7 +120,7 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
                 </li>
               ))}
             </ul>
-            <StoreButtons t={t} variant="light" />
+            <StoreButtons t={t} variant="light" placement="site_pricing_free" />
           </article>
         </m.div>
 
@@ -129,8 +140,8 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
               )}
             </AnimatePresence>
             <h3 className="font-display text-xl font-semibold">{t.premium.name}</h3>
-            <p className="mt-1 text-sm font-bold text-white/70">{t.premium.desc}</p>
-            <p className="mt-4">
+            <p className="mt-1 text-sm font-bold text-white/90">{t.premium.desc}</p>
+            <p className="mt-4" aria-live="polite">
               <m.span
                 key={period}
                 className="inline-block font-display text-4xl font-semibold"
@@ -140,9 +151,12 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
               >
                 {PREMIUM_PRICE[period]}
               </m.span>{" "}
-              <span className="font-bold text-white/70">
+              <span className="font-bold text-white/90">
                 {yearly ? t.perYear : t.perMonth}
               </span>
+            </p>
+            <p className="mt-1 text-sm font-bold text-white/90" aria-live="polite">
+              {yearly ? t.yearlyNote : t.monthlyNote}
             </p>
             <ul className="mt-5 flex-1 space-y-2">
               {t.premium.features.map((f) => (
@@ -152,7 +166,7 @@ export function Pricing({ t }: { t: Dict["pricing"] }) {
                 </li>
               ))}
             </ul>
-            <StoreButtons t={t} variant="sunny" />
+            <StoreButtons t={t} variant="sunny" placement="site_pricing_premium" />
           </article>
         </m.div>
       </m.div>

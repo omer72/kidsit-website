@@ -7,17 +7,46 @@ import { SocialProof } from "@/components/social-proof";
 import { Pricing } from "@/components/pricing";
 import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
-import { dictionaries, type Lang } from "@/dictionaries";
+import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
 
 export default function Home({ params }: { params: { lang: Lang } }) {
   const t = dictionaries[params.lang];
+  // No aggregateRating until the store has a meaningful number of ratings.
+  const ld = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Organization", name: "Kidsit AI", url: "https://kidsit.ai", logo: "https://kidsit.ai/icon-512.png" },
+      {
+        "@type": "MobileApplication",
+        name: "Kidsit AI",
+        operatingSystem: "iOS, Android",
+        applicationCategory: "LifestyleApplication",
+        inLanguage: params.lang,
+        offers: [
+          { "@type": "Offer", price: "0", priceCurrency: "USD", name: "Free" },
+          { "@type": "Offer", price: "59.99", priceCurrency: "USD", name: "Premium yearly" },
+          { "@type": "Offer", price: "9.99", priceCurrency: "USD", name: "Premium monthly" },
+        ],
+        sameAs: [storeUrl.apple("site_schema"), storeUrl.play("site_schema")],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: t.faq.items.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
   return (
     <MotionRoot>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <Navbar t={t.nav} />
       <main>
         <Hero t={t.hero} />
         <Features t={t.features} />
-        <Showcase t={t.showcase} />
+        <Showcase t={t.showcase} lang={params.lang} />
         <SocialProof t={t.social} />
         <Pricing t={t.pricing} />
         <Faq t={t.faq} />

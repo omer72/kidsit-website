@@ -35,3 +35,19 @@
     animation: none;
   }
 }
+
+/* Content must show without JS: the layout script adds .js before first paint,
+   and framer's SSR opacity:0 start state only applies once it's set. */
+html:not(.js) [style*="opacity:0"],
+html:not(.js) [style*="opacity: 0"] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html:not(.js) .faq-panel {
+  grid-template-rows: 1fr !important;
+}
+
+html:not(.js) .faq-panel > div {
+  visibility: visible !important;
+}
