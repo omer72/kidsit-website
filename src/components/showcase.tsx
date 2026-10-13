@@ -2,22 +2,14 @@
 
 import Image from "next/image";
 import { Reveal } from "./motion";
-import type { Dict } from "@/dictionaries";
+import type { Dict, Lang } from "@/dictionaries";
 
 const SHOTS = [
-  {
-    src: "/app-response.png",
-    alt: "Kidsit AI response screen with structured guidance: what happened, why, and what to try",
-    tilt: "rotate-1",
-  },
-  {
-    src: "/app-history.png",
-    alt: "Kidsit AI history screen showing logged moments for a child",
-    tilt: "-rotate-1",
-  },
+  { src: "/app-response.png", tilt: "rotate-1" },
+  { src: "/app-history.png", tilt: "-rotate-1" },
 ];
 
-export function Showcase({ t }: { t: Dict["showcase"] }) {
+export function Showcase({ t, lang }: { t: Dict["showcase"]; lang: Lang }) {
   return (
     <section id="demo" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       <Reveal>
@@ -30,10 +22,15 @@ export function Showcase({ t }: { t: Dict["showcase"] }) {
           <video
             controls
             playsInline
-            preload="metadata"
+            preload="none"
+            poster="/promo-poster.webp"
+            aria-label={t.videoLabel}
             className="w-full rounded-3xl border-2 border-ink bg-ink shadow-sticker-lg"
           >
-            <source src="/promo.mp4" type="video/mp4" />
+            <source src="/promo-720.webm" type="video/webm" />
+            <source src="/promo-720.mp4" type="video/mp4" />
+            <track kind="captions" src="/promo.en.vtt" srcLang="en" label="English" default={lang === "en"} />
+            <track kind="captions" src="/promo.he.vtt" srcLang="he" label="עברית" default={lang === "he"} />
           </video>
         </Reveal>
         <div className="grid grid-cols-2 gap-6">
@@ -43,14 +40,14 @@ export function Showcase({ t }: { t: Dict["showcase"] }) {
                 <div className="overflow-hidden rounded-3xl border-2 border-ink bg-white shadow-sticker">
                   <Image
                     src={s.src}
-                    alt={s.alt}
+                    alt={t.alts[i]}
                     width={1290}
                     height={2796}
                     sizes="(max-width: 1024px) 45vw, 260px"
                     className="h-auto w-full"
                   />
                 </div>
-                <figcaption className="mt-3 text-center text-sm font-extrabold text-ink/60">
+                <figcaption className="mt-3 text-center text-sm font-extrabold text-ink-muted">
                   {t.captions[i]}
                 </figcaption>
               </figure>
