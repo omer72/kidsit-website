@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { m, spring, useReducedMotion } from "./motion";
 import { storeUrl, type Dict } from "@/dictionaries";
@@ -55,9 +54,6 @@ function Chip({
 const btn = "rounded-xl border-2 border-ink px-6 py-3 text-center font-bold shadow-sticker";
 
 export function Hero({ t }: { t: Dict["hero"] }) {
-  // Same markup server-side; on Android the Play button just moves first.
-  const [android, setAndroid] = useState(false);
-  useEffect(() => setAndroid(/Android/i.test(navigator.userAgent)), []);
   return (
     <section id="top" className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-20 pt-8 sm:px-6 sm:gap-12 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:pt-20">
       <div className="animate-fade-up">
@@ -84,7 +80,7 @@ export function Hero({ t }: { t: Dict["hero"] }) {
           </m.a>
           <m.a
             href={storeUrl.play("site_hero")}
-            className={`${btn} bg-grape text-white ${android ? "order-first" : ""}`}
+            className={`${btn} bg-grape text-white`}
             whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
             transition={spring}
