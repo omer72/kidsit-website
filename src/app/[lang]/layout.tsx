@@ -64,6 +64,15 @@ export default async function RootLayout({
         style={{ "--font-body": he ? "var(--font-rubik)" : "var(--font-nunito)" } as React.CSSProperties}
       >
         {children}
+        {/* NagishLi accessibility widget (LGPL, self-hosted in /public/nagishli).
+            It reads nagishli_config when it loads, so the config is set right before the script is added. */}
+        <Script id="nagishli" strategy="lazyOnload">
+          {`window.nagishli_config = { language: "${params.lang}", color: "purple" };
+var s = document.createElement("script");
+s.src = "/nagishli/nagishli_beta.js?v=3.0b";
+s.charset = "utf-8";
+document.body.appendChild(s);`}
+        </Script>
         {/* lazyOnload so analytics never competes with LCP or hydration */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-MJH3YYBHJ0"
