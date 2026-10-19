@@ -81,9 +81,9 @@ const en = {
         desc: "Kidsit gets to know your child and adapts its advice. When you mark something \"didn't help,\" the next answer tries a different angle.",
       },
       {
-        emoji: "🌙",
-        title: "End of day report",
-        desc: "Get insights on the day's patterns and challenges, plus tips for tomorrow, so the hard moments turn into something you can actually see and plan around.",
+        emoji: "📒",
+        title: "Remembers every moment",
+        desc: "Past moments for each child feed into the next answer, so guidance fits your child better over time.",
       },
     ],
   },
@@ -97,7 +97,7 @@ const en = {
     ],
     captions: [
       "A kinder second look: not a lecture, not a label",
-      "Patterns become visible over time",
+      "Every moment is remembered next time",
     ],
   },
   social: {
@@ -157,9 +157,9 @@ const en = {
       badge: "Most loved",
       features: [
         "7-day free trial",
-        "Unlimited children",
-        "Patterns & memory over time",
-        "End of day reports",
+        "Track every child",
+        "Unlimited moments",
+        "Memory for each child",
         "Cancel anytime",
       ],
     },
@@ -182,7 +182,7 @@ const en = {
       },
       {
         q: "How does the free trial work?",
-        a: "You can use Kidsit AI free with one child, no time limit. Premium (unlimited children, patterns over time) comes as a monthly or yearly plan, and both start with a 7-day free trial for new subscribers. Cancel anytime. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
+        a: "You can use Kidsit AI free with one child, no time limit. Premium (track every child, unlimited moments) comes as a monthly or yearly plan, and both start with a 7-day free trial for new subscribers. Cancel anytime. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
         q: "Is it on Android?",
@@ -268,9 +268,9 @@ const he: Dict = {
         desc: "Kidsit מכירה את הילד שלכם ומתאימה את העצות בהתאם. סימנתם ש\"לא עזר\"? התשובה הבאה תנסה כיוון אחר.",
       },
       {
-        emoji: "🌙",
-        title: "סיכום יומי",
-        desc: "תובנות על הדפוסים והאתגרים של היום, וטיפים למחר, כדי שהרגעים הקשים יהפכו למשהו שאפשר לראות ולתכנן סביבו.",
+        emoji: "📒",
+        title: "זוכרת כל רגע",
+        desc: "רגעים קודמים של כל ילד משפיעים על התשובה הבאה, כך שהעצות מתאימות לו יותר עם הזמן.",
       },
     ],
   },
@@ -284,7 +284,7 @@ const he: Dict = {
     ],
     captions: [
       "מבט שני, רך יותר: לא הרצאה ולא תווית",
-      "הדפוסים נהיים גלויים עם הזמן",
+      "כל רגע נזכר בפעם הבאה",
     ],
   },
   social: {
@@ -344,9 +344,9 @@ const he: Dict = {
       badge: "הכי אהוב",
       features: [
         "שבוע ניסיון חינם",
-        "ילדים ללא הגבלה",
-        "דפוסים וזיכרון לאורך זמן",
-        "סיכומים יומיים",
+        "מעקב אחרי כל הילדים",
+        "רגעים ללא הגבלה",
+        "זיכרון לכל ילד",
         "ביטול בכל עת",
       ],
     },
@@ -369,7 +369,7 @@ const he: Dict = {
       },
       {
         q: "איך עובד הניסיון החינמי?",
-        a: "אפשר להשתמש ב-Kidsit AI חינם עם ילד אחד, ללא הגבלת זמן. פרימיום (ילדים ללא הגבלה, דפוסים לאורך זמן) מגיע במנוי חודשי או שנתי, ושניהם מתחילים בשבוע ניסיון חינם למנויים חדשים. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
+        a: "אפשר להשתמש ב-Kidsit AI חינם עם ילד אחד, ללא הגבלת זמן. פרימיום (מעקב אחרי כל הילדים ורגעים ללא הגבלה) מגיע במנוי חודשי או שנתי, ושניהם מתחילים בשבוע ניסיון חינם למנויים חדשים. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
       },
       {
         q: "יש גרסה לאנדרואיד?",
