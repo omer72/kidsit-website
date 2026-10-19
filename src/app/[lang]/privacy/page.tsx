@@ -64,10 +64,13 @@ const DOCS: Record<Lang, LegalDoc> = {
             <p>
               We use essential first-party storage so the site works (your language choice and accessibility-menu
               preferences). With your permission we also load Google Analytics 4 to understand how the site is used.
-              Analytics does not receive anything you enter in the app. Google tags do not load, and non-essential
-              cookies are not set, until you accept.
+              After you accept, Google&apos;s tags may also send a conversion measurement ping when you click an App
+              Store or Google Play button (used to attribute store visits from this site). Analytics and those pings do
+              not receive anything you enter in the app. Google tags do not load, and non-essential cookies are not set,
+              until you accept.
             </p>
-            <table className="mt-4 w-full border-collapse text-sm">
+            <div className="mt-4 max-w-full overflow-x-auto">
+            <table className="w-full min-w-[36rem] border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-ink text-start">
                   <th scope="col" className="py-2 pe-3">Name</th>
@@ -106,8 +109,16 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3">Up to 2 years (Google)</td>
                   <td className="py-2">Analytics</td>
                 </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
+                  <td className="py-2 pe-3">Request (Google)</td>
+                  <td className="py-2 pe-3">Store-click conversion measurement after you accept; attributes App Store / Play visits from this site</td>
+                  <td className="py-2 pe-3">Session (no extra first-party cookie of ours)</td>
+                  <td className="py-2">Analytics</td>
+                </tr>
               </tbody>
             </table>
+            </div>
             <p className="mt-4">
               When you first visit we ask you to choose: “Accept all”, “Reject non-essential”, or pick by category under
               “Settings”. We store your choice with its date and ask again after 12 months or if this policy changes.
@@ -185,10 +196,12 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>
               אנו משתמשים באחסון חיוני מצד ראשון כדי שהאתר יעבוד (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נטען גם
-              Google Analytics 4 כדי להבין איך משתמשים באתר. הניתוח אינו מקבל דבר ממה שאתם מזינים באפליקציה. תגי Google
-              לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
+              Google Analytics 4 כדי להבין איך משתמשים באתר. לאחר האישור, תגי Google עשויים גם לשלוח מדידת המרה (conversion)
+              כשלוחצים על כפתור App Store או Google Play (כדי לייחס ביקורים בחנויות מהאתר). הניתוח והמדידות האלה אינם מקבלים
+              דבר ממה שאתם מזינים באפליקציה. תגי Google לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
             </p>
-            <table className="mt-4 w-full border-collapse text-sm">
+            <div className="mt-4 max-w-full overflow-x-auto">
+            <table className="w-full min-w-[36rem] border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-ink text-start">
                   <th scope="col" className="py-2 pe-3">שם</th>
@@ -227,8 +240,16 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3">עד שנתיים (Google)</td>
                   <td className="py-2">סטטיסטיקה</td>
                 </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
+                  <td className="py-2 pe-3">בקשה (Google)</td>
+                  <td className="py-2 pe-3">מדידת המרה בלחיצה על חנות האפליקציות לאחר אישור; מייחסת ביקורים ב-App Store / Play מהאתר</td>
+                  <td className="py-2 pe-3">למשך הסשן (בלי עוגייה נוספת שלנו)</td>
+                  <td className="py-2">סטטיסטיקה</td>
+                </tr>
               </tbody>
             </table>
+            </div>
             <p className="mt-4">
               בביקור הראשון נבקש מכם לבחור: „אישור הכול”, „דחיית הלא־חיוניות”, או בחירה לפי קטגוריה ב„הגדרות”. נשמור את
               הבחירה עם התאריך ונשאל שוב אחרי 12 חודשים או אם מדיניות זו תשתנה. אפשר לשנות או לבטל הסכמה בכל עת דרך קישור

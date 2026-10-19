@@ -19,7 +19,7 @@ export function generateMetadata({ params }: { params: { lang: Lang; slug: strin
   return {
     title: post.titleTag,
     description: post.description,
-    ...ogFor("he", post.titleTag, post.description, `/blog/${post.slug}`),
+    ...ogFor("he", post.titleTag, post.description, `/blog/${post.slug}`, "article"),
     alternates: { canonical: post.path },
   };
 }

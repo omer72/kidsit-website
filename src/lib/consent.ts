@@ -6,6 +6,7 @@ export const CONSENT_VERSION = 1;
 export const CONSENT_KEY = "kidsit-consent";
 export const GA_ID = "G-MJH3YYBHJ0";
 const YEAR = 365 * 24 * 3600 * 1000;
+const GA_DISABLE = `ga-disable-${GA_ID}`;
 
 export type Consent = { v: number; ts: string; analytics: boolean };
 
@@ -27,6 +28,7 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __kidsitGaLoaded?: boolean;
+    [key: string]: unknown;
   }
 }
 
@@ -40,9 +42,49 @@ function ensureGtagStub() {
   }
 }
 
+/** Delete GA cookies on this host and the parent domain (e.g. .kidsit.ai). */
+export function clearGaCookies() {
+  if (typeof document === "undefined") return;
+  const names = document.cookie.split(";").map((c) => c.trim().split("=")[0]);
+  const ga = names.filter((n) => n === "_ga" || n.startsWith("_ga_"));
+  if (!ga.length) return;
+  const host = location.hostname;
+  const parts = host.split(".");
+  const domains = ["", host];
+  if (parts.length >= 2) domains.push("." + parts.slice(-2).join("."));
+  if (parts.length >= 3) domains.push("." + parts.slice(-3).join("."));
+  for (const name of ga) {
+    for (const d of domains) {
+      const domain = d ? `; domain=${d}` : "";
+      document.cookie = `${name}=; Max-Age=0; path=/${domain}`;
+    }
+  }
+}
+
+/** Stop any further GA hits on this page immediately (Accept → Reject). */
+export function disableAnalytics() {
+  ensureGtagStub();
+  window[GA_DISABLE] = true;
+  window.gtag!("consent", "update", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+  clearGaCookies();
+}
+
 /** Load gtag.js once and configure GA4. Call only after analytics consent. */
 export function loadAnalytics() {
-  if (typeof window === "undefined" || window.__kidsitGaLoaded) return;
+  if (typeof window === "undefined") return;
+  window[GA_DISABLE] = false;
+  if (window.__kidsitGaLoaded) {
+    // Re-enabled after a previous reject on the same page: restore consent and re-config.
+    ensureGtagStub();
+    window.gtag!("consent", "update", { analytics_storage: "granted" });
+    window.gtag!("config", GA_ID);
+    return;
+  }
   ensureGtagStub();
   window.gtag!("consent", "update", { analytics_storage: "granted" });
   const s = document.createElement("script");
@@ -65,10 +107,7 @@ export function saveConsent({ analytics = false }: { analytics?: boolean }): Con
   }
   document.documentElement.classList.remove("consent-needed");
   if (c.analytics) loadAnalytics();
-  else {
-    ensureGtagStub();
-    window.gtag!("consent", "update", { analytics_storage: "denied" });
-  }
+  else disableAnalytics();
   window.dispatchEvent(new CustomEvent("kidsit-consent", { detail: c }));
   return c;
 }

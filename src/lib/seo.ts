@@ -15,12 +15,20 @@ export const card = (lang: Lang) => ({
   alt: OG_ALT[lang],
 });
 
+type OgType = "website" | "article";
+
 // A page-level openGraph object replaces the layout's, so every page (home via the layout, and privacy, terms,
-// support, accessibility) spreads this to get the share image, site name, type and locale.
-export function ogFor(lang: Lang, title: string, description: string, path: string): Pick<Metadata, "openGraph" | "twitter"> {
+// support, accessibility, blog) spreads this to get the share image, site name, type and locale.
+export function ogFor(
+  lang: Lang,
+  title: string,
+  description: string,
+  path: string,
+  type: OgType = "website",
+): Pick<Metadata, "openGraph" | "twitter"> {
   return {
     openGraph: {
-      type: "website",
+      type,
       siteName: "Kidsit AI",
       locale: lang === "he" ? "he_IL" : "en_US",
       url: `/${lang}${path}`,

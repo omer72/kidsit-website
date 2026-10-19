@@ -59,12 +59,11 @@ html:not(.js) .faq-panel > div {
 html.consent-needed .consent-banner {
   display: block;
 }
-@media (max-width: 767px) {
-  html.consent-showing #NagishLiTrigger,
-  html.consent-needed #NagishLiTrigger {
-    bottom: calc(var(--consent-h, 260px) + 12px) !important;
-    top: auto !important;
-  }
+/* Lift Nagish above the banner at every width (P4); banner sits bottom-left on md+. */
+html.consent-showing #NagishLiTrigger,
+html.consent-needed #NagishLiTrigger {
+  bottom: calc(var(--consent-h, 260px) + 12px) !important;
+  top: auto !important;
 }
 
 /* Blog article prose: light formatting only; inherits page font weight. */
