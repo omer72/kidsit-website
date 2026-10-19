@@ -9,14 +9,25 @@ declare global {
   }
 }
 
-// GA4 custom event for App Store / Google Play button clicks (mark it as a Key event in GA4).
-// gtag.js loads lazily, so if it isn't there yet we queue the call on dataLayer the same way the
-// gtag() stub does; gtag.js replays the queue when it loads.
+/**
+ * Fire our `store_click` gtag event for App Store buttons only.
+ *
+ * Play Store is intentionally skipped: GA4 already has a configured `play_store_click`
+ * event (observed on Play clicks only in earlier verification — extra.py clicked the
+ * Play button and collected both our store_click and the GA-side play_store_click).
+ * Sending store_click for Play would double-count. No equivalent GA-side App Store event
+ * was observed, so App Store still needs store_click.
+ *
+ * Mark store_click as a Key event in GA4 for App Store reporting.
+ * gtag.js loads lazily, so if it isn't there yet we queue on dataLayer the same way the
+ * gtag() stub does; gtag.js replays the queue when it loads.
+ */
 export function trackStoreClick(store: Store, lang: Lang, placement: string, url: string) {
   if (typeof window === "undefined") return;
+  if (store === "play") return;
   const params = {
-    platform: store === "apple" ? "ios" : "android",
-    store: store === "apple" ? "app_store" : "google_play",
+    platform: "ios",
+    store: "app_store",
     page_language: lang,
     placement,
     link_url: url,
