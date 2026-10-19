@@ -95,7 +95,7 @@ const DOCS: Record<Lang, LegalDoc> = {
         h: "Known limitations",
         p: (
           <ul className={list}>
-            <li>The app screenshots on the site are images of the app&apos;s interface and are in English, including on the Hebrew page. Their content is described in their text alternatives.</li>
+            <li>Some app screenshots on the English pages are in English; the Hebrew landing page shows a Hebrew screenshot. Their content is described in their text alternatives.</li>
             <li>The accessibility menu is a beta version. It does not offer audio reading or voice commands.</li>
             <li>Links to the App Store and Google Play lead to sites that we do not control.</li>
           </ul>
@@ -185,7 +185,7 @@ const DOCS: Record<Lang, LegalDoc> = {
         h: "מגבלות ידועות",
         p: (
           <ul className={list}>
-            <li>צילומי האפליקציה באתר הם תמונות של ממשק האפליקציה, והם באנגלית גם בעמוד העברי. התוכן שלהם מתואר בחלופה הטקסטואלית.</li>
+            <li>חלק מצילומי האפליקציה בעמודים באנגלית הם באנגלית; בעמוד הנחיתה בעברית מוצג צילום מסך בעברית. התוכן שלהם מתואר בחלופה הטקסטואלית.</li>
             <li>תפריט הנגישות הוא גרסת בטא, והוא אינו כולל הקראה קולית או פקודות קוליות.</li>
             <li>הקישורים ל-App Store ול-Google Play מובילים לאתרים שאינם בשליטתנו.</li>
           </ul>

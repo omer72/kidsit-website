@@ -44,7 +44,8 @@ const png = async (f: string) =>
 export async function GET(_req: Request, { params }: { params: { lang: Lang } }) {
   const t = TEXT[params.lang] ?? TEXT.en;
   const text = `Kidsit AI${t.tagline}`;
-  const [icon, shot] = await Promise.all([png("icon-512.png"), png("app-mic.png")]);
+  const shotFile = params.lang === "he" ? "app-mic-he.png" : "app-mic.png";
+  const [icon, shot] = await Promise.all([png("icon-512.png"), png(shotFile)]);
   return new ImageResponse(
     (
       <div

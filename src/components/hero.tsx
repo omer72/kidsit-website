@@ -112,7 +112,7 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
         </Chip>
         <div className="animate-fade-up-late rotate-1 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-white shadow-sticker-lg">
           <Image
-            src="/app-mic.png"
+            src={lang === "he" ? "/app-mic-he.png" : "/app-mic.png"}
             alt={t.screenshotAlt}
             width={1290}
             height={2796}
