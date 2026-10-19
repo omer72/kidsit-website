@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { ogFor } from "@/lib/seo";
 import Link from "next/link";
 import { LegalPage, type LegalDoc } from "@/components/legal";
 import { ACCESSIBILITY_EMAIL, type Lang } from "@/dictionaries";
+
+// Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
+export const dynamicParams = false;
 
 // Accessibility statement. The widget features listed here were checked against the self-hosted
 // NagishLi 3.0 beta in /public/nagishli (options rendered by the live widget); items the widget marks
@@ -15,8 +19,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   return {
     title,
     description,
-    twitter: { title, description },
-    openGraph: { title, description, url: `/${params.lang}/accessibility` },
+    ...ogFor(params.lang, title, description, "/accessibility"),
     alternates: {
       canonical: `/${params.lang}/accessibility`,
       languages: { en: "/en/accessibility", he: "/he/accessibility", "x-default": "/en/accessibility" },
@@ -77,7 +80,7 @@ const DOCS: Record<Lang, LegalDoc> = {
             <ul className={list}>
               <li>Make text bigger or smaller, and increase line spacing and word spacing</li>
               <li>Align text to the right, center or left</li>
-              <li>Apply color filters: grayscale, inverted colors, blue light filter, cold colors, saturated colors and high brightness</li>
+              <li>Apply color filters: Color Blind (grayscale), Impaired Vision (inverted colors), Blue Light Filter, Cold Colors, Bold Colors and High Brightness</li>
               <li>Choose your own text color and background color</li>
               <li>Show images only or text only</li>
               <li>Highlight links and headings</li>
@@ -94,7 +97,6 @@ const DOCS: Record<Lang, LegalDoc> = {
           <ul className={list}>
             <li>The app screenshots on the site are images of the app&apos;s interface and are in English, including on the Hebrew page. Their content is described in their text alternatives.</li>
             <li>The accessibility menu is a beta version. It does not offer audio reading or voice commands.</li>
-            <li>The accessibility menu loads a script library (jQuery) from an external server; if that server is unavailable, the menu may not open.</li>
             <li>Links to the App Store and Google Play lead to sites that we do not control.</li>
           </ul>
         ),
@@ -168,7 +170,7 @@ const DOCS: Record<Lang, LegalDoc> = {
             <ul className={list}>
               <li>הגדלה והקטנה של הטקסט, והגדלת המרווח בין השורות ובין המילים</li>
               <li>יישור הטקסט לימין, למרכז או לשמאל</li>
-              <li>מסנני צבע: גווני אפור, היפוך צבעים, סינון אור כחול, צבעים קרים, צבעים רוויים ובהירות גבוהה</li>
+              <li>מסנני צבע: עיוורי צבעים (גווני אפור), כבדי ראייה (היפוך צבעים), מסנן אור כחול, צבעים קרים, צבעים עזים ובהירות גבוהה</li>
               <li>בחירת צבע טקסט וצבע רקע</li>
               <li>הצגת תמונות בלבד או טקסט בלבד</li>
               <li>הדגשת קישורים וכותרות</li>
@@ -185,7 +187,6 @@ const DOCS: Record<Lang, LegalDoc> = {
           <ul className={list}>
             <li>צילומי האפליקציה באתר הם תמונות של ממשק האפליקציה, והם באנגלית גם בעמוד העברי. התוכן שלהם מתואר בחלופה הטקסטואלית.</li>
             <li>תפריט הנגישות הוא גרסת בטא, והוא אינו כולל הקראה קולית או פקודות קוליות.</li>
-            <li>תפריט הנגישות טוען ספריית קוד (jQuery) משרת חיצוני; אם השרת אינו זמין, ייתכן שהתפריט לא ייפתח.</li>
             <li>הקישורים ל-App Store ול-Google Play מובילים לאתרים שאינם בשליטתנו.</li>
           </ul>
         ),
@@ -220,5 +221,5 @@ const DOCS: Record<Lang, LegalDoc> = {
 };
 
 export default function Accessibility({ params }: { params: { lang: Lang } }) {
-  return <LegalPage lang={params.lang} doc={DOCS[params.lang]} />;
+  return <LegalPage lang={params.lang} path="/accessibility" doc={DOCS[params.lang]} />;
 }

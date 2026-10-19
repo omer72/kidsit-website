@@ -19,6 +19,7 @@ export function Showcase({ t, lang }: { t: Dict["showcase"]; lang: Lang }) {
       <div className="mt-10 grid items-start gap-8 lg:grid-cols-2">
         <Reveal>
           {/* ponytail: native <video> controls; no player lib until someone asks for autoplay/analytics */}
+          {/* ?v=2: re-cut on 2026-10-19 (end-of-day report segment removed); bust long-lived caches */}
           <video
             controls
             playsInline
@@ -27,10 +28,10 @@ export function Showcase({ t, lang }: { t: Dict["showcase"]; lang: Lang }) {
             aria-label={t.videoLabel}
             className="w-full rounded-3xl border-2 border-ink bg-ink shadow-sticker-lg"
           >
-            <source src="/promo-720.webm" type="video/webm" />
-            <source src="/promo-720.mp4" type="video/mp4" />
-            <track kind="captions" src="/promo.en.vtt" srcLang="en" label="English" default={lang === "en"} />
-            <track kind="captions" src="/promo.he.vtt" srcLang="he" label="עברית" default={lang === "he"} />
+            <source src="/promo-720.webm?v=2" type="video/webm" />
+            <source src="/promo-720.mp4?v=2" type="video/mp4" />
+            <track kind="captions" src="/promo.en.vtt?v=2" srcLang="en" label="English" default={lang === "en"} />
+            <track kind="captions" src="/promo.he.vtt?v=2" srcLang="he" label="עברית" default={lang === "he"} />
           </video>
         </Reveal>
         <div className="grid grid-cols-2 gap-6">

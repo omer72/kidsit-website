@@ -9,7 +9,7 @@ const UPDATED_LABEL: Record<Lang, string> = { en: "Last updated:", he: "עודכ
 
 // Shared shell for the privacy, terms and support pages. The document is written in the page
 // language, so it inherits lang/dir from <html> (rtl on /he).
-export function LegalPage({ lang, doc, children }: { lang: Lang; doc: LegalDoc; children?: React.ReactNode }) {
+export function LegalPage({ lang, path, doc, children }: { lang: Lang; path: string; doc: LegalDoc; children?: React.ReactNode }) {
   const d = dictionaries[lang];
   return (
     <>
@@ -33,7 +33,7 @@ export function LegalPage({ lang, doc, children }: { lang: Lang; doc: LegalDoc; 
           {children}
         </article>
       </main>
-      <Footer t={d.footer} base={`/${lang}`} />
+      <Footer t={d.footer} base={`/${lang}`} path={path} />
     </>
   );
 }

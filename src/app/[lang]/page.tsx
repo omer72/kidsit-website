@@ -9,6 +9,9 @@ import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
 
+// Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
+export const dynamicParams = false;
+
 export default function Home({ params }: { params: { lang: Lang } }) {
   const t = dictionaries[params.lang];
   // No aggregateRating until the store has a meaningful number of ratings.

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { ogFor } from "@/lib/seo";
 import Link from "next/link";
 import { LegalPage, mail, type LegalDoc } from "@/components/legal";
 import { SUPPORT_EMAIL, type Lang } from "@/dictionaries";
+
+// Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
+export const dynamicParams = false;
 
 // Used as the App Store / Google Play "Support URL". Contact is by email only (mailto); there is no form.
 export function generateMetadata({ params }: { params: { lang: Lang } }): Metadata {
@@ -13,8 +17,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   return {
     title,
     description,
-    twitter: { title, description },
-    openGraph: { title, description, url: `/${params.lang}/support` },
+    ...ogFor(params.lang, title, description, "/support"),
     alternates: {
       canonical: `/${params.lang}/support`,
       languages: { en: "/en/support", he: "/he/support", "x-default": "/en/support" },
@@ -178,5 +181,5 @@ const DOCS: Record<Lang, LegalDoc> = {
 };
 
 export default function Support({ params }: { params: { lang: Lang } }) {
-  return <LegalPage lang={params.lang} doc={DOCS[params.lang]} />;
+  return <LegalPage lang={params.lang} path="/support" doc={DOCS[params.lang]} />;
 }

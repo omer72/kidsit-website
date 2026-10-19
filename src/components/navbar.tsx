@@ -5,13 +5,7 @@ import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { m, spring } from "./motion";
 import type { Dict } from "@/dictionaries";
-
-// Remember the choice for the middleware's "/" redirect and keep the #section.
-function rememberLocale(e: React.MouseEvent<HTMLAnchorElement>) {
-  const a = e.currentTarget;
-  document.cookie = `NEXT_LOCALE=${a.hreflang}; path=/; max-age=31536000; samesite=lax`;
-  a.hash = window.location.hash;
-}
+import { rememberLocale } from "./lang-switch";
 
 const Icon = ({ open }: { open: boolean }) => (
   <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

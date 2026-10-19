@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { ogFor } from "@/lib/seo";
 import { LegalPage, mail, type LegalDoc } from "@/components/legal";
 import type { Lang } from "@/dictionaries";
+
+// Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
+export const dynamicParams = false;
 
 export function generateMetadata({ params }: { params: { lang: Lang } }): Metadata {
   const he = params.lang === "he";
@@ -11,8 +15,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   return {
     title,
     description,
-    twitter: { title, description },
-    openGraph: { title, description, url: `/${params.lang}/terms` },
+    ...ogFor(params.lang, title, description, "/terms"),
     alternates: {
       canonical: `/${params.lang}/terms`,
       languages: { en: "/en/terms", he: "/he/terms", "x-default": "/en/terms" },
@@ -139,5 +142,5 @@ const DOCS: Record<Lang, LegalDoc> = {
 };
 
 export default function Terms({ params }: { params: { lang: Lang } }) {
-  return <LegalPage lang={params.lang} doc={DOCS[params.lang]} />;
+  return <LegalPage lang={params.lang} path="/terms" doc={DOCS[params.lang]} />;
 }

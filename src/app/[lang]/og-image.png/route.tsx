@@ -3,17 +3,18 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { LANGS, type Lang } from "@/dictionaries";
 
-// Prerender both cards at build time. On Vercel, files in /public are served by the CDN and are
-// NOT bundled into the serverless function, so reading public/*.png at request time threw ENOENT
-// (/var/task/public/icon-512.png) and every /[lang]/opengraph-image request returned 500.
+// Share card at /<lang>/og-image.png, referenced (with per-language alt text) by ogFor() in src/lib/seo.ts.
+// A plain route handler instead of the opengraph-image file convention, because that convention only allows one
+// alt text for every language. Prerendered at build time: on Vercel, files in /public are served by the CDN and
+// are NOT bundled into the serverless function, so reading public/*.png at request time threw ENOENT
+// (/var/task/public/icon-512.png) and every card request returned 500.
+export const dynamic = "force-static";
+export const dynamicParams = false;
 export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
 }
-export const dynamicParams = false;
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
-export const alt = "Kidsit AI, your AI parenting copilot, with the app's home screen";
+const size = { width: 1200, height: 630 };
 
 const TEXT = {
   en: { tagline: "Your AI parenting copilot", family: "Fredoka", dir: "ltr" },
@@ -40,7 +41,7 @@ const visual = (text: string, dir: string) => (dir === "rtl" ? Array.from(text).
 const png = async (f: string) =>
   `data:image/png;base64,${(await readFile(join(process.cwd(), "public", f))).toString("base64")}`;
 
-export default async function Image({ params }: { params: { lang: Lang } }) {
+export async function GET(_req: Request, { params }: { params: { lang: Lang } }) {
   const t = TEXT[params.lang] ?? TEXT.en;
   const text = `Kidsit AI${t.tagline}`;
   const [icon, shot] = await Promise.all([png("icon-512.png"), png("app-mic.png")]);
@@ -88,6 +89,8 @@ export default async function Image({ params }: { params: { lang: Lang } }) {
     ),
     {
       ...size,
+      // the URL has no content hash, so keep browser/crawler caching to a day
+      headers: { "cache-control": "public, max-age=86400" },
       fonts: [{ name: t.family, data: await font(t.family, text), weight: 600, style: "normal" }],
     },
   );
