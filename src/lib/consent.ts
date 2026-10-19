@@ -69,9 +69,8 @@ export function disableAnalytics() {
   // Drop event/config calls; still allow a local consent update for completeness.
   ensureGtagStub();
   const push = window.gtag!;
-  window.gtag = function gtag() {
-    // eslint-disable-next-line prefer-rest-params
-    if (arguments[0] === "consent") push.apply(null, arguments as unknown as []);
+  window.gtag = function gtag(...args: unknown[]) {
+    if (args[0] === "consent") push(...args);
   };
   window.gtag("consent", "update", {
     analytics_storage: "denied",
