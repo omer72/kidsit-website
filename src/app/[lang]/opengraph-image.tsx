@@ -1,7 +1,15 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import type { Lang } from "@/dictionaries";
+import { LANGS, type Lang } from "@/dictionaries";
+
+// Prerender both cards at build time. On Vercel, files in /public are served by the CDN and are
+// NOT bundled into the serverless function, so reading public/*.png at request time threw ENOENT
+// (/var/task/public/icon-512.png) and every /[lang]/opengraph-image request returned 500.
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
+export const dynamicParams = false;
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -24,7 +32,11 @@ async function font(family: string, text: string) {
   return (await fetch(url)).arrayBuffer();
 }
 
-// Read from disk so the card never depends on the live site having these files yet.
+// Satori has no bidi algorithm: it lays glyphs out left to right, so a Hebrew string comes out
+// mirrored. The tagline is pure Hebrew letters and spaces, so reversing it gives the visual order.
+const visual = (text: string, dir: string) => (dir === "rtl" ? Array.from(text).reverse().join("") : text);
+
+// Read from disk at build time (the route is prerendered, see generateStaticParams above).
 const png = async (f: string) =>
   `data:image/png;base64,${(await readFile(join(process.cwd(), "public", f))).toString("base64")}`;
 
@@ -58,7 +70,7 @@ export default async function Image({ params }: { params: { lang: Lang } }) {
             style={{ borderRadius: 44 }}
           />
           <div style={{ fontSize: 84 }}>Kidsit AI</div>
-          <div style={{ fontSize: 40, color: "#5B3DF5", direction: t.dir }}>{t.tagline}</div>
+          <div style={{ fontSize: 40, color: "#5B3DF5" }}>{visual(t.tagline, t.dir)}</div>
         </div>
         <div
           style={{

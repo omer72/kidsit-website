@@ -1,15 +1,29 @@
 export const LANGS = ["en", "he"] as const;
 export type Lang = (typeof LANGS)[number];
 
+// The one support address used everywhere on the site (footer, FAQ, legal pages, /support).
+export const SUPPORT_EMAIL = "omer+support@kidsit.ai";
+
+// TODO(Gal): App Store Connect provider token ("pt"), from App Store Connect → App Analytics →
+// Campaigns → Generate a campaign link. Paste the numeric token here as a string, e.g. "123456".
+// While it's empty, `pt` is left out of the App Store links (App Analytics won't attribute ct= without it).
+export const APP_STORE_PROVIDER_TOKEN = "";
+
+// Every placement is prefixed with the page language (he_site_hero / en_site_hero) so Hebrew and
+// English visitors can be told apart in App Store Connect (ct) and Play Console (utm_content).
+const tag = (lang: Lang, placement: string) => `${lang}_${placement}`;
+
 // No /us/ in the Apple URL: Apple redirects to the visitor's storefront.
-// ct= labels the placement; add &pt=<provider token> to see it in App Store Connect.
 export const storeUrl = {
-  apple: (placement: string) =>
-    `https://apps.apple.com/app/id6769443099?mt=8&ct=${placement}`,
+  apple: (placement: string, lang: Lang) => {
+    const q = new URLSearchParams({ mt: "8", ct: tag(lang, placement) });
+    if (APP_STORE_PROVIDER_TOKEN) q.set("pt", APP_STORE_PROVIDER_TOKEN);
+    return `https://apps.apple.com/app/id6769443099?${q}`;
+  },
   // referrer= carries the campaign into Play Console → Acquisition reports
-  play: (placement: string) =>
+  play: (placement: string, lang: Lang) =>
     `https://play.google.com/store/apps/details?id=ai.kidsit.app&referrer=${encodeURIComponent(
-      `utm_source=kidsit_site&utm_medium=web&utm_campaign=site_cta&utm_content=${placement}`,
+      `utm_source=kidsit_site&utm_medium=web&utm_campaign=site_cta_${lang}&utm_content=${tag(lang, placement)}`,
     )}`,
 };
 
@@ -170,7 +184,7 @@ const en = {
       },
       {
         q: "Is it on Android?",
-        a: "Yes. Kidsit AI is available for both iPhone and Android, grab it from the App Store or Google Play. Same app, same coach, either phone. Questions? Write to omer+support@kidsit.ai.",
+        a: `Yes. Kidsit AI is available for both iPhone and Android, grab it from the App Store or Google Play. Same app, same coach, either phone. Questions? Write to ${SUPPORT_EMAIL}.`,
       },
     ] as FaqItem[],
   },
@@ -187,13 +201,14 @@ const en = {
       { label: "FAQ", href: "#faq" },
       { label: "Privacy", href: "/en/privacy" },
       { label: "Terms", href: "/en/terms" },
-      { label: "Contact us", href: "mailto:omer+support@kidsit.ai" },
+      { label: "Support", href: "/en/support" },
+      { label: "Contact us", href: `mailto:${SUPPORT_EMAIL}` },
     ],
     disclaimer:
       "© 2026 Kidsit.ai. This app is not a substitute for professional, medical, or psychological advice. It is designed to provide parents with smart, sensitive, and practical guidance for dealing with everyday situations in real-time.",
   },
   legal: {
-    back: "← Back to",
+    back: "← Back to ",
     home: "/en",
   },
 };
@@ -205,7 +220,7 @@ const he: Dict = {
   meta: {
     title: "Kidsit AI | הדרכה רגועה לרגעים הקשים",
     description:
-      "מספרים מה קרה עכשיו עם הילד ומקבלים הדרכה חמה ומבוססת מדע תוך כ-10 שניות, בלי שיפוטיות ובלי הרצאות.",
+      "מספרים מה קרה עכשיו עם הילד ומקבלים הדרכה חמה, בהשראת גישות הורות מוכרות, תוך כ-10 שניות. בלי שיפוטיות ובלי הרצאות.",
   },
   nav: {
     links: [
@@ -231,7 +246,7 @@ const he: Dict = {
     ctaPlay: "Google Play",
     ctaSecondary: "צפו איך זה עובד",
     chipWhisper: "🎙️ מספרים מה קרה",
-    chipTime: "⏱️ ‎~10 שניות לתוכנית",
+    chipTime: "⏱️ כ-10 שניות לתוכנית",
     screenshotAlt:
       "מסך הבית של Kidsit AI: ‏\"מה קרה עם תום?\" עם כפתור מיקרופון בלחיצה ממושכת באמצע הקלטה",
   },
@@ -273,7 +288,7 @@ const he: Dict = {
     heading: "הורים ממליצים",
     stats: [
       { value: "iOS + אנדרואיד", label: "אפליקציה אחת, כל טלפון" },
-      { value: "‎~10 שניות", label: "מסיפור לתוכנית" },
+      { value: "כ-10 שניות", label: "מסיפור לתוכנית" },
       { value: "ילד אחד חינם", label: "ללא הגבלת זמן" },
     ],
     sourceLabel: "ביקורת ב-App Store",
@@ -355,7 +370,7 @@ const he: Dict = {
       },
       {
         q: "יש גרסה לאנדרואיד?",
-        a: "כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד, מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון. יש שאלות? כתבו לנו: omer+support@kidsit.ai.",
+        a: `כן. Kidsit AI זמינה גם לאייפון וגם לאנדרואיד, מורידים מה-App Store או מ-Google Play. אותה אפליקציה, אותו מאמן, בכל טלפון. יש שאלות? כתבו לנו: ${SUPPORT_EMAIL}.`,
       },
     ],
   },
@@ -372,13 +387,14 @@ const he: Dict = {
       { label: "שאלות נפוצות", href: "#faq" },
       { label: "פרטיות", href: "/he/privacy" },
       { label: "תנאי שימוש", href: "/he/terms" },
-      { label: "צרו קשר", href: "mailto:omer+support@kidsit.ai" },
+      { label: "תמיכה", href: "/he/support" },
+      { label: "צרו קשר", href: `mailto:${SUPPORT_EMAIL}` },
     ],
     disclaimer:
       "© 2026 Kidsit.ai. האפליקציה אינה תחליף לייעוץ מקצועי, רפואי או פסיכולוגי. היא נועדה להעניק להורים הדרכה חכמה, רגישה ומעשית להתמודדות עם סיטואציות יומיומיות בזמן אמת.",
   },
   legal: {
-    back: "← חזרה ל",
+    back: "→ חזרה ל-",
     home: "/he",
   },
 };

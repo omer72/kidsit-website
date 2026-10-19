@@ -6,8 +6,9 @@ const BASE = "https://kidsit.ai";
 // Real content dates, so lastmod doesn't change on every build.
 const PAGES = [
   { path: "", lastModified: "2026-10-14" },
-  { path: "/privacy", lastModified: "2026-10-14" },
-  { path: "/terms", lastModified: "2026-03-01" },
+  { path: "/privacy", lastModified: "2026-10-19" },
+  { path: "/terms", lastModified: "2026-10-19" },
+  { path: "/support", lastModified: "2026-10-19" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
