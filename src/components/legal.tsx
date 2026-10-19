@@ -33,7 +33,7 @@ export function LegalPage({ lang, path, doc, children }: { lang: Lang; path: str
           {children}
         </article>
       </main>
-      <Footer t={d.footer} base={`/${lang}`} path={path} />
+      <Footer t={d.footer} base={`/${lang}`} path={path} lang={lang} />
     </>
   );
 }

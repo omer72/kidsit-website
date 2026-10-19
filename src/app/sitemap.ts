@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LANGS } from "@/dictionaries";
+import { listPosts } from "@/lib/blog";
 
 const BASE = "https://kidsit.ai";
 
@@ -13,7 +14,7 @@ const PAGES = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return LANGS.flatMap((lang) =>
+  const bilingual = LANGS.flatMap((lang) =>
     PAGES.map(({ path, lastModified }) => ({
       url: `${BASE}/${lang}${path}`,
       lastModified,
@@ -25,4 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
+  // Blog is Hebrew-only (no EN counterpart).
+  const posts = listPosts();
+  const blog: MetadataRoute.Sitemap = [
+    { url: `${BASE}/he/blog`, lastModified: "2026-10-19" },
+    ...posts.map((p) => ({ url: `${BASE}${p.path}`, lastModified: p.date })),
+  ];
+  return [...bilingual, ...blog];
 }

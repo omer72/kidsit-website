@@ -54,7 +54,7 @@ export default function Home({ params }: { params: { lang: Lang } }) {
         <Pricing t={t.pricing} lang={params.lang} />
         <Faq t={t.faq} />
       </main>
-      <Footer t={t.footer} />
+      <Footer t={t.footer} base={`/${params.lang}`} lang={params.lang} />
     </MotionRoot>
   );
 }

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { NagishLi } from "@/components/nagishli";
+import { CookieConsent } from "@/components/cookie-consent";
+import { Analytics } from "@/components/analytics";
 import { ogFor } from "@/lib/seo";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 import "../globals.css";
@@ -53,6 +55,10 @@ export default async function RootLayout({
             __html: "document.documentElement.classList.add('js')",
           }}
         />
+        {/* Consent Mode v2 defaults denied before any Google tag; gtag.js loads only after accept (see Analytics). */}
+        <Script id="consent-defaults" strategy="beforeInteractive">{`(function(){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500});})();`}</Script>
+        {/* Show the prerendered consent banner from first paint when no valid choice is stored (v1, 12 months). */}
+        <Script id="consent-needed" strategy="beforeInteractive">{`try{var c=JSON.parse(localStorage.getItem('kidsit-consent')||'null');if(!c||c.v!==1||!c.ts||Date.now()-Date.parse(c.ts)>31536e6)document.documentElement.classList.add('consent-needed')}catch(e){document.documentElement.classList.add('consent-needed')}`}</Script>
       </head>
       <body
         className={`${fontClass} bg-paper font-body text-ink antialiased`}
@@ -60,17 +66,8 @@ export default async function RootLayout({
       >
         {children}
         <NagishLi lang={params.lang} />
-        {/* lazyOnload so analytics never competes with LCP or hydration */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-MJH3YYBHJ0"
-          strategy="lazyOnload"
-        />
-        <Script id="gtag-init" strategy="lazyOnload">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-MJH3YYBHJ0');`}
-        </Script>
+        <CookieConsent lang={params.lang} />
+        <Analytics />
       </body>
     </html>
   );

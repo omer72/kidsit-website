@@ -23,6 +23,14 @@ export function middleware(req: NextRequest) {
   const cookie = req.cookies.get("NEXT_LOCALE")?.value;
   const he = cookie === "he" || cookie === "en" ? cookie === "he" : prefersHebrew(req.headers.get("accept-language"));
   const { pathname } = req.nextUrl;
+
+  // Blog is Hebrew-only: bare /blog(/...) always goes to /he/blog(/...). /en/blog 404s via [...missing].
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
+    const url = new URL(`/he${pathname}`, req.url);
+    url.search = req.nextUrl.search;
+    return NextResponse.redirect(url, 307);
+  }
+
   const path = pathname === "/" ? "" : pathname;
   const url = new URL(`/${he ? "he" : "en"}${path}`, req.url);
   url.search = req.nextUrl.search;

@@ -13,7 +13,8 @@ const Icon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-export function Navbar({ t }: { t: Dict["nav"] }) {
+export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
+  const hrefOf = (h: string) => (h.startsWith("#") ? base + h : h);
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -42,7 +43,7 @@ export function Navbar({ t }: { t: Dict["nav"] }) {
         aria-label={t.label}
         className="mx-auto flex max-w-5xl items-center justify-between rounded-2xl border-2 border-ink bg-white px-4 py-1.5 shadow-sticker"
       >
-        <a href="#top" className="flex min-h-11 items-center gap-2 font-display text-xl font-semibold">
+        <a href={hrefOf("#top")} className="flex min-h-11 items-center gap-2 font-display text-xl font-semibold">
           <Image
             src="/logo.png"
             alt=""
@@ -59,7 +60,7 @@ export function Navbar({ t }: { t: Dict["nav"] }) {
           {t.links.map((l) => (
             <li key={l.href}>
               <m.a
-                href={l.href}
+                href={hrefOf(l.href)}
                 className="inline-flex min-h-11 items-center px-2 hover:text-grape"
                 whileHover={{ y: -2 }}
                 transition={spring}
@@ -82,7 +83,7 @@ export function Navbar({ t }: { t: Dict["nav"] }) {
 
         <div className="flex items-center gap-2">
           <m.a
-            href="#pricing"
+            href={hrefOf("#pricing")}
             className="inline-flex min-h-11 items-center rounded-xl border-2 border-ink bg-grape px-4 text-sm font-bold text-white shadow-sticker-sm"
             whileHover={{ y: -2, boxShadow: "4px 6px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
@@ -116,7 +117,7 @@ export function Navbar({ t }: { t: Dict["nav"] }) {
               {t.links.map((l) => (
                 <li key={l.href}>
                   <a
-                    href={l.href}
+                    href={hrefOf(l.href)}
                     className="flex min-h-11 items-center px-5 font-bold hover:bg-paper"
                     onClick={() => setOpen(false)}
                   >

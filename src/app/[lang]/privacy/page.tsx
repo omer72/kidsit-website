@@ -57,9 +57,64 @@ const DOCS: Record<Lang, LegalDoc> = {
         p: "Moments and child profiles are stored on your device. We do not store them on our servers, so we keep nothing to retain once you delete the app.",
       },
       {
-        id: "analytics",
-        h: "Analytics and cookies on kidsit.ai",
-        p: "This website uses Google Analytics 4 to understand how many people visit and which sections they read. It may set cookies in your browser. It does not receive anything you enter in the app.",
+        id: "cookies",
+        h: "Cookies and local storage",
+        p: (
+          <>
+            <p>
+              We use essential first-party storage so the site works (your language choice and accessibility-menu
+              preferences). With your permission we also load Google Analytics 4 to understand how the site is used.
+              Analytics does not receive anything you enter in the app. Google tags do not load, and non-essential
+              cookies are not set, until you accept.
+            </p>
+            <table className="mt-4 w-full border-collapse text-sm">
+              <thead>
+                <tr className="border-b-2 border-ink text-start">
+                  <th scope="col" className="py-2 pe-3">Name</th>
+                  <th scope="col" className="py-2 pe-3">Type</th>
+                  <th scope="col" className="py-2 pe-3">Purpose</th>
+                  <th scope="col" className="py-2 pe-3">Duration</th>
+                  <th scope="col" className="py-2">Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>kidsit-consent</code></td>
+                  <td className="py-2 pe-3">localStorage</td>
+                  <td className="py-2 pe-3">Remembers your cookie choice (version and date)</td>
+                  <td className="py-2 pe-3">12 months</td>
+                  <td className="py-2">Essential</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
+                  <td className="py-2 pe-3">Cookie</td>
+                  <td className="py-2 pe-3">Remembers the language you chose (Hebrew or English)</td>
+                  <td className="py-2 pe-3">1 year</td>
+                  <td className="py-2">Essential</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
+                  <td className="py-2 pe-3">localStorage</td>
+                  <td className="py-2 pe-3">Accessibility-menu preferences on your device only</td>
+                  <td className="py-2 pe-3">Until reset or you clear site data</td>
+                  <td className="py-2">Essential</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_ga, _ga_*</code></td>
+                  <td className="py-2 pe-3">Cookie (Google)</td>
+                  <td className="py-2 pe-3">Google Analytics 4 statistics, only if you accept analytics</td>
+                  <td className="py-2 pe-3">Up to 2 years (Google)</td>
+                  <td className="py-2">Analytics</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mt-4">
+              When you first visit we ask you to choose: “Accept all”, “Reject non-essential”, or pick by category under
+              “Settings”. We store your choice with its date and ask again after 12 months or if this policy changes.
+              You can change or withdraw consent any time with the “Cookie settings” link in the footer of every page.
+            </p>
+          </>
+        ),
       },
       {
         id: "payments",
@@ -124,9 +179,63 @@ const DOCS: Record<Lang, LegalDoc> = {
         p: "הרגעים ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים אותם בשרתים שלנו, ולכן לאחר מחיקת האפליקציה לא נותר אצלנו מידע לשמור.",
       },
       {
-        id: "analytics",
-        h: "ניתוח נתונים ועוגיות (Cookies) באתר kidsit.ai",
-        p: "אתר זה משתמש ב-Google Analytics 4 כדי להבין כמה אנשים מבקרים בו ואילו חלקים הם קוראים. השירות עשוי לשמור עוגיות (Cookies) בדפדפן שלכם. הוא אינו מקבל דבר ממה שאתם מזינים באפליקציה.",
+        id: "cookies",
+        h: "עוגיות ואחסון מקומי",
+        p: (
+          <>
+            <p>
+              אנו משתמשים באחסון חיוני מצד ראשון כדי שהאתר יעבוד (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נטען גם
+              Google Analytics 4 כדי להבין איך משתמשים באתר. הניתוח אינו מקבל דבר ממה שאתם מזינים באפליקציה. תגי Google
+              לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
+            </p>
+            <table className="mt-4 w-full border-collapse text-sm">
+              <thead>
+                <tr className="border-b-2 border-ink text-start">
+                  <th scope="col" className="py-2 pe-3">שם</th>
+                  <th scope="col" className="py-2 pe-3">סוג</th>
+                  <th scope="col" className="py-2 pe-3">מטרה</th>
+                  <th scope="col" className="py-2 pe-3">משך</th>
+                  <th scope="col" className="py-2">קטגוריה</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>kidsit-consent</code></td>
+                  <td className="py-2 pe-3">localStorage</td>
+                  <td className="py-2 pe-3">שומר את בחירת העוגיות שלכם (גרסה ותאריך)</td>
+                  <td className="py-2 pe-3">12 חודשים</td>
+                  <td className="py-2">חיוני</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
+                  <td className="py-2 pe-3">Cookie</td>
+                  <td className="py-2 pe-3">שומר את השפה שבחרתם (עברית או אנגלית)</td>
+                  <td className="py-2 pe-3">שנה</td>
+                  <td className="py-2">חיוני</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
+                  <td className="py-2 pe-3">localStorage</td>
+                  <td className="py-2 pe-3">העדפות תפריט הנגישות במכשיר שלכם בלבד</td>
+                  <td className="py-2 pe-3">עד איפוס או ניקוי נתוני האתר</td>
+                  <td className="py-2">חיוני</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_ga, _ga_*</code></td>
+                  <td className="py-2 pe-3">Cookie (Google)</td>
+                  <td className="py-2 pe-3">סטטיסטיקות Google Analytics 4, רק אם אישרתם ניתוח</td>
+                  <td className="py-2 pe-3">עד שנתיים (Google)</td>
+                  <td className="py-2">סטטיסטיקה</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mt-4">
+              בביקור הראשון נבקש מכם לבחור: „אישור הכול”, „דחיית הלא־חיוניות”, או בחירה לפי קטגוריה ב„הגדרות”. נשמור את
+              הבחירה עם התאריך ונשאל שוב אחרי 12 חודשים או אם מדיניות זו תשתנה. אפשר לשנות או לבטל הסכמה בכל עת דרך קישור
+              „הגדרות עוגיות” בתחתית כל עמוד.
+            </p>
+          </>
+        ),
       },
       {
         id: "payments",
