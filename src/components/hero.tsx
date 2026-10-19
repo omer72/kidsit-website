@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { m, spring, useReducedMotion } from "./motion";
-import { storeUrl, type Dict } from "@/dictionaries";
+import { storeUrl, type Dict, type Lang } from "@/dictionaries";
+import { trackStoreClick } from "@/lib/track";
 
 function Scribble() {
   const reduce = useReducedMotion();
@@ -53,7 +54,9 @@ function Chip({
 
 const btn = "rounded-xl border-2 border-ink px-6 py-3 text-center font-bold shadow-sticker";
 
-export function Hero({ t }: { t: Dict["hero"] }) {
+export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
+  const apple = storeUrl.apple("site_hero", lang);
+  const play = storeUrl.play("site_hero", lang);
   return (
     <section id="top" className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-20 pt-8 sm:px-6 sm:gap-12 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:pt-20">
       <div className="animate-fade-up">
@@ -70,7 +73,8 @@ export function Hero({ t }: { t: Dict["hero"] }) {
         <p className="mt-6 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
         <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
           <m.a
-            href={storeUrl.apple("site_hero")}
+            href={apple}
+            onClick={() => trackStoreClick("apple", lang, "site_hero", apple)}
             className={`${btn} bg-grape text-white`}
             whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
@@ -79,7 +83,8 @@ export function Hero({ t }: { t: Dict["hero"] }) {
             {t.ctaApple}
           </m.a>
           <m.a
-            href={storeUrl.play("site_hero")}
+            href={play}
+            onClick={() => trackStoreClick("play", lang, "site_hero", play)}
             className={`${btn} bg-grape text-white`}
             whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
@@ -107,7 +112,7 @@ export function Hero({ t }: { t: Dict["hero"] }) {
         </Chip>
         <div className="animate-fade-up-late rotate-1 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-white shadow-sticker-lg">
           <Image
-            src="/app-mic.png"
+            src={lang === "he" ? "/app-mic-he.png" : "/app-mic.png"}
             alt={t.screenshotAlt}
             width={1290}
             height={2796}

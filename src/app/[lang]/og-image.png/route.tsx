@@ -1,11 +1,20 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import type { Lang } from "@/dictionaries";
+import { LANGS, type Lang } from "@/dictionaries";
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
-export const alt = "Kidsit AI, your AI parenting copilot, with the app's home screen";
+// Share card at /<lang>/og-image.png, referenced (with per-language alt text) by ogFor() in src/lib/seo.ts.
+// A plain route handler instead of the opengraph-image file convention, because that convention only allows one
+// alt text for every language. Prerendered at build time: on Vercel, files in /public are served by the CDN and
+// are NOT bundled into the serverless function, so reading public/*.png at request time threw ENOENT
+// (/var/task/public/icon-512.png) and every card request returned 500.
+export const dynamic = "force-static";
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
+
+const size = { width: 1200, height: 630 };
 
 const TEXT = {
   en: { tagline: "Your AI parenting copilot", family: "Fredoka", dir: "ltr" },
@@ -24,14 +33,19 @@ async function font(family: string, text: string) {
   return (await fetch(url)).arrayBuffer();
 }
 
-// Read from disk so the card never depends on the live site having these files yet.
+// Satori has no bidi algorithm: it lays glyphs out left to right, so a Hebrew string comes out
+// mirrored. The tagline is pure Hebrew letters and spaces, so reversing it gives the visual order.
+const visual = (text: string, dir: string) => (dir === "rtl" ? Array.from(text).reverse().join("") : text);
+
+// Read from disk at build time (the route is prerendered, see generateStaticParams above).
 const png = async (f: string) =>
   `data:image/png;base64,${(await readFile(join(process.cwd(), "public", f))).toString("base64")}`;
 
-export default async function Image({ params }: { params: { lang: Lang } }) {
+export async function GET(_req: Request, { params }: { params: { lang: Lang } }) {
   const t = TEXT[params.lang] ?? TEXT.en;
   const text = `Kidsit AI${t.tagline}`;
-  const [icon, shot] = await Promise.all([png("icon-512.png"), png("app-mic.png")]);
+  const shotFile = params.lang === "he" ? "app-mic-he.png" : "app-mic.png";
+  const [icon, shot] = await Promise.all([png("icon-512.png"), png(shotFile)]);
   return new ImageResponse(
     (
       <div
@@ -58,7 +72,7 @@ export default async function Image({ params }: { params: { lang: Lang } }) {
             style={{ borderRadius: 44 }}
           />
           <div style={{ fontSize: 84 }}>Kidsit AI</div>
-          <div style={{ fontSize: 40, color: "#5B3DF5", direction: t.dir }}>{t.tagline}</div>
+          <div style={{ fontSize: 40, color: "#5B3DF5" }}>{visual(t.tagline, t.dir)}</div>
         </div>
         <div
           style={{
@@ -76,6 +90,8 @@ export default async function Image({ params }: { params: { lang: Lang } }) {
     ),
     {
       ...size,
+      // the URL has no content hash, so keep browser/crawler caching to a day
+      headers: { "cache-control": "public, max-age=86400" },
       fonts: [{ name: t.family, data: await font(t.family, text), weight: 600, style: "normal" }],
     },
   );

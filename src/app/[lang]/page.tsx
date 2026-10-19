@@ -9,6 +9,9 @@ import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
 
+// Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
+export const dynamicParams = false;
+
 export default function Home({ params }: { params: { lang: Lang } }) {
   const t = dictionaries[params.lang];
   // No aggregateRating until the store has a meaningful number of ratings.
@@ -27,7 +30,7 @@ export default function Home({ params }: { params: { lang: Lang } }) {
           { "@type": "Offer", price: "59.99", priceCurrency: "USD", name: "Premium yearly" },
           { "@type": "Offer", price: "9.99", priceCurrency: "USD", name: "Premium monthly" },
         ],
-        sameAs: [storeUrl.apple("site_schema"), storeUrl.play("site_schema")],
+        sameAs: [storeUrl.apple("site_schema", params.lang), storeUrl.play("site_schema", params.lang)],
       },
       {
         "@type": "FAQPage",
@@ -44,14 +47,14 @@ export default function Home({ params }: { params: { lang: Lang } }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <Navbar t={t.nav} />
       <main>
-        <Hero t={t.hero} />
+        <Hero t={t.hero} lang={params.lang} />
         <Features t={t.features} />
         <Showcase t={t.showcase} lang={params.lang} />
         <SocialProof t={t.social} />
-        <Pricing t={t.pricing} />
+        <Pricing t={t.pricing} lang={params.lang} />
         <Faq t={t.faq} />
       </main>
-      <Footer t={t.footer} />
+      <Footer t={t.footer} base={`/${params.lang}`} lang={params.lang} />
     </MotionRoot>
   );
 }

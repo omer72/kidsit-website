@@ -1,11 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  async redirects() {
-    return [
-      { source: "/privacy", destination: "/en/privacy", permanent: false },
-      { source: "/terms", destination: "/en/terms", permanent: false },
-    ];
-  },
-};
+// Bare /privacy, /terms, /support and /accessibility are redirected by language in src/middleware.ts.
+const nextConfig = {};
 
 export default nextConfig;
