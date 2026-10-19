@@ -79,8 +79,9 @@ export function disableAnalytics() {
     ad_personalization: "denied",
   });
   // Swallow beacons / fetch to Google analytics & ads endpoints for the rest of this page load.
+  // Any Google Analytics / Tag Manager / Ads collect endpoint (incl. googletagmanager.com/a).
   const block = (url: string) =>
-    /google-analytics\.com|googletagmanager\.com\/(gtag\/js|td)|google\.[a-z.]+\/g?\/collect|doubleclick\.net|googlesyndication|pagead2/.test(
+    /google-analytics\.com|googletagmanager\.com|google\.[a-z.]+\/(g\/)?collect|doubleclick\.net|googlesyndication|pagead2/.test(
       String(url),
     );
   if (!window.__kidsitNetPatched) {
