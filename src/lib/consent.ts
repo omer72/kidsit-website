@@ -28,7 +28,12 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __kidsitGaLoaded?: boolean;
-    __kidsitNetPatched?: { fetch: typeof fetch; sendBeacon?: typeof navigator.sendBeacon };
+    __kidsitNetPatched?: {
+      fetch: typeof fetch;
+      sendBeacon?: typeof navigator.sendBeacon;
+      XHR?: typeof XMLHttpRequest;
+      Image?: typeof Image;
+    };
     [key: string]: unknown;
   }
 }
@@ -87,7 +92,9 @@ export function disableAnalytics() {
   if (!window.__kidsitNetPatched) {
     const sb = navigator.sendBeacon?.bind(navigator);
     const origFetch = window.fetch.bind(window);
-    window.__kidsitNetPatched = { fetch: origFetch, sendBeacon: sb };
+    const XO = window.XMLHttpRequest;
+    const Img = window.Image;
+    window.__kidsitNetPatched = { fetch: origFetch, sendBeacon: sb, XHR: XO, Image: Img };
     if (sb) {
       navigator.sendBeacon = (url, data?) => (block(String(url)) ? true : sb(url, data));
     }
@@ -96,6 +103,36 @@ export function disableAnalytics() {
       if (block(url)) return Promise.resolve(new Response(null, { status: 204 }));
       return origFetch(input, init);
     }) as typeof fetch;
+    // gtag often transports via Image or XHR — block those too while rejected.
+    window.XMLHttpRequest = class extends XO {
+      open(method: string, url: string | URL, ...rest: unknown[]) {
+        (this as unknown as { __blocked?: boolean }).__blocked = block(String(url));
+        // eslint-disable-next-line prefer-spread, @typescript-eslint/no-explicit-any
+        return super.open(method, url as string, ...(rest as [boolean]));
+      }
+      send(body?: Document | XMLHttpRequestBodyInit | null) {
+        if ((this as unknown as { __blocked?: boolean }).__blocked) return;
+        return super.send(body);
+      }
+    } as unknown as typeof XMLHttpRequest;
+    const srcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+    window.Image = function (this: HTMLImageElement, w?: number, h?: number) {
+      const img = w !== undefined ? new Img(w, h) : new Img();
+      if (srcDesc?.set && srcDesc.get) {
+        Object.defineProperty(img, "src", {
+          configurable: true,
+          enumerable: true,
+          set(v: string) {
+            if (!block(v)) srcDesc.set!.call(img, v);
+          },
+          get() {
+            return srcDesc.get!.call(img);
+          },
+        });
+      }
+      return img;
+    } as unknown as typeof Image;
+    (window.Image as unknown as { prototype: typeof Img.prototype }).prototype = Img.prototype;
   }
   // Stop the library from loading further if a script tag is still mid-flight.
   document.querySelectorAll('script[src*="googletagmanager.com/gtag"]').forEach((el) => el.remove());
@@ -110,6 +147,8 @@ export function loadAnalytics() {
   if (window.__kidsitNetPatched) {
     window.fetch = window.__kidsitNetPatched.fetch;
     if (window.__kidsitNetPatched.sendBeacon) navigator.sendBeacon = window.__kidsitNetPatched.sendBeacon;
+    if (window.__kidsitNetPatched.XHR) window.XMLHttpRequest = window.__kidsitNetPatched.XHR;
+    if (window.__kidsitNetPatched.Image) window.Image = window.__kidsitNetPatched.Image;
     delete window.__kidsitNetPatched;
   }
   if (window.__kidsitGaLoaded) {
