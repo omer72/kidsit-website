@@ -6,6 +6,7 @@ export const CONSENT_VERSION = 1;
 export const CONSENT_KEY = "kidsit-consent";
 export const GA_ID = "G-MJH3YYBHJ0";
 const YEAR = 365 * 24 * 3600 * 1000;
+const GA_DISABLE = `ga-disable-${GA_ID}`;
 
 export type Consent = { v: number; ts: string; analytics: boolean };
 
@@ -27,6 +28,13 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __kidsitGaLoaded?: boolean;
+    __kidsitNetPatched?: {
+      fetch: typeof fetch;
+      sendBeacon?: typeof navigator.sendBeacon;
+      XHR?: typeof XMLHttpRequest;
+      Image?: typeof Image;
+    };
+    [key: string]: unknown;
   }
 }
 
@@ -40,9 +48,116 @@ function ensureGtagStub() {
   }
 }
 
+/** Delete GA cookies on this host and the parent domain (e.g. .kidsit.ai). */
+export function clearGaCookies() {
+  if (typeof document === "undefined") return;
+  const names = document.cookie.split(";").map((c) => c.trim().split("=")[0]);
+  const ga = names.filter((n) => n === "_ga" || n.startsWith("_ga_"));
+  if (!ga.length) return;
+  const host = location.hostname;
+  const parts = host.split(".");
+  const domains = ["", host];
+  if (parts.length >= 2) domains.push("." + parts.slice(-2).join("."));
+  if (parts.length >= 3) domains.push("." + parts.slice(-3).join("."));
+  for (const name of ga) {
+    for (const d of domains) {
+      const domain = d ? `; domain=${d}` : "";
+      document.cookie = `${name}=; Max-Age=0; path=/${domain}`;
+    }
+  }
+}
+
+/** Stop any further GA / Ads hits on this page immediately (Accept → Reject). */
+export function disableAnalytics() {
+  // Must be set before any further hit (Google's documented kill switch).
+  window[GA_DISABLE] = true;
+  // Drop event/config calls; still allow a local consent update for completeness.
+  ensureGtagStub();
+  const push = window.gtag!;
+  window.gtag = function gtag(...args: unknown[]) {
+    if (args[0] === "consent") push(...args);
+  };
+  window.gtag("consent", "update", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+  // Swallow beacons / fetch to Google analytics & ads endpoints for the rest of this page load.
+  // Any Google Analytics / Tag Manager / Ads collect endpoint (incl. googletagmanager.com/a).
+  const block = (url: string) =>
+    /google-analytics\.com|googletagmanager\.com|google\.[a-z.]+\/(g\/)?collect|doubleclick\.net|googlesyndication|pagead2/.test(
+      String(url),
+    );
+  if (!window.__kidsitNetPatched) {
+    const sb = navigator.sendBeacon?.bind(navigator);
+    const origFetch = window.fetch.bind(window);
+    const XO = window.XMLHttpRequest;
+    const Img = window.Image;
+    window.__kidsitNetPatched = { fetch: origFetch, sendBeacon: sb, XHR: XO, Image: Img };
+    if (sb) {
+      navigator.sendBeacon = (url, data?) => (block(String(url)) ? true : sb(url, data));
+    }
+    window.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+      if (block(url)) return Promise.resolve(new Response(null, { status: 204 }));
+      return origFetch(input, init);
+    }) as typeof fetch;
+    // gtag often transports via Image or XHR — block those too while rejected.
+    window.XMLHttpRequest = class extends XO {
+      open(method: string, url: string | URL, ...rest: unknown[]) {
+        (this as unknown as { __blocked?: boolean }).__blocked = block(String(url));
+        // eslint-disable-next-line prefer-spread, @typescript-eslint/no-explicit-any
+        return super.open(method, url as string, ...(rest as [boolean]));
+      }
+      send(body?: Document | XMLHttpRequestBodyInit | null) {
+        if ((this as unknown as { __blocked?: boolean }).__blocked) return;
+        return super.send(body);
+      }
+    } as unknown as typeof XMLHttpRequest;
+    const srcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+    window.Image = function (this: HTMLImageElement, w?: number, h?: number) {
+      const img = w !== undefined ? new Img(w, h) : new Img();
+      if (srcDesc?.set && srcDesc.get) {
+        Object.defineProperty(img, "src", {
+          configurable: true,
+          enumerable: true,
+          set(v: string) {
+            if (!block(v)) srcDesc.set!.call(img, v);
+          },
+          get() {
+            return srcDesc.get!.call(img);
+          },
+        });
+      }
+      return img;
+    } as unknown as typeof Image;
+    (window.Image as unknown as { prototype: typeof Img.prototype }).prototype = Img.prototype;
+  }
+  // Stop the library from loading further if a script tag is still mid-flight.
+  document.querySelectorAll('script[src*="googletagmanager.com/gtag"]').forEach((el) => el.remove());
+  clearGaCookies();
+}
+
 /** Load gtag.js once and configure GA4. Call only after analytics consent. */
 export function loadAnalytics() {
-  if (typeof window === "undefined" || window.__kidsitGaLoaded) return;
+  if (typeof window === "undefined") return;
+  window[GA_DISABLE] = false;
+  // Undo a same-page Reject network patch if the visitor accepts again.
+  if (window.__kidsitNetPatched) {
+    window.fetch = window.__kidsitNetPatched.fetch;
+    if (window.__kidsitNetPatched.sendBeacon) navigator.sendBeacon = window.__kidsitNetPatched.sendBeacon;
+    if (window.__kidsitNetPatched.XHR) window.XMLHttpRequest = window.__kidsitNetPatched.XHR;
+    if (window.__kidsitNetPatched.Image) window.Image = window.__kidsitNetPatched.Image;
+    delete window.__kidsitNetPatched;
+  }
+  if (window.__kidsitGaLoaded) {
+    // Re-enabled after a previous reject on the same page: restore consent and re-config.
+    ensureGtagStub();
+    window.gtag!("consent", "update", { analytics_storage: "granted" });
+    window.gtag!("config", GA_ID);
+    return;
+  }
   ensureGtagStub();
   window.gtag!("consent", "update", { analytics_storage: "granted" });
   const s = document.createElement("script");
@@ -65,10 +180,7 @@ export function saveConsent({ analytics = false }: { analytics?: boolean }): Con
   }
   document.documentElement.classList.remove("consent-needed");
   if (c.analytics) loadAnalytics();
-  else {
-    ensureGtagStub();
-    window.gtag!("consent", "update", { analytics_storage: "denied" });
-  }
+  else disableAnalytics();
   window.dispatchEvent(new CustomEvent("kidsit-consent", { detail: c }));
   return c;
 }

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { m, spring, useReducedMotion } from "./motion";
 import { storeUrl, type Dict, type Lang } from "@/dictionaries";
-import { trackStoreClick } from "@/lib/track";
 
 function Scribble() {
   const reduce = useReducedMotion();
@@ -74,7 +73,6 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
         <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
           <m.a
             href={apple}
-            onClick={() => trackStoreClick("apple", lang, "site_hero", apple)}
             className={`${btn} bg-grape text-white`}
             whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
@@ -84,7 +82,6 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
           </m.a>
           <m.a
             href={play}
-            onClick={() => trackStoreClick("play", lang, "site_hero", play)}
             className={`${btn} bg-grape text-white`}
             whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
             whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}

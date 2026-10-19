@@ -1,6 +1,17 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
+import { storeUrl } from "@/dictionaries";
+
+/** Rewrite bare App Store / Play links to the same he_ ct/UTM scheme as the HE landing page (placement "blog"). */
+function withStoreUtms(html: string): string {
+  const apple = storeUrl.apple("blog", "he");
+  const play = storeUrl.play("blog", "he");
+  return html
+    .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
+    .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
+}
+
 
 export type PostMeta = {
   slug: string; // path segment, e.g. hetkefei-zaam-gil-3
@@ -47,7 +58,7 @@ function loadFile(file: string): Post {
   const slug = path.replace(/^\/he\/blog\//, "");
   // Strip the leading H1 from HTML body (rendered separately as page title) but keep it in bodyMd for diff checks.
   const bodyWithoutH1 = body.replace(/^#\s+.+\n+/, "");
-  const html = marked.parse(bodyWithoutH1, { async: false }) as string;
+  const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string);
   return {
     slug,
     path,
