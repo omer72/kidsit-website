@@ -69,7 +69,12 @@ const DOCS: Record<Lang, LegalDoc> = {
               not receive anything you enter in the app. Google tags do not load, and non-essential cookies are not set,
               until you accept.
             </p>
-            <div className="mt-4 max-w-full overflow-x-auto">
+            <div
+              className="mt-4 max-w-full overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-grape"
+              tabIndex={0}
+              role="region"
+              aria-label="Cookie table"
+            >
             <table className="w-full min-w-[36rem] border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-ink text-start">
@@ -200,7 +205,12 @@ const DOCS: Record<Lang, LegalDoc> = {
               כשלוחצים על כפתור App Store או Google Play (כדי לייחס ביקורים בחנויות מהאתר). הניתוח והמדידות האלה אינם מקבלים
               דבר ממה שאתם מזינים באפליקציה. תגי Google לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
             </p>
-            <div className="mt-4 max-w-full overflow-x-auto">
+            <div
+              className="mt-4 max-w-full overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-grape"
+              tabIndex={0}
+              role="region"
+              aria-label="טבלת עוגיות"
+            >
             <table className="w-full min-w-[36rem] border-collapse text-sm">
               <thead>
                 <tr className="border-b-2 border-ink text-start">
