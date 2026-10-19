@@ -28,6 +28,7 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __kidsitGaLoaded?: boolean;
+    __kidsitNetPatched?: { fetch: typeof fetch; sendBeacon?: typeof navigator.sendBeacon };
     [key: string]: unknown;
   }
 }
@@ -61,16 +62,43 @@ export function clearGaCookies() {
   }
 }
 
-/** Stop any further GA hits on this page immediately (Accept → Reject). */
+/** Stop any further GA / Ads hits on this page immediately (Accept → Reject). */
 export function disableAnalytics() {
-  ensureGtagStub();
+  // Must be set before any further hit (Google's documented kill switch).
   window[GA_DISABLE] = true;
-  window.gtag!("consent", "update", {
+  // Drop event/config calls; still allow a local consent update for completeness.
+  ensureGtagStub();
+  const push = window.gtag!;
+  window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    if (arguments[0] === "consent") push.apply(null, arguments as unknown as []);
+  };
+  window.gtag("consent", "update", {
     analytics_storage: "denied",
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",
   });
+  // Swallow beacons / fetch to Google analytics & ads endpoints for the rest of this page load.
+  const block = (url: string) =>
+    /google-analytics\.com|googletagmanager\.com\/(gtag\/js|td)|google\.[a-z.]+\/g?\/collect|doubleclick\.net|googlesyndication|pagead2/.test(
+      String(url),
+    );
+  if (!window.__kidsitNetPatched) {
+    const sb = navigator.sendBeacon?.bind(navigator);
+    const origFetch = window.fetch.bind(window);
+    window.__kidsitNetPatched = { fetch: origFetch, sendBeacon: sb };
+    if (sb) {
+      navigator.sendBeacon = (url, data?) => (block(String(url)) ? true : sb(url, data));
+    }
+    window.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+      if (block(url)) return Promise.resolve(new Response(null, { status: 204 }));
+      return origFetch(input, init);
+    }) as typeof fetch;
+  }
+  // Stop the library from loading further if a script tag is still mid-flight.
+  document.querySelectorAll('script[src*="googletagmanager.com/gtag"]').forEach((el) => el.remove());
   clearGaCookies();
 }
 
@@ -78,6 +106,12 @@ export function disableAnalytics() {
 export function loadAnalytics() {
   if (typeof window === "undefined") return;
   window[GA_DISABLE] = false;
+  // Undo a same-page Reject network patch if the visitor accepts again.
+  if (window.__kidsitNetPatched) {
+    window.fetch = window.__kidsitNetPatched.fetch;
+    if (window.__kidsitNetPatched.sendBeacon) navigator.sendBeacon = window.__kidsitNetPatched.sendBeacon;
+    delete window.__kidsitNetPatched;
+  }
   if (window.__kidsitGaLoaded) {
     // Re-enabled after a previous reject on the same page: restore consent and re-config.
     ensureGtagStub();
