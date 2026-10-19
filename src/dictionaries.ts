@@ -3,6 +3,8 @@ export type Lang = (typeof LANGS)[number];
 
 // The one support address used everywhere on the site (footer, FAQ, legal pages, /support).
 export const SUPPORT_EMAIL = "omer+support@kidsit.ai";
+// Accessibility contact (accessibility statement only). Kept separate from support on purpose.
+export const ACCESSIBILITY_EMAIL = "omer+privacy@kidsit.ai";
 
 // TODO(Gal): App Store Connect provider token ("pt"), from App Store Connect → App Analytics →
 // Campaigns → Generate a campaign link. Paste the numeric token here as a string, e.g. "123456".
@@ -202,6 +204,7 @@ const en = {
       { label: "Privacy", href: "/en/privacy" },
       { label: "Terms", href: "/en/terms" },
       { label: "Support", href: "/en/support" },
+      { label: "Accessibility", href: "/en/accessibility" },
       { label: "Contact us", href: `mailto:${SUPPORT_EMAIL}` },
     ],
     disclaimer:
@@ -388,6 +391,7 @@ const he: Dict = {
       { label: "פרטיות", href: "/he/privacy" },
       { label: "תנאי שימוש", href: "/he/terms" },
       { label: "תמיכה", href: "/he/support" },
+      { label: "הצהרת נגישות", href: "/he/accessibility" },
       { label: "צרו קשר", href: `mailto:${SUPPORT_EMAIL}` },
     ],
     disclaimer:

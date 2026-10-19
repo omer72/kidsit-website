@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-// "/" and "/support": pick he/en from the switcher's cookie, else Accept-Language.
+// "/", "/support" and "/accessibility": pick he/en from the switcher's cookie, else Accept-Language.
 export function middleware(req: NextRequest) {
   const cookie = req.cookies.get("NEXT_LOCALE")?.value;
   const he = cookie
@@ -10,4 +10,4 @@ export function middleware(req: NextRequest) {
   return NextResponse.redirect(new URL(`/${he ? "he" : "en"}${path}`, req.url), 307);
 }
 
-export const config = { matcher: ["/", "/support"] };
+export const config = { matcher: ["/", "/support", "/accessibility"] };

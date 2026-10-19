@@ -68,6 +68,17 @@ export default async function RootLayout({
             It reads nagishli_config when it loads, so the config is set right before the script is added. */}
         <Script id="nagishli" strategy="lazyOnload">
           {`window.nagishli_config = { language: "${params.lang}", color: "purple" };
+// NagishLi's own "Accessibility Statement" item opens a generic built-in overlay and has no config
+// for a URL, so send it to our statement page instead (capture phase runs before the widget's handler).
+var openStatement = function (e) {
+  if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return;
+  if (!e.target.closest || !e.target.closest('[data-nagishli-overlay="accessibility_statement"]')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  window.location.href = "/${params.lang}/accessibility";
+};
+document.addEventListener("click", openStatement, true);
+document.addEventListener("keydown", openStatement, true);
 var s = document.createElement("script");
 s.src = "/nagishli/nagishli_beta.js?v=3.0b";
 s.charset = "utf-8";
