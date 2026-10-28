@@ -41,7 +41,7 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
               <p className="text-sm font-bold text-ink-muted">
                 <time dateTime={p.date}>{p.date.split("-").reverse().join(".")}</time>
               </p>
-              <Link href={p.path} className="mt-1 block font-display text-2xl font-semibold text-grape hover:underline">
+              <Link href={p.path} className="blog-index-title mt-1 block font-display text-2xl font-semibold text-grape hover:underline">
                 {p.title}
               </Link>
               <p className="mt-2 font-bold text-ink/80">{p.description}</p>
