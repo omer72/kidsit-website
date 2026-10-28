@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogInstallBar } from "@/components/blog-install-bar";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor } from "@/lib/seo";
@@ -62,6 +63,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Footer t={d.footer} base="/he" path={`/blog/${post.slug}`} lang="he" />
+      <BlogInstallBar />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogInstallBar } from "@/components/blog-install-bar";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor } from "@/lib/seo";
@@ -34,7 +35,7 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
       <main className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
         <h1 className="font-display text-4xl font-semibold">בלוג</h1>
         <p className="mt-4 font-bold text-ink/80">מאמרים קצרים להורים על הרגעים הקשים של היום.</p>
-        <ul className="mt-10 space-y-6">
+        <ul className="blog-index-list mt-10 space-y-6">
           {posts.map((p) => (
             <li key={p.slug} className="rounded-2xl border-2 border-ink bg-white p-5 shadow-sticker-sm">
               <p className="text-sm font-bold text-ink-muted">
@@ -49,6 +50,7 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
         </ul>
       </main>
       <Footer t={d.footer} base="/he" path="/blog" lang="he" />
+      <BlogInstallBar />
     </>
   );
 }
