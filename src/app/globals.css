@@ -139,3 +139,13 @@ html.consent-needed #NagishLiTrigger {
 .blog-prose strong {
   font-weight: 800;
 }
+/* Phone-width only: blocks that hold store links start clear of the Nagish trigger
+   (bottom-right, 60px + 10px). Inline link boxes then cannot intersect the FAB. */
+@media (max-width: 767px) {
+  .blog-prose :is(p, li, blockquote):has(a[href*="apps.apple.com"], a[href*="play.google.com"]) {
+    padding-inline-start: 4.5rem;
+  }
+  .blog-prose :is(li, blockquote):has(a[href*="apps.apple.com"], a[href*="play.google.com"]) :is(p, li) {
+    padding-inline-start: 0;
+  }
+}
