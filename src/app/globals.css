@@ -149,3 +149,16 @@ html.consent-needed #NagishLiTrigger {
     padding-inline-start: 0;
   }
 }
+
+/* Blog index titles at phone width (≤640px). #NagishLiTrigger is position:fixed;
+   right:10px; 60×60 in both directions, so its column is the physical right.
+   The overlap check measures the title link's border box. Padding sits inside
+   that box (and padding-inline-end is the physical left on the Hebrew page),
+   so it would not move the box off the button. A physical right margin of
+   4.5rem (72px) shrinks the box: at 390px the title's right edge lands ~44px
+   left of the trigger. The sticky bar and its store buttons are unchanged. */
+@media (max-width: 640px) {
+  .blog-index-title {
+    margin-right: 4.5rem;
+  }
+}
