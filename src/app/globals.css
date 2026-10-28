@@ -66,6 +66,36 @@ html.consent-needed #NagishLiTrigger {
   top: auto !important;
 }
 
+/* Hebrew blog install bar (mobile only, md:hidden). The Nagish trigger stays at its default
+   bottom-right corner and sits in the bar's physical-right gutter, so it stays tappable and
+   does not cover the store buttons or a card title that has scrolled above the bar.
+   While the consent banner is open the bar stacks above it and the trigger is lifted clear
+   of both. --blog-bar-h is measured by BlogInstallBar; 7.5rem covers the bar before that. */
+@media (max-width: 767px) {
+  .blog-install-bar {
+    /* 60px trigger + 10px corner offset + gap, so the buttons stay left of the FAB. */
+    padding-right: 5.25rem;
+  }
+  .blog-index-list {
+    /* Last card can scroll fully above the trigger (60px) plus a gap. */
+    padding-bottom: 4.75rem;
+  }
+  html:is(.consent-showing, .consent-needed) .blog-install-bar {
+    bottom: var(--consent-h, 260px);
+    padding-right: 0.75rem;
+  }
+  html:has(.blog-install-bar):is(.consent-showing, .consent-needed) #NagishLiTrigger {
+    bottom: calc(var(--consent-h, 260px) + var(--blog-bar-h, 7.5rem) + 12px) !important;
+    top: auto !important;
+  }
+  body:has(.blog-install-bar) {
+    padding-bottom: var(--blog-bar-h, 7.5rem);
+  }
+  html:is(.consent-showing, .consent-needed) body:has(.blog-install-bar) {
+    padding-bottom: calc(var(--consent-h, 260px) + var(--blog-bar-h, 7.5rem) + 4.75rem);
+  }
+}
+
 /* Blog article prose: light formatting only; inherits page font weight. */
 .blog-prose h2 {
   margin-top: 2rem;
@@ -108,4 +138,14 @@ html.consent-needed #NagishLiTrigger {
 }
 .blog-prose strong {
   font-weight: 800;
+}
+/* Phone-width only: blocks that hold store links start clear of the Nagish trigger
+   (bottom-right, 60px + 10px). Inline link boxes then cannot intersect the FAB. */
+@media (max-width: 767px) {
+  .blog-prose :is(p, li, blockquote):has(a[href*="apps.apple.com"], a[href*="play.google.com"]) {
+    padding-inline-start: 4.5rem;
+  }
+  .blog-prose :is(li, blockquote):has(a[href*="apps.apple.com"], a[href*="play.google.com"]) :is(p, li) {
+    padding-inline-start: 0;
+  }
 }
