@@ -139,6 +139,16 @@ html.consent-needed #NagishLiTrigger {
 .blog-prose strong {
   font-weight: 800;
 }
+.blog-sources a {
+  overflow-wrap: anywhere;
+}
+/* Source links sit in the physical-right column the Nagish trigger occupies.
+   padding-inline-start is the right edge on the Hebrew page, same clearance as store links. */
+@media (max-width: 767px) {
+  .blog-sources {
+    padding-inline-start: 4.5rem;
+  }
+}
 /* Phone-width only: blocks that hold store links start clear of the Nagish trigger
    (bottom-right, 60px + 10px). Inline link boxes then cannot intersect the FAB. */
 @media (max-width: 767px) {
