@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata } from "next";
 import type { Lang } from "@/dictionaries";
 
@@ -17,6 +19,28 @@ export const card = (lang: Lang) => ({
 
 type OgType = "website" | "article";
 
+export type ShareImage = {
+  url: string;
+  width: 1200;
+  height: 630;
+  alt: string;
+  type: "image/png";
+};
+
+const SITE = "https://kidsit.ai";
+
+/**
+ * Per-post share card at public/og/he/<slug>.png, served as /og/he/<slug>.png.
+ * Missing file falls back to the shared Hebrew card. URLs are absolute.
+ */
+export function hePostShareImage(slug: string, alt: string): ShareImage {
+  const safe = /^[a-z0-9-]+$/.test(slug);
+  if (safe && existsSync(join(process.cwd(), "public", "og", "he", `${slug}.png`))) {
+    return { url: `${SITE}/og/he/${slug}.png`, width: 1200, height: 630, alt, type: "image/png" };
+  }
+  return { url: `${SITE}/he/og-image.png`, width: 1200, height: 630, alt: OG_ALT.he, type: "image/png" };
+}
+
 // A page-level openGraph object replaces the layout's, so every page (home via the layout, and privacy, terms,
 // support, accessibility, blog) spreads this to get the share image, site name, type and locale.
 export function ogFor(
@@ -25,7 +49,9 @@ export function ogFor(
   description: string,
   path: string,
   type: OgType = "website",
+  image?: ShareImage,
 ): Pick<Metadata, "openGraph" | "twitter"> {
+  const img = image ?? card(lang);
   return {
     openGraph: {
       type,
@@ -34,8 +60,8 @@ export function ogFor(
       url: `/${lang}${path}`,
       title,
       description,
-      images: [card(lang)],
+      images: [img],
     },
-    twitter: { card: "summary_large_image", title, description, images: [card(lang)] },
+    twitter: { card: "summary_large_image", title, description, images: [img] },
   };
 }
