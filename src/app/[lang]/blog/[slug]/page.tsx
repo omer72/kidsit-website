@@ -43,6 +43,20 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
     mainEntityOfPage: { "@type": "WebPage", "@id": `https://kidsit.ai${post.path}` },
     image: "https://kidsit.ai/he/og-image.png",
   };
+  const faqLd =
+    post.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          inLanguage: "he",
+          mainEntityOfPage: { "@type": "WebPage", "@id": `https://kidsit.ai${post.path}` },
+          mainEntity: post.faq.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a },
+          })),
+        }
+      : null;
   return (
     <>
       <Navbar t={d.nav} base="/he" />
@@ -62,6 +76,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
         </article>
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {faqLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} /> : null}
       <Footer t={d.footer} base="/he" path={`/blog/${post.slug}`} lang="he" />
       <BlogInstallBar />
     </>

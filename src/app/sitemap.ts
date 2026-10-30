@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Blog is Hebrew-only (no EN counterpart).
   const posts = listPosts();
   const blog: MetadataRoute.Sitemap = [
-    { url: `${BASE}/he/blog`, lastModified: "2026-10-19" },
+    { url: `${BASE}/he/blog`, lastModified: posts[0]?.date ?? "2026-10-19" },
     ...posts.map((p) => ({ url: `${BASE}${p.path}`, lastModified: p.date })),
   ];
   return [...bilingual, ...blog];
