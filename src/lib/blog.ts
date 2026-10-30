@@ -80,7 +80,8 @@ function loadFile(file: string): Post {
   const slug = path.replace(/^\/he\/blog\//, "");
   const expanded = expandFaq(body);
   // Strip the leading H1 from HTML body (rendered separately as page title) but keep it in bodyMd for diff checks.
-  const bodyWithoutH1 = expanded.body.replace(/^#\s+.+\n+/, "");
+  // Frontmatter parsing can leave a blank line, so the heading is not always at column 0.
+  const bodyWithoutH1 = expanded.body.replace(/^\s*#\s+.+(?:\n+|$)/, "");
   const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string);
   return {
     slug,
