@@ -13,12 +13,12 @@ export function LegalPage({ lang, path, doc, children }: { lang: Lang; path: str
   const d = dictionaries[lang];
   return (
     <>
-      <main className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
+      <main className="mx-auto min-w-0 max-w-3xl px-5 py-16 sm:px-6">
         <Link href={d.legal.home} className="inline-flex min-h-11 items-center font-bold text-grape hover:underline">
           {d.legal.back}
           <bdi dir="ltr">kidsit·ai</bdi>
         </Link>
-        <article className="text-start">
+        <article className="min-w-0 text-start">
           <h1 className="mt-6 font-display text-4xl font-semibold">{doc.title}</h1>
           <p className="mt-2 text-sm font-bold text-ink-muted">
             {UPDATED_LABEL[lang]} {doc.updated}
@@ -27,7 +27,7 @@ export function LegalPage({ lang, path, doc, children }: { lang: Lang; path: str
           {doc.sections.map((s) => (
             <section key={s.id} id={s.id} className="mt-8 scroll-mt-6">
               <h2 className="font-display text-2xl font-semibold">{s.h}</h2>
-              <div className="mt-2 font-bold text-ink/80">{s.p}</div>
+              <div className="mt-2 break-words font-bold text-ink/80">{s.p}</div>
             </section>
           ))}
           {children}
