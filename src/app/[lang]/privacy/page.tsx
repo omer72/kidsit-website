@@ -26,10 +26,13 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
 // Updated November 2026 for on-device digests and optional anonymous insights.
+// Updated November 1, 2026: a guidance request carries only the active child's story, context,
+// profile, and eight recent moments, plus a RevenueCat ID. Other children and the optional
+// moment note are not included.
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 2026",
+    updated: "November 1, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -45,7 +48,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "use",
         h: "How We Use Information",
-        p: "Information stored on your device is used to give you personalized parenting guidance and, if you turn it on, a digest calculated on the device. A guidance request is sent to our functions on Netlify. That request includes the situation you described, the child profile you entered (name, birth date, gender, intake answers, and notes), siblings' names and ages, and the history saved on the device (stories, the guidance you received, ratings, and notes) so the function can choose relevant moments. OpenAI's gpt-4o-mini model then receives the profile fields above and up to five earlier moments for the child you asked about. The optional moment note is stored on the device and included in that history; it is not copied into the model prompt as its own field. We do not store those prompts.",
+        p: "Information stored on your device is used to give you personalized parenting guidance and, if you turn it on, a digest calculated on the device. A guidance request is sent to our functions on Netlify. That request includes only the child you asked about: the story text, the context you chose (location, your mood, who else was there, and how urgent it feels), that child's profile (name, birth date, gender, intake answers, notes, and whether a new baby recently joined the family, without the baby's name), and that child's eight most recent moments (each moment's story, a short summary of the earlier guidance and its advice headlines, your rating, and, when saved, when and where it happened and your mood). It also includes a RevenueCat ID so the function can check the subscription. Names, profiles, and history of other children are not sent. If an older version of the app still includes them, the function leaves them out of the prompt. The optional moment note stays on your device and is not included in the request. OpenAI's gpt-4o-mini model then receives the story, that context, that child's profile, and up to five of those recent moments. The RevenueCat ID is not part of the text sent to the model. We do not store those prompts.",
       },
       {
         id: "sharing",
@@ -233,7 +236,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "נובמבר 2026",
+    updated: "1 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -249,7 +252,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "use",
         h: "כיצד אנו משתמשים במידע",
-        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת את תיאור הסיטואציה, את פרופיל הילד שהזנתם (שם, תאריך לידה, מגדר, תשובות היכרות והערות), שמות וגילאים של אחים, ואת היסטוריית הרגעים השמורה במכשיר (סיפורים, ההדרכה שקיבלתם, דירוגים והערות), כדי שהפונקציה תוכל לבחור רגעים רלוונטיים. מודל gpt-4o-mini של OpenAI מקבל את שדות הפרופיל האלה ועד חמישה רגעים קודמים של הילד שעליו שאלתם. הערת הרגע נשמרת במכשיר ונכללת בהיסטוריה הזו; היא לא מועתקת לפרומפט של המודל כשדה נפרד. איננו שומרים את הפרומפטים האלה.",
+        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו — מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-4o-mini של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
       },
       {
         id: "sharing",
