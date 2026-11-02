@@ -23,38 +23,108 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   };
 }
 
-// Drafted from what the site and FAQ already say. Needs a legal read before it's final.
+// Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
+// Updated November 2026 for on-device digests and optional anonymous insights.
+// Updated November 1, 2026: a guidance request carries only the active child's story, context,
+// profile, and eight recent moments, plus a RevenueCat ID. Other children and the optional
+// moment note are not included.
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "October 2026",
+    updated: "November 1, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
         id: "collect",
         h: "Information We Collect",
-        p: "The app collects information you provide directly: children's names, ages, characteristics, and descriptions of situations. This information is stored on your device.",
+        p: "The app collects information you provide directly: children's names, ages, characteristics, and descriptions of situations, your rating of each moment (it got worse, about the same, it helped, or it helped a lot), and an optional note. This information is stored on your device. If you separately choose to send anonymous insights, we receive only the summary described under “Weekly digest and anonymous insights”.",
       },
       {
         id: "voice",
         h: "Voice recordings and transcription",
-        p: "When you use the microphone, your voice is transcribed to text transiently so the app can generate guidance. We do not retain your recordings. Nothing you say is used to train models.",
+        p: "When you use the microphone, your voice is sent to OpenAI Whisper (whisper-1) and transcribed to text transiently so the app can generate guidance. We do not retain your recordings. Nothing you say is used to train models.",
       },
       {
         id: "use",
         h: "How We Use Information",
-        p: "Information is used solely to provide personalized parenting guidance. Situation descriptions are sent to external AI services (OpenAI and Anthropic) for processing and are not stored by us.",
+        p: "Information stored on your device is used to give you personalized parenting guidance and, if you turn it on, a digest calculated on the device. A guidance request is sent to our functions on Netlify. That request includes only the child you asked about: the story text, the context you chose (location, your mood, who else was there, and how urgent it feels), that child's profile (name, birth date, gender, intake answers, notes, and whether a new baby recently joined the family, without the baby's name), and that child's eight most recent moments (each moment's story, a short summary of the earlier guidance and its advice headlines, your rating, and, when saved, when and where it happened and your mood). It also includes a RevenueCat ID so the function can check the subscription. Names, profiles, and history of other children are not sent. If an older version of the app still includes them, the function leaves them out of the prompt. The optional moment note stays on your device and is not included in the request. OpenAI's gpt-4o-mini model then receives the story, that context, that child's profile, and up to five of those recent moments. The RevenueCat ID is not part of the text sent to the model. We do not store those prompts.",
       },
       {
         id: "sharing",
         h: "Third-Party Sharing",
-        p: "Situation descriptions are sent to AI providers (OpenAI, Anthropic) to generate recommendations. These providers are subject to their own privacy policies. We do not sell personal information, and we do not show ads.",
+        p: (
+          <>
+            <p>We do not sell personal information, and we do not show ads. The providers below match what the app and this site actually use:</p>
+            <ul className="mt-3 list-disc space-y-2 ps-5">
+              <li>OpenAI — gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
+              <li>Netlify — hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
+              <li>RevenueCat — checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. Apple or Google bills you. We never see your card number.</li>
+              <li>Insert Affiliate — if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
+              <li>Vercel — hosts this website (kidsit.ai) and the anonymous insights endpoint. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our insights database.</li>
+              <li>Neon — Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send. See “Weekly digest and anonymous insights”.</li>
+              <li>Google — Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
+            </ul>
+          </>
+        ),
       },
       {
         id: "retention",
         h: "Data Storage and Retention",
-        p: "Moments and child profiles are stored on your device. We do not store them on our servers, so we keep nothing to retain once you delete the app.",
+        p: "Moments, ratings, notes, and child profiles are stored on your device. We do not store those moments or profiles on our servers. If you delete the app, that on-device information is removed with it. The exception is anonymous insights you choose to send: the counts and the optional rating are kept, and free text is deleted after 90 days.",
+      },
+      {
+        id: "insights",
+        h: "Weekly digest and anonymous insights",
+        p: (
+          <>
+            <p>
+              The daily or weekly digest is built on your device from moments already stored there, separately for each
+              child. It is off unless you turn it on. Building or reading the digest does not send those moments to us.
+            </p>
+            <p className="mt-2">
+              Sharing anonymous insights is a separate choice, and it is also off by default. Nothing is sent unless you
+              turn sharing on and then confirm one send, after a preview of exactly what will leave the device. Turning
+              either option off does not change the price or the guidance you can use.
+            </p>
+            <p className="mt-2">
+              If you send a summary, it can include counts of how moments went (helped a lot, helped, about the same, got
+              worse, or not rated) grouped by a fixed list of situation types; counts of which guidance techniques
+              appeared in moments that helped or did not; an optional rating from 1 to 5 of how much Kidsit helped that
+              week; optional free text you write, up to 500 characters; the app language; whether the device is iOS or
+              Android; and the app version at major.minor only. A daily digest is still stored as an ISO week (for
+              example 2026-W44), not the exact day. In the digest wording on the device, “about the same” is counted with
+              moments that did not help. The anonymous counts keep the original rating, including “about the same”, and
+              do not fold it into another number before it is stored.
+            </p>
+            <p className="mt-2">
+              We do not receive children&apos;s names, stories, AI replies, notes, ages, birth dates, gender, diagnoses,
+              how many children you have, or any user, device, install, or RevenueCat identifier. The row is stored
+              under a random id. The data is not linked to you, and your IP address is not stored in this database.
+            </p>
+            <p className="mt-2">
+              Before sending, the app removes names of children and siblings saved on the device, email addresses, phone
+              numbers, web addresses, 9-digit ID numbers, and full dates from the free text, and shows you the cleaned
+              version. The server removes emails, phone numbers, web addresses, 9-digit ID numbers, and full dates again
+              before writing. Do not write names, places, contact details, or medical details. The text is stored as it
+              remains after that cleaning.
+            </p>
+            <p className="mt-2">
+              Free text is deleted automatically after 90 days. The counts may be kept longer. Because the send is
+              anonymous, we cannot find or delete one specific submission. To remove a piece of free text that is still
+              inside those 90 days, email us and quote it.
+            </p>
+            <p className="mt-2">
+              Submissions are stored in Neon Postgres through Vercel, and the endpoint runs on Vercel. Vercel request
+              logs include IP addresses for the plan&apos;s retention period. We do not write the request body or the IP
+              address into our database, and we do not use those logs to identify you.
+            </p>
+            <p className="mt-2">
+              The purpose is to improve Kidsit. You can turn sharing off at any time in the app&apos;s settings, and the
+              send button then disappears.
+            </p>
+          </>
+        ),
       },
       {
         id: "cookies",
@@ -140,17 +210,17 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "children",
         h: "Children's information",
-        p: "Kidsit AI is for parents and guardians aged 18 or over, not for children. Any information about a child is entered by their parent or guardian and is handled as described above.",
+        p: "Kidsit AI is for parents and guardians aged 18 or over, not for children. Any information about a child is entered by their parent or guardian and is handled as described above. The digest is calculated on the device for each child and is not sent unless you turn on sharing and confirm a send. Anonymous insights are not meant to include a child's name or other identifiers.",
       },
       {
         id: "delete",
         h: "How to delete your data",
-        p: <>Data stored on your device is removed when you delete the app. To ask us about access, correction or deletion of anything else, email {mail}.</>,
+        p: <>Data stored on your device is removed when you delete the app, or when you use Clear all data in the app. Anonymous insights are not linked to you, so we cannot find one specific submission to delete it. Free text from those submissions is deleted automatically after 90 days. To ask us to remove a piece of free text sooner, or to ask about access, correction, or deletion of anything else, email {mail}.</>,
       },
       {
         id: "rights",
         h: "Your Rights",
-        p: "Under the Israeli Privacy Protection Law and the GDPR, you have the right to access, correct, or delete your data. Contact us using the address below to exercise these rights.",
+        p: "Under the Israeli Privacy Protection Law and the GDPR, you have the right to access, correct, or delete your data. On-device data is under your control in the app. Anonymous insights are not linked to an identity, so we cannot look up a specific send; free text is deleted after 90 days. Contact us using the address below to exercise these rights.",
       },
       {
         id: "security",
@@ -166,33 +236,95 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "אוקטובר 2026",
+    updated: "1 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
         id: "collect",
         h: "המידע שאנו אוספים",
-        p: "האפליקציה אוספת מידע שאתם מוסרים לה ישירות: שמות הילדים, גילם, מאפייניהם ותיאורים של סיטואציות. מידע זה נשמר במכשיר שלכם.",
+        p: "האפליקציה אוספת מידע שאתם מוסרים לה ישירות: שמות הילדים, גילם, מאפייניהם ותיאורים של סיטואציות, את הדירוג שלכם לכל רגע (הורע, פחות או יותר אותו דבר, עזר, או עזר מאוד), והערה אם כתבתם אחת. מידע זה נשמר במכשיר שלכם. אם תבחרו בנפרד לשלוח תובנות אנונימיות, נקבל רק את הסיכום המתואר בסעיף „סיכום שבועי ותובנות אנונימיות”.",
       },
       {
         id: "voice",
         h: "הקלטות קוליות ותמלול",
-        p: "כאשר אתם משתמשים במיקרופון, הקול שלכם מתומלל לטקסט באופן זמני, כדי שהאפליקציה תוכל להפיק הדרכה. איננו שומרים את ההקלטות שלכם. שום דבר שאתם אומרים אינו משמש לאימון מודלים.",
+        p: "כאשר אתם משתמשים במיקרופון, הקול שלכם נשלח ל-Whisper של OpenAI‏ (whisper-1) ומתומלל לטקסט באופן זמני, כדי שהאפליקציה תוכל להפיק הדרכה. איננו שומרים את ההקלטות שלכם. שום דבר שאתם אומרים אינו משמש לאימון מודלים.",
       },
       {
         id: "use",
         h: "כיצד אנו משתמשים במידע",
-        p: "המידע משמש אך ורק לצורך מתן הדרכת הורות מותאמת אישית. תיאורי הסיטואציות נשלחים לעיבוד אצל שירותי בינה מלאכותית חיצוניים (OpenAI ו-Anthropic), ואינם נשמרים אצלנו.",
+        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו — מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-4o-mini של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
       },
       {
         id: "sharing",
         h: "שיתוף מידע עם צדדים שלישיים",
-        p: "תיאורי הסיטואציות נשלחים לספקי בינה מלאכותית (OpenAI, ‏Anthropic) לצורך הפקת המלצות. ספקים אלה כפופים למדיניות הפרטיות שלהם. איננו מוכרים מידע אישי ואיננו מציגים פרסומות.",
+        p: (
+          <>
+            <p>איננו מוכרים מידע אישי ואיננו מציגים פרסומות. הספקים שלהלן תואמים את מה שהאפליקציה והאתר באמת משתמשים בו:</p>
+            <ul className="mt-3 list-disc space-y-2 ps-5">
+              <li>OpenAI — ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
+              <li>Netlify — מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
+              <li>RevenueCat — בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
+              <li>Insert Affiliate — אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
+              <li>Vercel — מארח את האתר הזה (kidsit.ai) ואת נקודת הקצה של התובנות האנונימיות. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד התובנות שלנו.</li>
+              <li>Neon — ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח. ראו „סיכום שבועי ותובנות אנונימיות”.</li>
+              <li>Google — ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
+            </ul>
+          </>
+        ),
       },
       {
         id: "retention",
         h: "אחסון ושמירת מידע",
-        p: "הרגעים ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים אותם בשרתים שלנו, ולכן לאחר מחיקת האפליקציה לא נותר אצלנו מידע לשמור.",
+        p: "הרגעים, הדירוגים, ההערות ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים את הרגעים או את הפרופילים האלה בשרתים שלנו. מחיקת האפליקציה מוחקת את המידע הזה יחד איתה. החריג הוא תובנות אנונימיות שאתם בוחרים לשלוח: הספירות והדירוג האופציונלי נשמרים, וטקסט חופשי נמחק אחרי 90 יום.",
+      },
+      {
+        id: "insights",
+        h: "סיכום שבועי ותובנות אנונימיות",
+        p: (
+          <>
+            <p>
+              הסיכום היומי או השבועי נבנה על המכשיר, מתוך רגעים שכבר שמורים שם, ובנפרד לכל ילד. הוא כבוי אלא אם תפעילו
+              אותו. בניית הסיכום או קריאתו אינן שולחות אלינו את הרגעים.
+            </p>
+            <p className="mt-2">
+              שיתוף תובנות אנונימיות הוא בחירה נפרדת, וגם הוא כבוי כברירת מחדל. שום דבר לא נשלח אלא אם תפעילו את השיתוף
+              ואז תאשרו שליחה מסוימת, אחרי תצוגה מקדימה של בדיוק מה שיוצא מהמכשיר. כיבוי אחת מהאפשרויות לא משנה את המחיר
+              ולא את ההדרכה שאפשר לקבל.
+            </p>
+            <p className="mt-2">
+              אם תשלחו סיכום, הוא יכול לכלול ספירות של איך הסתיימו רגעים (עזר מאוד, עזר, פחות או יותר אותו דבר, הורע, או
+              בלי דירוג) לפי רשימה קבועה של סוגי סיטואציות; ספירות של טכניקות הדרכה שהופיעו ברגעים שעזרו או שלא עזרו;
+              דירוג אופציונלי מ־1 עד 5 על כמה Kidsit עזרה באותו שבוע; טקסט חופשי אופציונלי שאתם כותבים, עד 500 תווים; שפת
+              האפליקציה; אם המכשיר הוא iOS או Android; וגרסת האפליקציה ברמת major.minor בלבד. גם סיכום יומי נשמר לפי שבוע
+              ISO (למשל 2026-W44), בלי התאריך המדויק. בניסוח הסיכום על המכשיר, „פחות או יותר אותו דבר” נספר יחד עם רגעים
+              שלא עזרו. הספירות האנונימיות שומרות את הדירוג המקורי, כולל „פחות או יותר אותו דבר”, ואינן מאחדות אותו עם
+              דירוג אחר לפני השמירה.
+            </p>
+            <p className="mt-2">
+              איננו מקבלים שמות של ילדים, סיפורים, תשובות של הבינה המלאכותית, הערות, גילאים, תאריכי לידה, מגדר, אבחנות,
+              מספר ילדים, או מזהה משתמש, מכשיר, התקנה או RevenueCat. הרשומה נשמרת תחת מזהה אקראי. הנתונים אינם מקושרים
+              אליכם, וכתובת ה-IP אינה נשמרת במסד הזה.
+            </p>
+            <p className="mt-2">
+              לפני השליחה האפליקציה מסירה מהטקסט החופשי שמות של ילדים ואחים השמורים במכשיר, כתובות דוא״ל, מספרי טלפון,
+              כתובות אתר, מספרי זהות בני 9 ספרות ותאריכים מלאים, ומראה לכם את הגרסה הנקייה. השרת מסיר שוב דוא״ל, טלפון,
+              כתובות אתר, מספרי זהות ותאריכים מלאים לפני הכתיבה. אל תכתבו שמות, מקומות, פרטי קשר או פרטים רפואיים. הטקסט
+              נשמר כפי שנשאר אחרי הניקוי.
+            </p>
+            <p className="mt-2">
+              הטקסט החופשי נמחק אוטומטית אחרי 90 יום. הספירות עשויות להישמר זמן רב יותר. מכיוון שהשליחה אנונימית, לא נוכל
+              לאתר או למחוק שליחה מסוימת. כדי להסיר טקסט שעודו בתוך 90 הימים, כתבו אלינו וצטטו אותו.
+            </p>
+            <p className="mt-2">
+              השליחות נשמרות ב-Neon Postgres דרך Vercel, והנקודת קצה רצה על Vercel. בלוגי הבקשות של Vercel מופיעות
+              כתובות IP, לפי משך השמירה של התוכנית. איננו כותבים את גוף הבקשה או את כתובת ה-IP למסד שלנו, ואיננו משתמשים
+              בלוגים האלה כדי לזהות אתכם.
+            </p>
+            <p className="mt-2">
+              המטרה היא לשפר את Kidsit. אפשר לכבות את השיתוף בכל עת בהגדרות האפליקציה, ואז כפתור השליחה נעלם.
+            </p>
+          </>
+        ),
       },
       {
         id: "cookies",
@@ -276,17 +408,17 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "children",
         h: "מידע על ילדים",
-        p: "Kidsit AI מיועדת להורים ולאפוטרופסים בני 18 ומעלה, ולא לילדים. כל מידע על ילד מוזן על ידי ההורה או האפוטרופוס שלו, והטיפול בו נעשה כמתואר לעיל.",
+        p: "Kidsit AI מיועדת להורים ולאפוטרופסים בני 18 ומעלה, ולא לילדים. כל מידע על ילד מוזן על ידי ההורה או האפוטרופוס שלו, והטיפול בו נעשה כמתואר לעיל. הסיכום מחושב על המכשיר לכל ילד בנפרד, ואינו נשלח אלא אם תפעילו שיתוף ותאשרו שליחה. תובנות אנונימיות אינן אמורות לכלול שם של ילד או מזהה אחר.",
       },
       {
         id: "delete",
         h: "כיצד למחוק את המידע שלכם",
-        p: <>המידע השמור במכשיר שלכם נמחק עם מחיקת האפליקציה. לפניות בנוגע לעיון, לתיקון או למחיקה של כל מידע אחר, כתבו אלינו לכתובת {mail}.</>,
+        p: <>המידע השמור במכשיר שלכם נמחק עם מחיקת האפליקציה, או כשאתם משתמשים בניקוי כל הנתונים באפליקציה. תובנות אנונימיות אינן מקושרות אליכם, ולכן לא נוכל לאתר שליחה מסוימת כדי למחוק אותה. טקסט חופשי מהשליחות האלה נמחק אוטומטית אחרי 90 יום. כדי לבקש שנמחק טקסט חופשי מוקדם יותר, או לשאול על עיון, תיקון או מחיקה של כל דבר אחר, כתבו אלינו לכתובת {mail}.</>,
       },
       {
         id: "rights",
         h: "הזכויות שלכם",
-        p: "בהתאם לחוק הגנת הפרטיות הישראלי ולתקנה הכללית להגנה על מידע של האיחוד האירופי (GDPR), עומדת לכם הזכות לעיין במידע שלכם, לתקנו או למחוק אותו. למימוש זכויות אלה, פנו אלינו בכתובת המופיעה להלן.",
+        p: "בהתאם לחוק הגנת הפרטיות הישראלי ולתקנה הכללית להגנה על מידע של האיחוד האירופי (GDPR), עומדת לכם הזכות לעיין במידע שלכם, לתקנו או למחוק אותו. המידע שבמכשיר נמצא בשליטתכם באפליקציה. תובנות אנונימיות אינן מקושרות לזהות, ולכן לא נוכל לאתר שליחה מסוימת; טקסט חופשי נמחק אחרי 90 יום. למימוש הזכויות האלה, פנו אלינו בכתובת המופיעה להלן.",
       },
       {
         id: "security",
