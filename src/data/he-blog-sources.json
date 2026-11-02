@@ -247,5 +247,49 @@
       "supports": "\"משפט תיקון ולא עוד אשמה\": משרד הבריאות – \"הורה טוב יכול לטעות ויכול גם לתקן\", הפחתת אשמה ומילוי \"הקנקן\" ההורי – תומך במסר שההורה לא צריך להיות מושלם.",
       "checkedAt": "2026-10-30T12:11:50+02:00"
     }
+  ],
+  "preida-bagan": [
+    {
+      "title": "תהליכי פרידה בגן",
+      "publisher": "המעון לגיל הרך, אוניברסיטת תל אביב",
+      "url": "https://daycare.tau.ac.il/newsletter/students_march",
+      "supports": "פרידה של שלושה (הורה, ילד, מטפלת); תגובה קצרה לבכי, קשר עין וטון רגוע, והסבר ארוך שעלול לבלבל ולהאריך; לא לחזור מהפרידה למרות הבכי; לא לצאת בלי שלום גם כשהילד במשחק; טקס קבוע; נסיגה בתקופות שינוי (מחלה, אח, נסיעה, מעבר) היא נורמטיבית ויש ליידע את הצוות; חרדת פרידה כסימן לקשר. בלי לצטט את ממצאי קליין ואחרים 2008, כי הספר עצמו לא נפתח.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    },
+    {
+      "title": "How to manage your child's separation anxiety",
+      "publisher": "UNICEF Parenting",
+      "url": "https://www.unicef.org/parenting/child-care/managing-child-separation-anxiety",
+      "supports": "פרידה קצרה וחיובית בלי למשוך אותה; חפץ מעבר; לדבר על מה שעושים יחד בחזרה. לא צוטט כאן טווח הגילאים, כדי לא לכפול את הניסוח של NHS.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    },
+    {
+      "title": "Separation anxiety",
+      "publisher": "NHS",
+      "url": "https://www.nhs.uk/baby/babys-development/behaviour/separation-anxiety/",
+      "supports": "נפוצה מגיל 6 חודשים עד גיל 3, יכולה להימשך יותר וגם בתקופות לחץ; לרוב סימן לקשר; השארה עם מטפל אחר לא פוגעת; אין סיבה לאשמה; לחייך ולנופף בביטחון; לפנות אם יש מצוקה גדולה, אם הילד נשאר נסער זמן רב אחרי היציאה, או אם זה נמשך יותר מכמה שבועות.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    },
+    {
+      "title": "Making Baby Drop Off at Child Care Easier",
+      "publisher": "American Academy of Pediatrics (HealthyChildren.org)",
+      "url": "https://www.healthychildren.org/English/family-life/work-and-child-care/Pages/making-baby-drop-off-at-child-care-easier.aspx",
+      "supports": "גיל 12 עד 24 חודשים הוא שיא חרדת הפרידה: הילד עלול לא להאמין שההורה יחזור, לבכות ולהיצמד. אחרי שעזבתם לא מופיעים שוב, אלא אם נשארים.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    },
+    {
+      "title": "How to Ease Your Child’s Separation Anxiety",
+      "publisher": "American Academy of Pediatrics (HealthyChildren.org)",
+      "url": "https://www.healthychildren.org/English/ages-stages/toddler/Pages/soothing-your-childs-separation-anxiety.aspx",
+      "supports": "טקס פרידה קצר ועקבי; לתאר את החזרה במונחי סדר היום של הילד (אחרי מנוחה) ולא רק לפי השעון; לא לחזור לחדר בגלל הבקשה להישאר; נדיר שחרדת פרידה נמשכת מדי יום אחרי שנות הגן המוקדמות, ואז לפנות לרופא הילדים. לא צוטט המשפט על בכי שנרגע «תוך דקות», כי הוא לא נתון מדוד.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    },
+    {
+      "title": "מהי חרדה",
+      "publisher": "משרד הבריאות – בנפש בריאה",
+      "url": "https://me.health.gov.il/mental-health/information-and-updates/pathology/anxiety/about/",
+      "supports": "חרדת היפרדות (חרדת נטישה): פחד מוגזם מפרידה. אבחנה כשהפחד, החרדה או ההימנעות נמשכים לפחות 4 שבועות בילדים ומתבגרים. סימנים לדוגמה: פחד שהדמות הקרובה תיפגע, הימנעות מיציאה, פחד להישאר בלעדיה, סיוטים על פרידה, כאבי ראש או בטן בפרידה. הפנייה היא לרופא או לגורם בבריאות הנפש. לא צוטט הנתון של 19% ולא סף 6 החודשים של הפרעות חרדה אחרות.",
+      "checkedAt": "2026-11-02T09:40:00+02:00"
+    }
   ]
 }
