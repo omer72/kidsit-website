@@ -130,6 +130,34 @@ html.consent-needed #NagishLiTrigger {
   color: #5b3df5;
   text-decoration: underline;
   text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+.blog-prose blockquote {
+  margin-top: 1rem;
+  border-inline-start: 4px solid #5b3df5;
+  padding-inline-start: 0.9rem;
+}
+.blog-prose table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.blog-prose th,
+.blog-prose td {
+  border: 2px solid #26265e;
+  padding: 0.45rem 0.4rem;
+  vertical-align: top;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+.blog-prose th {
+  font-weight: 800;
+}
+@media (max-width: 640px) {
+  .blog-prose table {
+    font-size: 0.875rem;
+  }
 }
 .blog-prose hr {
   margin: 2rem 0;
