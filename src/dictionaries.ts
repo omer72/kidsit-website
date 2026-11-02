@@ -101,6 +101,47 @@ const en = {
       "Every moment is remembered next time",
     ],
   },
+  summary: {
+    badge: "New in app 1.0.13",
+    heading: "A daily or weekly summary, on the device",
+    lead: "The summary is built on the device for the open child from moments already stored there, covering either the current week or today, and it does not call a model.",
+    detail:
+      "It counts each situation by whether it helped, did not help, or has no rating, and adds up to three fixed sentences about what stands out.",
+    points: [
+      {
+        emoji: "🗓️",
+        title: "Weekly or daily",
+        text: "Settings turns it on and chooses weekly or daily.",
+      },
+      {
+        emoji: "🔔",
+        title: "A local reminder",
+        text: "On the phone a local reminder can also be set, and its text is a fixed line with no child's name.",
+      },
+    ],
+    tabsLabel: "Summary screens",
+    shots: [
+      {
+        id: "weekly",
+        label: "Weekly",
+        caption: "The current week, counted on the device",
+        alt: "Kidsit weekly summary for the open child: each situation counted by whether it helped, did not help, or has no rating. Built on the device, with no model call.",
+      },
+      {
+        id: "daily",
+        label: "Daily",
+        caption: "Today, plus up to three fixed sentences",
+        alt: "Kidsit daily summary for the open child: today's situations counted by whether they helped, did not help, or have no rating, plus a fixed sentence about what stands out.",
+      },
+      {
+        id: "settings",
+        label: "Settings",
+        caption: "Turn it on, then choose weekly or daily",
+        alt: "Kidsit settings screen with the summary switched on, and a choice between weekly and daily.",
+      },
+    ],
+    schemaFeature: "On-device daily or weekly summary for the open child, with no model call",
+  },
   social: {
     heading: "Loved by parents",
     stats: [
@@ -180,6 +221,10 @@ const en = {
         q: "What happens to what I whisper?",
         a: "Your voice is transcribed transiently and not retained by us. Moments and child profiles live on your device. No ads, no selling data, and nothing you say is used to train models.",
         link: { label: "Read how voice is handled", href: "/en/privacy#voice" },
+      },
+      {
+        q: "What is the daily or weekly summary?",
+        a: "In app 1.0.13, Settings turns it on and chooses weekly or daily. The summary is built on the device for the open child from moments already stored there, covering either the current week or today, and it does not call a model. It counts each situation by whether it helped, did not help, or has no rating, and adds up to three fixed sentences about what stands out. On the phone a local reminder can also be set, and its text is a fixed line with no child's name.",
       },
       {
         q: "How does the free trial work?",
@@ -290,6 +335,46 @@ const he: Dict = {
       "כל רגע נזכר בפעם הבאה",
     ],
   },
+  summary: {
+    badge: "חדש באפליקציה 1.0.13",
+    heading: "סיכום יומי או שבועי, במכשיר",
+    lead: "הסיכום נבנה במכשיר עבור הילד הפתוח, מהרגעים שכבר שמורים שם, לשבוע הנוכחי או להיום, בלי קריאה למודל.",
+    detail: "הוא סופר כל סוג מצב לפי עזר, לא עזר או בלי דירוג, ומוסיף עד שלושה משפטים קבועים על מה שבולט.",
+    points: [
+      {
+        emoji: "🗓️",
+        title: "שבועי או יומי",
+        text: "בהגדרות מפעילים אותו ובוחרים שבועי או יומי.",
+      },
+      {
+        emoji: "🔔",
+        title: "תזכורת מקומית",
+        text: "באפליקציה אפשר גם לקבוע תזכורת מקומית עם משפט קבוע, בלי שם הילד.",
+      },
+    ],
+    tabsLabel: "מסכי הסיכום",
+    shots: [
+      {
+        id: "weekly",
+        label: "שבועי",
+        caption: "השבוע הנוכחי, בספירה על המכשיר",
+        alt: "מסך הסיכום השבועי של Kidsit עבור הילד הפתוח: כל סוג מצב נספר לפי עזר, לא עזר או בלי דירוג, והסיכום נבנה במכשיר בלי קריאה למודל.",
+      },
+      {
+        id: "daily",
+        label: "יומי",
+        caption: "היום, ועד שלושה משפטים קבועים",
+        alt: "מסך הסיכום היומי של Kidsit עבור הילד הפתוח: ספירה של המצבים מהיום לפי עזר, לא עזר או בלי דירוג, ומשפט קבוע על מה שבולט.",
+      },
+      {
+        id: "settings",
+        label: "הגדרות",
+        caption: "מפעילים ובוחרים שבועי או יומי",
+        alt: "מסך ההגדרות של Kidsit: הסיכום מופעל, ואפשר לבחור בין שבועי ליומי.",
+      },
+    ],
+    schemaFeature: "סיכום יומי או שבועי במכשיר עבור הילד הפתוח, בלי קריאה למודל",
+  },
   social: {
     heading: "הורים ממליצים",
     stats: [
@@ -369,6 +454,10 @@ const he: Dict = {
         q: "מה קורה עם מה שאני מספר?",
         a: "ההקלטה מתומללת באופן זמני ולא נשמרת אצלנו. הרגעים ופרופילי הילדים נשמרים במכשיר שלכם. בלי פרסומות, בלי מכירת מידע, ושום דבר שאתם אומרים לא משמש לאימון מודלים.",
         link: { label: "איך מטפלים בקול", href: "/he/privacy#voice" },
+      },
+      {
+        q: "מה זה הסיכום היומי או השבועי?",
+        a: "באפליקציה 1.0.13 מפעילים את הסיכום בהגדרות ובוחרים שבועי או יומי. הסיכום נבנה במכשיר עבור הילד הפתוח, מהרגעים שכבר שמורים שם, לשבוע הנוכחי או להיום, בלי קריאה למודל. הוא סופר כל סוג מצב לפי עזר, לא עזר או בלי דירוג, ומוסיף עד שלושה משפטים קבועים על מה שבולט. באפליקציה אפשר גם לקבוע תזכורת מקומית עם משפט קבוע, בלי שם הילד.",
       },
       {
         q: "איך עובד הניסיון החינמי?",

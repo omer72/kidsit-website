@@ -2,6 +2,7 @@ import { MotionRoot } from "@/components/motion";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Features } from "@/components/features";
+import { Summary } from "@/components/summary";
 import { Showcase } from "@/components/showcase";
 import { SocialProof } from "@/components/social-proof";
 import { Pricing } from "@/components/pricing";
@@ -25,6 +26,7 @@ export default function Home({ params }: { params: { lang: Lang } }) {
         operatingSystem: "iOS, Android",
         applicationCategory: "LifestyleApplication",
         inLanguage: params.lang,
+        featureList: [...t.features.cards.map((c) => c.title), t.summary.schemaFeature],
         offers: [
           { "@type": "Offer", price: "0", priceCurrency: "USD", name: "Free" },
           { "@type": "Offer", price: "59.99", priceCurrency: "USD", name: "Premium yearly" },
@@ -49,6 +51,7 @@ export default function Home({ params }: { params: { lang: Lang } }) {
       <main>
         <Hero t={t.hero} lang={params.lang} />
         <Features t={t.features} />
+        <Summary t={t.summary} lang={params.lang} />
         <Showcase t={t.showcase} lang={params.lang} />
         <SocialProof t={t.social} />
         <Pricing t={t.pricing} lang={params.lang} />
