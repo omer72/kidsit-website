@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LANGS } from "@/dictionaries";
-import { listPosts } from "@/lib/blog";
+import { blogIndexAlternates, listPosts, postLanguageAlternates, type PostMeta } from "@/lib/blog";
 
 const BASE = "https://kidsit.ai";
 
@@ -26,11 +26,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
-  // Blog is Hebrew-only (no EN counterpart).
-  const posts = listPosts();
+  const hePosts = listPosts("he");
+  const enPosts = listPosts("en");
+  const newest = (posts: PostMeta[], fallback: string) =>
+    posts.reduce((max, p) => (p.dateModified > max ? p.dateModified : max), posts[0]?.dateModified ?? fallback);
+  const absolute = (languages: Record<string, string>) =>
+    Object.fromEntries(Object.entries(languages).map(([code, path]) => [code, `${BASE}${path}`]));
   const blog: MetadataRoute.Sitemap = [
-    { url: `${BASE}/he/blog`, lastModified: posts.reduce((max, p) => (p.dateModified > max ? p.dateModified : max), posts[0]?.dateModified ?? "2026-10-19") },
-    ...posts.map((p) => ({ url: `${BASE}${p.path}`, lastModified: p.dateModified })),
+    {
+      url: `${BASE}/he/blog`,
+      lastModified: newest(hePosts, "2026-10-19"),
+      alternates: { languages: absolute(blogIndexAlternates("he").languages) },
+    },
+    {
+      url: `${BASE}/en/blog`,
+      lastModified: newest(enPosts, "2026-11-02"),
+      alternates: { languages: absolute(blogIndexAlternates("en").languages) },
+    },
+    ...hePosts.map((p) => {
+      const alt = postLanguageAlternates("he", p.slug, p.path);
+      return {
+        url: `${BASE}${p.path}`,
+        lastModified: p.dateModified,
+        ...(alt.languages ? { alternates: { languages: absolute(alt.languages) } } : {}),
+      };
+    }),
+    ...enPosts.map((p) => {
+      const alt = postLanguageAlternates("en", p.slug, p.path);
+      return {
+        url: `${BASE}${p.path}`,
+        lastModified: p.dateModified,
+        ...(alt.languages ? { alternates: { languages: absolute(alt.languages) } } : {}),
+      };
+    }),
   ];
   return [...bilingual, ...blog];
 }

@@ -24,7 +24,8 @@ export function middleware(req: NextRequest) {
   const he = cookie === "he" || cookie === "en" ? cookie === "he" : prefersHebrew(req.headers.get("accept-language"));
   const { pathname } = req.nextUrl;
 
-  // Blog is Hebrew-only: bare /blog(/...) always goes to /he/blog(/...). /en/blog 404s via [...missing].
+  // Bare /blog(/...) stays the Hebrew blog. English lives at /en/blog, which the matcher
+  // does not send through here (paths under /en and /he are excluded).
   if (pathname === "/blog" || pathname.startsWith("/blog/")) {
     const url = new URL(`/he${pathname}`, req.url);
     url.search = req.nextUrl.search;
