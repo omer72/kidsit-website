@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { shouldBypassLocale } from "@/lib/locale-bypass";
 
 // Full Accept-Language parsing with q-values; "iw" is the legacy code for Hebrew.
 function prefersHebrew(header: string | null): boolean {
@@ -20,11 +21,15 @@ function prefersHebrew(header: string | null): boolean {
 const LOCALIZED = new Set(["/", "/privacy", "/terms", "/support", "/accessibility"]);
 
 export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  // /api/* is a route handler (insights). Rewriting it to /en/api/* would 404.
+  if (shouldBypassLocale(pathname)) return NextResponse.next();
+
   const cookie = req.cookies.get("NEXT_LOCALE")?.value;
   const he = cookie === "he" || cookie === "en" ? cookie === "he" : prefersHebrew(req.headers.get("accept-language"));
-  const { pathname } = req.nextUrl;
 
-  // Blog is Hebrew-only: bare /blog(/...) always goes to /he/blog(/...). /en/blog 404s via [...missing].
+  // Bare /blog(/...) stays the Hebrew blog. English lives at /en/blog, which the matcher
+  // does not send through here (paths under /en and /he are excluded).
   if (pathname === "/blog" || pathname.startsWith("/blog/")) {
     const url = new URL(`/he${pathname}`, req.url);
     url.search = req.nextUrl.search;
@@ -40,5 +45,5 @@ export function middleware(req: NextRequest) {
   return NextResponse.rewrite(url);
 }
 
-// Every path except /he/..., /en/..., Next internals and files (anything with an extension).
-export const config = { matcher: ["/", "/((?!_next/|he/|he$|en/|en$|.*\\.).*)"] };
+// Every path except /api/..., /he/..., /en/..., Next internals and files (anything with an extension).
+export const config = { matcher: ["/", "/((?!_next/|api/|he/|he$|en/|en$|.*\\.).*)"] };

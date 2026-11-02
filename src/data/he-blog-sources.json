@@ -291,5 +291,56 @@
       "supports": "חרדת היפרדות (חרדת נטישה): פחד מוגזם מפרידה. אבחנה כשהפחד, החרדה או ההימנעות נמשכים לפחות 4 שבועות בילדים ומתבגרים. סימנים לדוגמה: פחד שהדמות הקרובה תיפגע, הימנעות מיציאה, פחד להישאר בלעדיה, סיוטים על פרידה, כאבי ראש או בטן בפרידה. הפנייה היא לרופא או לגורם בבריאות הנפש. לא צוטט הנתון של 19% ולא סף 6 החודשים של הפרעות חרדה אחרות.",
       "checkedAt": "2026-11-02T09:40:00+02:00"
     }
+  ],
+  "kibui-masach": [
+    {
+      "title": "Screen Time & Temper Tantrums: Helpful Tips for Parents",
+      "publisher": "American Academy of Pediatrics (HealthyChildren.org)",
+      "url": "https://www.healthychildren.org/English/family-life/Media/Pages/screen-time-and-temper-tantrums-helpful-tips-for-parents.aspx",
+      "supports": "מעט מילים בשיא («I know it's tough, but it's time to put your tablet away»); מדיה לפעמים מכסה מצוקה או שעמום וכשהיא נעלמת התחושה חוזרת; טיימר שהילד מפעיל אם אזהרות עוזרות; פינת רגיעה; לא להציע להרביץ לכרית; קושי לעבור הילוך לא אומר מעצמו שהילד תקוע על הטכנולוגיה; מתי לרופא: כמעט בכל סיום, שינויי שינה/היגיינה/אכילה/חברה, קושי בכמה דקות שעמום בלי מסך, הסתגרות.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "Setting Limitations on Tech Time",
+      "publisher": "American Academy of Pediatrics",
+      "url": "https://www.aap.org/en/patient-care/media-and-children/center-of-excellence-on-social-media-and-youth-mental-health/qa-portal/qa-portal-library/qa-portal-library-questions/setting-limitations-on-tech-time/",
+      "supports": "לא לתת להתנהגות לעבוד כדי לקבל את המסך בחזרה; להישאר רגועים ולתת זמן הרגעה; אחרי ההירגעות פעילות משותפת; גבול חדש יכול להביא עלייה בהתקפים; ילד שהשתתף בקביעת הכלל וזמנים צפויים.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "התפרצויות זעם (טנטרום) של ילדים",
+      "publisher": "משרד הבריאות – הוֹרוּת והורים",
+      "url": "https://me.health.gov.il/parenting/learn-more/growth-and-development/tantrums/",
+      "supports": "לרוב מגיל שנה וחצי עד 4, שיא סביב 2–3; האונה הקדמית לא בשלה; עייפות, רעב, מעבר; בשיא מעט מילים ובטיחות, לא להיכנע לצרחות; התראה לפני מעברים; תיקון אחרי צעקה; מתי לפנות לעזרה כולל פגיעה.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "Shifting Off Screens",
+      "publisher": "Children and Screens",
+      "url": "https://www.childrenandscreens.org/learn-explore/research/shifting-off-screens/",
+      "supports": "יחידות זמן שהילד מבין («Once Elmo says goodbye», «one more song and then the tablet goes night-night»); להגיד לאן עוברים; לא ישר למטלה; אח שעדיין במסך מקשה; עקביות.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "How do I put a stop to screen time without causing a meltdown?",
+      "publisher": "Common Sense Media",
+      "url": "https://www.commonsensemedia.org/articles/how-do-i-put-a-stop-to-screen-time-turn-off-the-tv-or-take-the-phone-away-without-causing-a-meltdown",
+      "supports": "לכבות autoplay; להראות איך מכבים; אזהרה עוזרת לחלק, וחלק מגיבים טוב יותר בלי אזהרה; ילדים קטנים בדרך כלל לא מבינים ספירה של חמש דקות; טנטרום כשלוקחים מכשיר ברוב המקרים לא סימן להיקשרות לא בריאה.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "3 ways to help your child transition off screens and avoid the dreaded tech tantrums",
+      "publisher": "The Conversation",
+      "url": "https://theconversation.com/3-ways-to-help-your-child-transition-off-screens-and-avoid-the-dreaded-tech-tantrums-220138",
+      "supports": "החוקרים מתארים אסטרטגיות שמשפחות מצאו מועילות: סיום בסוף פרקים או בסוף משחק, לומר מה בא אחר כך, בחירה קטנה כמו מי מפעיל את הטיימר. לא צוטט גודל מדגם: בכתבה כתוב 14 הורים, ולא נפתח קובץ המאמר בכתב העת כדי לאמת מספר אחר.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    },
+    {
+      "title": "Longitudinal Associations Between Use of Mobile Devices for Calming and Emotional Reactivity and Executive Functioning in Children Aged 3 to 5 Years (Radesky et al., JAMA Pediatr. 2023;177(1):62-70)",
+      "publisher": "JAMA Pediatrics",
+      "url": "https://jamanetwork.com/journals/jamapediatrics/fullarticle/2799042",
+      "supports": "עוקבה של 422 ילדים בגיל 3–5: שימוש תכוף יותר במכשיר כדי להרגיע קשור לתגובתיות רגשית גבוהה יותר, ובולט יותר אצל בנים ואצל ילדים עם surgency גבוה. קשר, לא סיבה. ניסוח של המחברים: שימוש תכוף להרגעה עלול לדחוק תרגול של דרכי הרגעה אחרות.",
+      "checkedAt": "2026-11-02T09:30:00Z"
+    }
   ]
 }

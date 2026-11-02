@@ -1,14 +1,15 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
-import { storeUrl } from "@/dictionaries";
-import sourcesJson from "@/data/he-blog-sources.json";
+import { storeUrl, type Lang } from "@/dictionaries";
+import heSourcesJson from "@/data/he-blog-sources.json";
+import enSourcesJson from "@/data/en-blog-sources.json";
 import reviewersJson from "@/data/he-blog-reviewers.json";
 
-/** Rewrite bare App Store / Play links to the same he_ ct/UTM scheme as the HE landing page (placement "blog"). */
-function withStoreUtms(html: string): string {
-  const apple = storeUrl.apple("blog", "he");
-  const play = storeUrl.play("blog", "he");
+/** Rewrite bare App Store / Play links to the page language's ct/UTM scheme (placement "blog"). */
+function withStoreUtms(html: string, lang: Lang): string {
+  const apple = storeUrl.apple("blog", lang);
+  const play = storeUrl.play("blog", lang);
   return html
     .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
     .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
@@ -45,7 +46,40 @@ export type Post = PostMeta & {
   sources: Source[];
 };
 
-const DIR = join(process.cwd(), "content/blog/he");
+function dirFor(lang: Lang): string {
+  return join(process.cwd(), "content/blog", lang);
+}
+
+/** Hebrew/English posts that translate each other. x-default is the English URL, matching the rest of the site. */
+const PAIRS: { he: string; en: string }[] = [{ he: "kibui-masach", en: "screen-time-meltdown" }];
+
+export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {
+  for (const pair of PAIRS) {
+    if (pair[lang] !== slug) continue;
+    const other: Lang = lang === "he" ? "en" : "he";
+    return { lang: other, slug: pair[other], path: `/${other}/blog/${pair[other]}` };
+  }
+  return null;
+}
+
+export function postLanguageAlternates(
+  lang: Lang,
+  slug: string,
+  selfPath: string,
+): { canonical: string; languages?: Record<string, string> } {
+  const alt = blogAlternate(lang, slug);
+  if (!alt) return { canonical: selfPath };
+  const he = lang === "he" ? selfPath : alt.path;
+  const en = lang === "en" ? selfPath : alt.path;
+  return { canonical: selfPath, languages: { he, en, "x-default": en } };
+}
+
+export function blogIndexAlternates(lang: Lang): { canonical: string; languages: Record<string, string> } {
+  return {
+    canonical: `/${lang}/blog`,
+    languages: { he: "/he/blog", en: "/en/blog", "x-default": "/en/blog" },
+  };
+}
 
 const HE_MONTHS = [
   "בינואר",
@@ -62,6 +96,21 @@ const HE_MONTHS = [
   "בדצמבר",
 ] as const;
 
+const EN_MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+] as const;
+
 /** Hebrew calendar-style date, e.g. 30 באוקטובר 2026. Parses the ISO date, not a timezone-shifted instant. */
 export function formatHebrewDate(iso: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
@@ -72,10 +121,24 @@ export function formatHebrewDate(iso: string): string {
   return `${day} ${month} ${m[1]}`;
 }
 
+/** Visible publish/updated date. English uses US order, e.g. November 2, 2026. */
+export function formatPostDate(iso: string, lang: Lang): string {
+  if (lang === "he") return formatHebrewDate(iso);
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) return iso;
+  const month = EN_MONTHS[Number(m[2]) - 1];
+  const day = Number(m[3]);
+  if (!month || day < 1 || day > 31) return iso;
+  return `${month} ${day}, ${m[1]}`;
+}
+
 type RawSource = { title?: string; url?: string; publisher?: string };
 type RawReviewer = { name?: string; credential?: string };
 
-const sourcesBySlug = sourcesJson as Record<string, RawSource[]>;
+const sourcesByLang: Record<Lang, Record<string, RawSource[]>> = {
+  he: heSourcesJson as Record<string, RawSource[]>,
+  en: enSourcesJson as Record<string, RawSource[]>,
+};
 const reviewersBySlug = reviewersJson as Record<string, RawReviewer>;
 
 function parseFrontmatter(raw: string): { meta: Record<string, string>; body: string } {
@@ -120,8 +183,8 @@ function isCdcSource(entry: RawSource): boolean {
   return /\bCDC\b/.test(label) || /centers for disease control/i.test(label);
 }
 
-function sourcesFor(slug: string): Source[] {
-  const raw = sourcesBySlug[slug];
+function sourcesFor(slug: string, lang: Lang): Source[] {
+  const raw = sourcesByLang[lang][slug];
   if (raw == null) return [];
   if (!Array.isArray(raw)) throw new Error(`Sources for ${slug} must be an array`);
   const out: Source[] = [];
@@ -178,16 +241,16 @@ function expandFaq(body: string): { body: string; faq: FaqItem[] } {
   return { body: body.replace(m[0], rendered), faq };
 }
 
-function loadFile(file: string): Post {
-  const raw = readFileSync(join(DIR, file), "utf8");
+function loadFile(file: string, lang: Lang): Post {
+  const raw = readFileSync(join(dirFor(lang), file), "utf8");
   const { meta, body } = parseFrontmatter(raw);
-  const path = meta.slug || `/he/blog/${file.replace(/\.md$/, "")}`;
-  const slug = path.replace(/^\/he\/blog\//, "");
+  const path = meta.slug || `/${lang}/blog/${file.replace(/\.md$/, "")}`;
+  const slug = path.replace(new RegExp(`^/${lang}/blog/`), "");
   const expanded = expandFaq(body);
   // Strip the leading H1 from HTML body (rendered separately as page title) but keep it in bodyMd for diff checks.
   // Frontmatter parsing can leave a blank line, so the heading is not always at column 0.
   const bodyWithoutH1 = expanded.body.replace(/^\s*#\s+.+(?:\n+|$)/, "");
-  const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string);
+  const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string, lang);
   const date = requireIsoDate(meta.date, slug, "date");
   const dateModified = meta.updated ? requireIsoDate(meta.updated, slug, "updated") : date;
   return {
@@ -202,15 +265,15 @@ function loadFile(file: string): Post {
     html,
     faq: expanded.faq,
     reviewer: reviewerFor(slug, meta),
-    sources: sourcesFor(slug),
+    sources: sourcesFor(slug, lang),
   };
 }
 
-export function listPosts(): PostMeta[] {
-  return readdirSync(DIR)
+export function listPosts(lang: Lang = "he"): PostMeta[] {
+  return readdirSync(dirFor(lang))
     .filter((f) => f.endsWith(".md"))
     .map((f) => {
-      const p = loadFile(f);
+      const p = loadFile(f, lang);
       return {
         slug: p.slug,
         path: p.path,
@@ -224,16 +287,16 @@ export function listPosts(): PostMeta[] {
     .sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
 }
 
-export function getPost(slug: string): Post | null {
+export function getPost(slug: string, lang: Lang = "he"): Post | null {
   const file = `${slug}.md`;
   try {
-    return loadFile(file);
+    return loadFile(file, lang);
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code === "ENOENT") return null;
     throw err;
   }
 }
 
-export function allSlugs(): string[] {
-  return listPosts().map((p) => p.slug);
+export function allSlugs(lang: Lang = "he"): string[] {
+  return listPosts(lang).map((p) => p.slug);
 }

@@ -30,15 +30,19 @@ export type ShareImage = {
 const SITE = "https://kidsit.ai";
 
 /**
- * Per-post share card at public/og/he/<slug>.png, served as /og/he/<slug>.png.
- * Missing file falls back to the shared Hebrew card. URLs are absolute.
+ * Per-post share card at public/og/<lang>/<slug>.png, served as /og/<lang>/<slug>.png.
+ * Missing file falls back to the shared language card. URLs are absolute.
  */
-export function hePostShareImage(slug: string, alt: string): ShareImage {
+export function postShareImage(lang: Lang, slug: string, alt: string): ShareImage {
   const safe = /^[a-z0-9-]+$/.test(slug);
-  if (safe && existsSync(join(process.cwd(), "public", "og", "he", `${slug}.png`))) {
-    return { url: `${SITE}/og/he/${slug}.png`, width: 1200, height: 630, alt, type: "image/png" };
+  if (safe && existsSync(join(process.cwd(), "public", "og", lang, `${slug}.png`))) {
+    return { url: `${SITE}/og/${lang}/${slug}.png`, width: 1200, height: 630, alt, type: "image/png" };
   }
-  return { url: `${SITE}/he/og-image.png`, width: 1200, height: 630, alt: OG_ALT.he, type: "image/png" };
+  return { url: `${SITE}/${lang}/og-image.png`, width: 1200, height: 630, alt: OG_ALT[lang], type: "image/png" };
+}
+
+export function hePostShareImage(slug: string, alt: string): ShareImage {
+  return postShareImage("he", slug, alt);
 }
 
 // A page-level openGraph object replaces the layout's, so every page (home via the layout, and privacy, terms,
