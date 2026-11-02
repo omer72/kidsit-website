@@ -3,21 +3,24 @@ import { LangSwitchLink } from "./lang-switch";
 import { CookieSettingsButton } from "./cookie-consent";
 
 // base prefixes in-page anchors so the footer also works on the legal pages; path ("/privacy" etc.) makes the
-// language switch go to the same page in the other language. Blog is Hebrew-only: switch goes to /en home (P6).
+// language switch go to the same page in the other language. Hebrew blog posts without an English sibling
+// still switch to the English home. Paired posts and both blog indexes pass switchTo.
 export function Footer({
   t,
   base = "",
   path = "",
   lang,
+  switchTo,
 }: {
   t: Dict["footer"];
   base?: string;
   path?: string;
   lang?: Lang;
+  switchTo?: string;
 }) {
   const link = "inline-flex min-h-11 items-center hover:text-sunny";
   const locale: Lang = lang ?? (base.startsWith("/he") ? "he" : "en");
-  const switchHref = path.startsWith("/blog") ? t.switchHref : t.switchHref + path;
+  const switchHref = switchTo ?? (path.startsWith("/blog") ? t.switchHref : t.switchHref + path);
   return (
     <footer className="border-t-2 border-ink bg-ink text-paper">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-6 md:flex-row md:items-start md:justify-between">
