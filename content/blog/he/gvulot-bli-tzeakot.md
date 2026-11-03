@@ -125,7 +125,7 @@ secondary_queries: ["איך להציב גבולות לילדים בלי לצעו
 
 התבנית פשוטה, אבל הרגע עצמו תמיד מסובך יותר: אח חדש, גן חדש, יום שבו הכול נשבר. ב-[Kidsit AI](https://kidsit.ai/he) מחזיקים את המיקרופון, מספרים מה קרה, ותוך כ־10 שניות מקבלים תוכנית רגועה — כולל משפט אמפתיה וגבול שמתאים לגיל ולמצב. ההקלטה מתומללת באופן זמני ולא נשמרת, ו-Kidsit היא כלי עזר יומיומי, לא טיפול. אם תרצו לקרוא עוד על הגישה, יש מאמר על [מאמן הורות AI ומה זה Kidsit](/he/blog/maan-horut-ai).
 
-ילד אחד בחינם, ללא הגבלת זמן; Premium עם 7 ימי ניסיון למי שרוצה יותר. [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+ילד אחד בחינם, ללא הגבלת זמן; Premium עם 7 ימי ניסיון למי שרוצה יותר. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 ---
 

@@ -124,7 +124,7 @@ secondary_queries: ["התקף זעם בפומבי", "ילד משתולל בסו�
 
 **ילד אחד בחינם, ללא הגבלת זמן.** מנוי Premium מגיע עם 7 ימי ניסיון.
 
-**להורדה:** [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+**להורדה:** [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 ---
 

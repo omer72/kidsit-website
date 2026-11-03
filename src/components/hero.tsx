@@ -67,7 +67,10 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
           </span>
         </h1>
         <p className="mt-6 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
-        <div className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-3 max-md:pr-[4.5rem] sm:mt-8">
+        {/* Nagish is 60px + 10px off the physical right. px-5 already insets 20px,
+            so 3.375rem more (74px total) clears the button with a few px to spare
+            and still keeps both 40px badges on one line at 360 and 390. */}
+        <div className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-3 max-md:pr-[3.375rem] sm:mt-8">
           <StoreBadges lang={lang} placement="site_hero" />
           <a
             href="#demo"

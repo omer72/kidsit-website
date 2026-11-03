@@ -74,7 +74,7 @@ secondary_queries: ["מריבות בין אחים מה עושים", "קנאת א
 
 עם שני ילדים או יותר, מה שעובד עם אחד לא תמיד עובד עם השני. ב-**Kidsit AI** לכל ילד יש פרופיל משלו. מספרים מה קרה ("הגדול בן 6 דחף את הקטנה בת 3 בגלל הלגו") ומקבלים הסבר קצר, שלושה דברים לנסות ומה להגיד, ומשפט חם לפני השינה. האפליקציה זוכרת את הרגעים של כל ילד ומתאימה את עצמה לאורך זמן.
 
-**אפשר להתחיל בחינם עם ילד אחד. ילדים נוספים ב-Premium, עם 7 ימי ניסיון חינם.** [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+**אפשר להתחיל בחינם עם ילד אחד. ילדים נוספים ב-Premium, עם 7 ימי ניסיון חינם.** [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ---
 

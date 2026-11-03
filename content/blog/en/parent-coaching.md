@@ -169,7 +169,7 @@ Do not copy a phone number from here to somewhere else without opening the page.
 
 ## Start now
 
-Want words for the next moment? Try Kidsit. One child is free, with no time limit. Premium includes a 7-day free trial. [App Store](https://apps.apple.com/app/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Want words for the next moment? Try Kidsit. One child is free, with no time limit. Premium includes a 7-day free trial. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 And if you have decided on coaching, the checklist above will help in the first conversation. You can do both: a person for the process, and an AI tool for the moment itself.
 

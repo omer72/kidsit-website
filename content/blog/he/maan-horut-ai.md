@@ -14,7 +14,7 @@ secondary_queries: ["אפליקציית הורות לרגעים קשים", "קו
 
 בדיוק לפער הזה, בין מה שאנחנו יודעים לבין מה שאנחנו מצליחים להיזכר בו באמצע הסערה, נועד מאמן הורות מבוסס AI. במאמר הזה נסביר מה זה, במה זה שונה מספר או מטיפול, איך Kidsit AI עובדת בפועל, ומה הגבולות שלה.
 
-> **רוצים לנסות כבר עכשיו?** Kidsit AI זמינה ל-iPhone ול-Android, וחינמית לילד אחד. [להורדה ב-App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+> **רוצים לנסות כבר עכשיו?** Kidsit AI זמינה ל-iPhone ול-Android, וחינמית לילד אחד. [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ## מה זה מאמן הורות AI?
 
@@ -102,7 +102,7 @@ Kidsit נבנתה בעיקר להורים לפעוטות ולילדים צעיר
 
 ## להתחיל עכשיו
 
-1. מורידים את האפליקציה: [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) או [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app).
+1. מורידים את האפליקציה: [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) או [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app).
 2. יוצרים פרופיל לילד, עם שם וגיל.
 3. ברגע הקשה הבא, מחזיקים את המיקרופון ומספרים מה קרה.
 

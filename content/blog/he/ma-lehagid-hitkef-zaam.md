@@ -158,7 +158,7 @@ secondary_queries: ["משפטים להרגעת התקף זעם", "מה אומר�
 
 Busy single mom1 כתבה ב־App Store שהעצות מעשיות וזמינות בדיוק כשצריך אותן. OzzyL10 הוסיף שהאפליקציה עוזרת גם ברגע עצמו וגם להבין את התמונה שמאחורי ההתנהגות. זה בדיוק הגשר בין רשימת משפטים כללית לבין המילים שמתאימות *לילד שלכם* הערב.
 
-**ילד אחד בחינם, ללא הגבלת זמן.** [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+**ילד אחד בחינם, ללא הגבלת זמן.** [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 ---
 

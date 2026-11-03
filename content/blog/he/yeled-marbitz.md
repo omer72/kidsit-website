@@ -76,7 +76,7 @@ secondary_queries: ["ילד מכה בגן", "פעוט מרביץ", "אסור ל�
 
 > "אני אוהבת אותך גם כשאתה כועס. ואני תמיד אעצור אותך מלהרביץ, כי אני שומרת על כולם, גם עליך."
 
-> **רוצים את המשפטים האלה בדיוק לרגע שלכם?** ב-Kidsit AI לוחצים על המיקרופון, מספרים בכמה מילים מה קרה, ותוך כ־10 שניות מקבלים תוכנית רגועה עם המילים המדויקות. [להורדה ב-App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+> **רוצים את המשפטים האלה בדיוק לרגע שלכם?** ב-Kidsit AI לוחצים על המיקרופון, מספרים בכמה מילים מה קרה, ותוך כ־10 שניות מקבלים תוכנית רגועה עם המילים המדויקות. [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ## למה פעוטות מרביצים?
 
@@ -151,7 +151,7 @@ secondary_queries: ["ילד מכה בגן", "פעוט מרביץ", "אסור ל�
 
 האפליקציה חינמית לילד אחד ללא הגבלה, ויש מנוי Premium חודשי או שנתי עם 7 ימי ניסיון. ההקלטה מתומללת באופן זמני ולא נשמרת, והרגעים והפרופילים נשמרים על המכשיר שלכם. אין פרסומות, ולא מוכרים מידע.
 
-[להורדה ב-App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [עוד על Kidsit AI](https://kidsit.ai/he)
+[להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [עוד על Kidsit AI](https://kidsit.ai/he)
 
 ## שאלות שהורים שואלים
 
