@@ -26,13 +26,14 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
 // Updated November 2026 for on-device digests and optional anonymous insights.
+// Updated November 3, 2026: disclose the Meta Pixel (analytics consent only) in the cookie section.
 // Updated November 1, 2026: a guidance request carries only the active child's story, context,
 // profile, and eight recent moments, plus a RevenueCat ID. Other children and the optional
 // moment note are not included.
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 1, 2026",
+    updated: "November 3, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -64,6 +65,7 @@ const DOCS: Record<Lang, LegalDoc> = {
               <li>Vercel — hosts this website (kidsit.ai) and the anonymous insights endpoint. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our insights database.</li>
               <li>Neon — Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send. See “Weekly digest and anonymous insights”.</li>
               <li>Google — Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
+              <li>Meta Platforms — the Meta Pixel on this website only, after you accept analytics cookies, to measure our ads and site visits. It does not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
             </ul>
           </>
         ),
@@ -139,6 +141,15 @@ const DOCS: Record<Lang, LegalDoc> = {
               not receive anything you enter in the app. Google tags do not load, and non-essential cookies are not set,
               until you accept.
             </p>
+            <p className="mt-2">
+              Meta Pixel. With the same permission we also load the Meta Pixel from Meta Platforms (Facebook) to measure
+              how well our ads work and to count site visits. It loads only after you allow analytics cookies in the
+              banner, and you can withdraw that any time under “Cookie settings”. When it runs, Meta may receive cookies
+              such as <code>_fbp</code>, browser and device information, the pages you visit on this site, and your IP
+              address. Through Meta&apos;s automatic matching it may also receive hashed identifiers. It does not receive
+              anything you enter in the app. Meta&apos;s handling of this data is described in its{" "}
+              <a className="text-grape underline underline-offset-2" href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">privacy policy</a>.
+            </p>
             <div
               className="mt-4 max-w-full overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-grape"
               tabIndex={0}
@@ -191,6 +202,13 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3">Session (no extra first-party cookie of ours)</td>
                   <td className="py-2">Analytics</td>
                 </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_fbp</code></td>
+                  <td className="py-2 pe-3">Cookie (Meta)</td>
+                  <td className="py-2 pe-3">Meta Pixel: measures our ads and site visits, only if you accept analytics</td>
+                  <td className="py-2 pe-3">Set by Meta (see Meta&apos;s privacy policy)</td>
+                  <td className="py-2">Analytics</td>
+                </tr>
               </tbody>
             </table>
             </div>
@@ -236,7 +254,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "1 בנובמבר 2026",
+    updated: "3 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -268,6 +286,7 @@ const DOCS: Record<Lang, LegalDoc> = {
               <li>Vercel — מארח את האתר הזה (kidsit.ai) ואת נקודת הקצה של התובנות האנונימיות. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד התובנות שלנו.</li>
               <li>Neon — ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח. ראו „סיכום שבועי ותובנות אנונימיות”.</li>
               <li>Google — ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
+              <li>Meta Platforms — הפיקסל של Meta באתר הזה בלבד, אחרי שאתם מאשרים עוגיות סטטיסטיקה, כדי למדוד את הפרסום שלנו וביקורים באתר. הוא אינו מקבל את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
             </ul>
           </>
         ),
@@ -337,6 +356,14 @@ const DOCS: Record<Lang, LegalDoc> = {
               כשלוחצים על כפתור App Store או Google Play (כדי לייחס ביקורים בחנויות מהאתר). הניתוח והמדידות האלה אינם מקבלים
               דבר ממה שאתם מזינים באפליקציה. תגי Google לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
             </p>
+            <p className="mt-2">
+              הפיקסל של Meta. באותה הסכמה נטען גם את הפיקסל של Meta מבית Meta Platforms (פייסבוק), כדי למדוד את יעילות
+              הפרסום שלנו ולספור ביקורים באתר. הוא נטען רק אחרי שאישרתם עוגיות סטטיסטיקה בבאנר, ואפשר לבטל זאת בכל עת דרך
+              „הגדרות עוגיות”. כשהוא פועל, Meta עשויה לקבל עוגיות כמו <code>_fbp</code>, מידע על הדפדפן והמכשיר, העמודים
+              שבהם ביקרתם באתר, וכתובת ה-IP שלכם. באמצעות ההתאמה האוטומטית (automatic matching) של Meta היא עשויה לקבל גם
+              מזהים מוצפנים (hashed). הוא אינו מקבל דבר ממה שאתם מזינים באפליקציה. הטיפול של Meta במידע הזה מתואר{" "}
+              <a className="text-grape underline underline-offset-2" href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">במדיניות הפרטיות שלה</a>.
+            </p>
             <div
               className="mt-4 max-w-full overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-grape"
               tabIndex={0}
@@ -387,6 +414,13 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3">בקשה (Google)</td>
                   <td className="py-2 pe-3">מדידת המרה בלחיצה על חנות האפליקציות לאחר אישור; מייחסת ביקורים ב-App Store / Play מהאתר</td>
                   <td className="py-2 pe-3">למשך הסשן (בלי עוגייה נוספת שלנו)</td>
+                  <td className="py-2">סטטיסטיקה</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_fbp</code></td>
+                  <td className="py-2 pe-3">Cookie (Meta)</td>
+                  <td className="py-2 pe-3">הפיקסל של Meta: מדידת הפרסום שלנו וביקורים באתר, רק אם אישרתם סטטיסטיקה</td>
+                  <td className="py-2 pe-3">נקבע על ידי Meta (ראו מדיניות הפרטיות של Meta)</td>
                   <td className="py-2">סטטיסטיקה</td>
                 </tr>
               </tbody>

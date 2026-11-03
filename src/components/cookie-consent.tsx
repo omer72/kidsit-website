@@ -8,7 +8,7 @@ import { decided, readConsent, saveConsent } from "@/lib/consent";
 export const CONSENT_TXT = {
   en: {
     title: "Cookies & privacy",
-    body: "We use essential storage to run the site (your language choice and accessibility-menu preferences). With your permission we also use Google Analytics 4 to understand how the site is used. You can change your choice any time under “Cookie settings”.",
+    body: "We use essential storage to run the site (your language choice and accessibility-menu preferences). With your permission we also use Google Analytics 4 and the Meta Pixel (Meta Platforms / Facebook) to understand how the site is used and to measure our ads. You can change your choice any time under “Cookie settings”.",
     accept: "Accept all",
     reject: "Reject non-essential",
     settings: "Settings",
@@ -20,14 +20,14 @@ export const CONSENT_TXT = {
     ],
     analytics: [
       "Analytics",
-      "Google Analytics 4: anonymous statistics that help us improve the site. Loads only if you allow it.",
+      "Google Analytics 4 and the Meta Pixel (Meta Platforms / Facebook): measure site visits and how well our ads work. Loads only if you allow it.",
     ],
     on: "Always on",
     footer: "Cookie settings",
   },
   he: {
     title: "עוגיות ופרטיות",
-    body: "אנו משתמשים באחסון חיוני כדי להפעיל את האתר (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נשתמש גם ב-Google Analytics 4 כדי להבין איך משתמשים באתר. אפשר לשנות את הבחירה בכל עת דרך „הגדרות עוגיות”.",
+    body: "אנו משתמשים באחסון חיוני כדי להפעיל את האתר (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נשתמש גם ב-Google Analytics 4 ובפיקסל של Meta‏ (Meta Platforms / פייסבוק) כדי להבין איך משתמשים באתר ולמדוד את הפרסום שלנו. אפשר לשנות את הבחירה בכל עת דרך „הגדרות עוגיות”.",
     accept: "אישור הכול",
     reject: "דחיית הלא־חיוניות",
     settings: "הגדרות",
@@ -39,7 +39,7 @@ export const CONSENT_TXT = {
     ],
     analytics: [
       "סטטיסטיקה",
-      "Google Analytics 4: נתונים אנונימיים שעוזרים לנו לשפר את האתר. נטען רק אם תאשרו.",
+      "Google Analytics 4 והפיקסל של Meta‏ (Meta Platforms / פייסבוק): מדידת ביקורים באתר ואת יעילות הפרסום שלנו. נטען רק אם תאשרו.",
     ],
     on: "פעיל תמיד",
     footer: "הגדרות עוגיות",
