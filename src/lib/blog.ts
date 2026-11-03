@@ -1,18 +1,35 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
-import { storeUrl, type Lang } from "@/dictionaries";
+import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
+import { storeBadgeArt } from "@/lib/store-badges";
 import heSourcesJson from "@/data/he-blog-sources.json";
 import enSourcesJson from "@/data/en-blog-sources.json";
 import reviewersJson from "@/data/he-blog-reviewers.json";
 
-/** Rewrite bare App Store / Play links to the page language's ct/UTM scheme (placement "blog"). */
+function escapeAttr(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+/** Official badge markup for a store link already rewritten to this page's campaign URL. */
+function storeBadgeHtml(href: string, kind: "apple" | "play", lang: Lang): string {
+  const art = storeBadgeArt[lang][kind];
+  const labels = dictionaries[lang].stores;
+  const alt = kind === "apple" ? labels.appleAlt : labels.playAlt;
+  const cls = kind === "apple" ? "store-badge-apple" : "store-badge-play";
+  return `<a class="store-badge" href="${href}" aria-label="${alt}"><img class="${cls}" src="${art.src}" alt="${alt}" width="${art.width}" height="${art.height}" /></a>`;
+}
+
+/** Rewrite bare App Store / Play links to the page language's ct/UTM scheme (placement "blog") and render them as badges. */
 function withStoreUtms(html: string, lang: Lang): string {
-  const apple = storeUrl.apple("blog", lang);
-  const play = storeUrl.play("blog", lang);
-  return html
+  const apple = escapeAttr(storeUrl.apple("blog", lang));
+  const play = escapeAttr(storeUrl.play("blog", lang));
+  const rewritten = html
     .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
     .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
+  return rewritten
+    .replace(/<a href="(https:\/\/apps\.apple\.com\/[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "apple", lang))
+    .replace(/<a href="(https:\/\/play\.google\.com\/store\/apps\/details[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "play", lang));
 }
 
 export type Reviewer = { name: string; credential: string };
