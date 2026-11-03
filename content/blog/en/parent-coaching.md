@@ -42,7 +42,7 @@ Disclosure: Naama, a parent coach you can find <a href="https://www.midrag.co.il
 
 There is no cutoff here of "after this many weeks." Parents reach out when something at home stays stuck, even if nobody has called it a problem.
 
-Reasons Midrag lists as common: weaning, sleep, difficulty with limits, behavior, emotional or social difficulties (including anxiety, depression, and tantrums, in their wording), and changes such as a growing family, divorce, a move, death, or illness. The Walla article also adds disagreements between the parents about how to raise a child, children's fears, developmental delays, and difficulty in the relationship with the child.
+Reasons Midrag lists as common: potty training, sleep, difficulty with limits, behavior, emotional or social difficulties (including anxiety, depression, and tantrums, in their wording), and changes such as a growing family, divorce, a move, death, or illness. The Walla article also adds disagreements between the parents about how to raise a child, children's fears, developmental delays, and difficulty in the relationship with the child.
 
 In the language of an ordinary evening, it looks like this:
 
@@ -175,4 +175,4 @@ And if you have decided on coaching, the checklist above will help in the first 
 
 ---
 
-*This article offers general information about kinds of help for parents. It is not medical, psychological, or therapeutic advice. Kidsit is an AI tool for the hard moment. It is not parent coaching and it is not therapy. If you are worried about safety, development, or health, talk to your pediatrician or another licensed professional.*
+*This article offers general information about kinds of help for parents. It is not medical, psychological, or therapeutic advice. Kidsit is an AI tool for the hard moment. It is not parent coaching and it is not therapy. If you are worried about safety, development, or health, talk to your pediatrician or another professional.*
