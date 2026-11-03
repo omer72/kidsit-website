@@ -49,5 +49,56 @@
       "supports": "Cohort of 422 children ages 3 to 5: more frequent device use to calm was associated with higher emotional reactivity, more so in boys and in children with higher surgency. Association, not cause.",
       "checkedAt": "2026-11-02T09:30:00Z"
     }
+  ],
+  "parent-coaching": [
+    {
+      "title": "Tiponet: Let's meet and talk about it",
+      "publisher": "Israel Ministry of Health – Parenting",
+      "url": "https://me.health.gov.il/parenting/raising-children/infant-and-child-development/tipat-halav/tiponet/",
+      "supports": "Page dated March 31, 2025: Tiponet is an online platform for group parent meetings led by Tipat Halav nurses; the meetings are at no cost; Hebrew and Arabic; a Zoom link by email after registration and by text on the morning of the meeting. Example topics: babies, sleep, nutrition, development, siblings, parents' well-being.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "Parent coaching on upapp",
+      "publisher": "Maccabi Healthcare Services",
+      "url": "https://www.maccabi4u.co.il/maccabi_circles/upapp/parent_trainings/",
+      "supports": "Updated July 8, 2026: up to 8 meetings per series, including an introductory meeting or several introductory meetings, at no cost; a team that includes educational psychologists and licensed therapists; available to all Maccabi members through mind in upapp. Topics on the page include burnout, routine, limits, life changes, divorce, loss, gender identity, and sibling relationships.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "Keshet Early Childhood Center",
+      "publisher": "Tel Aviv-Yafo Municipality",
+      "url": "https://www.tel-aviv.gov.il/Residents/HealthAndSocial/Pages/keshet.aspx",
+      "supports": "Checked 2026-11-02: services for early childhood and parents, with an emphasis on the parent-child relationship. Parent coaching or counseling: 15 meetings and/or short counseling of a few meetings, with a social worker or an early-childhood educational counselor. Price on the page: 35 NIS for a one-time meeting, 350 NIS for the full coaching. A postpartum mothers' group (8 meetings, Kiryat Shalom and Neve Ofer) at no cost. It is not claimed that the center's other services are free.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "Kol Sherut — Parents",
+      "publisher": "Kol Sherut",
+      "url": "https://www.kolsherut.org.il/parents",
+      "supports": "A directory of services for parents, with a parent-coaching category and where each service operates. It is not stated that the services are at no cost: cost and eligibility are on each service's page.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "Parent coaching",
+      "publisher": "Midrag",
+      "url": "https://www.midrag.co.il/Content/Tip/21078",
+      "supports": "Coaching focuses on parenting and the relationship with the child, as distinct from couples or psychological therapy; it can stand alone or be added to therapy for the child; does not require a license or a formal certificate; a process of between two and three months (their wording); individual: a weekly 50-minute meeting, clinic or Zoom; group: about two hours, usually 4–10 meetings; early childhood with them from about age 2 until elementary school. Average prices on the page were not quoted in the article, only that the page publishes a price list. Checked 2026-11-02.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "What is parent coaching, and when is it worth reaching out?",
+      "publisher": "Walla Health",
+      "url": "https://www.walla.co.il/healthy/health-news/3629618",
+      "supports": "Dr. Moran Influs Adler, updated January 7, 2024: check training, knowledge, and experience; clinical, developmental, and educational psychologists and clinical social workers who specialize in children hold a license from the Ministry of Health; when a child's symptoms are significant, individual therapy may need to be added. The wording that parent coaching is therapy was not adopted.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    },
+    {
+      "title": "Helplines for mental-health first aid",
+      "publisher": "Israel Ministry of Health – Mental Health",
+      "url": "https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/first-aid/",
+      "supports": "Page dated October 21, 2026: round-the-clock phone lines including ERAN 1201, and the health funds' lines as listed there; a psychiatric emergency room open all hours, all year, with no referral and at no charge; acute physical signs — urgent care or an emergency room. Phone numbers that contradict each other on the page were not copied.",
+      "checkedAt": "2026-11-02T14:20:00+02:00"
+    }
   ]
 }
