@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { m, spring, useReducedMotion } from "./motion";
-import { storeUrl, type Dict, type Lang } from "@/dictionaries";
+import type { Dict, Lang } from "@/dictionaries";
+import { StoreBadges } from "./store-badges";
 
 function Scribble() {
   const reduce = useReducedMotion();
@@ -51,11 +52,7 @@ function Chip({
   );
 }
 
-const btn = "rounded-xl border-2 border-ink px-6 py-3 text-center font-bold shadow-sticker";
-
 export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
-  const apple = storeUrl.apple("site_hero", lang);
-  const play = storeUrl.play("site_hero", lang);
   return (
     <section id="top" className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-20 pt-8 sm:px-6 sm:gap-12 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:pt-20">
       <div className="animate-fade-up">
@@ -70,29 +67,11 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
           </span>
         </h1>
         <p className="mt-6 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-          <m.a
-            href={apple}
-            className={`${btn} bg-grape text-white`}
-            whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
-            whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
-            transition={spring}
-          >
-            {t.ctaApple}
-          </m.a>
-          <m.a
-            href={play}
-            className={`${btn} bg-grape text-white`}
-            whileHover={{ y: -3, boxShadow: "6px 8px 0 0 #26265E" }}
-            whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
-            transition={spring}
-          >
-            {t.ctaPlay}
-          </m.a>
-          {/* a text link on phones, so the two store buttons share one row */}
+        <div className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-3 max-md:pr-[4.5rem] sm:mt-8">
+          <StoreBadges lang={lang} placement="site_hero" />
           <a
             href="#demo"
-            className="col-span-2 inline-flex min-h-11 items-center justify-center font-bold underline underline-offset-4 sm:col-span-1 sm:rounded-xl sm:border-2 sm:border-ink sm:bg-white sm:px-6 sm:py-3 sm:no-underline sm:shadow-sticker"
+            className="inline-flex min-h-11 w-full items-center justify-center font-bold underline underline-offset-4 sm:w-auto sm:rounded-xl sm:border-2 sm:border-ink sm:bg-white sm:px-6 sm:py-3 sm:no-underline sm:shadow-sticker"
           >
             {t.ctaSecondary}
           </a>

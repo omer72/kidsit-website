@@ -132,6 +132,28 @@ html.consent-needed #NagishLiTrigger {
   text-underline-offset: 2px;
   overflow-wrap: anywhere;
 }
+/* Store badges sit inline with the sentence and wrap instead of widening the page. */
+.blog-prose a.store-badge {
+  display: inline-flex;
+  max-width: 100%;
+  margin-block: 0.25rem;
+  margin-inline: 0.15rem;
+  line-height: 0;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.blog-prose img.store-badge-apple,
+.blog-prose img.store-badge-play {
+  width: auto;
+  max-width: 100%;
+}
+.blog-prose img.store-badge-apple {
+  height: 40px;
+}
+.blog-prose img.store-badge-play {
+  /* Play file includes padding; 60px lines the visible badge up with the 40px App Store badge. */
+  height: 60px;
+}
 .blog-prose blockquote {
   margin-top: 1rem;
   border-inline-start: 4px solid #5b3df5;

@@ -8,7 +8,7 @@ import { SocialProof } from "@/components/social-proof";
 import { Pricing } from "@/components/pricing";
 import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
-import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
+import { APP_STORE_URL, dictionaries, PLAY_STORE_URL, type Lang } from "@/dictionaries";
 
 // Only /he and /en exist (params come from the [lang] layout); anything else is a 404, never a render with an unknown lang.
 export const dynamicParams = false;
@@ -23,16 +23,17 @@ export default function Home({ params }: { params: { lang: Lang } }) {
       {
         "@type": "MobileApplication",
         name: "Kidsit AI",
-        operatingSystem: "iOS, Android",
+        operatingSystem: "Android, iOS",
         applicationCategory: "LifestyleApplication",
         inLanguage: params.lang,
         featureList: [...t.features.cards.map((c) => c.title), t.summary.schemaFeature],
+        downloadUrl: [APP_STORE_URL, PLAY_STORE_URL],
         offers: [
           { "@type": "Offer", price: "0", priceCurrency: "USD", name: "Free" },
           { "@type": "Offer", price: "59.99", priceCurrency: "USD", name: "Premium yearly" },
           { "@type": "Offer", price: "9.99", priceCurrency: "USD", name: "Premium monthly" },
         ],
-        sameAs: [storeUrl.apple("site_schema", params.lang), storeUrl.play("site_schema", params.lang)],
+        sameAs: [APP_STORE_URL, PLAY_STORE_URL],
       },
       {
         "@type": "FAQPage",

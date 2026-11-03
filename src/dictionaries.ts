@@ -11,20 +11,23 @@ export const ACCESSIBILITY_EMAIL = "omer+privacy@kidsit.ai";
 // While it's empty, `pt` is left out of the App Store links (App Analytics won't attribute ct= without it).
 export const APP_STORE_PROVIDER_TOKEN = "";
 
+// Live store listings. Every button and schema URL is built from these two constants.
+export const APP_STORE_URL = "https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099";
+export const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=ai.kidsit.app";
+
 // Every placement is prefixed with the page language (he_site_hero / en_site_hero) so Hebrew and
 // English visitors can be told apart in App Store Connect (ct) and Play Console (utm_content).
 const tag = (lang: Lang, placement: string) => `${lang}_${placement}`;
 
-// No /us/ in the Apple URL: Apple redirects to the visitor's storefront.
 export const storeUrl = {
   apple: (placement: string, lang: Lang) => {
     const q = new URLSearchParams({ mt: "8", ct: tag(lang, placement) });
     if (APP_STORE_PROVIDER_TOKEN) q.set("pt", APP_STORE_PROVIDER_TOKEN);
-    return `https://apps.apple.com/app/id6769443099?${q}`;
+    return `${APP_STORE_URL}?${q}`;
   },
   // referrer= carries the campaign into Play Console → Acquisition reports
   play: (placement: string, lang: Lang) =>
-    `https://play.google.com/store/apps/details?id=ai.kidsit.app&referrer=${encodeURIComponent(
+    `${PLAY_STORE_URL}&referrer=${encodeURIComponent(
       `utm_source=kidsit_site&utm_medium=web&utm_campaign=site_cta_${lang}&utm_content=${tag(lang, placement)}`,
     )}`,
 };
@@ -33,6 +36,10 @@ export type FaqItem = { q: string; a: string; link?: { label: string; href: stri
 
 const en = {
   dir: "ltr" as "ltr" | "rtl",
+  stores: {
+    appleAlt: "Download on the App Store",
+    playAlt: "Get it on Google Play",
+  },
   meta: {
     title: "Kidsit AI | Calm guidance for hard parenting moments",
     description:
@@ -267,6 +274,10 @@ export type Dict = typeof en;
 
 const he: Dict = {
   dir: "rtl",
+  stores: {
+    appleAlt: "להורדה ב-App Store",
+    playAlt: "כעת ב-Google Play",
+  },
   meta: {
     title: "Kidsit AI | אפליקציית הדרכת הורים לרגעים הקשים, בקול",
     description:

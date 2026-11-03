@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
-
-const btn =
-  "inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-grape px-2 text-sm font-bold text-white shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape";
+import type { Lang } from "@/dictionaries";
+import { StoreBadges } from "./store-badges";
 
 /**
  * Mobile-only install bar for the blog. Desktop keeps the in-article store links.
@@ -14,11 +12,7 @@ const btn =
  */
 export function BlogInstallBar({ lang }: { lang: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { ctaApple, ctaPlay } = dictionaries[lang].hero;
-  const apple = storeUrl.apple("blog_sticky", lang);
-  const play = storeUrl.play("blog_sticky", lang);
   const title = lang === "he" ? "הורידו את Kidsit" : "Get Kidsit";
-  const sr = lang === "he" ? "הורידו ב־" : "Download on ";
 
   useEffect(() => {
     const el = ref.current;
@@ -53,16 +47,7 @@ export function BlogInstallBar({ lang }: { lang: Lang }) {
       <p id="blog-install-title" className="text-center font-display text-sm font-semibold leading-tight">
         {title}
       </p>
-      <div className="mt-1.5 grid grid-cols-2 gap-2 pb-0.5">
-        <a href={apple} className={btn}>
-          <span className="sr-only">{sr}</span>
-          {ctaApple}
-        </a>
-        <a href={play} className={btn}>
-          <span className="sr-only">{sr}</span>
-          {ctaPlay}
-        </a>
-      </div>
+      <StoreBadges lang={lang} placement="blog_sticky" className="mt-1.5" />
     </div>
   );
 }

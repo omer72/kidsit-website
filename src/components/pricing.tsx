@@ -5,45 +5,10 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { m, spring, useStagger, Reveal } from "./motion";
-import { storeUrl, type Dict, type Lang } from "@/dictionaries";
+import type { Dict, Lang } from "@/dictionaries";
+import { StoreBadges } from "./store-badges";
 
 const PREMIUM_PRICE = { monthly: "$9.99", yearly: "$59.99" };
-
-
-function StoreButtons({
-  t,
-  variant,
-  placement,
-  lang,
-}: {
-  t: Dict["pricing"];
-  variant: "light" | "sunny";
-  placement: string;
-  lang: Lang;
-}) {
-  const stores = [
-    { key: "apple" as const, href: storeUrl.apple(placement, lang), label: t.storeApple },
-    { key: "play" as const, href: storeUrl.play(placement, lang), label: t.storePlay },
-  ];
-  return (
-    <div className="mt-6 flex gap-2">
-      {stores.map((s) => (
-        <m.a
-          key={s.key}
-          href={s.href}
-          className={`flex min-h-11 flex-1 items-center justify-center rounded-xl border-2 border-ink px-2 py-3 text-center text-sm font-bold shadow-sticker-sm ${
-            variant === "sunny" ? "bg-sunny text-ink" : "bg-paper text-ink"
-          }`}
-          whileHover={{ y: -2, boxShadow: "4px 6px 0 0 #26265E" }}
-          whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
-          transition={spring}
-        >
-          {s.label}
-        </m.a>
-      ))}
-    </div>
-  );
-}
 
 function BillingToggle({
   yearly,
@@ -122,7 +87,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
                 </li>
               ))}
             </ul>
-            <StoreButtons t={t} variant="light" placement="site_pricing_free" lang={lang} />
+            <StoreBadges lang={lang} placement="site_pricing_free" clearNagish className="mt-6" />
           </article>
         </m.div>
 
@@ -168,7 +133,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
                 </li>
               ))}
             </ul>
-            <StoreButtons t={t} variant="sunny" placement="site_pricing_premium" lang={lang} />
+            <StoreBadges lang={lang} placement="site_pricing_premium" clearNagish className="mt-6" />
           </article>
         </m.div>
       </m.div>
