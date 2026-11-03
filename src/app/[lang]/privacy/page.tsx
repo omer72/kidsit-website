@@ -56,7 +56,7 @@ const DOCS: Record<Lang, LegalDoc> = {
         h: "Third-Party Sharing",
         p: (
           <>
-            <p>We do not sell personal information, and we do not show ads. The providers below match what the app and this site actually use:</p>
+            <p>We do not sell personal information. We do not show ads in the app or on this site. We advertise Kidsit on Meta&apos;s platforms and, with your consent, measure those ads using the Meta Pixel. The providers below match what the app and this site actually use:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
               <li>OpenAI — gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
               <li>Netlify — hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
@@ -145,8 +145,9 @@ const DOCS: Record<Lang, LegalDoc> = {
               Meta Pixel. With the same permission we also load the Meta Pixel from Meta Platforms (Facebook) to measure
               how well our ads work and to count site visits. It loads only after you allow analytics cookies in the
               banner, and you can withdraw that any time under “Cookie settings”. When it runs, Meta may receive cookies
-              such as <code>_fbp</code>, browser and device information, the pages you visit on this site, and your IP
-              address. Through Meta&apos;s automatic matching it may also receive hashed identifiers. It does not receive
+              such as <code>_fbp</code> and <code>_fbc</code>, browser and device information, the pages you visit on this
+              site, and your IP address. It may also send automatic click events when you click buttons on the site
+              (SubscribedButtonClick). Through Meta&apos;s automatic matching it may also receive hashed identifiers. It does not receive
               anything you enter in the app. Meta&apos;s handling of this data is described in its{" "}
               <a className="text-grape underline underline-offset-2" href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">privacy policy</a>.
             </p>
@@ -206,7 +207,14 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3"><code>_fbp</code></td>
                   <td className="py-2 pe-3">Cookie (Meta)</td>
                   <td className="py-2 pe-3">Meta Pixel: measures our ads and site visits, only if you accept analytics</td>
-                  <td className="py-2 pe-3">Set by Meta (see Meta&apos;s privacy policy)</td>
+                  <td className="py-2 pe-3">90 days</td>
+                  <td className="py-2">Analytics</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_fbc</code></td>
+                  <td className="py-2 pe-3">Cookie (Meta)</td>
+                  <td className="py-2 pe-3">Meta Pixel: set when you arrive from a link on Facebook or Instagram (holds the click ID), only if you accept analytics</td>
+                  <td className="py-2 pe-3">90 days</td>
                   <td className="py-2">Analytics</td>
                 </tr>
               </tbody>
@@ -277,7 +285,7 @@ const DOCS: Record<Lang, LegalDoc> = {
         h: "שיתוף מידע עם צדדים שלישיים",
         p: (
           <>
-            <p>איננו מוכרים מידע אישי ואיננו מציגים פרסומות. הספקים שלהלן תואמים את מה שהאפליקציה והאתר באמת משתמשים בו:</p>
+            <p>איננו מוכרים מידע אישי. איננו מציגים פרסומות באפליקציה או באתר. אנחנו מפרסמים את Kidsit בפלטפורמות של Meta, ובהסכמתכם מודדים את הפרסומות האלה בעזרת הפיקסל. הספקים שלהלן תואמים את מה שהאפליקציה והאתר באמת משתמשים בו:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
               <li>OpenAI — ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
               <li>Netlify — מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
@@ -357,11 +365,12 @@ const DOCS: Record<Lang, LegalDoc> = {
               דבר ממה שאתם מזינים באפליקציה. תגי Google לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
             </p>
             <p className="mt-2">
-              הפיקסל של Meta. באותה הסכמה נטען גם את הפיקסל של Meta מבית Meta Platforms (פייסבוק), כדי למדוד את יעילות
+              הפיקסל של Meta. באותה הסכמה אנו טוענים גם את הפיקסל של Meta מבית Meta Platforms (פייסבוק), כדי למדוד את יעילות
               הפרסום שלנו ולספור ביקורים באתר. הוא נטען רק אחרי שאישרתם עוגיות סטטיסטיקה בבאנר, ואפשר לבטל זאת בכל עת דרך
-              „הגדרות עוגיות”. כשהוא פועל, Meta עשויה לקבל עוגיות כמו <code>_fbp</code>, מידע על הדפדפן והמכשיר, העמודים
-              שבהם ביקרתם באתר, וכתובת ה-IP שלכם. באמצעות ההתאמה האוטומטית (automatic matching) של Meta היא עשויה לקבל גם
-              מזהים מוצפנים (hashed). הוא אינו מקבל דבר ממה שאתם מזינים באפליקציה. הטיפול של Meta במידע הזה מתואר{" "}
+              „הגדרות עוגיות”. כשהוא פועל, Meta עשויה לקבל עוגיות כמו <code>_fbp</code> ו-<code>_fbc</code>, מידע על הדפדפן
+              והמכשיר, העמודים שבהם ביקרתם באתר, וכתובת ה-IP שלכם. הוא עשוי גם לשלוח אירועי לחיצה אוטומטיים כשלוחצים על
+              כפתורים באתר (SubscribedButtonClick). באמצעות ההתאמה האוטומטית (automatic matching) של Meta היא עשויה לקבל גם
+              מזהים מגובבים (hashed). הוא אינו מקבל דבר ממה שאתם מזינים באפליקציה. הטיפול של Meta במידע הזה מתואר{" "}
               <a className="text-grape underline underline-offset-2" href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">במדיניות הפרטיות שלה</a>.
             </p>
             <div
@@ -420,7 +429,14 @@ const DOCS: Record<Lang, LegalDoc> = {
                   <td className="py-2 pe-3"><code>_fbp</code></td>
                   <td className="py-2 pe-3">Cookie (Meta)</td>
                   <td className="py-2 pe-3">הפיקסל של Meta: מדידת הפרסום שלנו וביקורים באתר, רק אם אישרתם סטטיסטיקה</td>
-                  <td className="py-2 pe-3">נקבע על ידי Meta (ראו מדיניות הפרטיות של Meta)</td>
+                  <td className="py-2 pe-3">90 יום</td>
+                  <td className="py-2">סטטיסטיקה</td>
+                </tr>
+                <tr className="border-b border-ink/20 align-top">
+                  <td className="py-2 pe-3"><code>_fbc</code></td>
+                  <td className="py-2 pe-3">Cookie (Meta)</td>
+                  <td className="py-2 pe-3">הפיקסל של Meta: נשמרת כשמגיעים מקישור בפייסבוק או באינסטגרם (מכילה את מזהה הלחיצה), רק אם אישרתם סטטיסטיקה</td>
+                  <td className="py-2 pe-3">90 יום</td>
                   <td className="py-2">סטטיסטיקה</td>
                 </tr>
               </tbody>

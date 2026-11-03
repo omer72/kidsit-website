@@ -39,7 +39,7 @@ export const CONSENT_TXT = {
     ],
     analytics: [
       "סטטיסטיקה",
-      "Google Analytics 4 והפיקסל של Meta‏ (Meta Platforms / פייסבוק): מדידת ביקורים באתר ואת יעילות הפרסום שלנו. נטען רק אם תאשרו.",
+      "Google Analytics 4 והפיקסל של Meta‏ (Meta Platforms / פייסבוק): מדידת ביקורים באתר ויעילות הפרסום שלנו. נטען רק אם תאשרו.",
     ],
     on: "פעיל תמיד",
     footer: "הגדרות עוגיות",
