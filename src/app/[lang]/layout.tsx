@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { NagishLi } from "@/components/nagishli";
 import { CookieConsent } from "@/components/cookie-consent";
 import { Analytics } from "@/components/analytics";
+import { MetaPixelPageView } from "@/components/meta-pixel-pageview";
 import { ogFor } from "@/lib/seo";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 import "../globals.css";
@@ -59,6 +60,22 @@ export default async function RootLayout({
         <Script id="consent-defaults" strategy="beforeInteractive">{`(function(){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500});})();`}</Script>
         {/* Show the prerendered consent banner from first paint when no valid choice is stored (v1, 12 months). */}
         <Script id="consent-needed" strategy="beforeInteractive">{`try{var c=JSON.parse(localStorage.getItem('kidsit-consent')||'null');if(!c||c.v!==1||!c.ts||Date.now()-Date.parse(c.ts)>31536e6)document.documentElement.classList.add('consent-needed')}catch(e){document.documentElement.classList.add('consent-needed')}`}</Script>
+        {/* Meta Pixel in <head> (plain script: next/script afterInteractive injects into body). */}
+        <script
+          id="meta-pixel"
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1684532029907797');
+fbq('track', 'PageView');`,
+          }}
+        />
+        {/* Raw HTML so React does not emit a preload for the tracking pixel (that would fire with JS on). */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1684532029907797&ev=PageView&noscript=1" />',
+          }}
+        />
       </head>
       <body
         className={`${fontClass} bg-paper font-body text-ink antialiased`}
@@ -68,6 +85,7 @@ export default async function RootLayout({
         <NagishLi lang={params.lang} />
         <CookieConsent lang={params.lang} />
         <Analytics />
+        <MetaPixelPageView />
       </body>
     </html>
   );
