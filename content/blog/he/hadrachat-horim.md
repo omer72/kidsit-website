@@ -169,7 +169,7 @@ Kidsit היא אפליקציית AI לרגע הקשה. היא לא הדרכת ה
 
 ## להתחיל עכשיו
 
-רוצים מילים לרגע הבא? נסו את Kidsit. ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
+רוצים מילים לרגע הבא? נסו את Kidsit. ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
 
 ואם החלטתם על הדרכה, הצ׳קליסט למעלה יעזור בשיחה הראשונה. אפשר לעשות את שניהם: אדם לתהליך, וכלי AI לרגע עצמו.
 

@@ -177,7 +177,7 @@ Kidsit אינו טיפול, ואינו ייעוץ רפואי או פסיכולו
 
 זה כלי עזר יומיומי, לא טיפול ולא ייעוץ רפואי, ל־iPhone ולאנדרואיד. עוד על הכלי: [מאמן הורות AI](/he/blog/maan-horut-ai).
 
-ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 ---
 

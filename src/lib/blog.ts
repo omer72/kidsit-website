@@ -27,9 +27,46 @@ function withStoreUtms(html: string, lang: Lang): string {
   const rewritten = html
     .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
     .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
-  return rewritten
-    .replace(/<a href="(https:\/\/apps\.apple\.com\/[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "apple", lang))
-    .replace(/<a href="(https:\/\/play\.google\.com\/store\/apps\/details[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "play", lang));
+  return groupStoreLinkRuns(
+    rewritten
+      .replace(/<a href="(https:\/\/apps\.apple\.com\/[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "apple", lang))
+      .replace(/<a href="(https:\/\/play\.google\.com\/store\/apps\/details[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "play", lang)),
+  );
+}
+
+/** One anchor, including an <img>, that does not read past its own closing tag. */
+const STORE_ANCHOR = String.raw`<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<\/a>`;
+
+/**
+ * Markdown joins store links with " · ". A flex row with gap replaces that dot so a
+ * wrap cannot leave a lone separator. Editorial middot lists are left as written.
+ * A trailing period stays on the last link.
+ */
+function groupStoreLinkRuns(html: string): string {
+  const runRe = new RegExp(`(?:${STORE_ANCHOR}\\s*·\\s*)+${STORE_ANCHOR}(\\.?)`, "g");
+  return html.replace(runRe, (run, dot: string | undefined) => {
+    if (!/class="store-badge"|apps\.apple\.com|play\.google\.com\/store\/apps\/details/.test(run)) return run;
+    const links = run.match(new RegExp(STORE_ANCHOR, "g"));
+    if (!links || links.length < 2) return run;
+    const parts: string[] = [];
+    let badges: string[] = [];
+    const flushBadges = () => {
+      if (!badges.length) return;
+      parts.push(`<span class="store-link-badges">${badges.join("")}</span>`);
+      badges = [];
+    };
+    links.forEach((link, i) => {
+      const suffix = i === links.length - 1 && dot ? "." : "";
+      const item = `<span class="store-link-item">${link}${suffix}</span>`;
+      if (link.includes('class="store-badge"')) badges.push(item);
+      else {
+        flushBadges();
+        parts.push(item);
+      }
+    });
+    flushBadges();
+    return `<span class="store-links">${parts.join("")}</span>`;
+  });
 }
 
 export type Reviewer = { name: string; credential: string };

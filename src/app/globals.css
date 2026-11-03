@@ -73,8 +73,9 @@ html.consent-needed #NagishLiTrigger {
    of both. --blog-bar-h is measured by BlogInstallBar; 7.5rem covers the bar before that. */
 @media (max-width: 767px) {
   .blog-install-bar {
-    /* 60px trigger + 10px corner offset + gap, so the buttons stay left of the FAB. */
-    padding-right: 5.25rem;
+    /* 60px trigger + 10px corner offset + a few px, so the buttons stay clear of the FAB.
+       4.75rem (76px) still clears it and leaves both 40px badges on one line at 360. */
+    padding-right: 4.75rem;
   }
   .blog-index-list {
     /* Last card can scroll fully above the trigger (60px) plus a gap. */
@@ -132,7 +133,25 @@ html.consent-needed #NagishLiTrigger {
   text-underline-offset: 2px;
   overflow-wrap: anywhere;
 }
-/* Store badges sit inline with the sentence and wrap instead of widening the page. */
+/* App Store + Play row. Both images are 40px tall (Play padding is cropped out of the PNG),
+   so flex alignment lines up the artwork edges. The row shrink-wraps and wraps instead of
+   squashing or widening the page. */
+.store-badge-slot {
+  max-width: 100%;
+  min-width: 0;
+}
+.store-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Store badges sit inline with the sentence and wrap instead of widening the page.
+   Both artworks are 40px tall; the Play PNG is cropped to the badge, so the boxes share
+   a top and baseline. */
 .blog-prose a.store-badge {
   display: inline-flex;
   max-width: 100%;
@@ -146,13 +165,34 @@ html.consent-needed #NagishLiTrigger {
 .blog-prose img.store-badge-play {
   width: auto;
   max-width: 100%;
-}
-.blog-prose img.store-badge-apple {
   height: 40px;
 }
-.blog-prose img.store-badge-play {
-  /* Play file includes padding; 60px lines the visible badge up with the 40px App Store badge. */
-  height: 60px;
+/* The markdown " · " between a store badge and the next link is dropped here.
+   Gap separates the items, including after they wrap, so no separator is left on its own line. */
+.blog-prose .store-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.4rem;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.blog-prose .store-links .store-link-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.4rem;
+  max-width: 100%;
+}
+.blog-prose .store-links .store-link-item {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+.blog-prose .store-links a.store-badge {
+  margin: 0;
 }
 .blog-prose blockquote {
   margin-top: 1rem;

@@ -202,7 +202,7 @@ Kidsit אינו טיפול ואינו ייעוץ רפואי.
 
 כשהרגע לא ברשימה, למשל ילדה שבוכה בחדר, ב-[Kidsit AI](https://kidsit.ai/he) מחזיקים את המיקרופון, מספרים מה קרה, ותוך כ־10 שניות מקבלים תוכנית רגועה: סיכום קצר, למה זה אולי קרה, שלוש פעולות, ומשפט חיבור לפני השינה. זה כלי עזר יומיומי, לא טיפול ולא ייעוץ רפואי, ל־iPhone ולאנדרואיד.
 
-ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/il/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 עוד על הכלי עצמו: [מאמן הורות AI](/he/blog/maan-horut-ai).
 

@@ -25,38 +25,36 @@ export function StoreBadges({
       href: storeUrl.apple(placement, lang),
       alt: labels.appleAlt,
       ...art.apple,
-      imgClass: "h-10 w-auto",
     },
     {
       key: "play" as const,
       href: storeUrl.play(placement, lang),
       alt: labels.playAlt,
       ...art.play,
-      imgClass: "h-[60px] w-auto",
     },
   ];
   return (
-    <div
-      className={`flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 ${clearNagish ? "max-md:pr-[4.5rem]" : ""} ${className}`}
-    >
-      {items.map((item) => (
-        <a
-          key={item.key}
-          href={item.href}
-          aria-label={item.alt}
-          className="inline-flex min-h-11 max-w-full items-center rounded-md"
-        >
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            unoptimized
-            className={`${item.imgClass} max-w-full`}
-            style={{ width: "auto", height: item.key === "apple" ? 40 : 60, maxWidth: "100%" }}
-          />
-        </a>
-      ))}
+    <div className={`store-badge-slot ${clearNagish ? "max-md:pr-[4.5rem]" : ""} ${className}`}>
+      <div className="store-badge-row">
+        {items.map((item) => (
+          <a
+            key={item.key}
+            href={item.href}
+            aria-label={item.alt}
+            className="inline-flex min-h-11 shrink-0 items-center rounded-md"
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              unoptimized
+              className="h-10 w-auto max-w-full"
+              style={{ width: "auto", height: 40, maxWidth: "100%" }}
+            />
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
