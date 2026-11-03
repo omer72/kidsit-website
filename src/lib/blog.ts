@@ -51,7 +51,10 @@ function dirFor(lang: Lang): string {
 }
 
 /** Hebrew/English posts that translate each other. x-default is the English URL, matching the rest of the site. */
-const PAIRS: { he: string; en: string }[] = [{ he: "kibui-masach", en: "screen-time-meltdown" }];
+const PAIRS: { he: string; en: string }[] = [
+  { he: "kibui-masach", en: "screen-time-meltdown" },
+  { he: "hadrachat-horim", en: "parent-coaching" },
+];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {
   for (const pair of PAIRS) {
