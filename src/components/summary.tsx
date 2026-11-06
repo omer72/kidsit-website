@@ -9,6 +9,9 @@ import type { Dict, Lang } from "@/dictionaries";
 const SHOT_W = 585;
 const SHOT_H = 1266;
 
+// Icons for the two points: a calendar (weekly or daily), a bell (the local reminder).
+const ICONS = ["M4 6h16v14H4zM4 10h16M8 3v4M16 3v4", "M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"];
+
 export function Summary({ t, lang }: { t: Dict["summary"]; lang: Lang }) {
   const [active, setActive] = useState(0);
 
@@ -20,22 +23,23 @@ export function Summary({ t, lang }: { t: Dict["summary"]; lang: Lang }) {
         <span className="inline-block rotate-1 rounded-lg border-2 border-ink bg-mint px-3 py-1 text-sm font-extrabold shadow-sticker-sm">
           {t.badge}
         </span>
-        <h2 className="mt-5 max-w-3xl font-display text-3xl font-semibold sm:text-4xl">{t.heading}</h2>
+        <h2 className="mt-5 min-w-0 max-w-3xl text-balance break-words font-display text-3xl font-semibold sm:text-4xl lg:text-5xl">{t.heading}</h2>
         <p className="mt-4 max-w-3xl text-lg font-bold text-ink/70">{t.lead}</p>
         <p className="mt-3 max-w-3xl font-bold text-ink/70">{t.detail}</p>
       </Reveal>
 
       <Reveal className="mt-6 grid max-w-3xl gap-4 max-lg:pr-[4.5rem] sm:grid-cols-2" delay={0.05}>
-        {t.points.map((p) => (
+        {t.points.map((p, i) => (
           <article key={p.title} className="rounded-2xl border-2 border-ink bg-white p-4 shadow-sticker-sm">
-            <span
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink bg-sunny text-xl shadow-sticker-sm"
-              aria-hidden
-            >
-              {p.emoji}
-            </span>
-            <h3 className="mt-3 font-display text-lg font-semibold">{p.title}</h3>
-            <p className="mt-1 font-bold text-ink/70">{p.text}</p>
+            <h3 className="flex items-center gap-3 font-display text-lg font-semibold">
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-ink bg-sunny shadow-sticker-sm">
+                <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+                  <path d={ICONS[i]} />
+                </svg>
+              </span>
+              {p.title}
+            </h3>
+            <p className="mt-2 font-bold text-ink/70">{p.text}</p>
           </article>
         ))}
       </Reveal>

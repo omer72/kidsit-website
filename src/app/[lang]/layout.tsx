@@ -8,6 +8,7 @@ import { MetaPixelPageView } from "@/components/meta-pixel-pageview";
 import { META_PIXEL_BOOTSTRAP } from "@/lib/meta-pixel-bootstrap";
 import { ogFor } from "@/lib/seo";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
+import { colors } from "@/colors";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -34,7 +35,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
   };
 }
 
-export const viewport: Viewport = { themeColor: "#F3F6FF" };
+export const viewport: Viewport = { themeColor: colors.paper };
 
 export default async function RootLayout({
   children,
@@ -50,7 +51,7 @@ export default async function RootLayout({
   const fontClass = (he ? await import("./fonts-he") : await import("./fonts-en")).fontClass;
   return (
     // suppressHydrationWarning: the inline script below adds "js" before React hydrates
-    <html lang={params.lang} dir={t.dir} className="scroll-smooth" suppressHydrationWarning>
+    <html lang={params.lang} dir={t.dir} className="scroll-smooth overflow-x-clip" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -66,7 +67,7 @@ export default async function RootLayout({
         <script id="meta-pixel" dangerouslySetInnerHTML={{ __html: META_PIXEL_BOOTSTRAP }} />
       </head>
       <body
-        className={`${fontClass} bg-paper font-body text-ink antialiased`}
+        className={`${fontClass} overflow-x-clip bg-paper font-body text-ink antialiased`}
         style={{ "--font-body": he ? "var(--font-rubik)" : "var(--font-nunito)" } as React.CSSProperties}
       >
         {children}

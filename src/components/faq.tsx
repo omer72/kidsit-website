@@ -11,7 +11,7 @@ function Item({ q, a, link, i }: FaqItem & { i: number }) {
       <h3>
         <button
           id={`faq-q-${i}`}
-          className="flex min-h-11 w-full items-center justify-between gap-4 px-5 py-4 text-start font-display text-lg font-semibold"
+          className="flex min-h-11 w-full items-center justify-between gap-4 px-5 py-3 text-start font-display text-lg font-semibold active:bg-paper disabled:cursor-not-allowed disabled:opacity-50"
           aria-expanded={open}
           aria-controls={`faq-a-${i}`}
           onClick={() => setOpen((v) => !v)}
@@ -54,9 +54,9 @@ export function Faq({ t }: { t: Dict["faq"] }) {
   return (
     <section id="faq" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       <Reveal>
-        <h2 className="font-display text-3xl font-semibold sm:text-4xl">{t.heading}</h2>
+        <h2 className="min-w-0 text-balance break-words font-display text-3xl font-semibold sm:text-4xl lg:text-5xl">{t.heading}</h2>
       </Reveal>
-      <Reveal className="mt-8 max-w-3xl space-y-4" delay={0.1}>
+      <Reveal className="mt-8 space-y-4 lg:w-10/12" delay={0.1}>
         {t.items.map((f, i) => (
           <Item key={f.q} {...f} i={i} />
         ))}

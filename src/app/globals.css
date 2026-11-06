@@ -1,14 +1,21 @@
+/* Hallmark · checked: 2026-11-06 · genre: playful (inferred) · posture: committed (sunny on the reviews band only)
+ * floor: fixed 7a, 10a, 30a, 34, 48, 54, 62, 73 · reflex: fixed 3, 9, 11, 12, 26b, 39b, 44c, 49b, 69, 77, 78 · finish: fixed F1, F3 (balanced heads), F15
+ * finish-review: subagent · 6 findings · 5 resolved · 1 left to the owner (section heads' copy)
+ * built: the project · redesign: full · brand kept (sticker palette, Fredoka) · section order kept · v2.0.0 */
+/* Hallmark · answered F5 · the coloured coin around each feature icon is the sticker system's own material */
+/* Hallmark · dropped "iOS + Android", "~10 sec", "1 kid free" stat pills · 69 names them: hero, pricing and FAQ already say each */
+/* Hallmark · waive 8 · kept sequence in a new composition · the order hero, demo, reviews, pricing, FAQ is the app-install anatomy; each section now has its own composition */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 ::selection {
-  background: #ffc53d;
-  color: #26265e;
+  background: theme("colors.sunny");
+  color: theme("colors.ink");
 }
 
 :focus-visible {
-  outline: 3px solid #5b3df5;
+  outline: 3px solid theme("colors.grape");
   outline-offset: 2px;
 }
 
@@ -103,7 +110,7 @@ html.consent-needed #NagishLiTrigger {
   font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #26265e;
+  color: theme("colors.ink");
 }
 .blog-prose h3 {
   margin-top: 1.5rem;
@@ -128,7 +135,7 @@ html.consent-needed #NagishLiTrigger {
   margin-top: 0.35rem;
 }
 .blog-prose a {
-  color: #5b3df5;
+  color: theme("colors.grape");
   text-decoration: underline;
   text-underline-offset: 2px;
   overflow-wrap: anywhere;
@@ -196,7 +203,7 @@ html.consent-needed #NagishLiTrigger {
 }
 .blog-prose blockquote {
   margin-top: 1rem;
-  border-inline-start: 4px solid #5b3df5;
+  border-inline-start: 4px solid theme("colors.grape");
   padding-inline-start: 0.9rem;
 }
 .blog-prose table {
@@ -207,7 +214,7 @@ html.consent-needed #NagishLiTrigger {
 }
 .blog-prose th,
 .blog-prose td {
-  border: 2px solid #26265e;
+  border: 2px solid theme("colors.ink");
   padding: 0.45rem 0.4rem;
   vertical-align: top;
   text-align: start;
@@ -224,7 +231,7 @@ html.consent-needed #NagishLiTrigger {
 .blog-prose hr {
   margin: 2rem 0;
   border: 0;
-  border-top: 2px solid #26265e;
+  border-top: 2px solid theme("colors.ink");
 }
 .blog-prose strong {
   font-weight: 800;
