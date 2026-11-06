@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
+import { colors } from "@/colors";
 import { m, spring } from "./motion";
 import type { Dict } from "@/dictionaries";
 import { rememberLocale } from "./lang-switch";
@@ -41,7 +42,7 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
     <header className="sticky top-3 z-50 px-3 sm:top-4 sm:px-6">
       <nav
         aria-label={t.label}
-        className="mx-auto flex max-w-5xl items-center justify-between rounded-2xl border-2 border-ink bg-white px-4 py-1.5 shadow-sticker"
+        className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl border-2 border-ink bg-white px-4 py-1.5 shadow-sticker"
       >
         <a href={hrefOf("#top")} className="flex min-h-11 items-center gap-2 font-display text-xl font-semibold">
           <Image
@@ -85,8 +86,8 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
           <m.a
             href={hrefOf("#pricing")}
             className="inline-flex min-h-11 items-center rounded-xl border-2 border-ink bg-grape px-4 text-sm font-bold text-white shadow-sticker-sm"
-            whileHover={{ y: -2, boxShadow: "4px 6px 0 0 #26265E" }}
-            whileTap={{ y: 0, boxShadow: "2px 2px 0 0 #26265E" }}
+            whileHover={{ y: -2, boxShadow: `4px 6px 0 0 ${colors.ink}` }}
+            whileTap={{ y: 0, boxShadow: `2px 2px 0 0 ${colors.ink}` }}
             transition={spring}
           >
             {t.cta}
@@ -108,11 +109,11 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
         <AnimatePresence>
           {open && (
             <m.ul
-              className="mx-auto mt-2 max-w-5xl overflow-hidden rounded-2xl border-2 border-ink bg-white shadow-sticker"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-2xl border-2 border-ink bg-white shadow-sticker"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
               {t.links.map((l) => (
                 <li key={l.href}>

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { colors } from "./src/colors";
 
 const config: Config = {
   content: [
@@ -8,23 +9,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        ink: "#26265E",
-        "ink-muted": "#5A5B7F",
-        paper: "#F3F6FF",
-        grape: "#5B3DF5",
-        sunny: "#FFC53D",
-        bubblegum: "#FF7BA9",
-        mint: "#3ECFAF",
-      },
+      colors,
       fontFamily: {
         display: ["var(--font-fredoka)"],
         body: ["var(--font-body)"],
       },
       boxShadow: {
-        sticker: "4px 4px 0 0 #26265E",
-        "sticker-sm": "2px 2px 0 0 #26265E",
-        "sticker-lg": "8px 8px 0 0 #26265E",
+        sticker: `4px 4px 0 0 ${colors.ink}`,
+        "sticker-sm": `2px 2px 0 0 ${colors.ink}`,
+        "sticker-lg": `8px 8px 0 0 ${colors.ink}`,
       },
     },
   },

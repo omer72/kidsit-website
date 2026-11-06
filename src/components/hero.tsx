@@ -1,23 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { m, spring, useReducedMotion } from "./motion";
+import { colors } from "@/colors";
+import { m, pop, useReducedMotion } from "./motion";
 import type { Dict, Lang } from "@/dictionaries";
 import { StoreBadges } from "./store-badges";
 
 function Scribble() {
   const reduce = useReducedMotion();
   return (
+    // Fixed height + non-scaling stroke: the mark keeps its weight under any word length.
     <svg
-      className="absolute -bottom-2 left-0 w-full"
+      className="absolute -bottom-2.5 left-0 h-3.5 w-full"
       viewBox="0 0 220 14"
+      preserveAspectRatio="none"
       fill="none"
       aria-hidden
     >
       <m.path
         d="M3 10 C 40 2, 70 13, 110 7 S 180 3, 217 8"
-        stroke="#FFC53D"
-        strokeWidth="5"
+        stroke={colors.sunny}
+        strokeWidth="6"
+        vectorEffect="non-scaling-stroke"
         strokeLinecap="round"
         initial={{ pathLength: reduce ? 1 : 0 }}
         whileInView={{ pathLength: 1 }}
@@ -44,7 +48,7 @@ function Chip({
         className="inline-block rounded-xl border-2 border-ink bg-white px-3 py-1.5 text-sm font-extrabold shadow-sticker"
         initial={{ scale: reduce ? 1 : 0.6 }}
         animate={{ scale: 1 }}
-        transition={{ ...spring, delay }}
+        transition={{ ...pop, delay }}
       >
         {children}
       </m.span>
@@ -54,17 +58,15 @@ function Chip({
 
 export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
   return (
-    <section id="top" className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-20 pt-8 sm:px-6 sm:gap-12 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:pt-20">
+    <section id="top" className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-20 pt-8 sm:px-6 sm:gap-12 sm:pt-14 lg:grid-cols-[minmax(0,38rem)_300px] lg:justify-center lg:gap-16 lg:pt-20">
       <div className="animate-fade-up">
-        <span className="inline-block -rotate-2 rounded-lg border-2 border-ink bg-bubblegum px-3 py-1 text-sm font-extrabold text-ink shadow-sticker-sm">
-          {t.badge}
-        </span>
-        <h1 className="mt-5 text-balance font-display text-[clamp(2rem,8vw,3rem)] font-semibold leading-tight sm:mt-6 sm:text-5xl">
+        <h1 className="min-w-0 text-balance break-words font-display text-[clamp(2rem,8vw,3rem)] font-semibold leading-tight sm:text-5xl lg:text-6xl">
           {t.h1a}{" "}
           <span className="relative inline-block">
             {t.h1Scribbled}
             <Scribble />
-          </span>
+          </span>{" "}
+          {t.h1b}
         </h1>
         <p className="mt-6 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
         {/* Nagish is 60px + 10px off the physical right. px-5 already insets 20px,
@@ -83,10 +85,10 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
 
       {/* Signature: the real app, mid-whisper */}
       <div className="relative mx-auto w-full max-w-[300px]">
-        <Chip className="-left-6 top-10 -rotate-6 sm:-left-16" delay={0.5}>
+        <Chip className="-start-4 -top-6 -rotate-6 sm:-start-16" delay={0.5}>
           {t.chipWhisper}
         </Chip>
-        <Chip className="-right-4 bottom-24 rotate-3 sm:-right-14" delay={0.7}>
+        <Chip className="-end-4 bottom-36 rotate-3 sm:-end-14 lg:-end-6 xl:-end-14" delay={0.7}>
           {t.chipTime}
         </Chip>
         <div className="animate-fade-up-late rotate-1 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-white shadow-sticker-lg">

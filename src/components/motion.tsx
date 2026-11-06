@@ -13,20 +13,24 @@ export function MotionRoot({ children }: { children: React.ReactNode }) {
   return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
 }
 
-export const spring = { type: "spring", stiffness: 320, damping: 24 } as const;
+// Critically damped: UI state settles without overshoot.
+export const spring = { type: "spring", stiffness: 320, damping: 36 } as const;
+// The one bouncy spring: hero store buttons and chips only.
+export const pop = { type: "spring", stiffness: 320, damping: 24 } as const;
 
 export function useStagger(): { parent: Variants; child: Variants } {
   const reduce = useReducedMotion();
   return {
     parent: { hidden: {}, show: { transition: { staggerChildren: 0.1 } } },
     child: {
-      hidden: { opacity: 0, y: reduce ? 0 : 24 },
-      show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+      hidden: { y: reduce ? 0 : 24 },
+      show: { y: 0, transition: { duration: 0.5, ease: "easeOut" } },
     },
   };
 }
 
-// Scroll-triggered fade-up; the one wrapper every section uses.
+// Scroll-triggered rise; the one wrapper every section uses.
+// Transform only: content is readable at rest, before hydration and in full-page captures.
 export function Reveal({
   children,
   className,
@@ -40,8 +44,8 @@ export function Reveal({
   return (
     <m.div
       className={className}
-      initial={{ opacity: 0, y: reduce ? 0 : 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: reduce ? 0 : 28 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.6, ease: "easeOut", delay }}
     >

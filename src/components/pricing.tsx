@@ -57,7 +57,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
   return (
     <section id="pricing" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       <Reveal>
-        <h2 className="font-display text-3xl font-semibold sm:text-4xl">{t.heading}</h2>
+        <h2 className="min-w-0 text-balance break-words font-display text-3xl font-semibold sm:text-4xl lg:text-5xl">{t.heading}</h2>
         <p className="mt-3 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
         <div className="mt-6">
           <BillingToggle yearly={yearly} onChange={setYearly} t={t} />
@@ -65,7 +65,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
       </Reveal>
 
       <m.div
-        className="mt-10 grid max-w-4xl items-stretch gap-6 md:grid-cols-2"
+        className="mt-10 grid items-stretch gap-6 md:grid-cols-2 lg:w-10/12"
         variants={parent}
         initial="hidden"
         whileInView="show"
