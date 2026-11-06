@@ -8,7 +8,7 @@ import { StoreBadges } from "./store-badges";
  * Mobile-only install bar for the blog. Desktop keeps the in-article store links.
  * Height is published as --blog-bar-h. On small screens the Nagish trigger stays in the
  * bottom-right corner, in the bar's physical-right gutter (see globals.css). Hidden from md up,
- * matching the navbar's mobile breakpoint.
+ * where the articles' own store links are enough.
  */
 export function BlogInstallBar({ lang }: { lang: Lang }) {
   const ref = useRef<HTMLDivElement>(null);

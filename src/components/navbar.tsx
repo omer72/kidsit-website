@@ -57,7 +57,7 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
           </span>
         </a>
 
-        <ul className="hidden gap-4 text-sm font-bold md:flex">
+        <ul className="hidden gap-4 text-sm font-bold lg:flex">
           {t.links.map((l) => (
             <li key={l.href}>
               <m.a
@@ -94,7 +94,7 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
           </m.a>
           <button
             ref={btnRef}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border-2 border-ink bg-white md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border-2 border-ink bg-white lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t.closeMenu : t.openMenu}
@@ -105,7 +105,7 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
         </div>
       </nav>
 
-      <div id="mobile-menu" className="md:hidden">
+      <div id="mobile-menu" className="lg:hidden">
         <AnimatePresence>
           {open && (
             <m.ul
