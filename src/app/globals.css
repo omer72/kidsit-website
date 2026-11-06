@@ -2,6 +2,7 @@
  * floor: fixed 7a, 10a, 30a, 34, 48, 54, 62, 73 · reflex: fixed 3, 9, 11, 12, 26b, 39b, 44c, 49b, 69, 77, 78 · finish: fixed F1, F3 (balanced heads), F15
  * finish-review: subagent · 6 findings · 5 resolved · 1 left to the owner (section heads' copy)
  * built: the project · redesign: full · brand kept (sticker palette, Fredoka) · section order kept · v2.0.0
+ * legal (support, privacy, accessibility, terms): checked 2026-11-06 · genre: editorial (long document) · polish · fixed 19, 26a (footer ring), 25, 63, F3, F17, F25, navbar added
  * blog (/[lang]/blog, articles): checked 2026-11-06 · genre: editorial (long document) · redesign: polish, index recomposed · fixed 10a, 19, 25, 26b, 49a, 63, 67, F3, F19 */
 /* Hallmark · dismissed 3 · the blog blockquote rule marks quoted guidance inside an article, the quotation's own convention */
 /* Hallmark · answered F5 · the coloured coin around each feature icon is the sticker system's own material */
@@ -125,6 +126,50 @@ html.consent-needed #NagishLiTrigger {
 .blog-prose p {
   margin-top: 1rem;
 }
+/* Legal pages (support, privacy, accessibility, terms) read like the articles: regular weight at 18px,
+   running text near 70 characters a line. */
+.legal-prose {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.legal-prose :is(p, ul, ol) {
+  max-width: 52ch;
+}
+/* Cookie names are Latin identifiers: isolate them LTR so "_fbp" does not read "fbp_" on /he. */
+.cookie-table code {
+  overflow-wrap: anywhere;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+html[dir="rtl"] .cookie-table code {
+  text-align: right;
+}
+/* Phones: each cookie row stacks as label and value; the explicit ARIA roles keep the table semantics. */
+@media (max-width: 639px) {
+  .cookie-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .cookie-table tr {
+    display: block;
+    padding-block: 0.75rem;
+  }
+  .cookie-table td {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: 0.15rem;
+  }
+  .cookie-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+  }
+}
+
 /* Running text at 18px holds about 70 characters a line (Nunito's "0" is wide, so 52ch, not 65ch);
    tables keep the full column. */
 .blog-prose {
