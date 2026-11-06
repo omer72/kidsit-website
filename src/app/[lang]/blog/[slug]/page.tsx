@@ -10,7 +10,7 @@ import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 
 const COPY = {
   he: {
-    back: "→ חזרה לבלוג",
+    back: "חזרה לבלוג",
     byline: "נכתב על ידי צוות Kidsit",
     updated: "עודכן:",
     reviewed: (name: string, credential: string) => `נבדק מקצועית על ידי ${name}, ${credential}`,
@@ -18,7 +18,7 @@ const COPY = {
     newTab: " (נפתח בכרטיסייה חדשה)",
   },
   en: {
-    back: "← Back to the blog",
+    back: "Back to the blog",
     byline: "Kidsit Team",
     updated: "Updated:",
     reviewed: (name: string, credential: string) => `Reviewed by ${name}, ${credential}`,
@@ -88,7 +88,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
     <>
       <Navbar t={d.nav} base={`/${lang}`} />
       <main className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
-        <Link href={`/${lang}/blog`} className="inline-flex min-h-11 items-center font-bold text-grape hover:underline">
+        <Link href={`/${lang}/blog`} className="inline-flex min-h-11 items-center font-bold text-grape hover:underline active:text-ink">
           {ui.back}
         </Link>
         <article className="text-start">
@@ -99,8 +99,8 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
           {post.reviewer ? (
             <p className="mt-1 text-sm font-bold text-ink-muted">{ui.reviewed(post.reviewer.name, post.reviewer.credential)}</p>
           ) : null}
-          <h1 className="mt-2 font-display text-4xl font-semibold">{post.title}</h1>
-          <div className="blog-prose mt-8 font-bold text-ink/85" dangerouslySetInnerHTML={{ __html: post.html }} />
+          <h1 className="mt-2 min-w-0 text-balance break-words font-display text-4xl font-semibold">{post.title}</h1>
+          <div className="blog-prose mt-8 text-ink/85" dangerouslySetInnerHTML={{ __html: post.html }} />
           {post.sources.length > 0 ? (
             <section className="blog-sources blog-prose mt-12 border-t-2 border-ink pt-8" aria-labelledby="post-sources-heading">
               <h2 id="post-sources-heading">{ui.sources}</h2>
@@ -111,7 +111,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
                       {source.title}
                       <span className="sr-only">{ui.newTab}</span>
                     </a>
-                    {source.publisher ? <span> — {source.publisher}</span> : null}
+                    {source.publisher ? <span>, {source.publisher}</span> : null}
                   </li>
                 ))}
               </ul>
