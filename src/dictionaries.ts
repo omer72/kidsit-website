@@ -255,7 +255,7 @@ const en = {
       "© 2026 Kidsit.ai. This app is not a substitute for professional, medical, or psychological advice. It is designed to provide parents with smart, sensitive, and practical guidance for dealing with everyday situations in real-time.",
   },
   legal: {
-    back: "← Back to ",
+    back: "Back to ",
     home: "/en",
   },
 };
@@ -487,7 +487,7 @@ const he: Dict = {
       "© 2026 Kidsit.ai. האפליקציה אינה תחליף לייעוץ מקצועי, רפואי או פסיכולוגי. היא נועדה להעניק להורים הדרכה חכמה, רגישה ומעשית להתמודדות עם סיטואציות יומיומיות בזמן אמת.",
   },
   legal: {
-    back: "→ חזרה ל-",
+    back: "חזרה ל-",
     home: "/he",
   },
 };
