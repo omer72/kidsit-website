@@ -1,19 +1,21 @@
 import Image from "next/image";
-import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
+import { dictionaries, type Lang } from "@/dictionaries";
+import { storeHref, type StoreLink } from "@/lib/store-links";
 import { storeBadgeArt } from "@/lib/store-badges";
 
 /**
  * Official App Store + Google Play badges, same visible height, wrapping in LTR and RTL.
+ * `link` sets utm_medium/ct campaign (see src/lib/store-links.ts).
  * `clearNagish` keeps the row out of the fixed accessibility button's physical-right column on phones.
  */
 export function StoreBadges({
   lang,
-  placement,
+  link,
   className = "",
   clearNagish = false,
 }: {
   lang: Lang;
-  placement: string;
+  link: StoreLink;
   className?: string;
   clearNagish?: boolean;
 }) {
@@ -22,13 +24,13 @@ export function StoreBadges({
   const items = [
     {
       key: "apple" as const,
-      href: storeUrl.apple(placement, lang),
+      href: storeHref("apple", link),
       alt: labels.appleAlt,
       ...art.apple,
     },
     {
       key: "play" as const,
-      href: storeUrl.play(placement, lang),
+      href: storeHref("play", link),
       alt: labels.playAlt,
       ...art.play,
     },

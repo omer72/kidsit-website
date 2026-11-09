@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { m, spring, useStagger, Reveal } from "./motion";
 import type { Dict, Lang } from "@/dictionaries";
+import { HOME_CAMPAIGN } from "@/lib/store-links";
 import { StoreBadges } from "./store-badges";
 
 const PREMIUM_PRICE = { monthly: "$9.99", yearly: "$59.99" };
@@ -87,7 +88,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
                 </li>
               ))}
             </ul>
-            <StoreBadges lang={lang} placement="site_pricing_free" clearNagish className="mt-6" />
+            <StoreBadges lang={lang} link={{ medium: "home", campaign: HOME_CAMPAIGN }} clearNagish className="mt-6" />
           </article>
         </m.div>
 
@@ -133,7 +134,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
                 </li>
               ))}
             </ul>
-            <StoreBadges lang={lang} placement="site_pricing_premium" clearNagish className="mt-6" />
+            <StoreBadges lang={lang} link={{ medium: "home", campaign: HOME_CAMPAIGN }} clearNagish className="mt-6" />
           </article>
         </m.div>
       </m.div>

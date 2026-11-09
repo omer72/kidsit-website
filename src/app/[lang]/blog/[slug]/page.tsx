@@ -128,7 +128,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
         lang={lang}
         switchTo={alternate?.path}
       />
-      <BlogInstallBar lang={lang} />
+      <BlogInstallBar lang={lang} campaign={post.slug} />
     </>
   );
 }

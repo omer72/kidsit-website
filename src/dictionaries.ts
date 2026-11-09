@@ -6,31 +6,15 @@ export const SUPPORT_EMAIL = "omer+support@kidsit.ai";
 // Accessibility contact (accessibility statement only). Kept separate from support on purpose.
 export const ACCESSIBILITY_EMAIL = "omer+privacy@kidsit.ai";
 
-// TODO(Gal): App Store Connect provider token ("pt"), from App Store Connect → App Analytics →
-// Campaigns → Generate a campaign link. Paste the numeric token here as a string, e.g. "123456".
-// While it's empty, `pt` is left out of the App Store links (App Analytics won't attribute ct= without it).
-export const APP_STORE_PROVIDER_TOKEN = "";
+// App Store Connect provider token ("pt") for Kidsit (app id 6769443099), from App Store Connect → App Analytics →
+// Campaigns → Generate a campaign link (e.g. https://apps.apple.com/app/apple-store/id6769443099?pt=128661105&ct=blog&mt=8).
+// Fixed constant, not an env var. Clickable App Store links are built in src/lib/store-links.ts.
+export const APP_STORE_PROVIDER_TOKEN = "128661105";
 
-// Live store listings. Every button and schema URL is built from these two constants.
+// Live store listings, clean and canonical. JSON-LD uses these as-is; clickable links get tracking
+// parameters from src/lib/store-links.ts (storeHref).
 export const APP_STORE_URL = "https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099";
 export const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=ai.kidsit.app";
-
-// Every placement is prefixed with the page language (he_site_hero / en_site_hero) so Hebrew and
-// English visitors can be told apart in App Store Connect (ct) and Play Console (utm_content).
-const tag = (lang: Lang, placement: string) => `${lang}_${placement}`;
-
-export const storeUrl = {
-  apple: (placement: string, lang: Lang) => {
-    const q = new URLSearchParams({ mt: "8", ct: tag(lang, placement) });
-    if (APP_STORE_PROVIDER_TOKEN) q.set("pt", APP_STORE_PROVIDER_TOKEN);
-    return `${APP_STORE_URL}?${q}`;
-  },
-  // referrer= carries the campaign into Play Console → Acquisition reports
-  play: (placement: string, lang: Lang) =>
-    `${PLAY_STORE_URL}&referrer=${encodeURIComponent(
-      `utm_source=kidsit_site&utm_medium=web&utm_campaign=site_cta_${lang}&utm_content=${tag(lang, placement)}`,
-    )}`,
-};
 
 export type FaqItem = { q: string; a: string; link?: { label: string; href: string } };
 
