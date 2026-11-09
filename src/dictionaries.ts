@@ -218,7 +218,7 @@ const en = {
     items: [
       {
         q: "Is this therapy or medical advice?",
-        a: "No. Kidsit AI is an AI parent-guidance tool for everyday moments: tantrums, bedtime standoffs, sibling battles. It is not therapy, not medical or psychological advice, and not a replacement for a human parent coach or a licensed professional. It does not diagnose or treat, and if something touches your child's safety, development, or mental health, it will tell you plainly to talk to a pediatrician, therapist, or licensed clinician.",
+        a: "No. Kidsit AI is an AI parent-guidance tool for everyday moments: tantrums, bedtime standoffs, sibling battles. It is not therapy, not medical or psychological advice, and not a replacement for a human parent coach or a licensed professional. It does not diagnose or treat, and if something touches your child's safety, development, or mental health, the app refers you to a pediatrician or a licensed professional.",
       },
       {
         q: "Where does the advice come from?",
@@ -455,7 +455,7 @@ const he: Dict = {
     items: [
       {
         q: "זה תחליף לטיפול או לייעוץ רפואי?",
-        a: "לא. Kidsit היא כלי הדרכת הורים מבוסס AI לרגע עצמו, כמו התקף זעם, מאבק שינה או ריב בין אחים. היא לא טיפול, לא ייעוץ רפואי או פסיכולוגי, ולא תחליף למדריכת הורים או לאיש מקצוע מוסמך. אם משהו נוגע לבטיחות, להתפתחות או לבריאות הנפשית, היא תגיד בפירוש לפנות לרופא ילדים או לאיש מקצוע מוסמך.",
+        a: "לא. Kidsit היא כלי הדרכת הורים מבוסס AI לרגע עצמו, כמו התקף זעם, מאבק שינה או ריב בין אחים. היא לא טיפול, לא ייעוץ רפואי או פסיכולוגי, ולא תחליף למדריכת הורים או לאיש מקצוע מוסמך. אם משהו נוגע לבטיחות, להתפתחות או לבריאות הנפשית, האפליקציה מפנה לרופא ילדים או לאיש מקצוע מוסמך.",
         link: {
           label: "איזו עזרה מתאימה לכם — הדרכת הורים, טיפול או אפליקציה",
           href: "/he/blog/hadrachat-horim",
