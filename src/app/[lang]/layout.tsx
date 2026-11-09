@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { NagishLi } from "@/components/nagishli";
 import { CookieConsent } from "@/components/cookie-consent";
 import { Analytics } from "@/components/analytics";
+import { StoreAttribution } from "@/components/store-attribution";
 import { MetaPixelPageView } from "@/components/meta-pixel-pageview";
 import { META_PIXEL_BOOTSTRAP } from "@/lib/meta-pixel-bootstrap";
 import { ogFor } from "@/lib/seo";
@@ -74,6 +75,7 @@ export default async function RootLayout({
         <NagishLi lang={params.lang} />
         <CookieConsent lang={params.lang} />
         <Analytics />
+        <StoreAttribution />
         <MetaPixelPageView />
       </body>
     </html>

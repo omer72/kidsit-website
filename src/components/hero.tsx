@@ -4,7 +4,7 @@ import Image from "next/image";
 import { colors } from "@/colors";
 import { m, pop, useReducedMotion } from "./motion";
 import type { Dict, Lang } from "@/dictionaries";
-import { HOME_CAMPAIGN } from "@/lib/store-links";
+import { HOME_PAGE } from "@/lib/store-links";
 import { StoreBadges } from "./store-badges";
 
 function Scribble() {
@@ -74,7 +74,7 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
             so 3.375rem more (74px total) clears the button with a few px to spare
             and still keeps both 40px badges on one line at 360 and 390. */}
         <div className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-3 max-md:pr-[3.375rem] sm:mt-8">
-          <StoreBadges lang={lang} link={{ medium: "home", campaign: HOME_CAMPAIGN }} />
+          <StoreBadges lang={lang} link={{ medium: "home", page: HOME_PAGE, placement: "hero" }} />
           <a
             href="#demo"
             className="inline-flex min-h-11 w-full items-center justify-center font-bold underline underline-offset-4 sm:w-auto sm:rounded-xl sm:border-2 sm:border-ink sm:bg-white sm:px-6 sm:py-3 sm:no-underline sm:shadow-sticker"
