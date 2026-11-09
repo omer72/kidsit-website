@@ -172,11 +172,11 @@ const en = {
     ],
   },
   pricing: {
-    heading: "Free for one child. Premium free for 7 days.",
-    sub: "Premium starts with a 7-day free trial. Cancel anytime from your App Store or Google Play subscriptions.",
+    heading: "One child without a subscription. Premium may include a trial when one is offered.",
+    sub: "Premium may start with a trial when one is offered. Availability, length, and eligibility can vary — check the current offer in the app. Cancel anytime from your App Store or Google Play subscriptions.",
     toggleLabel: "Billing period",
-    yearlyNote: "That’s $5.00/month, billed yearly after a 7-day free trial.",
-    monthlyNote: "Billed monthly after a 7-day free trial.",
+    yearlyNote: "That’s $5.00/month, billed yearly after any trial that is offered and for which you are eligible.",
+    monthlyNote: "Billed monthly after any trial that is offered and for which you are eligible.",
     monthly: "Monthly",
     yearly: "Yearly · save 50%",
     perMonth: "/month",
@@ -186,16 +186,16 @@ const en = {
     free: {
       name: "Try it",
       desc: "For getting to know the coach.",
-      price: "Free",
-      cadence: "no time limit",
-      features: ["One child profile", "Voice or typed moments", "Full guidance answers"],
+      price: "Start without a subscription",
+      cadence: "one child",
+      features: ["One child profile", "Voice or typed moments", "New guidance requires an active subscription or trial"],
     },
     premium: {
       name: "Premium",
       desc: "Everything, for the whole crew.",
       badge: "Best value",
       features: [
-        "7-day free trial",
+        "A trial may be offered — check eligibility in the app",
         "Track every child",
         "Unlimited moments",
         "Memory for each child",
@@ -225,7 +225,7 @@ const en = {
       },
       {
         q: "How does the free trial work?",
-        a: "You can use Kidsit AI free with one child, no time limit. Premium (track every child, unlimited moments) comes as a monthly or yearly plan, and both start with a 7-day free trial for new subscribers. Cancel anytime. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
+        a: "You can start Kidsit AI with one child without a subscription, and no account is required to start. Generating new guidance requires an active subscription or trial. This is not unlimited free guidance, and a free trial is not guaranteed. Premium supports more than one child. A trial may be offered to some new subscribers; availability, length, and eligibility can vary, so check the current offer in the app. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
         q: "Is it on Android?",
