@@ -52,7 +52,7 @@ function happy(u: URL): Response {
     return json(200, { data: rows.filter((r) => inRange(r.start_time)) });
   }
   if (path.endsWith("/act_137780457")) return json(200, { id: "act_137780457", name: "Kidsit Ads", account_status: 1 });
-  return json(200, { id: "1684532029907797", name: "Kidsit Pixel", last_fired_time: "2026-11-09T10:12:00+0000" });
+  return json(200, { id: "2535446663629392", name: "Kidsit Pixel", last_fired_time: "2026-11-09T10:12:00+0000" });
 }
 
 test("no token → not connected, with no network call", async () => {
@@ -64,7 +64,7 @@ test("no token → not connected, with no network call", async () => {
 
 test("config: pixel default, act_ prefix, version check", () => {
   const a = resolveMetaConfig({ META_ACCESS_TOKEN: TOKEN });
-  assert.ok(a.ok && a.config.pixelId === "1684532029907797" && a.config.adAccountId === null && a.config.version === DEFAULT_GRAPH_VERSION);
+  assert.ok(a.ok && a.config.pixelId === "2535446663629392" && a.config.adAccountId === null && a.config.version === DEFAULT_GRAPH_VERSION);
   const b = resolveMetaConfig({ META_ACCESS_TOKEN: TOKEN, META_AD_ACCOUNT_ID: "137780457" });
   assert.ok(b.ok && b.config.adAccountId === "act_137780457");
   assert.equal(resolveMetaConfig({ META_ACCESS_TOKEN: TOKEN, META_PIXEL_ID: "abc" }).ok, false);
@@ -171,7 +171,7 @@ test("paging: follows graph.facebook.com next links, ignores other hosts, dedupe
       pages++;
       return json(200, {
         data: [hourly("2026-11-09T05:00:00+0000", [["PageView", 4]])],
-        paging: { next: `https://graph.facebook.com/v25.0/1684532029907797/stats?after=X&access_token=${TOKEN}` },
+        paging: { next: `https://graph.facebook.com/v25.0/2535446663629392/stats?after=X&access_token=${TOKEN}` },
       });
     }
     pages++;

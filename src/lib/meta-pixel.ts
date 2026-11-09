@@ -3,7 +3,7 @@
 
 import { CONSENT_VERSION } from "./consent";
 
-export const META_PIXEL_ID = "1684532029907797";
+export const META_PIXEL_ID = "2535446663629392";
 export const META_PIXEL_SRC = "https://connect.facebook.net/en_US/fbevents.js";
 /** 12 months. Matches consent.ts and the consent-needed head script (31536e6). */
 export const CONSENT_MAX_AGE_MS = 365 * 24 * 3600 * 1000;
