@@ -393,5 +393,53 @@
       "supports": "עמוד מ־21 באוקטובר 2026: מוקדים טלפוניים 24/7 כולל ער״ן 1201, ומוקדי קופות החולים כפי שרשומים שם; חדר מיון פסיכיאטרי פעיל כל שעות היממה כל השנה, בלי הפנייה וללא תשלום; סימנים גופניים חריפים — טיפול דחוף או חדר מיון. לא הועתקו מספרים שסותרים זה את זה בתוך העמוד.",
       "checkedAt": "2026-11-02T14:20:00+02:00"
     }
+  ],
+  "kidsit-vs-chatgpt": [
+    {
+      "title": "ChatGPT Free Tier FAQ",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq",
+      "supports": "ChatGPT חינמי; שיחות טקסט יומיומיות ללא הגבלה במסלול החינמי, עם מגבלות נפרדות לקול ולכלים.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "Memory in ChatGPT",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/8590148-memory-in-chatgpt",
+      "supports": "כשהזיכרון מופעל ChatGPT יכול לזכור העדפות ופרטים רלוונטיים.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "ChatGPT Voice",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/20001274-chatgpt-voice",
+      "supports": "מצב קולי: מדברים ושומעים תשובה בתוך שיחה.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "ChatGPT Plans and Pricing",
+      "publisher": "OpenAI",
+      "url": "https://chatgpt.com/pricing/",
+      "supports": "גרסה חינמית זמינה לכולם; יש מסלולים בתשלום.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "כוח עזר בלתי צפוי: כך AI יכול להפוך אתכם להורים טובים יותר",
+      "publisher": "ynet wellness",
+      "url": "https://www.ynet.co.il/wellness/article/rkgipkiabe",
+      "supports": "בניית סוכן בשיחה קבועה, תפקיד, רקע/משימה/תוצאה; AI אינו פסיכולוג ולא מדריכת הורים."
+    },
+    {
+      "title": "ניסינו לגדל ילדים עם עזרה מ-ChatGPT",
+      "publisher": "ynet דיגיטל",
+      "url": "https://www.ynet.co.il/digital/technology/article/sylur7igel",
+      "supports": "ההורה נשאר מאחורי ההגה; לא משתפים פרטים מזהים."
+    },
+    {
+      "title": "מדריך לשימוש מוגן ובטוח בצ'ט AI",
+      "publisher": "איגוד האינטרנט הישראלי",
+      "url": "https://www.isoc.org.il/digital-literacy/online-safety-guides/guides-users/guide-safe-chat-ai-applications",
+      "supports": "זהירות בשיתוף פרטים מזהים בצ'ט AI."
+    }
   ]
 }

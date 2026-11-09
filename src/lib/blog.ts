@@ -108,6 +108,7 @@ function dirFor(lang: Lang): string {
 const PAIRS: { he: string; en: string }[] = [
   { he: "kibui-masach", en: "screen-time-meltdown" },
   { he: "hadrachat-horim", en: "parent-coaching" },
+  { he: "kidsit-vs-chatgpt", en: "kidsit-vs-chatgpt" },
 ];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {

@@ -100,5 +100,59 @@
       "supports": "Page dated October 21, 2026: round-the-clock phone lines including ERAN 1201, and the health funds' lines as listed there; a psychiatric emergency room open all hours, all year, with no referral and at no charge; acute physical signs — urgent care or an emergency room. Phone numbers that contradict each other on the page were not copied.",
       "checkedAt": "2026-11-02T14:20:00+02:00"
     }
+  ],
+  "kidsit-vs-chatgpt": [
+    {
+      "title": "ChatGPT Free Tier FAQ",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq",
+      "supports": "ChatGPT is free to use; free users have unlimited everyday text chats, with separate limits for voice and other tools.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "Memory in ChatGPT",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/8590148-memory-in-chatgpt",
+      "supports": "When Memory is enabled, ChatGPT can remember relevant preferences and details from chats.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "ChatGPT Voice",
+      "publisher": "OpenAI Help",
+      "url": "https://help.openai.com/en/articles/20001274-chatgpt-voice",
+      "supports": "Voice mode: speak and hear a spoken reply inside a chat.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "ChatGPT Plans and Pricing",
+      "publisher": "OpenAI",
+      "url": "https://chatgpt.com/pricing/",
+      "supports": "Free version available to everyone; paid plans exist.",
+      "checkedAt": "2026-11-08"
+    },
+    {
+      "title": "When and how to use AI chatbots for parenting advice",
+      "publisher": "CNBC Make It",
+      "url": "https://www.cnbc.com/make-it/2026/01/22/when-how-to-use-ai-chatbots-for-parenting-advice-researcher.html",
+      "supports": "Low-stakes questions are an appropriate use; medication or urgent symptoms belong with a professional."
+    },
+    {
+      "title": "Should I use ChatGPT for my child's health?",
+      "publisher": "CHOC Children's",
+      "url": "https://health.choc.org/should-you-use-chatgpt-for-your-childs-health/",
+      "supports": "Chatbot as a companion, not a replacement; do not share identifying information."
+    },
+    {
+      "title": "'Am I a good mom?' We put ChatGPT's parenting advice to the test",
+      "publisher": "CBC News",
+      "url": "https://www.cbc.ca/news/canada/ai-parenting-advice-1.7534527",
+      "supports": "A parenting coach described it as useful in addition to other sources, not the be-all and end-all."
+    },
+    {
+      "title": "ChatGPT vs. Gemini — I asked both for parenting advice",
+      "publisher": "Tom's Guide",
+      "url": "https://www.tomsguide.com/ai/chatgpt-vs-gemini-i-asked-both-for-parenting-advice-and-one-clearly-did-it-better",
+      "supports": "Described ChatGPT as warm and reassuring."
+    }
   ]
 }

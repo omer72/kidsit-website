@@ -289,6 +289,20 @@ html[dir="rtl"] .cookie-table code {
     font-size: 0.875rem;
   }
 }
+/* Copyable prompts: wrap instead of a long horizontal scroll on phones. */
+.blog-prose pre {
+  margin-top: 1rem;
+  border: 2px solid theme("colors.ink");
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.blog-prose pre code {
+  font-family: inherit;
+}
 .blog-prose hr {
   margin: 2rem 0;
   border: 0;
