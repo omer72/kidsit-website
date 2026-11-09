@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogInstallBar } from "@/components/blog-install-bar";
+import { BLOG_INDEX_CAMPAIGN } from "@/lib/store-links";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor } from "@/lib/seo";
@@ -98,7 +99,7 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
         </ul>
       </main>
       <Footer t={d.footer} base={`/${lang}`} path="/blog" lang={lang} switchTo={`/${other}/blog`} />
-      <BlogInstallBar lang={lang} />
+      <BlogInstallBar lang={lang} campaign={BLOG_INDEX_CAMPAIGN} />
     </>
   );
 }

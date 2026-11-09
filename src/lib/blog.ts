@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
-import { dictionaries, storeUrl, type Lang } from "@/dictionaries";
+import { dictionaries, type Lang } from "@/dictionaries";
+import { storeHref } from "@/lib/store-links";
 import { storeBadgeArt } from "@/lib/store-badges";
 import heSourcesJson from "@/data/he-blog-sources.json";
 import enSourcesJson from "@/data/en-blog-sources.json";
@@ -20,10 +21,10 @@ function storeBadgeHtml(href: string, kind: "apple" | "play", lang: Lang): strin
   return `<a class="store-badge" href="${href}" aria-label="${alt}"><img class="${cls}" src="${art.src}" alt="${alt}" width="${art.width}" height="${art.height}" /></a>`;
 }
 
-/** Rewrite bare App Store / Play links to the page language's ct/UTM scheme (placement "blog") and render them as badges. */
-function withStoreUtms(html: string, lang: Lang): string {
-  const apple = escapeAttr(storeUrl.apple("blog", lang));
-  const play = escapeAttr(storeUrl.play("blog", lang));
+/** Rewrite App Store / Play links in a post to tracked links (utm_medium=blog, campaign = post slug) and render them as badges. */
+function withStoreUtms(html: string, lang: Lang, slug: string): string {
+  const apple = escapeAttr(storeHref("apple", { medium: "blog", campaign: slug }));
+  const play = escapeAttr(storeHref("play", { medium: "blog", campaign: slug }));
   const rewritten = html
     .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
     .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
@@ -308,7 +309,7 @@ function loadFile(file: string, lang: Lang): Post {
   // Strip the leading H1 from HTML body (rendered separately as page title) but keep it in bodyMd for diff checks.
   // Frontmatter parsing can leave a blank line, so the heading is not always at column 0.
   const bodyWithoutH1 = expanded.body.replace(/^\s*#\s+.+(?:\n+|$)/, "");
-  const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string, lang);
+  const html = withStoreUtms(marked.parse(bodyWithoutH1, { async: false }) as string, lang, slug);
   const date = requireIsoDate(meta.date, slug, "date");
   const dateModified = meta.updated ? requireIsoDate(meta.updated, slug, "updated") : date;
   return {
