@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx --test src/lib/insights/*.test.ts src/lib/meta-pixel.test.ts"
+    "test": "tsx --test src/lib/insights/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
