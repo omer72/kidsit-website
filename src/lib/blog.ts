@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
 import { dictionaries, type Lang } from "@/dictionaries";
-import { storeHref } from "@/lib/store-links";
+import { storeHref, storeLinkData, type StoreLink } from "@/lib/store-links";
 import { storeBadgeArt } from "@/lib/store-badges";
 import heSourcesJson from "@/data/he-blog-sources.json";
 import enSourcesJson from "@/data/en-blog-sources.json";
@@ -13,25 +13,29 @@ function escapeAttr(value: string): string {
 }
 
 /** Official badge markup for a store link already rewritten to this page's campaign URL. */
-function storeBadgeHtml(href: string, kind: "apple" | "play", lang: Lang): string {
+function storeBadgeHtml(href: string, kind: "apple" | "play", lang: Lang, link: StoreLink): string {
   const art = storeBadgeArt[lang][kind];
   const labels = dictionaries[lang].stores;
   const alt = kind === "apple" ? labels.appleAlt : labels.playAlt;
   const cls = kind === "apple" ? "store-badge-apple" : "store-badge-play";
-  return `<a class="store-badge" href="${href}" aria-label="${alt}"><img class="${cls}" src="${art.src}" alt="${alt}" width="${art.width}" height="${art.height}" /></a>`;
+  const data = Object.entries(storeLinkData(kind, link))
+    .map(([k, v]) => ` ${k}="${escapeAttr(v)}"`)
+    .join("");
+  return `<a class="store-badge" href="${href}"${data} aria-label="${alt}"><img class="${cls}" src="${art.src}" alt="${alt}" width="${art.width}" height="${art.height}" /></a>`;
 }
 
-/** Rewrite App Store / Play links in a post to tracked links (utm_medium=blog, campaign = post slug) and render them as badges. */
+/** Rewrite App Store / Play links in a post to tracked links (utm_medium=blog, page = post slug, placement "article") and render them as badges. */
 function withStoreUtms(html: string, lang: Lang, slug: string): string {
-  const apple = escapeAttr(storeHref("apple", { medium: "blog", campaign: slug }));
-  const play = escapeAttr(storeHref("play", { medium: "blog", campaign: slug }));
+  const link: StoreLink = { medium: "blog", lang, page: slug, placement: "article" };
+  const apple = escapeAttr(storeHref("apple", link));
+  const play = escapeAttr(storeHref("play", link));
   const rewritten = html
     .replace(/https:\/\/apps\.apple\.com\/[^"\s<]+/g, apple)
     .replace(/https:\/\/play\.google\.com\/store\/apps\/details\?id=ai\.kidsit\.app[^"\s<]*/g, play);
   return groupStoreLinkRuns(
     rewritten
-      .replace(/<a href="(https:\/\/apps\.apple\.com\/[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "apple", lang))
-      .replace(/<a href="(https:\/\/play\.google\.com\/store\/apps\/details[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "play", lang)),
+      .replace(/<a href="(https:\/\/apps\.apple\.com\/[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "apple", lang, link))
+      .replace(/<a href="(https:\/\/play\.google\.com\/store\/apps\/details[^"]+)">[\s\S]*?<\/a>/g, (_, href: string) => storeBadgeHtml(href, "play", lang, link)),
   );
 }
 

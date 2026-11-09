@@ -9,9 +9,9 @@ import { StoreBadges } from "./store-badges";
  * Height is published as --blog-bar-h. On small screens the Nagish trigger stays in the
  * bottom-right corner, in the bar's physical-right gutter (see globals.css). Hidden from md up,
  * where the articles' own store links are enough.
- * `campaign` is the post slug on a post page, BLOG_INDEX_CAMPAIGN on the index (utm_medium=blog).
+ * `page` is the post slug on a post page, BLOG_INDEX_PAGE on the index (utm_medium=blog, placement "bar").
  */
-export function BlogInstallBar({ lang, campaign }: { lang: Lang; campaign: string }) {
+export function BlogInstallBar({ lang, page }: { lang: Lang; page: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const title = lang === "he" ? "הורידו את Kidsit" : "Get Kidsit";
 
@@ -48,7 +48,7 @@ export function BlogInstallBar({ lang, campaign }: { lang: Lang; campaign: strin
       <p id="blog-install-title" className="text-center font-display text-sm font-semibold leading-tight">
         {title}
       </p>
-      <StoreBadges lang={lang} link={{ medium: "blog", campaign }} className="mt-1.5" />
+      <StoreBadges lang={lang} link={{ medium: "blog", page, placement: "bar" }} className="mt-1.5" />
     </div>
   );
 }
