@@ -2,6 +2,18 @@
 // Bare /privacy, /terms, /support and /accessibility are redirected by language in src/middleware.ts.
 // www → apex (P10): host match only; path and query are preserved. Domains themselves are unchanged in Vercel.
 const nextConfig = {
+  // /admin is private: never indexed, never stored by shared caches.
+  async headers() {
+    return [
+      {
+        source: "/admin/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+          { key: "Cache-Control", value: "private, no-store" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {
