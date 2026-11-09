@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { unstable_cache } from "next/cache";
 import { configuredSecret, SESSION_COOKIE, verifySessionToken } from "@/lib/admin/auth";
 import { allSectionsFailed, loadRevenueCat, resolveConfig, type DailyPoint, type RevenueCatStats, type Section, type SegmentTotal } from "@/lib/admin/revenuecat";
+import { loadMeta, metaAnyFailed, metaFingerprint, resolveMetaConfig, type MetaStats } from "@/lib/admin/meta";
 import { EXTRA_PROVIDERS, providerById, runProvider, type ProviderData, type ProviderResult, type Table } from "@/lib/admin/providers";
 import { login, logout } from "./actions";
 
@@ -67,6 +68,36 @@ async function getProvider(id: string): Promise<ProviderResult> {
     if (e instanceof ProviderFailed) return e.result;
     if (e && typeof e === "object" && "result" in e) return (e as ProviderFailed).result;
     return { state: "error", error: "טעינת הנתונים נכשלה." };
+  }
+}
+
+// Meta Pixel: 15 min cache keyed on a fingerprint of the token (+ pixel/ad account/app secret/version), never the token.
+// Any failed section throws, so errors and partial results are shown but not cached.
+class MetaFailed extends Error {
+  constructor(public result: MetaStats) {
+    super("meta failed");
+  }
+}
+const cachedMeta = unstable_cache(
+  // fingerprint is unused in the body on purpose: unstable_cache folds the arguments into the cache key.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (fingerprint: string): Promise<MetaStats> => {
+    const r = await loadMeta(process.env);
+    if (r.state !== "ok" || metaAnyFailed(r)) throw new MetaFailed(r);
+    return r;
+  },
+  ["admin-stats-meta-v1"],
+  { revalidate: CACHE_S },
+);
+
+async function getMeta(): Promise<MetaStats> {
+  const cfg = resolveMetaConfig(process.env);
+  if (!cfg.ok) return loadMeta(process.env); // "not connected" or a config error: no network call, nothing cached
+  try {
+    return await cachedMeta(metaFingerprint(cfg.config));
+  } catch (e) {
+    if (e && typeof e === "object" && "result" in e) return (e as MetaFailed).result;
+    return { state: "invalid_config", error: "טעינת הנתונים מ-Meta נכשלה." };
   }
 }
 
@@ -263,6 +294,111 @@ function ProviderCard({ title, r }: { title: string; r: ProviderResult }) {
   );
 }
 
+const fmtNum = (n: number) => new Intl.NumberFormat("he-IL").format(n);
+const fmtDate = (d: string) => `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}`;
+
+function MetaCard({ m }: { m: MetaStats }) {
+  const title = "Meta Pixel";
+  if (m.state === "not_connected")
+    return (
+      <Card title={title}>
+        <NotConnected missing={m.missing} note="בלי טוקן הכרטיס לא פונה ל-Meta בכלל." />
+      </Card>
+    );
+  if (m.state === "invalid_config")
+    return (
+      <Card title={title}>
+        <ErrorNote msg={m.error} />
+      </Card>
+    );
+  const ev = m.events;
+  const sections = [m.pixel, m.events, m.hosts, ...(m.adAccount ? [m.adAccount] : [])];
+  const errs = Array.from(new Set(sections.map((x) => (x.ok ? null : x.error))));
+  // Every call failed the same way (e.g. an expired token) → one message instead of four.
+  if (errs.length === 1 && errs[0] !== null)
+    return (
+      <Card title={title}>
+        <ErrorNote msg={errs[0]} />
+      </Card>
+    );
+  return (
+    <Card title={title}>
+      <div className="space-y-4">
+        <p className="text-xs text-ink-muted">
+          עודכן לאחרונה: <span className="tabular-nums">{fmtTime(m.fetchedAt)}</span> (שעון ישראל) · טווח:{" "}
+          {`\u2066${fmtDate(m.range.startDay)}–${fmtDate(m.range.endDay)}\u2069`} (28 ימים, שעון ישראל)
+        </p>
+        <SectionView s={m.pixel}>
+          {(p) => (
+            <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="min-w-0 rounded-xl bg-paper p-3">
+                <dt className="text-xs text-ink-muted">פיקסל</dt>
+                <dd className="font-bold [overflow-wrap:anywhere]">
+                  <bdi>{p.name ?? "ללא שם"}</bdi>
+                </dd>
+                <dd dir="ltr" className="text-end text-xs tabular-nums text-ink-muted">
+                  ID {m.pixelId}
+                </dd>
+              </div>
+              <div className="min-w-0 rounded-xl bg-paper p-3">
+                <dt className="text-xs text-ink-muted">נתונים אחרונים התקבלו</dt>
+                <dd className="font-bold">
+                  {p.lastFiredTime ? (
+                    <>
+                      <bdi className="tabular-nums">{fmtTime(p.lastFiredTime)}</bdi> (שעון ישראל)
+                    </>
+                  ) : (
+                    "עדיין לא התקבלו נתונים"
+                  )}
+                </dd>
+              </div>
+            </dl>
+          )}
+        </SectionView>
+        <SectionView s={ev}>
+          {(e) => (
+            <div className="space-y-4">
+              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="rounded-xl bg-paper p-3">
+                  <dt className="text-xs text-ink-muted">סה״כ אירועים, 28 ימים</dt>
+                  <dd className="font-display text-2xl font-semibold tabular-nums">{fmtNum(e.total)}</dd>
+                </div>
+                <div className="rounded-xl bg-paper p-3">
+                  <dt className="text-xs text-ink-muted">PageView</dt>
+                  <dd className="font-display text-2xl font-semibold tabular-nums">{fmtNum(e.byEvent.find((x) => x.label === "PageView")?.value ?? 0)}</dd>
+                </div>
+              </dl>
+              <Bars points={e.daily} label="אירועים ליום" />
+              <div>
+                <h3 className="mb-1 font-bold">לפי אירוע</h3>
+                <DataTable t={{ title: "לפי אירוע", columns: ["אירוע", "אירועים"], rows: e.byEvent.map((r) => [r.label, fmtNum(r.value)]), ltrFirstColumn: true, empty: "לא התקבלו אירועים בטווח." }} />
+              </div>
+            </div>
+          )}
+        </SectionView>
+        <div>
+          <h3 className="mb-1 font-bold">לפי דומיין</h3>
+          <SectionView s={m.hosts}>
+            {(h) => <DataTable t={{ title: "לפי דומיין", columns: ["דומיין", "אירועים"], rows: h.map((r) => [r.label, fmtNum(r.value)]), ltrFirstColumn: true, empty: "אין נתוני דומיין בטווח." }} />}
+          </SectionView>
+        </div>
+        {m.adAccount && (
+          <SectionView s={m.adAccount}>
+            {(a) => (
+              <Muted>
+                חשבון מודעות: <bdi>{a.name ?? "ללא שם"}</bdi> (<bdi>{a.id}</bdi>) · {a.status}
+              </Muted>
+            )}
+          </SectionView>
+        )}
+        <Muted>
+          ספירת אירועים שהפיקסל קיבל (לא משתמשים ייחודיים), לפי שעה מ-Meta ומקובצת לימים לפי שעון ישראל. היום האחרון חלקי. באתר הפיקסל נטען רק אחרי הסכמה לעוגיות.
+        </Muted>
+      </div>
+    </Card>
+  );
+}
+
 function RevenueCatView({ rc }: { rc: RevenueCatStats }) {
   if (rc.state === "not_connected")
     return (
@@ -367,9 +503,10 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
       </Shell>
     );
 
-  const [rc, providers] = await Promise.all([
+  const [rc, providers, meta] = await Promise.all([
     getRevenueCat(),
     Promise.all(EXTRA_PROVIDERS.map((p) => getProvider(p.id))),
+    getMeta(),
   ]);
   const updated = rc.state === "ok" ? rc.fetchedAt : new Date().toISOString();
 
@@ -390,6 +527,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
         {EXTRA_PROVIDERS.map((p, i) => (
           <ProviderCard key={p.id} title={p.title} r={providers[i]} />
         ))}
+        <MetaCard m={meta} />
       </div>
     </Shell>
   );
