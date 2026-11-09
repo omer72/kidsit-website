@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { unstable_cache } from "next/cache";
 import { configuredSecret, SESSION_COOKIE, verifySessionToken } from "@/lib/admin/auth";
 import { allSectionsFailed, loadRevenueCat, resolveConfig, type DailyPoint, type RevenueCatStats, type Section, type SegmentTotal } from "@/lib/admin/revenuecat";
-import { EXTRA_PROVIDERS, type ProviderResult } from "@/lib/admin/providers";
+import { EXTRA_PROVIDERS, providerById, runProvider, type ProviderData, type ProviderResult, type Table } from "@/lib/admin/providers";
 import { login, logout } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -30,6 +30,45 @@ const cachedRevenueCat = unstable_cache(
   ["admin-stats-revenuecat-v1"],
   { revalidate: CACHE_S },
 );
+
+// Google sections: same rules as RevenueCat. 15 min cache keyed on the provider and a fingerprint of its env
+// (service-account JSON + property/site), so a new or rotated key shows up at once. A thrown error is never cached.
+const cachedProviderData = unstable_cache(
+  // envFingerprint is unused in the body on purpose: unstable_cache folds the arguments into the cache key.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (providerId: string, envFingerprint: string): Promise<ProviderData> => {
+    const p = providerById(providerId);
+    if (!p) throw new Error("unknown provider");
+    const r = await runProvider(p, process.env);
+    if (r.state !== "ok") throw new ProviderFailed(r);
+    const { state, ...data } = r;
+    void state;
+    return data;
+  },
+  ["admin-stats-provider-v1"],
+  { revalidate: CACHE_S },
+);
+class ProviderFailed extends Error {
+  constructor(public result: ProviderResult) {
+    super("provider failed");
+  }
+}
+
+async function getProvider(id: string): Promise<ProviderResult> {
+  const p = providerById(id)!;
+  const missing = p.env.filter((n) => !process.env[n]?.trim());
+  // Missing env → "not connected" straight away: no network call and nothing cached.
+  if (missing.length) return { state: "not_connected", missing };
+  const fp = createHash("sha256");
+  for (const name of p.env) fp.update(name).update("=").update(process.env[name] ?? "").update("\0");
+  try {
+    return { state: "ok", ...(await cachedProviderData(id, fp.digest("hex").slice(0, 12))) };
+  } catch (e) {
+    if (e instanceof ProviderFailed) return e.result;
+    if (e && typeof e === "object" && "result" in e) return (e as ProviderFailed).result;
+    return { state: "error", error: "טעינת הנתונים נכשלה." };
+  }
+}
 
 async function getRevenueCat(): Promise<RevenueCatStats> {
   const { key, projectId } = resolveConfig(process.env);
@@ -64,7 +103,7 @@ function fmtValue(value: number, unit: string, currency: string | null) {
   return new Intl.NumberFormat("he-IL").format(value);
 }
 
-const card = "rounded-2xl border-2 border-ink bg-white p-4 shadow-sticker-sm";
+const card = "min-w-0 rounded-2xl border-2 border-ink bg-white p-4 shadow-sticker-sm";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -144,6 +183,44 @@ function NotConnected({ missing, note }: { missing: string[]; note?: string }) {
   );
 }
 
+function DataTable({ t }: { t: Table }) {
+  if (!t.rows.length) return <Muted>{t.empty}</Muted>;
+  return (
+    <div className="max-w-full overflow-x-auto" tabIndex={0} role="region" aria-label={t.title}>
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b-2 border-ink/20 text-start text-xs text-ink-muted">
+            {t.columns.map((c, i) => (
+              <th key={c} scope="col" className={`py-1.5 pe-2 font-normal ${i === 0 ? "text-start" : "text-end"}`}>
+                {c}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {t.rows.map((r, ri) => (
+            <tr key={ri} className="border-b border-ink/10 last:border-0">
+              {r.map((cell, i) => (
+                <td
+                  key={i}
+                  dir={i === 0 && t.ltrFirstColumn ? "ltr" : undefined}
+                  className={
+                    i === 0
+                      ? `py-1.5 pe-2 [overflow-wrap:anywhere] ${t.ltrFirstColumn ? "text-end" : ""}`
+                      : "whitespace-nowrap py-1.5 pe-2 text-end tabular-nums"
+                  }
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function ProviderCard({ title, r }: { title: string; r: ProviderResult }) {
   return (
     <Card title={title}>
@@ -152,7 +229,35 @@ function ProviderCard({ title, r }: { title: string; r: ProviderResult }) {
       ) : r.state === "error" ? (
         <ErrorNote msg={r.error} />
       ) : (
-        <Totals rows={r.rows.map((x) => ({ label: x.label, value: Number(x.value) }))} empty="אין נתונים." />
+        <div className="space-y-4">
+          <p className="text-xs text-ink-muted">
+            עודכן לאחרונה: <span className="tabular-nums">{fmtTime(r.fetchedAt)}</span> (שעון ישראל) · טווח: {r.range}
+          </p>
+          {r.totals.length > 0 ? (
+            <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {r.totals.map((x) => (
+                <div key={x.label} className="rounded-xl bg-paper p-3">
+                  <dt className="text-xs text-ink-muted">{x.label}</dt>
+                  <dd className="font-display text-2xl font-semibold tabular-nums">{x.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <Muted>אין נתונים בטווח.</Muted>
+          )}
+          {r.tables.map((t) => (
+            <div key={t.title}>
+              <h3 className="mb-1 font-bold">{t.title}</h3>
+              <DataTable t={t} />
+            </div>
+          ))}
+          {r.note && <Muted>{r.note}</Muted>}
+          {r.link && (
+            <a href={r.link.href} className="inline-block text-sm text-grape underline underline-offset-2">
+              {r.link.label}
+            </a>
+          )}
+        </div>
       )}
     </Card>
   );
@@ -264,7 +369,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
 
   const [rc, providers] = await Promise.all([
     getRevenueCat(),
-    Promise.all(EXTRA_PROVIDERS.map((p) => p.load(process.env))),
+    Promise.all(EXTRA_PROVIDERS.map((p) => getProvider(p.id))),
   ]);
   const updated = rc.state === "ok" ? rc.fetchedAt : new Date().toISOString();
 
@@ -272,7 +377,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
     <Shell>
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
         <p>
-          עודכן לאחרונה: <span className="tabular-nums">{fmtTime(updated)}</span> (שעון ישראל) · מתרענן כל 15 דקות
+          RevenueCat עודכן לאחרונה: <span className="tabular-nums">{fmtTime(updated)}</span> (שעון ישראל) · כל מקור מתרענן כל 15 דקות
         </p>
         <form action={logout}>
           <button type="submit" className="underline underline-offset-2">
@@ -281,7 +386,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
         </form>
       </div>
       <RevenueCatView rc={rc} />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4">
         {EXTRA_PROVIDERS.map((p, i) => (
           <ProviderCard key={p.id} title={p.title} r={providers[i]} />
         ))}
