@@ -8,7 +8,7 @@ import { decided, readConsent, saveConsent } from "@/lib/consent";
 export const CONSENT_TXT = {
   en: {
     title: "Cookies & privacy",
-    body: "We use essential storage to run the site (your language choice and accessibility-menu preferences). With your permission we also use Google Analytics 4 and the Meta Pixel (Meta Platforms / Facebook) to understand how the site is used and to measure our ads. You can change your choice any time under “Cookie settings”.",
+    body: "We use essential storage to run the site (your language choice and accessibility-menu preferences). We also keep the visit source and campaign in session storage until you close the tab, to measure which channels bring app downloads. With your permission we also use Google Analytics 4 and the Meta Pixel (Meta Platforms / Facebook) to understand how the site is used and to measure our ads. You can change your choice any time under “Cookie settings”.",
     accept: "Accept all",
     reject: "Reject non-essential",
     settings: "Settings",
@@ -27,7 +27,7 @@ export const CONSENT_TXT = {
   },
   he: {
     title: "עוגיות ופרטיות",
-    body: "אנו משתמשים באחסון חיוני כדי להפעיל את האתר (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נשתמש גם ב-Google Analytics 4 ובפיקסל של Meta‏ (Meta Platforms / פייסבוק) כדי להבין איך משתמשים באתר ולמדוד את הפרסום שלנו. אפשר לשנות את הבחירה בכל עת דרך „הגדרות עוגיות”.",
+    body: "אנו משתמשים באחסון חיוני כדי להפעיל את האתר (בחירת השפה והעדפות תפריט הנגישות). אנו שומרים גם את מקור הביקור והקמפיין באחסון הסשן עד סגירת הלשונית, כדי למדוד אילו ערוצים מביאים הורדות לאפליקציה. בהסכמתכם נשתמש גם ב-Google Analytics 4 ובפיקסל של Meta‏ (Meta Platforms / פייסבוק) כדי להבין איך משתמשים באתר ולמדוד את הפרסום שלנו. אפשר לשנות את הבחירה בכל עת דרך „הגדרות עוגיות”.",
     accept: "אישור הכול",
     reject: "דחיית הלא־חיוניות",
     settings: "הגדרות",

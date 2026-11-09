@@ -26,6 +26,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
 // Updated November 2026 for on-device digests and optional anonymous insights.
+// Updated November 9, 2026: disclose the session-only visit-source record (store-link attribution) in the cookie section.
 // Updated November 3, 2026: disclose the Meta Pixel (analytics consent only) in the cookie section.
 // Updated November 1, 2026: a guidance request carries only the active child's story, context,
 // profile, and eight recent moments, plus a RevenueCat ID. Other children and the optional
@@ -33,7 +34,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 3, 2026",
+    updated: "November 9, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -135,7 +136,9 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>
               We use essential first-party storage so the site works (your language choice and accessibility-menu
-              preferences). With your permission we also load Google Analytics 4 to understand how the site is used.
+              preferences).
+              {" "}We also keep how you arrived on this visit (the source, such as a search engine, an AI chat or an ad, its campaign parameters, any ad click ID, and the landing page) in session storage only, which is cleared when you close the tab, and add the source and campaign to the App Store and Google Play links, to measure which channels lead to app downloads.{" "}
+              With your permission we also load Google Analytics 4 to understand how the site is used.
               After you accept, Google&apos;s tags may also send a conversion measurement ping when you click an App
               Store or Google Play button (used to attribute store visits from this site). Analytics and those pings do
               not receive anything you enter in the app. Google tags do not load, and non-essential cookies are not set,
@@ -262,7 +265,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "3 בנובמבר 2026",
+    updated: "9 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -359,7 +362,9 @@ const DOCS: Record<Lang, LegalDoc> = {
         p: (
           <>
             <p>
-              אנו משתמשים באחסון חיוני מצד ראשון כדי שהאתר יעבוד (בחירת השפה והעדפות תפריט הנגישות). בהסכמתכם נטען גם
+              אנו משתמשים באחסון חיוני מצד ראשון כדי שהאתר יעבוד (בחירת השפה והעדפות תפריט הנגישות).
+              {" "}אנו שומרים גם איך הגעתם לאתר בביקור הזה (המקור, למשל מנוע חיפוש, צ׳אט AI או מודעה, פרמטרי הקמפיין, מזהה הקליק של המודעה אם יש, ועמוד הנחיתה) באחסון הסשן בלבד, שנמחק כשסוגרים את הלשונית, ומוסיפים את המקור והקמפיין לקישורים ל-App Store ול-Google Play, כדי למדוד אילו ערוצים מביאים הורדות של האפליקציה.{" "}
+              בהסכמתכם נטען גם
               Google Analytics 4 כדי להבין איך משתמשים באתר. לאחר האישור, תגי Google עשויים גם לשלוח מדידת המרה (conversion)
               כשלוחצים על כפתור App Store או Google Play (כדי לייחס ביקורים בחנויות מהאתר). הניתוח והמדידות האלה אינם מקבלים
               דבר ממה שאתם מזינים באפליקציה. תגי Google לא נטענים, ועוגיות שאינן חיוניות לא נשמרות, עד שתאשרו.
