@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogInstallBar } from "@/components/blog-install-bar";
@@ -11,7 +12,7 @@ import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 const COPY = {
   he: {
     title: "בלוג | Kidsit AI",
-    description: "מאמרים להורים: התקפי זעם, מלחמות שינה, ריבים בין אחים ועוד — הדרכה רגועה לרגעים הקשים.",
+    description: "מאמרים להורים: התקפי זעם, מלחמות שינה, ריבים בין אחים ועוד: הדרכה רגועה לרגעים הקשים.",
     h1: "בלוג",
     intro: "מאמרים קצרים להורים על הרגעים הקשים של היום.",
   },
@@ -49,23 +50,51 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
   return (
     <>
       <Navbar t={d.nav} base={`/${lang}`} />
-      <main className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
-        <h1 className="font-display text-4xl font-semibold">{copy.h1}</h1>
-        <p className="mt-4 font-bold text-ink/80">{copy.intro}</p>
-        <ul className="blog-index-list mt-10 space-y-6">
-          {posts.map((p) => (
-            <li key={p.slug} className="rounded-2xl border-2 border-ink bg-white p-5 shadow-sticker-sm">
-              <p className="text-sm font-bold text-ink-muted">
-                <time dateTime={p.date}>
-                  {lang === "he" ? p.date.split("-").reverse().join(".") : formatPostDate(p.date, "en")}
-                </time>
-              </p>
-              <Link href={p.path} className="blog-index-title mt-1 block font-display text-2xl font-semibold text-grape hover:underline">
-                {p.title}
-              </Link>
-              <p className="mt-2 font-bold text-ink/80">{p.description}</p>
-            </li>
-          ))}
+      <main className="mx-auto max-w-5xl px-5 py-16 sm:px-6">
+        <h1 className="min-w-0 text-balance break-words font-display text-4xl font-semibold sm:text-5xl">{copy.h1}</h1>
+        <p className="mt-4 max-w-xl text-lg font-bold text-ink/80">{copy.intro}</p>
+        {/* The newest post leads across both columns; each post shows its own share card. */}
+        <ul className="blog-index-list mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
+          {posts.map((p, i) => {
+            const lead = i === 0;
+            return (
+              <li
+                key={p.slug}
+                className={lead ? "grid gap-6 md:col-span-2 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center md:gap-10" : ""}
+              >
+                {/* The share card carries its own sticker frame. The title link is the one tab stop; the picture repeats it for pointer users. */}
+                <Link href={p.path} tabIndex={-1} aria-hidden="true" className="block">
+                  <Image
+                    src={`/og/${lang}/${p.slug}.png`}
+                    alt=""
+                    width={1200}
+                    height={630}
+                    priority={lead}
+                    sizes={lead ? "(max-width: 768px) 100vw, 580px" : "(max-width: 768px) 100vw, 470px"}
+                    className="h-auto w-full"
+                  />
+                </Link>
+                <div className={lead ? "" : "mt-5"}>
+                  <p className="text-sm font-bold text-ink-muted">
+                    <time dateTime={p.date}>
+                      {lang === "he" ? p.date.split("-").reverse().join(".") : formatPostDate(p.date, "en")}
+                    </time>
+                  </p>
+                  <h2 className="mt-1 min-w-0 text-balance break-words">
+                    <Link
+                      href={p.path}
+                      className={`blog-index-title block font-display font-semibold hover:text-grape hover:underline active:text-grape ${
+                        lead ? "text-2xl sm:text-4xl" : "text-2xl"
+                      }`}
+                    >
+                      {p.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-2 max-w-[65ch] font-bold text-ink/80">{p.description}</p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </main>
       <Footer t={d.footer} base={`/${lang}`} path="/blog" lang={lang} switchTo={`/${other}/blog`} />

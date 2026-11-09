@@ -58,7 +58,7 @@ function Switch({ on, set, labelId }: { on: boolean; set: (v: boolean) => void; 
     >
       <span
         aria-hidden="true"
-        className={`absolute top-[3px] h-5 w-5 rounded-full transition-[inset-inline-start] ${on ? "bg-white start-[23px]" : "bg-ink start-[3px]"}`}
+        className={`absolute start-[3px] top-[3px] h-5 w-5 rounded-full transition-transform motion-reduce:transition-none ${on ? "translate-x-5 bg-white rtl:-translate-x-5" : "bg-ink"}`}
       />
     </button>
   );
@@ -180,7 +180,7 @@ export function CookieConsent({ lang }: { lang: Lang }) {
               <p className="text-sm font-bold text-ink/70">{s.essential[1]}</p>
             </div>
             {/* ink/70 on paper ≈ 5.7:1 — meets WCAG AA 4.5:1 (P7). */}
-            <span className="pt-1 text-xs font-extrabold uppercase text-ink/70">{s.on}</span>
+            <span className="shrink-0 pt-1 text-xs font-extrabold text-ink/70">{s.on}</span>
           </li>
           <li className="flex items-start gap-4 py-3">
             <div className="flex-1">
@@ -193,18 +193,19 @@ export function CookieConsent({ lang }: { lang: Lang }) {
           </li>
         </ul>
       )}
-      <div className="mt-4 grid grid-cols-2 gap-2">
+      {/* Stacked below sm: the longest label ("Reject non-essential") needs about 195px a column. */}
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
         <button
           type="button"
           onClick={() => done({ analytics: true })}
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-grape px-3 font-bold text-white shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+          className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl border-2 border-ink bg-grape px-3 font-bold text-white shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
         >
           {s.accept}
         </button>
         <button
           type="button"
           onClick={() => done({ analytics: false })}
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-paper px-3 font-bold shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+          className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl border-2 border-ink bg-paper px-3 font-bold shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
         >
           {s.reject}
         </button>
@@ -212,7 +213,7 @@ export function CookieConsent({ lang }: { lang: Lang }) {
           <button
             type="button"
             onClick={() => done({ analytics: an })}
-            className="col-span-2 inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-white px-3 font-bold shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+            className="inline-flex sm:col-span-2 min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-white px-3 font-bold shadow-sticker-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
           >
             {s.save}
           </button>
@@ -221,7 +222,7 @@ export function CookieConsent({ lang }: { lang: Lang }) {
             type="button"
             aria-expanded="false"
             onClick={() => setMore(true)}
-            className="col-span-2 inline-flex min-h-11 items-center justify-center text-sm font-bold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+            className="inline-flex sm:col-span-2 min-h-11 items-center justify-center text-sm font-bold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
           >
             {s.settings}
           </button>

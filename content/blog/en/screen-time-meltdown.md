@@ -109,7 +109,7 @@ In the first five minutes, do not say "go play." Be part of the next thing.
 
 Snack together, sit by the bath, "help me stir." Children and Screens says to move toward something they like, not a chore. Save the talk until they are calm, as the Ministry of Health recommends too.
 
-## "I gave the tablet back" — and tomorrow
+## "I gave the tablet back", and tomorrow
 
 If you handed the tablet back so the screaming would stop, that happens when dinner is burning.
 

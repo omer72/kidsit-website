@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { LANGS, type Lang } from "@/dictionaries";
+import { colors } from "@/colors";
 
 // Share card at /<lang>/og-image.png, referenced (with per-language alt text) by ogFor() in src/lib/seo.ts.
 // A plain route handler instead of the opengraph-image file convention, because that convention only allows one
@@ -57,8 +58,8 @@ export async function GET(_req: Request, { params }: { params: { lang: Lang } })
           alignItems: "center",
           justifyContent: "center",
           gap: 64,
-          background: "#F3F6FF",
-          color: "#26265E",
+          background: colors.paper,
+          color: colors.ink,
           fontFamily: t.family,
         }}
       >
@@ -72,15 +73,15 @@ export async function GET(_req: Request, { params }: { params: { lang: Lang } })
             style={{ borderRadius: 44 }}
           />
           <div style={{ fontSize: 84 }}>Kidsit AI</div>
-          <div style={{ fontSize: 40, color: "#5B3DF5" }}>{visual(t.tagline, t.dir)}</div>
+          <div style={{ fontSize: 40, color: colors.grape }}>{visual(t.tagline, t.dir)}</div>
         </div>
         <div
           style={{
             display: "flex",
-            border: "6px solid #26265E",
+            border: `6px solid ${colors.ink}`,
             borderRadius: 48,
             overflow: "hidden",
-            boxShadow: "12px 12px 0 0 #26265E",
+            boxShadow: `12px 12px 0 0 ${colors.ink}`,
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}

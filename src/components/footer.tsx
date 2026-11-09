@@ -18,7 +18,8 @@ export function Footer({
   lang?: Lang;
   switchTo?: string;
 }) {
-  const link = "inline-flex min-h-11 items-center hover:text-sunny";
+  // sunny ring: the site-wide grape outline is 2.26:1 on the ink footer
+  const link = "inline-flex min-h-11 items-center whitespace-nowrap hover:text-sunny focus-visible:outline-sunny";
   const locale: Lang = lang ?? (base.startsWith("/he") ? "he" : "en");
   const switchHref = switchTo ?? (path.startsWith("/blog") ? t.switchHref : t.switchHref + path);
   return (
@@ -30,7 +31,7 @@ export function Footer({
           </p>
           <p className="mt-2 max-w-xs font-bold text-paper/60">{t.tagline}</p>
         </div>
-        <nav aria-label={t.label} className="grid grid-cols-2 gap-x-16 font-bold">
+        <nav aria-label={t.label} className="grid grid-cols-2 gap-x-6 font-bold sm:gap-x-16">
           {t.links.map((l) => (
             <a key={l.href} className={link} href={l.href.startsWith("#") ? base + l.href : l.href}>
               {l.label}

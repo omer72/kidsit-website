@@ -58,14 +58,14 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>We do not sell personal information. We do not show ads in the app or on this site. We advertise Kidsit on Meta&apos;s platforms and, with your consent, measure those ads using the Meta Pixel. The providers below match what the app and this site actually use:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
-              <li>OpenAI — gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
-              <li>Netlify — hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
-              <li>RevenueCat — checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. Apple or Google bills you. We never see your card number.</li>
-              <li>Insert Affiliate — if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
-              <li>Vercel — hosts this website (kidsit.ai) and the anonymous insights endpoint. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our insights database.</li>
-              <li>Neon — Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send. See “Weekly digest and anonymous insights”.</li>
-              <li>Google — Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
-              <li>Meta Platforms — the Meta Pixel on this website only, after you accept analytics cookies, to measure our ads and site visits. It does not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
+              <li>OpenAI: gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
+              <li>Netlify: hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
+              <li>RevenueCat: checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. Apple or Google bills you. We never see your card number.</li>
+              <li>Insert Affiliate: if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
+              <li>Vercel: hosts this website (kidsit.ai) and the anonymous insights endpoint. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our insights database.</li>
+              <li>Neon: Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send. See “Weekly digest and anonymous insights”.</li>
+              <li>Google: Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
+              <li>Meta Platforms: the Meta Pixel on this website only, after you accept analytics cookies, to measure our ads and site visits. It does not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
             </ul>
           </>
         ),
@@ -157,65 +157,65 @@ const DOCS: Record<Lang, LegalDoc> = {
               role="region"
               aria-label="Cookie table"
             >
-            <table className="w-full min-w-[36rem] border-collapse text-sm">
-              <thead>
-                <tr className="border-b-2 border-ink text-start">
-                  <th scope="col" className="py-2 pe-3">Name</th>
-                  <th scope="col" className="py-2 pe-3">Type</th>
-                  <th scope="col" className="py-2 pe-3">Purpose</th>
-                  <th scope="col" className="py-2 pe-3">Duration</th>
-                  <th scope="col" className="py-2">Category</th>
+            <table role="table" className="cookie-table w-full border-collapse text-sm sm:min-w-[36rem]">
+              <thead role="rowgroup">
+                <tr role="row" className="border-b-2 border-ink text-start">
+                  <th role="columnheader" scope="col" className="py-2 pe-3">Name</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">Type</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">Purpose</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">Duration</th>
+                  <th role="columnheader" scope="col" className="py-2">Category</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>kidsit-consent</code></td>
-                  <td className="py-2 pe-3">localStorage</td>
-                  <td className="py-2 pe-3">Remembers your cookie choice (version and date)</td>
-                  <td className="py-2 pe-3">12 months</td>
-                  <td className="py-2">Essential</td>
+              <tbody role="rowgroup">
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>kidsit-consent</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">localStorage</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Remembers your cookie choice (version and date)</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">12 months</td>
+                  <td role="cell" data-label="Category" className="py-2">Essential</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
-                  <td className="py-2 pe-3">Cookie</td>
-                  <td className="py-2 pe-3">Remembers the language you chose (Hebrew or English)</td>
-                  <td className="py-2 pe-3">1 year</td>
-                  <td className="py-2">Essential</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">Cookie</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Remembers the language you chose (Hebrew or English)</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">1 year</td>
+                  <td role="cell" data-label="Category" className="py-2">Essential</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
-                  <td className="py-2 pe-3">localStorage</td>
-                  <td className="py-2 pe-3">Accessibility-menu preferences on your device only</td>
-                  <td className="py-2 pe-3">Until reset or you clear site data</td>
-                  <td className="py-2">Essential</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">localStorage</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Accessibility-menu preferences on your device only</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">Until reset or you clear site data</td>
+                  <td role="cell" data-label="Category" className="py-2">Essential</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_ga, _ga_*</code></td>
-                  <td className="py-2 pe-3">Cookie (Google)</td>
-                  <td className="py-2 pe-3">Google Analytics 4 statistics, only if you accept analytics</td>
-                  <td className="py-2 pe-3">Up to 2 years (Google)</td>
-                  <td className="py-2">Analytics</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>_ga, _ga_*</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">Cookie (Google)</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Google Analytics 4 statistics, only if you accept analytics</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">Up to 2 years (Google)</td>
+                  <td role="cell" data-label="Category" className="py-2">Analytics</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
-                  <td className="py-2 pe-3">Request (Google)</td>
-                  <td className="py-2 pe-3">Store-click conversion measurement after you accept; attributes App Store / Play visits from this site</td>
-                  <td className="py-2 pe-3">Session (no extra first-party cookie of ours)</td>
-                  <td className="py-2">Analytics</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">Request (Google)</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Store-click conversion measurement after you accept; attributes App Store / Play visits from this site</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">Session (no extra first-party cookie of ours)</td>
+                  <td role="cell" data-label="Category" className="py-2">Analytics</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_fbp</code></td>
-                  <td className="py-2 pe-3">Cookie (Meta)</td>
-                  <td className="py-2 pe-3">Meta Pixel: measures our ads and site visits, only if you accept analytics</td>
-                  <td className="py-2 pe-3">90 days</td>
-                  <td className="py-2">Analytics</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>_fbp</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">Cookie (Meta)</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Meta Pixel: measures our ads and site visits, only if you accept analytics</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">90 days</td>
+                  <td role="cell" data-label="Category" className="py-2">Analytics</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_fbc</code></td>
-                  <td className="py-2 pe-3">Cookie (Meta)</td>
-                  <td className="py-2 pe-3">Meta Pixel: set when you arrive from a link on Facebook or Instagram (holds the click ID), only if you accept analytics</td>
-                  <td className="py-2 pe-3">90 days</td>
-                  <td className="py-2">Analytics</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="Name" className="py-2 pe-3"><code>_fbc</code></td>
+                  <td role="cell" data-label="Type" className="py-2 pe-3">Cookie (Meta)</td>
+                  <td role="cell" data-label="Purpose" className="py-2 pe-3">Meta Pixel: set when you arrive from a link on Facebook or Instagram (holds the click ID), only if you accept analytics</td>
+                  <td role="cell" data-label="Duration" className="py-2 pe-3">90 days</td>
+                  <td role="cell" data-label="Category" className="py-2">Analytics</td>
                 </tr>
               </tbody>
             </table>
@@ -278,7 +278,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "use",
         h: "כיצד אנו משתמשים במידע",
-        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו — מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-4o-mini של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
+        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו, מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-4o-mini של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
       },
       {
         id: "sharing",
@@ -287,14 +287,14 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>איננו מוכרים מידע אישי. איננו מציגים פרסומות באפליקציה או באתר. אנחנו מפרסמים את Kidsit בפלטפורמות של Meta, ובהסכמתכם מודדים את הפרסומות האלה בעזרת הפיקסל. הספקים שלהלן תואמים את מה שהאפליקציה והאתר באמת משתמשים בו:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
-              <li>OpenAI — ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
-              <li>Netlify — מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
-              <li>RevenueCat — בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
-              <li>Insert Affiliate — אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
-              <li>Vercel — מארח את האתר הזה (kidsit.ai) ואת נקודת הקצה של התובנות האנונימיות. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד התובנות שלנו.</li>
-              <li>Neon — ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח. ראו „סיכום שבועי ותובנות אנונימיות”.</li>
-              <li>Google — ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
-              <li>Meta Platforms — הפיקסל של Meta באתר הזה בלבד, אחרי שאתם מאשרים עוגיות סטטיסטיקה, כדי למדוד את הפרסום שלנו וביקורים באתר. הוא אינו מקבל את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
+              <li>OpenAI: ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
+              <li>Netlify: מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
+              <li>RevenueCat: בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
+              <li>Insert Affiliate: אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
+              <li>Vercel: מארח את האתר הזה (kidsit.ai) ואת נקודת הקצה של התובנות האנונימיות. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד התובנות שלנו.</li>
+              <li>Neon: ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח. ראו „סיכום שבועי ותובנות אנונימיות”.</li>
+              <li>Google: ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
+              <li>Meta Platforms: הפיקסל של Meta באתר הזה בלבד, אחרי שאתם מאשרים עוגיות סטטיסטיקה, כדי למדוד את הפרסום שלנו וביקורים באתר. הוא אינו מקבל את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
             </ul>
           </>
         ),
@@ -379,65 +379,65 @@ const DOCS: Record<Lang, LegalDoc> = {
               role="region"
               aria-label="טבלת עוגיות"
             >
-            <table className="w-full min-w-[36rem] border-collapse text-sm">
-              <thead>
-                <tr className="border-b-2 border-ink text-start">
-                  <th scope="col" className="py-2 pe-3">שם</th>
-                  <th scope="col" className="py-2 pe-3">סוג</th>
-                  <th scope="col" className="py-2 pe-3">מטרה</th>
-                  <th scope="col" className="py-2 pe-3">משך</th>
-                  <th scope="col" className="py-2">קטגוריה</th>
+            <table role="table" className="cookie-table w-full border-collapse text-sm sm:min-w-[36rem]">
+              <thead role="rowgroup">
+                <tr role="row" className="border-b-2 border-ink text-start">
+                  <th role="columnheader" scope="col" className="py-2 pe-3">שם</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">סוג</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">מטרה</th>
+                  <th role="columnheader" scope="col" className="py-2 pe-3">משך</th>
+                  <th role="columnheader" scope="col" className="py-2">קטגוריה</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>kidsit-consent</code></td>
-                  <td className="py-2 pe-3">localStorage</td>
-                  <td className="py-2 pe-3">שומר את בחירת העוגיות שלכם (גרסה ותאריך)</td>
-                  <td className="py-2 pe-3">12 חודשים</td>
-                  <td className="py-2">חיוני</td>
+              <tbody role="rowgroup">
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>kidsit-consent</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">localStorage</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">שומר את בחירת העוגיות שלכם (גרסה ותאריך)</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">12 חודשים</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">חיוני</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
-                  <td className="py-2 pe-3">Cookie</td>
-                  <td className="py-2 pe-3">שומר את השפה שבחרתם (עברית או אנגלית)</td>
-                  <td className="py-2 pe-3">שנה</td>
-                  <td className="py-2">חיוני</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>NEXT_LOCALE</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">Cookie</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">שומר את השפה שבחרתם (עברית או אנגלית)</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">שנה</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">חיוני</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
-                  <td className="py-2 pe-3">localStorage</td>
-                  <td className="py-2 pe-3">העדפות תפריט הנגישות במכשיר שלכם בלבד</td>
-                  <td className="py-2 pe-3">עד איפוס או ניקוי נתוני האתר</td>
-                  <td className="py-2">חיוני</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>Localize-NagishLi-A11y-Plugin-Settings-v3-Beta</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">localStorage</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">העדפות תפריט הנגישות במכשיר שלכם בלבד</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">עד איפוס או ניקוי נתוני האתר</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">חיוני</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_ga, _ga_*</code></td>
-                  <td className="py-2 pe-3">Cookie (Google)</td>
-                  <td className="py-2 pe-3">סטטיסטיקות Google Analytics 4, רק אם אישרתם ניתוח</td>
-                  <td className="py-2 pe-3">עד שנתיים (Google)</td>
-                  <td className="py-2">סטטיסטיקה</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>_ga, _ga_*</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">Cookie (Google)</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">סטטיסטיקות Google Analytics 4, רק אם אישרתם ניתוח</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">עד שנתיים (Google)</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">סטטיסטיקה</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
-                  <td className="py-2 pe-3">בקשה (Google)</td>
-                  <td className="py-2 pe-3">מדידת המרה בלחיצה על חנות האפליקציות לאחר אישור; מייחסת ביקורים ב-App Store / Play מהאתר</td>
-                  <td className="py-2 pe-3">למשך הסשן (בלי עוגייה נוספת שלנו)</td>
-                  <td className="py-2">סטטיסטיקה</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>pagead2…/measurement/conversion</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">בקשה (Google)</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">מדידת המרה בלחיצה על חנות האפליקציות לאחר אישור; מייחסת ביקורים ב-App Store / Play מהאתר</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">למשך הסשן (בלי עוגייה נוספת שלנו)</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">סטטיסטיקה</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_fbp</code></td>
-                  <td className="py-2 pe-3">Cookie (Meta)</td>
-                  <td className="py-2 pe-3">הפיקסל של Meta: מדידת הפרסום שלנו וביקורים באתר, רק אם אישרתם סטטיסטיקה</td>
-                  <td className="py-2 pe-3">90 יום</td>
-                  <td className="py-2">סטטיסטיקה</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>_fbp</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">Cookie (Meta)</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">הפיקסל של Meta: מדידת הפרסום שלנו וביקורים באתר, רק אם אישרתם סטטיסטיקה</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">90 יום</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">סטטיסטיקה</td>
                 </tr>
-                <tr className="border-b border-ink/20 align-top">
-                  <td className="py-2 pe-3"><code>_fbc</code></td>
-                  <td className="py-2 pe-3">Cookie (Meta)</td>
-                  <td className="py-2 pe-3">הפיקסל של Meta: נשמרת כשמגיעים מקישור בפייסבוק או באינסטגרם (מכילה את מזהה הלחיצה), רק אם אישרתם סטטיסטיקה</td>
-                  <td className="py-2 pe-3">90 יום</td>
-                  <td className="py-2">סטטיסטיקה</td>
+                <tr role="row" className="border-b border-ink/20 align-top">
+                  <td role="cell" data-label="שם" className="py-2 pe-3"><code>_fbc</code></td>
+                  <td role="cell" data-label="סוג" className="py-2 pe-3">Cookie (Meta)</td>
+                  <td role="cell" data-label="מטרה" className="py-2 pe-3">הפיקסל של Meta: נשמרת כשמגיעים מקישור בפייסבוק או באינסטגרם (מכילה את מזהה הלחיצה), רק אם אישרתם סטטיסטיקה</td>
+                  <td role="cell" data-label="משך" className="py-2 pe-3">90 יום</td>
+                  <td role="cell" data-label="קטגוריה" className="py-2">סטטיסטיקה</td>
                 </tr>
               </tbody>
             </table>

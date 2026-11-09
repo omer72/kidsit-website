@@ -62,34 +62,31 @@ const en = {
     closeMenu: "Close menu",
   },
   hero: {
-    badge: "AI parenting copilot for iPhone and Android",
     h1a: "Calm help for the",
-    h1Scribbled: "hard parenting moments.",
+    h1Scribbled: "hard",
+    h1b: "parenting moments.",
     sub: "Hold the mic, say what happened. Get a calm plan in about 10 seconds.",
     ctaApple: "App Store",
     ctaPlay: "Google Play",
     ctaSecondary: "Watch it work",
-    chipWhisper: "🎙️ whisper what happened",
-    chipTime: "⏱️ ~10 sec to a plan",
+    chipWhisper: "whisper what happened",
+    chipTime: "~10 sec to a plan",
     screenshotAlt:
-      "Kidsit AI home screen: 'What happened with Tom?' with a press-and-hold microphone button mid-recording",
+      "Kidsit AI home screen: ‘What happened with Tom?’ with a press-and-hold microphone button mid-recording",
   },
   features: {
     heading: "Built for the hardest 10 minutes of your day",
-    sub: "The kid is on the floor, it's 6 PM, and you can't exactly google it mid-meltdown.",
+    sub: "The kid is on the floor, it’s 6 PM, and you can’t exactly google it mid-meltdown.",
     cards: [
       {
-        emoji: "⚡",
         title: "Instant help, in the moment",
         desc: "Get practical, personalized guidance the moment a challenge arises with your child. Whisper it or type it, even when your hands are full.",
       },
       {
-        emoji: "🧠",
         title: "Tailored to your child",
-        desc: "Kidsit gets to know your child and adapts its advice. When you mark something \"didn't help,\" the next answer tries a different angle.",
+        desc: "Kidsit gets to know your child and adapts its advice. When you mark something “didn’t help,” the next answer tries a different angle.",
       },
       {
-        emoji: "📒",
         title: "Remembers every moment",
         desc: "Past moments for each child feed into the next answer, so guidance fits your child better over time.",
       },
@@ -116,12 +113,10 @@ const en = {
       "It counts each situation by whether it helped, did not help, or has no rating, and adds up to three fixed sentences about what stands out.",
     points: [
       {
-        emoji: "🗓️",
         title: "Weekly or daily",
         text: "Settings turns it on and chooses weekly or daily.",
       },
       {
-        emoji: "🔔",
         title: "A local reminder",
         text: "On the phone a local reminder can also be set, and its text is a fixed line with no child's name.",
       },
@@ -151,17 +146,12 @@ const en = {
   },
   social: {
     heading: "Loved by parents",
-    stats: [
-      { value: "iOS + Android", label: "one app, either phone" },
-      { value: "~10 sec", label: "from whisper to plan" },
-      { value: "1 kid free", label: "no time limit" },
-    ],
     sourceLabel: "App Store review",
     translatedNote: "",
     quotes: [
       {
         quote:
-          "It didn't just tell me what to do in the moment, it also helped me understand the bigger picture behind the behavior. Highly recommend to any parent looking for support and effective strategies.",
+          "It didn’t just tell me what to do in the moment, it also helped me understand the bigger picture behind the behavior. Highly recommend to any parent looking for support and effective strategies.",
         name: "OzzyL10",
         role: "Helpful and Thoughtful Parenting Support",
         initials: "O",
@@ -185,7 +175,7 @@ const en = {
     heading: "Free for one child. Premium free for 7 days.",
     sub: "Premium starts with a 7-day free trial. Cancel anytime from your App Store or Google Play subscriptions.",
     toggleLabel: "Billing period",
-    yearlyNote: "That's $5.00/month, billed yearly after a 7-day free trial.",
+    yearlyNote: "That’s $5.00/month, billed yearly after a 7-day free trial.",
     monthlyNote: "Billed monthly after a 7-day free trial.",
     monthly: "Monthly",
     yearly: "Yearly · save 50%",
@@ -203,7 +193,7 @@ const en = {
     premium: {
       name: "Premium",
       desc: "Everything, for the whole crew.",
-      badge: "Most loved",
+      badge: "Best value",
       features: [
         "7-day free trial",
         "Track every child",
@@ -265,7 +255,7 @@ const en = {
       "© 2026 Kidsit.ai. This app is not a substitute for professional, medical, or psychological advice. It is designed to provide parents with smart, sensitive, and practical guidance for dealing with everyday situations in real-time.",
   },
   legal: {
-    back: "← Back to ",
+    back: "Back to ",
     home: "/en",
   },
 };
@@ -300,15 +290,15 @@ const he: Dict = {
     closeMenu: "סגירת תפריט",
   },
   hero: {
-    badge: "קופיילוט הורות חכם לאייפון ולאנדרואיד",
-    h1a: "עזרה רגועה",
-    h1Scribbled: "לרגעים הקשים בהורות.",
+    h1a: "עזרה רגועה לרגעים",
+    h1Scribbled: "הקשים",
+    h1b: "בהורות.",
     sub: "לוחצים על המיקרופון ומספרים מה קרה. תוך כ-10 שניות מקבלים תוכנית רגועה.",
     ctaApple: "App Store",
     ctaPlay: "Google Play",
     ctaSecondary: "צפו איך זה עובד",
-    chipWhisper: "🎙️ מספרים מה קרה",
-    chipTime: "⏱️ כ-10 שניות לתוכנית",
+    chipWhisper: "מספרים מה קרה",
+    chipTime: "כ-10 שניות לתוכנית",
     screenshotAlt:
       "מסך הבית של Kidsit AI: \"מה קרה עם נועה?\" (בת שנתיים) עם כפתור מיקרופון להקלטה בלחיצה ממושכת",
   },
@@ -317,17 +307,14 @@ const he: Dict = {
     sub: "הילד על הרצפה, השעה 18:00, ואי אפשר בדיוק לגגל את זה באמצע התקף זעם.",
     cards: [
       {
-        emoji: "⚡",
         title: "עזרה מיידית בכל סיטואציה",
         desc: "הדרכה מעשית ומותאמת אישית ברגע שמתעורר אתגר עם הילד. בקול או בהקלדה, גם כשהידיים מלאות.",
       },
       {
-        emoji: "🧠",
         title: "מותאם לילד שלכם",
         desc: "Kidsit מכירה את הילד שלכם ומתאימה את העצות בהתאם. סימנתם ש\"לא עזר\"? התשובה הבאה תנסה כיוון אחר.",
       },
       {
-        emoji: "📒",
         title: "זוכרת כל רגע",
         desc: "רגעים קודמים של כל ילד משפיעים על התשובה הבאה, כך שהעצות מתאימות לו יותר עם הזמן.",
       },
@@ -353,12 +340,10 @@ const he: Dict = {
     detail: "הוא סופר כל סוג מצב לפי עזר, לא עזר או בלי דירוג, ומוסיף עד שלושה משפטים קבועים על מה שבולט.",
     points: [
       {
-        emoji: "🗓️",
         title: "שבועי או יומי",
         text: "בהגדרות מפעילים אותו ובוחרים שבועי או יומי.",
       },
       {
-        emoji: "🔔",
         title: "תזכורת מקומית",
         text: "באפליקציה אפשר גם לקבוע תזכורת מקומית עם משפט קבוע, בלי שם הילד.",
       },
@@ -388,11 +373,6 @@ const he: Dict = {
   },
   social: {
     heading: "הורים ממליצים",
-    stats: [
-      { value: "iOS + אנדרואיד", label: "אפליקציה אחת, כל טלפון" },
-      { value: "כ-10 שניות", label: "מסיפור לתוכנית" },
-      { value: "ילד אחד חינם", label: "ללא הגבלת זמן" },
-    ],
     sourceLabel: "ביקורת ב-App Store",
     translatedNote: "תורגם מאנגלית",
     quotes: [
@@ -440,7 +420,7 @@ const he: Dict = {
     premium: {
       name: "פרימיום",
       desc: "הכול, לכל החבורה.",
-      badge: "הכי אהוב",
+      badge: "הכי משתלם",
       features: [
         "שבוע ניסיון חינם",
         "מעקב אחרי כל הילדים",
@@ -507,7 +487,7 @@ const he: Dict = {
       "© 2026 Kidsit.ai. האפליקציה אינה תחליף לייעוץ מקצועי, רפואי או פסיכולוגי. היא נועדה להעניק להורים הדרכה חכמה, רגישה ומעשית להתמודדות עם סיטואציות יומיומיות בזמן אמת.",
   },
   legal: {
-    back: "→ חזרה ל-",
+    back: "חזרה ל-",
     home: "/he",
   },
 };
