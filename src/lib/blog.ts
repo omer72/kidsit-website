@@ -114,6 +114,7 @@ const PAIRS: { he: string; en: string }[] = [
   { he: "kibui-masach", en: "screen-time-meltdown" },
   { he: "hadrachat-horim", en: "parent-coaching" },
   { he: "kidsit-vs-chatgpt", en: "kidsit-vs-chatgpt" },
+  { he: "hachana-lifgishat-hadracha", en: "prepare-for-parent-coaching-session" },
 ];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {

@@ -154,5 +154,35 @@
       "url": "https://www.tomsguide.com/ai/chatgpt-vs-gemini-i-asked-both-for-parenting-advice-and-one-clearly-did-it-better",
       "supports": "Described ChatGPT as warm and reassuring."
     }
+  ],
+  "prepare-for-parent-coaching-session": [
+    {
+      "title": "Building a Strong Relationship With Your Child's Therapist",
+      "publisher": "Child Mind Institute",
+      "url": "https://childmind.org/article/how-to-work-well-with-your-childs-therapist/",
+      "supports": "The therapist needs more information than what they get in one session a week; observe the child's behavior and report back; keep notes about frequency, intensity and duration; tell a story, because a child can present differently in the office than at home; share what you've already tried, what has worked and what hasn't.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "Making the Most of Your Child's Health Appointments: Parent Tips",
+      "publisher": "HealthyChildren.org – American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/English/family-life/health-management/Pages/making-the-most-of-your-childs-health-appointments-parent-tips.aspx",
+      "supports": "Last updated 8/26/2025. Bring a list of questions; ask whether there is information to track before the next appointment, with examples that include behavior concerns and sleep. Cited only for that principle; the page is written mainly for medical appointments of children with special health needs.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "Keeping a behaviour diary",
+      "publisher": "Action for Children – Parent Talk",
+      "url": "https://parents.actionforchildren.org.uk/feelings-behaviour/understanding-emotions-behaviour/behaviour-diary/",
+      "supports": "Reviewed February 2026. Diary structure: situation / behaviour / consequences / reflection. Record the positives too. Can be shared with professionals.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "How therapy with children looks and works (Hebrew)",
+      "publisher": "Israel Ministry of Health – BeNefesh Bri'a",
+      "url": "https://me.health.gov.il/mental-health/therapy-rehabilitation/public-care/kids-and-teens/kids-therapy-process/",
+      "supports": "Dr. Yuval Raveh, 21 October 2026. The child is with the therapist about an hour a week and the rest of the time at home with parents; parent work is an essential part of a child's therapy.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    }
   ]
 }
