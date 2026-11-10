@@ -1,30 +1,23 @@
 // Read-only Meta Graph API client for the Meta Pixel card on /admin/stats. Server-side only.
 // Endpoints (https://developers.facebook.com/docs/marketing-api/reference/ads-pixel/ and …/ads-pixel/stats/):
 //   GET /{pixel-id}?fields=name,last_fired_time
-//   GET /{pixel-id}/stats?aggregation=event|host&start_time=…&end_time=…  (unix seconds; hourly buckets:
-//       { data: [{ aggregation, start_time, data: [{ value, count }] }], paging })
 //   GET /act_{ad-account-id}?fields=name,account_status                    (optional access check)
+// No /{pixel-id}/stats: Meta answers "(#100) Permission Denied" for it (system-user and admin tokens, ads_read and
+// business_management, v25–v27; checked 2026-11-09), so event counts come from Events Manager / GA4 instead.
 // The token travels only in the Authorization header. It never goes into a URL, a log line, an error or the cache key;
 // errors are built from Meta's numeric codes, never from Meta's message text.
 import { createHash, createHmac } from "node:crypto";
 import { META_PIXEL_ID } from "../meta-pixel";
-import { addDays, dayInZone } from "./dates";
-import type { DailyPoint, Section, SegmentTotal } from "./revenuecat";
+import type { Section } from "./revenuecat";
 
 export const META_GRAPH = "https://graph.facebook.com";
 /** Pinned. Checked against developers.facebook.com on 2026-11-09; override with META_GRAPH_VERSION. */
 export const DEFAULT_GRAPH_VERSION = "v25.0";
-export const META_WINDOW_DAYS = 28;
-/** Ask for at most 7 days per stats call, then merge (the stats docs mention a 7-day limit). */
-const CHUNK_DAYS = 7;
-const MAX_PAGES = 20;
-const TZ = "Asia/Jerusalem";
 
 type Env = Record<string, string | undefined>;
 type Fetch = (url: string, init?: RequestInit) => Promise<Response>;
 
 export type MetaConfig = { token: string; pixelId: string; adAccountId: string | null; appSecret: string | null; version: string };
-export type EventStats = { daily: DailyPoint[]; byEvent: SegmentTotal[]; total: number };
 export type MetaStats =
   | { state: "not_connected"; missing: string[] }
   | { state: "invalid_config"; error: string }
@@ -32,10 +25,7 @@ export type MetaStats =
       state: "ok";
       fetchedAt: string;
       pixelId: string;
-      range: { startDay: string; endDay: string };
       pixel: Section<{ name: string | null; lastFiredTime: string | null }>;
-      events: Section<EventStats>;
-      hosts: Section<SegmentTotal[]>;
       adAccount: Section<{ id: string; name: string | null; status: string }> | null;
     };
 
@@ -118,97 +108,6 @@ const graphUrl = (c: MetaConfig, path: string, params: Record<string, string>) =
   return u;
 };
 
-/** Epoch ms of local midnight in Asia/Jerusalem for a YYYY-MM-DD day. */
-export function jerusalemMidnight(day: string): number {
-  const guess = Date.parse(`${day}T00:00:00Z`);
-  const offsetAt = (t: number) => {
-    const p = Object.fromEntries(
-      new Intl.DateTimeFormat("en-US", { timeZone: TZ, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" })
-        .formatToParts(new Date(t))
-        .map((x) => [x.type, x.value]),
-    );
-    return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - t;
-  };
-  let t = guess - offsetAt(guess);
-  t = guess - offsetAt(t);
-  return t;
-}
-
-export function metaWindow(now: Date) {
-  const endDay = dayInZone(TZ, now);
-  const startDay = addDays(endDay, -(META_WINDOW_DAYS - 1));
-  const start = jerusalemMidnight(startDay);
-  const chunks: { start: number; end: number }[] = [];
-  for (let s = start; s < now.getTime(); s += CHUNK_DAYS * 864e5) chunks.push({ start: s, end: Math.min(s + CHUNK_DAYS * 864e5, now.getTime()) });
-  return { startDay, endDay, start, chunks };
-}
-
-type Bucket = { hour: string; value: string; count: number };
-
-/** Map one stats page: [{ start_time, data: [{ value, count }] }] → flat hourly buckets. */
-export function mapStatsPage(json: unknown): { buckets: Bucket[]; next: string | null } {
-  if (!isObj(json) || !Array.isArray(json.data)) throw new Error("unexpected stats response");
-  const buckets: Bucket[] = [];
-  for (const r of json.data) {
-    if (!isObj(r) || typeof r.start_time !== "string" || !Array.isArray(r.data)) continue;
-    const hour = new Date(r.start_time);
-    if (Number.isNaN(hour.getTime())) continue;
-    for (const d of r.data) {
-      if (!isObj(d)) continue;
-      const count = typeof d.count === "number" ? d.count : typeof d.count === "string" ? Number(d.count) : NaN;
-      if (!Number.isFinite(count) || count < 0) continue;
-      buckets.push({ hour: hour.toISOString(), value: typeof d.value === "string" && d.value ? d.value : "(לא ידוע)", count });
-    }
-  }
-  const next = isObj(json.paging) && typeof json.paging.next === "string" ? json.paging.next : null;
-  return { buckets, next };
-}
-
-async function loadAggregation(c: MetaConfig, aggregation: "event" | "host", win: ReturnType<typeof metaWindow>, fetchImpl: Fetch) {
-  // Keyed by hour+value so overlapping chunk edges or repeated pages are counted once.
-  const seen = new Map<string, Bucket>();
-  await Promise.all(
-    win.chunks.map(async (ch) => {
-      let url: URL | null = graphUrl(c, `${c.pixelId}/stats`, {
-        aggregation,
-        start_time: String(Math.floor(ch.start / 1000)),
-        end_time: String(Math.floor(ch.end / 1000)),
-      });
-      for (let page = 0; url && page < MAX_PAGES; page++) {
-        const { buckets, next } = mapStatsPage(await graphGet(c, url, fetchImpl));
-        for (const b of buckets) seen.set(`${b.hour}\0${b.value}`, b);
-        url = null;
-        if (next) {
-          const n = new URL(next);
-          if (n.origin === META_GRAPH) url = n;
-        }
-      }
-    }),
-  );
-  return Array.from(seen.values()).filter((b) => {
-    const t = Date.parse(b.hour);
-    return t >= win.start && t < win.chunks[win.chunks.length - 1].end;
-  });
-}
-
-const totalsBy = (buckets: Bucket[]): SegmentTotal[] => {
-  const m = new Map<string, number>();
-  for (const b of buckets) m.set(b.value, (m.get(b.value) ?? 0) + b.count);
-  return Array.from(m, ([label, value]) => ({ label, value })).sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
-};
-
-export function mapEvents(buckets: Bucket[], win: { startDay: string; endDay: string }): EventStats {
-  const perDay = new Map<string, number>();
-  for (let d = win.startDay; d <= win.endDay; d = addDays(d, 1)) perDay.set(d, 0);
-  for (const b of buckets) {
-    const day = dayInZone(TZ, new Date(b.hour));
-    if (perDay.has(day)) perDay.set(day, (perDay.get(day) ?? 0) + b.count);
-  }
-  const daily = Array.from(perDay, ([date, value]) => ({ date, value, incomplete: date === win.endDay }));
-  const byEvent = totalsBy(buckets);
-  return { daily, byEvent, total: byEvent.reduce((a, r) => a + r.value, 0) };
-}
-
 const ACCOUNT_STATUS: Record<number, string> = { 1: "פעיל", 2: "מושבת", 3: "חוב פתוח", 7: "בבדיקת סיכון", 8: "ממתין לסגירה", 9: "בתקופת חסד", 100: "ממתין לסגירה", 101: "סגור" };
 
 async function section<T>(fn: () => Promise<T>, secrets: (string | null)[]): Promise<Section<T>> {
@@ -225,16 +124,13 @@ export async function loadMeta(env: Env, fetchImpl: Fetch = fetch, now: Date = n
   if (!r.ok) return r.missing ? { state: "not_connected", missing: r.missing } : { state: "invalid_config", error: r.error ?? "הגדרה לא תקינה." };
   const c = r.config;
   const secrets = [c.token, c.appSecret, c.appSecret ? appSecretProof(c.token, c.appSecret) : null];
-  const win = metaWindow(now);
 
-  const [pixel, events, hosts, adAccount] = await Promise.all([
+  const [pixel, adAccount] = await Promise.all([
     section(async () => {
       const j = (await graphGet(c, graphUrl(c, c.pixelId, { fields: "name,last_fired_time" }), fetchImpl)) as Record<string, unknown>;
       const fired = typeof j.last_fired_time === "string" && !Number.isNaN(Date.parse(j.last_fired_time)) ? new Date(j.last_fired_time).toISOString() : null;
       return { name: typeof j.name === "string" ? j.name : null, lastFiredTime: fired };
     }, secrets),
-    section(async () => mapEvents(await loadAggregation(c, "event", win, fetchImpl), win), secrets),
-    section(async () => totalsBy(await loadAggregation(c, "host", win, fetchImpl)), secrets),
     c.adAccountId
       ? section(async () => {
           const j = (await graphGet(c, graphUrl(c, c.adAccountId!, { fields: "name,account_status" }), fetchImpl)) as Record<string, unknown>;
@@ -244,12 +140,7 @@ export async function loadMeta(env: Env, fetchImpl: Fetch = fetch, now: Date = n
       : Promise.resolve(null),
   ]);
 
-  // aggregation=host is documented, but if Meta rejects the parameter, say the split may not be available.
-  const hostsOut: typeof hosts =
-    !hosts.ok && hosts.error.includes("(קוד 100)") ? { ok: false, error: `${hosts.error} ייתכן שהחלוקה לפי דומיין (aggregation=host) לא זמינה לפיקסל הזה.` } : hosts;
-
-  return { state: "ok", fetchedAt: now.toISOString(), pixelId: c.pixelId, range: { startDay: win.startDay, endDay: win.endDay }, pixel, events, hosts: hostsOut, adAccount };
+  return { state: "ok", fetchedAt: now.toISOString(), pixelId: c.pixelId, pixel, adAccount };
 }
 
-export const metaAnyFailed = (s: MetaStats) =>
-  s.state === "ok" && [s.pixel, s.events, s.hosts, s.adAccount].some((x) => x !== null && !x.ok);
+export const metaAnyFailed = (s: MetaStats) => s.state === "ok" && [s.pixel, s.adAccount].some((x) => x !== null && !x.ok);
