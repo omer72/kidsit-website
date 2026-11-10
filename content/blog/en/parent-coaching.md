@@ -1,6 +1,6 @@
 ---
 date: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-10
 slug: /en/blog/parent-coaching
 title_tag: "Parent Coaching: What It Is, When to Reach Out | Kidsit AI"
 meta_description: "What parent coaching is, how it differs from therapy, when to reach out, and which options exist in Israel, including at no cost. Kidsit is an AI tool, not parent coaching and not therapy."
@@ -121,7 +121,7 @@ The introductory conversation is the place to ask, not to close. The list fits a
 - Which approach do they work in?
 - What is the goal of the process, and roughly how many meetings?
 - In person or on Zoom?
-- What happens between meetings: can you write, or do you wait until next week?
+- What happens between meetings: can you write, or do you wait until next week? [What to note between sessions and what to bring](/en/blog/prepare-for-parent-coaching-session).
 - What is the cost, and what is included in it?
 
 According to Midrag, because there is no license requirement, these questions are the check. If after the conversation it is not clear what will happen in the next meeting, that is an answer in itself.
@@ -132,7 +132,7 @@ Kidsit is an AI app for the hard moment. It is not parent coaching, not counseli
 
 **Yes, inside the moment.** At six in the evening on the floor, at the daycare door, in the supermarket line. When your hands are full and there is no time to search for an article. You press and hold the microphone and say what happened.
 
-**Yes, between meetings.** If you are already meeting with a coach, you can practice at home what was said there, in the moment it happens, not only in next week's diary.
+**Yes, between meetings.** If you are already meeting with a coach, you can practice at home what was said there, in the moment it happens, not only in next week's diary. [What to note between sessions and what to bring →](/en/blog/prepare-for-parent-coaching-session).
 
 **Yes, when there is no one to turn to right now.** Not instead of the appointment. Until the appointment, or on an evening when there is no meeting.
 

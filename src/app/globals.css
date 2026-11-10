@@ -311,6 +311,20 @@ html[dir="rtl"] .cookie-table code {
 .blog-prose strong {
   font-weight: 700;
 }
+/* 4-line behavior log: a bordered, copyable box. Ordered list, not an image. */
+.blog-prose .behavior-log {
+  margin-top: 1rem;
+  max-width: min(52ch, 100%);
+  border: 2px solid theme("colors.ink");
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+}
+.blog-prose .behavior-log ol {
+  margin-top: 0;
+}
+.blog-prose .behavior-log li {
+  overflow-wrap: anywhere;
+}
 .blog-sources a {
   overflow-wrap: anywhere;
 }

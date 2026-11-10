@@ -441,5 +441,49 @@
       "url": "https://www.isoc.org.il/digital-literacy/online-safety-guides/guides-users/guide-safe-chat-ai-applications",
       "supports": "זהירות בשיתוף פרטים מזהים בצ'ט AI."
     }
+  ],
+  "hachana-lifgishat-hadracha": [
+    {
+      "title": "איך נראה ומתנהל הטיפול בילדים",
+      "publisher": "משרד הבריאות – בנפש בריאה",
+      "url": "https://me.health.gov.il/mental-health/therapy-rehabilitation/public-care/kids-and-teens/kids-therapy-process/",
+      "supports": "ד״ר יובל רווה, 21 באוקטובר 2026: הילד או הילדה מגיעים למטפל לשעה בשבוע, ובכל שאר הזמן הם נמצאים בבית עם ההורים; הדרכת הורים היא חלק חיוני בטיפול.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "לקראת הפגישה הראשונה (אינטייק)",
+      "publisher": "לאומית שירותי בריאות",
+      "url": "https://www.leumit.co.il/mental-health-arena/the-first-meeting/",
+      "supports": "ההתרגשות עלולה לגרום לנו לשכוח דברים שרצינו לומר; מומלץ להתארגן מראש, ולפעמים אפילו להעלות על הכתב. רשמו לעצמכם מה המטרה מבחינתכם בכל מפגש מעקב. מה נוסה, מה עזר ומה לא.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "Building a Strong Relationship With Your Child's Therapist",
+      "publisher": "Child Mind Institute",
+      "url": "https://childmind.org/article/how-to-work-well-with-your-childs-therapist/",
+      "supports": "Observe the child's behavior and report back; keep notes about frequency, intensity and duration; tell a story, because a child can present differently in the office than at home; share what you've already tried, what has worked and what hasn't.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "Keeping a behaviour diary",
+      "publisher": "Action for Children – Parent Talk",
+      "url": "https://parents.actionforchildren.org.uk/feelings-behaviour/understanding-emotions-behaviour/behaviour-diary/",
+      "supports": "Reviewed February 2026. Diary structure: situation / behaviour / consequences / reflection. Record the positives too. Can be shared with professionals.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "הדרכת הורים אונליין",
+      "publisher": "מידרג",
+      "url": "https://www.midrag.co.il/Content/Tip/27711",
+      "supports": "כדי להגיע מוכנים לפגישה חשוב לאסוף כמה שיותר מידע (גננת, מורה, צהרון). בפגישות ההמשך המדריכה תוכל לקבל פידבק ולדעת האם המצב השתפר.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    },
+    {
+      "title": "Making the Most of Your Child's Health Appointments: Parent Tips",
+      "publisher": "HealthyChildren.org – American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/English/family-life/health-management/Pages/making-the-most-of-your-childs-health-appointments-parent-tips.aspx",
+      "supports": "Last updated 8/26/2025. Bring a list of questions; ask whether there is information to track before the next appointment, with examples that include behavior concerns and sleep. Cited only for that principle; the page is written mainly for medical appointments of children with special health needs.",
+      "checkedAt": "2026-11-10T14:03:00+02:00"
+    }
   ]
 }
