@@ -294,8 +294,6 @@ function ProviderCard({ title, r }: { title: string; r: ProviderResult }) {
   );
 }
 
-const fmtNum = (n: number) => new Intl.NumberFormat("he-IL").format(n);
-const fmtDate = (d: string) => `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}`;
 
 function MetaCard({ m }: { m: MetaStats }) {
   const title = "Meta Pixel";
@@ -311,10 +309,9 @@ function MetaCard({ m }: { m: MetaStats }) {
         <ErrorNote msg={m.error} />
       </Card>
     );
-  const ev = m.events;
-  const sections = [m.pixel, m.events, m.hosts, ...(m.adAccount ? [m.adAccount] : [])];
+  const sections = [m.pixel, ...(m.adAccount ? [m.adAccount] : [])];
   const errs = Array.from(new Set(sections.map((x) => (x.ok ? null : x.error))));
-  // Every call failed the same way (e.g. an expired token) → one message instead of four.
+  // Every call failed the same way (e.g. an expired token) → one message instead of two.
   if (errs.length === 1 && errs[0] !== null)
     return (
       <Card title={title}>
@@ -325,8 +322,7 @@ function MetaCard({ m }: { m: MetaStats }) {
     <Card title={title}>
       <div className="space-y-4">
         <p className="text-xs text-ink-muted">
-          עודכן לאחרונה: <span className="tabular-nums">{fmtTime(m.fetchedAt)}</span> (שעון ישראל) · טווח:{" "}
-          {`\u2066${fmtDate(m.range.startDay)}–${fmtDate(m.range.endDay)}\u2069`} (28 ימים, שעון ישראל)
+          עודכן לאחרונה: <span className="tabular-nums">{fmtTime(m.fetchedAt)}</span> (שעון ישראל)
         </p>
         <SectionView s={m.pixel}>
           {(p) => (
@@ -355,33 +351,6 @@ function MetaCard({ m }: { m: MetaStats }) {
             </dl>
           )}
         </SectionView>
-        <SectionView s={ev}>
-          {(e) => (
-            <div className="space-y-4">
-              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div className="rounded-xl bg-paper p-3">
-                  <dt className="text-xs text-ink-muted">סה״כ אירועים, 28 ימים</dt>
-                  <dd className="font-display text-2xl font-semibold tabular-nums">{fmtNum(e.total)}</dd>
-                </div>
-                <div className="rounded-xl bg-paper p-3">
-                  <dt className="text-xs text-ink-muted">PageView</dt>
-                  <dd className="font-display text-2xl font-semibold tabular-nums">{fmtNum(e.byEvent.find((x) => x.label === "PageView")?.value ?? 0)}</dd>
-                </div>
-              </dl>
-              <Bars points={e.daily} label="אירועים ליום" />
-              <div>
-                <h3 className="mb-1 font-bold">לפי אירוע</h3>
-                <DataTable t={{ title: "לפי אירוע", columns: ["אירוע", "אירועים"], rows: e.byEvent.map((r) => [r.label, fmtNum(r.value)]), ltrFirstColumn: true, empty: "לא התקבלו אירועים בטווח." }} />
-              </div>
-            </div>
-          )}
-        </SectionView>
-        <div>
-          <h3 className="mb-1 font-bold">לפי דומיין</h3>
-          <SectionView s={m.hosts}>
-            {(h) => <DataTable t={{ title: "לפי דומיין", columns: ["דומיין", "אירועים"], rows: h.map((r) => [r.label, fmtNum(r.value)]), ltrFirstColumn: true, empty: "אין נתוני דומיין בטווח." }} />}
-          </SectionView>
-        </div>
         {m.adAccount && (
           <SectionView s={m.adAccount}>
             {(a) => (
@@ -392,7 +361,7 @@ function MetaCard({ m }: { m: MetaStats }) {
           </SectionView>
         )}
         <Muted>
-          ספירת אירועים שהפיקסל קיבל (לא משתמשים ייחודיים), לפי שעה מ-Meta ומקובצת לימים לפי שעון ישראל. היום האחרון חלקי. באתר הפיקסל נטען רק אחרי הסכמה לעוגיות.
+          ספירות אירועים לא זמינות דרך ה-API של Meta, אותן רואים ב-Events Manager. באתר הפיקסל נטען רק אחרי הסכמה לעוגיות.
         </Muted>
       </div>
     </Card>
