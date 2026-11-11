@@ -25,6 +25,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
+// Updated November 11, 2026: anonymous funnel counts, the Android install source, and the free-answers counter.
 // Updated November 2026 for on-device digests and optional anonymous insights.
 // Updated November 9, 2026: disclose the session-only visit-source record (store-link attribution) in the cookie section.
 // Updated November 3, 2026: disclose the Meta Pixel (analytics consent only) in the cookie section.
@@ -34,7 +35,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 9, 2026",
+    updated: "November 11, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -61,10 +62,10 @@ const DOCS: Record<Lang, LegalDoc> = {
             <ul className="mt-3 list-disc space-y-2 ps-5">
               <li>OpenAI: gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
               <li>Netlify: hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
-              <li>RevenueCat: checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. Apple or Google bills you. We never see your card number.</li>
+              <li>RevenueCat: checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. It also holds the Android install source and the free-answers counter described under “App usage counts, install source and free answers”. Apple or Google bills you. We never see your card number.</li>
               <li>Insert Affiliate: if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
-              <li>Vercel: hosts this website (kidsit.ai) and the anonymous insights endpoint. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our insights database.</li>
-              <li>Neon: Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send. See “Weekly digest and anonymous insights”.</li>
+              <li>Vercel: hosts this website (kidsit.ai) and the endpoints for anonymous insights and funnel counts. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our database.</li>
+              <li>Neon: Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send and the daily funnel counters. See “Weekly digest and anonymous insights” and “App usage counts, install source and free answers”.</li>
               <li>Google: Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
               <li>Meta Platforms: the Meta Pixel on this website only, after you accept analytics cookies, to measure our ads and site visits. It does not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
             </ul>
@@ -74,7 +75,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "retention",
         h: "Data Storage and Retention",
-        p: "Moments, ratings, notes, and child profiles are stored on your device. We do not store those moments or profiles on our servers. If you delete the app, that on-device information is removed with it. The exception is anonymous insights you choose to send: the counts and the optional rating are kept, and free text is deleted after 90 days.",
+        p: "Moments, ratings, notes, and child profiles are stored on your device. We do not store those moments or profiles on our servers. If you delete the app, that on-device information is removed with it. The exception is anonymous insights you choose to send: the counts and the optional rating are kept, and free text is deleted after 90 days. Funnel counts are kept only as daily totals.",
       },
       {
         id: "insights",
@@ -125,6 +126,41 @@ const DOCS: Record<Lang, LegalDoc> = {
             <p className="mt-2">
               The purpose is to improve Kidsit. You can turn sharing off at any time in the app&apos;s settings, and the
               send button then disappears.
+            </p>
+          </>
+        ),
+      },
+      {
+        id: "funnel",
+        h: "App usage counts, install source and free answers",
+        p: (
+          <>
+            <p>
+              Anonymous funnel counts. The app reports when an install reaches certain steps for the first time:
+              finishing onboarding, adding a first child, sending a first moment, receiving a first answer, rating a
+              moment, seeing or closing the subscription screen, and buying a subscription. Each step is sent once per
+              install. A report contains only the step name, whether the device is iOS or Android, the app language, the
+              app version at major.minor only, and, on Android, the install source (the utm_source value from the Google
+              Play link, if there was one). It contains no user, device, install, or RevenueCat identifier, no child
+              data, no story text, and no cookies. The server adds the day (UTC) and keeps only a daily counter for each
+              combination; it does not keep a row per report. The counters are stored in Neon Postgres through Vercel.
+              Vercel request logs include IP addresses for the plan&apos;s retention period, and we do not write the IP
+              address into the database. There is no setting in the app to turn these counts off, and they are not
+              linked to you.
+            </p>
+            <p className="mt-2">
+              Android install source. If you install the Android app from a Google Play link that carries campaign
+              parameters (for example, from this website), Google Play gives the app those parameters once after
+              installation. The app keeps only the utm_source, utm_medium, utm_campaign, and utm_content values and
+              drops any ad click IDs. It stores them on your device and on your RevenueCat subscriber (as media source,
+              ad group, campaign, and creative), linked to the RevenueCat app user id, so we can see which channels lead
+              to subscriptions. The App Store has no equivalent, so the iOS app does not do this.
+            </p>
+            <p className="mt-2">
+              Free answers counter. Your first 3 guidance answers are free. To count them, our Netlify function stores
+              one number, how many free answers have been used, as an attribute on your RevenueCat subscriber, linked to
+              the RevenueCat app user id. It does not include the story, the answer, or anything about your child.
+              Subscribers are not counted.
             </p>
           </>
         ),
@@ -265,7 +301,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "9 בנובמבר 2026",
+    updated: "11 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -292,10 +328,10 @@ const DOCS: Record<Lang, LegalDoc> = {
             <ul className="mt-3 list-disc space-y-2 ps-5">
               <li>OpenAI: ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
               <li>Netlify: מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
-              <li>RevenueCat: בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
+              <li>RevenueCat: בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. אצלו נשמרים גם מקור ההתקנה ב-Android ומונה תשובות החינם, כמתואר בסעיף „ספירות שימוש, מקור ההתקנה ותשובות חינם”. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
               <li>Insert Affiliate: אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
-              <li>Vercel: מארח את האתר הזה (kidsit.ai) ואת נקודת הקצה של התובנות האנונימיות. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד התובנות שלנו.</li>
-              <li>Neon: ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח. ראו „סיכום שבועי ותובנות אנונימיות”.</li>
+              <li>Vercel: מארח את האתר הזה (kidsit.ai) ואת נקודות הקצה של התובנות האנונימיות ושל ספירות המשפך. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד שלנו.</li>
+              <li>Neon: ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח ואת מוני המשפך היומיים. ראו „סיכום שבועי ותובנות אנונימיות” ו„ספירות שימוש, מקור ההתקנה ותשובות חינם”.</li>
               <li>Google: ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
               <li>Meta Platforms: הפיקסל של Meta באתר הזה בלבד, אחרי שאתם מאשרים עוגיות סטטיסטיקה, כדי למדוד את הפרסום שלנו וביקורים באתר. הוא אינו מקבל את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
             </ul>
@@ -305,7 +341,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "retention",
         h: "אחסון ושמירת מידע",
-        p: "הרגעים, הדירוגים, ההערות ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים את הרגעים או את הפרופילים האלה בשרתים שלנו. מחיקת האפליקציה מוחקת את המידע הזה יחד איתה. החריג הוא תובנות אנונימיות שאתם בוחרים לשלוח: הספירות והדירוג האופציונלי נשמרים, וטקסט חופשי נמחק אחרי 90 יום.",
+        p: "הרגעים, הדירוגים, ההערות ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים את הרגעים או את הפרופילים האלה בשרתים שלנו. מחיקת האפליקציה מוחקת את המידע הזה יחד איתה. החריג הוא תובנות אנונימיות שאתם בוחרים לשלוח: הספירות והדירוג האופציונלי נשמרים, וטקסט חופשי נמחק אחרי 90 יום. ספירות המשפך נשמרות רק כסיכומים יומיים.",
       },
       {
         id: "insights",
@@ -352,6 +388,38 @@ const DOCS: Record<Lang, LegalDoc> = {
             </p>
             <p className="mt-2">
               המטרה היא לשפר את Kidsit. אפשר לכבות את השיתוף בכל עת בהגדרות האפליקציה, ואז כפתור השליחה נעלם.
+            </p>
+          </>
+        ),
+      },
+      {
+        id: "funnel",
+        h: "ספירות שימוש, מקור ההתקנה ותשובות חינם",
+        p: (
+          <>
+            <p>
+              ספירות משפך אנונימיות. האפליקציה מדווחת כשהתקנה מגיעה בפעם הראשונה לשלבים מסוימים: סיום ההיכרות עם
+              האפליקציה, הוספת ילד ראשון, שליחת רגע ראשון, קבלת תשובה ראשונה, דירוג רגע, הצגה או סגירה של מסך המנוי,
+              ורכישת מנוי. כל שלב נשלח פעם אחת לכל התקנה. הדיווח כולל רק את שם השלב, אם המכשיר הוא iOS או Android, את
+              שפת האפליקציה, את גרסת האפליקציה ברמת major.minor בלבד, וב-Android גם את מקור ההתקנה (ערך utm_source
+              מהקישור ל-Google Play, אם היה כזה). הוא אינו כולל מזהה משתמש, מכשיר, התקנה או RevenueCat, מידע על ילדים,
+              טקסט של סיפור או עוגיות. השרת מוסיף את היום (UTC) ושומר רק מונה יומי לכל צירוף; הוא לא שומר רשומה לכל
+              דיווח. המונים נשמרים ב-Neon Postgres דרך Vercel. בלוגי הבקשות של Vercel מופיעות כתובות IP, לפי משך השמירה
+              של התוכנית, ואיננו כותבים את כתובת ה-IP למסד. אין באפליקציה הגדרה לכבות את הספירות האלה, והן אינן
+              מקושרות אליכם.
+            </p>
+            <p className="mt-2">
+              מקור ההתקנה ב-Android. אם התקנתם את אפליקציית Android מקישור ל-Google Play שכולל פרמטרי קמפיין (למשל מהאתר
+              הזה), Google Play מעביר את הפרמטרים האלה לאפליקציה פעם אחת אחרי ההתקנה. האפליקציה שומרת רק את הערכים
+              utm_source,‏ utm_medium,‏ utm_campaign ו-utm_content, ומשמיטה מזהי לחיצה של מודעות. היא שומרת אותם במכשיר
+              שלכם ואצל המנוי שלכם ב-RevenueCat (כמקור מדיה, קבוצת מודעות, קמפיין וקריאייטיב), מקושרים למזהה המשתמש של
+              האפליקציה ב-RevenueCat, כדי שנוכל לראות אילו ערוצים מביאים מנויים. ב-App Store אין מנגנון מקביל, ולכן
+              אפליקציית iOS לא עושה זאת.
+            </p>
+            <p className="mt-2">
+              מונה תשובות החינם. 3 תשובות ההדרכה הראשונות בחינם. כדי לספור אותן, פונקציית Netlify שלנו שומרת מספר אחד,
+              כמה תשובות חינם כבר התקבלו, כמאפיין של המנוי שלכם ב-RevenueCat, מקושר למזהה המשתמש של האפליקציה
+              ב-RevenueCat. הוא אינו כולל את הסיפור, את התשובה או מידע על הילד. אצל מנויים לא סופרים.
             </p>
           </>
         ),
