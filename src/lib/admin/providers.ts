@@ -3,6 +3,7 @@
 import { ConfigError, GoogleApiError } from "./google-auth";
 import { loadGa4 } from "./ga4";
 import { loadGsc } from "./gsc";
+import { FUNNEL_PROVIDER } from "./funnel";
 
 export type Table = { title: string; columns: string[]; rows: string[][]; ltrFirstColumn?: boolean; empty: string };
 export type ProviderData = {
@@ -118,5 +119,8 @@ export const GA4_PROVIDER: StatsProvider = {
   },
 };
 
+/** The Google sources. */
 export const EXTRA_PROVIDERS: StatsProvider[] = [GSC_PROVIDER, GA4_PROVIDER];
-export const providerById = (id: string) => EXTRA_PROVIDERS.find((p) => p.id === id);
+/** Every provider card on /admin/stats, in display order: the in-app funnel first, then Google. */
+export const STATS_PROVIDERS: StatsProvider[] = [FUNNEL_PROVIDER, ...EXTRA_PROVIDERS];
+export const providerById = (id: string) => STATS_PROVIDERS.find((p) => p.id === id);
