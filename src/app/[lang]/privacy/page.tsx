@@ -25,6 +25,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
+// Updated November 11, 2026: OpenAI models are gpt-6-luna (guidance) and gpt-transcribe (voice).
 // Updated November 11, 2026: anonymous funnel counts, the Android install source, and the free-answers counter.
 // Updated November 2026 for on-device digests and optional anonymous insights.
 // Updated November 9, 2026: disclose the session-only visit-source record (store-link attribution) in the cookie section.
@@ -46,12 +47,12 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "voice",
         h: "Voice recordings and transcription",
-        p: "When you use the microphone, your voice is sent to OpenAI Whisper (whisper-1) and transcribed to text transiently so the app can generate guidance. We do not retain your recordings. Nothing you say is used to train models.",
+        p: "When you use the microphone, your voice is sent to OpenAI's gpt-transcribe model and transcribed to text transiently so the app can generate guidance. We do not retain your recordings. Nothing you say is used to train models.",
       },
       {
         id: "use",
         h: "How We Use Information",
-        p: "Information stored on your device is used to give you personalized parenting guidance and, if you turn it on, a digest calculated on the device. A guidance request is sent to our functions on Netlify. That request includes only the child you asked about: the story text, the context you chose (location, your mood, who else was there, and how urgent it feels), that child's profile (name, birth date, gender, intake answers, notes, and whether a new baby recently joined the family, without the baby's name), and that child's eight most recent moments (each moment's story, a short summary of the earlier guidance and its advice headlines, your rating, and, when saved, when and where it happened and your mood). It also includes a RevenueCat ID so the function can check the subscription. Names, profiles, and history of other children are not sent. If an older version of the app still includes them, the function leaves them out of the prompt. The optional moment note stays on your device and is not included in the request. OpenAI's gpt-4o-mini model then receives the story, that context, that child's profile, and up to five of those recent moments. The RevenueCat ID is not part of the text sent to the model. We do not store those prompts.",
+        p: "Information stored on your device is used to give you personalized parenting guidance and, if you turn it on, a digest calculated on the device. A guidance request is sent to our functions on Netlify. That request includes only the child you asked about: the story text, the context you chose (location, your mood, who else was there, and how urgent it feels), that child's profile (name, birth date, gender, intake answers, notes, and whether a new baby recently joined the family, without the baby's name), and that child's eight most recent moments (each moment's story, a short summary of the earlier guidance and its advice headlines, your rating, and, when saved, when and where it happened and your mood). It also includes a RevenueCat ID so the function can check the subscription. Names, profiles, and history of other children are not sent. If an older version of the app still includes them, the function leaves them out of the prompt. The optional moment note stays on your device and is not included in the request. OpenAI's gpt-6-luna model then receives the story, that context, that child's profile, and up to five of those recent moments. The RevenueCat ID is not part of the text sent to the model. We do not store those prompts.",
       },
       {
         id: "sharing",
@@ -60,7 +61,7 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>We do not sell personal information. We do not show ads in the app or on this site. We advertise Kidsit on Meta&apos;s platforms and, with your consent, measure those ads using the Meta Pixel. The providers below match what the app and this site actually use:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
-              <li>OpenAI: gpt-4o-mini writes guidance and Whisper (whisper-1) transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
+              <li>OpenAI: gpt-6-luna writes guidance and gpt-transcribe transcribes voice, as described above. OpenAI&apos;s privacy policy applies to that processing.</li>
               <li>Netlify: hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
               <li>RevenueCat: checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. It also holds the Android install source and the free-answers counter described under “App usage counts, install source and free answers”. Apple or Google bills you. We never see your card number.</li>
               <li>Insert Affiliate: if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
@@ -312,12 +313,12 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "voice",
         h: "הקלטות קוליות ותמלול",
-        p: "כאשר אתם משתמשים במיקרופון, הקול שלכם נשלח ל-Whisper של OpenAI‏ (whisper-1) ומתומלל לטקסט באופן זמני, כדי שהאפליקציה תוכל להפיק הדרכה. איננו שומרים את ההקלטות שלכם. שום דבר שאתם אומרים אינו משמש לאימון מודלים.",
+        p: "כאשר אתם משתמשים במיקרופון, הקול שלכם נשלח למודל gpt-transcribe של OpenAI ומתומלל לטקסט באופן זמני, כדי שהאפליקציה תוכל להפיק הדרכה. איננו שומרים את ההקלטות שלכם. שום דבר שאתם אומרים אינו משמש לאימון מודלים.",
       },
       {
         id: "use",
         h: "כיצד אנו משתמשים במידע",
-        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו, מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-4o-mini של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
+        p: "המידע השמור במכשיר משמש למתן הדרכת הורות מותאמת אישית, ואם תפעילו זאת, גם לסיכום שמחושב על המכשיר. בקשת הדרכה נשלחת לפונקציות שלנו ב-Netlify. הבקשה כוללת רק את הילד שעליו שאלתם: את טקסט הסיפור, את ההקשר שבחרתם (מיקום, מצב הרוח שלכם, מי עוד היה שם, ועד כמה זה דחוף), את הפרופיל של הילד הזה (שם, תאריך לידה, מגדר, תשובות היכרות, הערות, והאם תינוק חדש הצטרף לאחרונה למשפחה, בלי שם התינוק), ואת שמונת הרגעים האחרונים של הילד הזה (הסיפור של כל רגע, תקציר קצר של ההדרכה הקודמת וכותרות העצות, הדירוג שלכם, ואם נשמרו, מתי ואיפה זה קרה ומה היה מצב הרוח שלכם). הבקשה כוללת גם מזהה RevenueCat, כדי שהפונקציה תוכל לבדוק את המנוי. שמות, פרופילים והיסטוריה של ילדים אחרים אינם נשלחים. אם גרסה ישנה של האפליקציה עדיין כוללת אותם, הפונקציה משאירה אותם מחוץ לפרומפט. הערת הרגע נשמרת במכשיר ואינה נכללת בבקשה. מודל gpt-6-luna של OpenAI מקבל את הסיפור, את ההקשר, את פרופיל הילד הזה, ועד חמישה מאותם רגעים אחרונים. מזהה RevenueCat אינו חלק מהטקסט שנשלח למודל. איננו שומרים את הפרומפטים האלה.",
       },
       {
         id: "sharing",
@@ -326,7 +327,7 @@ const DOCS: Record<Lang, LegalDoc> = {
           <>
             <p>איננו מוכרים מידע אישי. איננו מציגים פרסומות באפליקציה או באתר. אנחנו מפרסמים את Kidsit בפלטפורמות של Meta, ובהסכמתכם מודדים את הפרסומות האלה בעזרת הפיקסל. הספקים שלהלן תואמים את מה שהאפליקציה והאתר באמת משתמשים בו:</p>
             <ul className="mt-3 list-disc space-y-2 ps-5">
-              <li>OpenAI: ‏gpt-4o-mini כותב את ההדרכה, ו-Whisper‏ (whisper-1) מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
+              <li>OpenAI: ‏gpt-6-luna כותב את ההדרכה, ו-gpt-transcribe מתמלל קול, כמתואר לעיל. מדיניות הפרטיות של OpenAI חלה על העיבוד הזה.</li>
               <li>Netlify: מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
               <li>RevenueCat: בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. אצלו נשמרים גם מקור ההתקנה ב-Android ומונה תשובות החינם, כמתואר בסעיף „ספירות שימוש, מקור ההתקנה ותשובות חינם”. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
               <li>Insert Affiliate: אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
