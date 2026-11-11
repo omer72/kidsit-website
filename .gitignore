@@ -35,3 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+
+# blog audio comparison clips (scripts/tts-compare.mjs)
+/tmp/
