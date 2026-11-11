@@ -5,7 +5,7 @@ import { unstable_cache } from "next/cache";
 import { configuredSecret, SESSION_COOKIE, verifySessionToken } from "@/lib/admin/auth";
 import { allSectionsFailed, loadRevenueCat, resolveConfig, type DailyPoint, type RevenueCatStats, type Section, type SegmentTotal } from "@/lib/admin/revenuecat";
 import { loadMeta, metaAnyFailed, metaFingerprint, resolveMetaConfig, type MetaStats } from "@/lib/admin/meta";
-import { EXTRA_PROVIDERS, providerById, runProvider, type ProviderData, type ProviderResult, type Table } from "@/lib/admin/providers";
+import { STATS_PROVIDERS, providerById, runProvider, type ProviderData, type ProviderResult, type Table } from "@/lib/admin/providers";
 import { login, logout } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -474,7 +474,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
 
   const [rc, providers, meta] = await Promise.all([
     getRevenueCat(),
-    Promise.all(EXTRA_PROVIDERS.map((p) => getProvider(p.id))),
+    Promise.all(STATS_PROVIDERS.map((p) => getProvider(p.id))),
     getMeta(),
   ]);
   const updated = rc.state === "ok" ? rc.fetchedAt : new Date().toISOString();
@@ -493,7 +493,7 @@ export default async function StatsPage({ searchParams }: { searchParams: { e?: 
       </div>
       <RevenueCatView rc={rc} />
       <div className="grid gap-4">
-        {EXTRA_PROVIDERS.map((p, i) => (
+        {STATS_PROVIDERS.map((p, i) => (
           <ProviderCard key={p.id} title={p.title} r={providers[i]} />
         ))}
         <MetaCard m={meta} />
