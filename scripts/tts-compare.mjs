@@ -27,13 +27,14 @@ const STYLE =
   "Calm, warm and unhurried, like a friend with a background in developmental psychology. " +
   "Natural pauses between sentences. Read quoted lines as something a parent says out loud, not as a list.";
 
-// Prices from the public pricing pages, checked 2026-11-11. USD per 1,000 characters.
+// Prices from the public pricing pages, checked 2026-11-11. USD per 1,000 characters,
+// or per minute of audio where the provider bills by audio (converted with the measured speaking speed).
 const PRICES = [
   {
     provider: "openai",
     label: "OpenAI gpt-4o-mini-tts",
-    per1k: 0.015,
-    note: "billed as $0.60/1M text tokens + $12/1M audio tokens; ~$0.015 per minute of audio, so per 1k characters is an estimate",
+    perMinute: 0.015,
+    note: "billed as $0.60/1M text tokens + $12/1M audio tokens, about $0.015 per minute of audio; per 1k characters follows from the measured speaking speed",
     url: "https://developers.openai.com/api/docs/pricing",
   },
   {
@@ -305,13 +306,29 @@ async function main() {
   }
   const all = totals.he + totals.en;
   const perPost = Math.round(all / totals.posts);
-  const cost = PRICES.map((p) => ({ ...p, post: (perPost / 1000) * p.per1k, blog: (all / 1000) * p.per1k }));
+  // Speaking speed from this run's clips (Hebrew is slower); falls back to the 2026-11-12 run.
+  const cpm = { he: 620, en: 900 };
+  for (const lang of ["he", "en"]) {
+    const timed = clips.filter((c) => c.lang === lang && c.seconds);
+    if (timed.length) {
+      cpm[lang] = Math.round((texts[lang].length * timed.length * 60) / timed.reduce((sum, c) => sum + c.seconds, 0));
+    }
+  }
+  const minutes = totals.he / cpm.he + totals.en / cpm.en;
+  const length = `${Math.floor(minutes / 60)} h ${Math.round(minutes % 60)} min`;
+  const size = `~${Math.round(minutes * 0.96)} MB at 128 kbps, ~${Math.round(minutes * 0.48)} MB at 64 kbps`;
+  const cost = PRICES.map((p) => {
+    const blog = p.perMinute ? minutes * p.perMinute : (all / 1000) * p.per1k;
+    const per1k = (blog / all) * 1000;
+    return { ...p, per1k, blog, post: (perPost / 1000) * per1k };
+  });
 
   console.log(`\nSkipped:${skipped.length ? "" : " none"}`);
   for (const s of skipped) console.log(`  - ${s}`);
   console.log(
     `\nCharacters: he ${totals.he.toLocaleString()}, en ${totals.en.toLocaleString()}, total ${all.toLocaleString()} across ${totals.posts} posts (avg ${perPost.toLocaleString()} per post)`,
   );
+  console.log(`Audio: about ${length} (he ${cpm.he} chars/min, en ${cpm.en} chars/min), ${size}`);
   console.log("\nApprox. cost (USD), list price before free tiers:");
   for (const c of cost) {
     console.log(
@@ -350,7 +367,7 @@ async function main() {
   ${section("he")}
   ${section("en")}
   <h2>Cost</h2>
-  <p>${all.toLocaleString()} characters across ${totals.posts} posts (avg ${perPost.toLocaleString()} per post). List prices checked 2026-11-11, before free tiers.</p>
+  <p>${all.toLocaleString()} characters across ${totals.posts} posts (avg ${perPost.toLocaleString()} per post), about ${esc(length)} of audio (${esc(size)}). List prices checked 2026-11-11, before free tiers.</p>
   <table><tr><th>Voice</th><th>$/1k chars</th><th>Per post</th><th>Whole blog</th><th>Note</th></tr>
   ${cost.map((c) => `<tr><td><a href="${c.url}">${esc(c.label)}</a></td><td>$${c.per1k.toFixed(3)}</td><td>$${c.post.toFixed(2)}</td><td>$${c.blog.toFixed(2)}</td><td>${esc(c.note)}</td></tr>`).join("")}
   </table>
