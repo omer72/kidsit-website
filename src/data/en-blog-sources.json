@@ -184,5 +184,206 @@
       "supports": "Dr. Yuval Raveh, 21 October 2026. The child is with the therapist about an hour a week and the rest of the time at home with parents; parent work is an essential part of a child's therapy.",
       "checkedAt": "2026-11-10T14:03:00+02:00"
     }
+  ],
+  "toddler-wont-hug-relatives": [
+    {
+      "title": "Consent: talking with children & teens — younger children's personal boundaries",
+      "publisher": "Raising Children Network",
+      "url": "https://raisingchildren.net.au/school-age/connecting-communicating/tough-topics/sexual-consent-how-to-talk-with-children-teens",
+      "supports": "Young children can be told it's their body and they can decide who hugs, kisses or tickles them, and that they can say no. Only this younger-children line is used; the rest of the page is about older kids and sexual consent and is not cited.",
+      "checkedAt": "2026-11-10T15:10:00+02:00"
+    },
+    {
+      "title": "Why you shouldn't force the kids to hug Granny at Christmas",
+      "publisher": "The Conversation",
+      "url": "https://theconversation.com/why-you-shouldnt-force-the-kids-to-hug-granny-at-christmas-108059",
+      "supports": "20 December 2018. Tell relatives in advance the child will choose the greeting; offer a choice (hug, high-five, fist-bump, wave); prepare the child that someone may ask; respect the answer; acknowledge the adult's disappointment.",
+      "checkedAt": "2026-11-10T15:10:00+02:00"
+    },
+    {
+      "title": "Doctor's Orders: Your Kids Don't Have to Hug Anyone",
+      "publisher": "Psychology Today — The Well Child",
+      "url": "https://www.psychologytoday.com/us/blog/the-well-child/202512/doctors-orders-your-kids-dont-have-to-hug-anyone",
+      "supports": "December 2025, a pediatrician author. Kids shouldn't be forced to show physical affection; respect over offending; a short line to the relative plus an alternative for the child, then move on. Cited once, as a secondary source.",
+      "checkedAt": "2026-11-10T15:10:00+02:00"
+    }
+  ],
+  "instead-of-threats": [
+    {
+      "title": "Tips for Giving Directions — Essentials for Parenting Toddlers",
+      "publisher": "CDC",
+      "url": "https://www.cdc.gov/parenting-toddlers/directions/good-directions.html",
+      "supports": "30 April 2026. Tell the child what to do, not just what to stop; offer two choices; use a neutral tone; give one warning, then follow through; before naming a consequence, check that you have the time and energy to follow through.",
+      "checkedAt": "2026-11-10T15:18:00+02:00"
+    },
+    {
+      "title": "Positive discipline for young children",
+      "publisher": "Caring for Kids — Canadian Paediatric Society",
+      "url": "https://caringforkids.cps.ca/handouts/behavior-and-development/positive-discipline-for-young-children",
+      "supports": "Last updated January 2020. Say what you mean, mean what you say, and follow through; use fewer words; tell children what they can do; talk to a health professional if the pattern is affecting the relationship.",
+      "checkedAt": "2026-11-10T15:18:00+02:00"
+    },
+    {
+      "title": "What's the Best Way to Discipline My Child?",
+      "publisher": "HealthyChildren.org — American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/english/family-life/family-dynamics/communication-discipline/pages/disciplining-your-child.aspx",
+      "supports": "Last updated 11/5/2018. Harsh verbal discipline and shaming are ineffective and harmful.",
+      "checkedAt": "2026-11-10T15:18:00+02:00"
+    },
+    {
+      "title": "Parental wellbeing — stepping out of the anger cycle (Hebrew)",
+      "publisher": "Israel Ministry of Health — parenting site",
+      "url": "https://me.health.gov.il/parenting/learn-more/family-parental-welfare/anger-management/",
+      "supports": "15 January 2025. Say what you will do to help the child keep the limit, and say what is allowed. Cited for meaning only.",
+      "checkedAt": "2026-11-10T15:18:00+02:00"
+    }
+  ],
+  "time-out-vs-time-in": [
+    {
+      "title": "How to Give a Time-Out",
+      "publisher": "HealthyChildren.org — American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/English/family-life/family-dynamics/communication-discipline/Pages/Time-Outs-101.aspx",
+      "supports": "Last updated 11/5/2018. One warning, name the behavior, a quiet place that is not the bedroom or playroom, one minute per year of age, return the child if they leave; from age 3 you can try “come back when you feel ready”; adults can take a time-out; time-outs can be used too much.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    },
+    {
+      "title": "How to Use Time-Out — Essentials for Parenting Toddlers",
+      "publisher": "CDC",
+      "url": "https://www.cdc.gov/parenting-toddlers/time-out/steps.html",
+      "supports": "30 April 2026. Use for dangerous, harmful or rule-breaking behavior, or not following a direction after one warning; one minute per year of age; no talking, looking or playing during; consider time-in when the child is in emotional distress. Curl returns 403 (bot block); content verified via fetch on 2026-11-10.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    },
+    {
+      "title": "Positive discipline techniques for kids under 5",
+      "publisher": "Arizona PBS",
+      "url": "https://azpbs.org/2026/11/positive-discipline-techniques-for-kids-under-5/",
+      "supports": "3 November 2026. For toddlers: redirection, routines, transition warnings and praise. For many toddlers, a time-in can work better than a time-out: staying close, helping them calm down and naming the feeling can teach more than sending them away alone. Does not ban time-out.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    },
+    {
+      "title": "Positive discipline for young children",
+      "publisher": "Caring for Kids — Canadian Paediatric Society",
+      "url": "https://caringforkids.cps.ca/handouts/behavior-and-development/positive-discipline-for-young-children",
+      "supports": "Last updated January 2020. Time-in as a connecting alternative; time-outs should not be used with children under the age of 3; time-out only after other positive methods.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    },
+    {
+      "title": "Are Timeouts Helpful or Harmful to Young Children?",
+      "publisher": "PBS KIDS for Parents",
+      "url": "https://www.pbs.org/parents/thrive/are-time-outs-helpful-or-harmful-to-young-children",
+      "supports": "Claire Lerner, 14 January 2016. An angry, shaming time-out can make things worse; a calm break can help when the child cannot accept comfort; children under 3 cannot be expected to reflect on what they did. Cited as the article; Lerner is not presented as someone who spoke to Kidsit.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    },
+    {
+      "title": "Disciplining Your Toddler",
+      "publisher": "Nemours KidsHealth",
+      "url": "https://kidshealth.org/en/parents/toddler-tantrums.html",
+      "supports": "Date reviewed February 2023. A short time-out from positive attention for hitting, biting or throwing food; kitchen chair or bottom stair; about 1 minute per year of age, and 3–5 minutes is plenty; calmly return the child if they get up, without talking. The page also uses “time-in” to mean praise for good behavior — that definition was not borrowed.",
+      "checkedAt": "2026-11-10T15:35:00+02:00"
+    }
+  ],
+  "toddler-refuses-bath": [
+    {
+      "title": "Fear of the bath: babies and toddlers",
+      "publisher": "Raising Children Network",
+      "url": "https://raisingchildren.net.au/newborns/behaviour/common-concerns/fear-of-the-bath",
+      "supports": "Toddlers may fear the drain noise, slipping, hair washing or soap in the eyes; there is no need to force a very upset child; a predictable routine helps; take the child out before pulling the plug; a bath cap or goggles can help; never leave the room.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    },
+    {
+      "title": "הילד מסרב להתקלח: תירוץ או בעיה בוויסות החושי?",
+      "publisher": "Hillel Yaffe Medical Center — occupational therapy service",
+      "url": "https://hymc.org.il/?ArticleID=10025&CategoryID=2447",
+      "supports": "29 June 2023. Toddlers' refusal is often ordinary resistance; extreme, repeated distress despite a calm setup, together with other sensory signs (picky eating, noise sensitivity, avoiding sand or certain clothes), is worth an occupational-therapy consultation. A gentle rinse with a cup or hand is preferable to a strong shower stream.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    },
+    {
+      "title": "Hairwashing for children: tips and advice",
+      "publisher": "NHS Children and Family Health Devon",
+      "url": "https://childrenandfamilyhealthdevon.nhs.uk/resources/hairwashing-for-children-tips-and-advice/",
+      "supports": "Bring water to the head with a jug, count the rinses, use a visor, goggles or flannel over the eyes, let the child lather themselves, and lean forward instead of back.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    },
+    {
+      "title": "Bathroom Safety",
+      "publisher": "HealthyChildren.org — American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/English/safety-prevention/at-home/Pages/Bathroom-Safety.aspx",
+      "supports": "Last updated 1/24/2017. Never leave a young child alone in the bath, even for a moment.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    },
+    {
+      "title": "בטיחות ילדים במים וטביעות ילדים",
+      "publisher": "Israel Ministry of Health",
+      "url": "https://me.health.gov.il/parenting/raising-children/safe-environment/home-safety/child-water-safety-drowning-prevention/",
+      "supports": "23 April 2026. Do not leave toddlers alone in the bath, even for a moment.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    },
+    {
+      "title": "רווחה הורית - לצאת ממעגל הכעס",
+      "publisher": "Israel Ministry of Health",
+      "url": "https://me.health.gov.il/parenting/learn-more/family-parental-welfare/anger-management/",
+      "supports": "15 January 2025. A defined choice and play appear as ways out of a stand-off. Cited for that principle only; examples were not copied.",
+      "checkedAt": "2026-11-10T15:25:00+02:00"
+    }
+  ],
+  "preschooler-lying": [
+    {
+      "title": "When Children Lie: What Parents Can Do",
+      "publisher": "HealthyChildren (AAP)",
+      "url": "https://www.healthychildren.org/English/family-life/family-dynamics/communication-discipline/Pages/when-children-lie.aspx",
+      "supports": "Updated 18 March 2025. Children under about 6 often have difficulty telling fantasy from reality; harsh punishment is usually not effective; the parent's own honesty is the main teacher; persistent lying can be a sign that help is needed.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "When Young Children Lie",
+      "publisher": "ZERO TO THREE",
+      "url": "https://www.zerotothree.org/resource/when-young-children-lie/",
+      "supports": "13 February 2017. Very common for preschoolers; self-control still developing; fear of a reaction drives lying; don't ask if they did it when you already know — describe and offer a repair.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "Children & lying",
+      "publisher": "Raising Children Network",
+      "url": "https://raisingchildren.net.au/preschoolers/behaviour/common-concerns/lies",
+      "supports": "Lying often starts around 2–3 and is more common at 4–6; praise the admission; don't label the child a liar; talk to a professional if lying is constant with other worrying behavior, or if the child seems afraid to tell you something or may be covering for someone.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "Why Kids Lie and What Parents Can Do About It",
+      "publisher": "Child Mind Institute",
+      "url": "https://childmind.org/article/why-kids-lie/",
+      "supports": "Last reviewed or updated 12 February 2026. Avoid labeling a child a liar. Use only the avoid-labeling and occasional-versus-persistent points; most of the page is about older children. Curl can return 403 (bot block); content verified via fetch on 2026-11-12.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    }
+  ],
+  "preschooler-wont-talk-about-day": [
+    {
+      "title": "What happened today?",
+      "publisher": "South Australia Department for Education",
+      "url": "https://www.education.sa.gov.au/parents-and-families/curriculum-and-learning/early-years/learning-with-your-child-greatstart/word-play/what-happened-today",
+      "supports": "Early-years activity, birth to 5. Make time at the end of the day to talk; give the child time to think and respond; mix open and closed questions; make a routine for catching up (for example dinner or bath time).",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "Talking & listening activities: 3–6 years",
+      "publisher": "Raising Children Network",
+      "url": "https://raisingchildren.net.au/guides/activity-guides/letters-words-and-stories/talking-and-listening-activity-children-3-6-years",
+      "supports": "Talk whenever you're together; a special place or time each day (for example after getting into bed).",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "Improving Family Communications",
+      "publisher": "HealthyChildren (AAP)",
+      "url": "https://www.healthychildren.org/English/family-life/family-dynamics/communication-discipline/Pages/Improving-Family-Communications.aspx",
+      "supports": "Updated 15 December 2025. Undivided attention; turn off the TV; be a good listener; ask about feelings; repeat back what you heard.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    },
+    {
+      "title": "Selective Mutism",
+      "publisher": "ASHA (American Speech-Language-Hearing Association)",
+      "url": "https://www.asha.org/public/speech/disorders/selective-mutism/",
+      "supports": "Last reviewed 1 May 2026. Closing box only: a child who talks freely at home but not at all at gan for more than a month (not counting the first month of a new setting), and it gets in the way of playing or joining in — start by talking to your doctor. Do not name a diagnosis on the page. HTTP 200 on 2026-11-12.",
+      "checkedAt": "2026-11-12T08:20:00+02:00"
+    }
   ]
 }

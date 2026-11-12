@@ -115,6 +115,12 @@ const PAIRS: { he: string; en: string }[] = [
   { he: "hadrachat-horim", en: "parent-coaching" },
   { he: "kidsit-vs-chatgpt", en: "kidsit-vs-chatgpt" },
   { he: "hachana-lifgishat-hadracha", en: "prepare-for-parent-coaching-session" },
+  { he: "lo-rotze-leneshek-et-savta", en: "toddler-wont-hug-relatives" },
+  { he: "bimkom-iyumim", en: "instead-of-threats" },
+  { he: "tayeem-aut-o-tayeem-ein", en: "time-out-vs-time-in" },
+  { he: "yeled-lo-rotze-lehitkaleach", en: "toddler-refuses-bath" },
+  { he: "yeled-meshaker", en: "preschooler-lying" },
+  { he: "ma-asita-hayom-bagan", en: "preschooler-wont-talk-about-day" },
 ];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {

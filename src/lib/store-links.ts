@@ -68,8 +68,41 @@ function fit(prefix: string, variable: string, suffix: string, max: number, opti
   return token(prefix, max);
 }
 
-/** Default ct: <lang>-<page>[-<pl>], page cut first so lang and placement survive. */
+/**
+ * HE/EN posts that use different slugs but should share one App Store `ct` and
+ * Play `utm_campaign` (the English slug, no lang prefix). Other pages stay
+ * <lang>-<page> from the later store-attribution change.
+ */
+const SHARED_STORE_CAMPAIGN: Record<string, string> = {
+  "lo-rotze-leneshek-et-savta": "toddler-wont-hug-relatives",
+  "toddler-wont-hug-relatives": "toddler-wont-hug-relatives",
+  "bimkom-iyumim": "instead-of-threats",
+  "instead-of-threats": "instead-of-threats",
+  "tayeem-aut-o-tayeem-ein": "tayeem-aut-o-tayeem-ein",
+  "time-out-vs-time-in": "tayeem-aut-o-tayeem-ein",
+  "yeled-lo-rotze-lehitkaleach": "toddler-refuses-bath",
+  "toddler-refuses-bath": "toddler-refuses-bath",
+  "yeled-meshaker": "yeled-meshaker",
+  "preschooler-lying": "yeled-meshaker",
+  "ma-asita-hayom-bagan": "ma-asita-hayom-bagan",
+  "preschooler-wont-talk-about-day": "ma-asita-hayom-bagan",
+};
+
+function sharedCampaign(page: string): string | undefined {
+  const v = SHARED_STORE_CAMPAIGN[page];
+  return v ? campaignToken(v) : undefined;
+}
+
+/** Play utm_campaign, and the page token used in default ct. */
+function defaultCampaign(link: StoreLink): string {
+  return sharedCampaign(link.page) ?? `${link.lang}-${campaignToken(link.page)}`;
+}
+
+/** Default ct: <lang>-<page>[-<pl>], page cut first so lang and placement survive.
+ *  Shared-campaign posts use <campaign>[-<pl>] with no lang prefix, so both languages match. */
 export function defaultCt(link: StoreLink): string {
+  const shared = sharedCampaign(link.page);
+  if (shared) return fit("", shared, PL_CT[link.placement], APP_STORE_CT_MAX);
   return fit(link.lang, token(link.page, 200) || "site", PL_CT[link.placement], APP_STORE_CT_MAX);
 }
 
@@ -79,17 +112,17 @@ export function ctFor(link: StoreLink, touch?: Touch | null): string {
     // ad-<source>-<campaign>[-<lang>]: source ≤ 12 chars; campaign falls back to the page token; lang only if it fits.
     const src = token(touch.source, 12) || "other";
     const utmCamp = token(touch.utm_campaign ?? "", 200);
-    const camp = utmCamp || `${link.lang}-${token(link.page, 200) || "site"}`;
+    const camp = utmCamp || defaultCampaign(link);
     return fit(`ad-${src}`, camp, "", APP_STORE_CT_MAX, utmCamp ? link.lang : "");
   }
   // organic source: <source>-<lang>-<page>[-<pl>], page cut first.
   const src = token(touch.source, 16) || "other";
-  return fit(`${src}-${link.lang}`, token(link.page, 200) || "site", PL_CT[link.placement], APP_STORE_CT_MAX);
+  return fit(`${src}-${link.lang}`, sharedCampaign(link.page) || token(link.page, 200) || "site", PL_CT[link.placement], APP_STORE_CT_MAX);
 }
 
 export function playReferrer(link: StoreLink, touch?: Touch | null, opts: { includeClickId?: boolean } = {}): string {
   const q = new URLSearchParams();
-  const campaign = `${link.lang}-${campaignToken(link.page)}`;
+  const campaign = defaultCampaign(link);
   if (touch && touch.source !== "direct" && touch.paid) {
     const clip = (v: string) => v.slice(0, MAX_VALUE);
     q.set("utm_source", clip(touch.utm_source ?? touch.source));

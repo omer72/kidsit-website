@@ -143,3 +143,101 @@ test("helpers", () => {
   assert.equal(APP_STORE_URL, "https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099");
   assert.equal(PLAY_STORE_URL, "https://play.google.com/store/apps/details?id=ai.kidsit.app");
 });
+
+test("shared campaign: HE/EN toddler-hug posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "lo-rotze-leneshek-et-savta", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "toddler-wont-hug-relatives", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "toddler-wont-hug-relatives");
+  assert.equal(defaultCt(enPost), "toddler-wont-hug-relatives");
+  assert.equal(defaultCt(heBar), "toddler-wont-hug-relatives-bar");
+  assert.equal(defaultCt(enBar), "toddler-wont-hug-relatives-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "toddler-wont-hug-relatives");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "toddler-wont-hug-relatives-bar");
+  // other posts stay lang-prefixed
+  assert.equal(defaultCt(post), "en-kidsit-vs-chatgpt");
+});
+
+test("shared campaign: HE/EN instead-of-threats posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "bimkom-iyumim", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "instead-of-threats", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "instead-of-threats");
+  assert.equal(defaultCt(enPost), "instead-of-threats");
+  assert.equal(defaultCt(heBar), "instead-of-threats-bar");
+  assert.equal(defaultCt(enBar), "instead-of-threats-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "instead-of-threats");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "instead-of-threats-bar");
+});
+
+test("shared campaign: HE/EN time-out-vs-time-in posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "tayeem-aut-o-tayeem-ein", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "time-out-vs-time-in", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "tayeem-aut-o-tayeem-ein");
+  assert.equal(defaultCt(enPost), "tayeem-aut-o-tayeem-ein");
+  assert.equal(defaultCt(heBar), "tayeem-aut-o-tayeem-ein-bar");
+  assert.equal(defaultCt(enBar), "tayeem-aut-o-tayeem-ein-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=tayeem-aut-o-tayeem-ein&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=tayeem-aut-o-tayeem-ein&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=tayeem-aut-o-tayeem-ein&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "tayeem-aut-o-tayeem-ein");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "tayeem-aut-o-tayeem-ein-bar");
+});
+
+test("shared campaign: HE/EN toddler-refuses-bath posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "yeled-lo-rotze-lehitkaleach", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "toddler-refuses-bath", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "toddler-refuses-bath");
+  assert.equal(defaultCt(enPost), "toddler-refuses-bath");
+  assert.equal(defaultCt(heBar), "toddler-refuses-bath-bar");
+  assert.equal(defaultCt(enBar), "toddler-refuses-bath-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-refuses-bath&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-refuses-bath&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-refuses-bath&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "toddler-refuses-bath");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "toddler-refuses-bath-bar");
+});
+
+test("shared campaign: HE/EN preschooler-lying posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "yeled-meshaker", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "preschooler-lying", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "yeled-meshaker");
+  assert.equal(defaultCt(enPost), "yeled-meshaker");
+  assert.equal(defaultCt(heBar), "yeled-meshaker-bar");
+  assert.equal(defaultCt(enBar), "yeled-meshaker-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=yeled-meshaker&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=yeled-meshaker&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=yeled-meshaker&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "yeled-meshaker");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "yeled-meshaker-bar");
+});
+
+test("shared campaign: HE/EN preschooler-wont-talk-about-day posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "ma-asita-hayom-bagan", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "preschooler-wont-talk-about-day", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "ma-asita-hayom-bagan");
+  assert.equal(defaultCt(enPost), "ma-asita-hayom-bagan");
+  assert.equal(defaultCt(heBar), "ma-asita-hayom-bagan-bar");
+  assert.equal(defaultCt(enBar), "ma-asita-hayom-bagan-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=ma-asita-hayom-bagan&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=ma-asita-hayom-bagan&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=ma-asita-hayom-bagan&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "ma-asita-hayom-bagan");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "ma-asita-hayom-bagan-bar");
+});
