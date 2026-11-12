@@ -11,11 +11,11 @@
 //
 // A provider without a key is skipped. Output: tmp/tts-compare/*.mp3 + index.html.
 
-import { createSign } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { failText, googleAuth } from "./tts-providers.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "tmp/tts-compare");
@@ -101,11 +101,6 @@ export function spokenChars(md) {
 
 // ---------- providers ----------
 
-async function failText(r) {
-  const t = await r.text().catch(() => "");
-  return `HTTP ${r.status}: ${t.slice(0, 300)}`;
-}
-
 const openai = {
   name: "openai",
   enabled: () => !!process.env.OPENAI_API_KEY,
@@ -130,37 +125,6 @@ const openai = {
     return { audio: Buffer.from(await r.arrayBuffer()), model };
   },
 };
-
-let googleToken = null;
-async function googleAuth() {
-  if (process.env.GOOGLE_TTS_API_KEY)
-    return { query: `?key=${encodeURIComponent(process.env.GOOGLE_TTS_API_KEY)}`, headers: {} };
-  if (!googleToken) {
-    // Service-account JSON → signed JWT → OAuth access token (no SDK needed).
-    const sa = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, "utf8"));
-    const now = Math.floor(Date.now() / 1000);
-    const b64 = (o) => Buffer.from(JSON.stringify(o)).toString("base64url");
-    const unsigned = `${b64({ alg: "RS256", typ: "JWT" })}.${b64({
-      iss: sa.client_email,
-      scope: "https://www.googleapis.com/auth/cloud-platform",
-      aud: sa.token_uri || "https://oauth2.googleapis.com/token",
-      iat: now,
-      exp: now + 3600,
-    })}`;
-    const sig = createSign("RSA-SHA256").update(unsigned).sign(sa.private_key).toString("base64url");
-    const r = await fetch(sa.token_uri || "https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-        assertion: `${unsigned}.${sig}`,
-      }),
-    });
-    if (!r.ok) throw new Error(`Google token: ${await failText(r)}`);
-    googleToken = (await r.json()).access_token;
-  }
-  return { query: "", headers: { Authorization: `Bearer ${googleToken}` } };
-}
 
 const google = {
   name: "google",

@@ -38,3 +38,7 @@ next-env.d.ts
 
 # blog audio comparison clips (scripts/tts-compare.mjs)
 /tmp/
+# blog audio: kept out of git until the storage decision (Blob or LFS); see scripts/generate-blog-audio.mjs
+/public/audio/blog/
+# local secrets (never commit)
+.env

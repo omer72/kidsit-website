@@ -1,0 +1,34 @@
+{
+  "_comment": "Voice per post language for scripts/generate-blog-audio.mjs. Changing provider, model, voice, settings or output re-renders that language only (the manifest hash covers them). Picked by Omer from the phase 1 comparison on 2026-11-12. pricePer1kChars and charsPerMinute are estimates used only for the cost print.",
+  "output": {
+    "lufs": -16,
+    "truePeak": -2,
+    "lra": 11,
+    "sampleRate": 44100,
+    "channels": 1,
+    "bitrate": "64k"
+  },
+  "languages": {
+    "he": {
+      "provider": "elevenlabs",
+      "model": "eleven_v4",
+      "voice": "EXAVITQu4vr4xnSDxMaL",
+      "voiceName": "Sarah (female)",
+      "settings": { "output_format": "mp3_44100_128" },
+      "limit": { "unit": "chars", "max": 9000 },
+      "pricePer1kChars": 0.08,
+      "charsPerMinute": 627
+    },
+    "en": {
+      "provider": "google",
+      "model": "Chirp3-HD",
+      "voice": "en-US-Chirp3-HD-Aoede",
+      "voiceName": "Aoede (female)",
+      "languageCode": "en-US",
+      "settings": { "audioEncoding": "MP3" },
+      "limit": { "unit": "bytes", "max": 4500 },
+      "pricePer1kChars": 0.03,
+      "charsPerMinute": 884
+    }
+  }
+}
