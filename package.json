@@ -8,10 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "blog:audio": "node --env-file-if-exists=.env.tts.local --import tsx scripts/generate-blog-audio.mjs",
-    "test": "tsx --test src/lib/insights/*.test.ts src/lib/funnel/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts src/lib/store-links.test.ts src/lib/attribution.test.ts src/lib/admin/*.test.ts src/lib/blog-audio*.test.ts"
+    "test-store": "tsx --test src/lib/insights/*.test.ts src/lib/funnel/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts src/lib/store-links.test.ts src/lib/attribution.test.ts src/lib/admin/*.test.ts src/lib/blog-audio*.test.ts"
+    "test-store-trl": "tsx --test src/lib/insights/*.test.ts src/lib/funnel/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts src/lib/rtl-visual.test.ts src/lib/store-links.test.ts src/lib/attribution.test.ts src/lib/admin/*.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
+    "bidi-js": "^1.1.0",
     "framer-motion": "^12.42.2",
     "marked": "^15.0.12",
     "next": "14.2.35",

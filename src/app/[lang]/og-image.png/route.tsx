@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { LANGS, type Lang } from "@/dictionaries";
 import { colors } from "@/colors";
+import { visualOrder } from "@/lib/rtl-visual";
 
 // Share card at /<lang>/og-image.png, referenced (with per-language alt text) by ogFor() in src/lib/seo.ts.
 // A plain route handler instead of the opengraph-image file convention, because that convention only allows one
@@ -34,9 +35,10 @@ async function font(family: string, text: string) {
   return (await fetch(url)).arrayBuffer();
 }
 
-// Satori has no bidi algorithm: it lays glyphs out left to right, so a Hebrew string comes out
-// mirrored. The tagline is pure Hebrew letters and spaces, so reversing it gives the visual order.
-const visual = (text: string, dir: string) => (dir === "rtl" ? Array.from(text).reverse().join("") : text);
+// Satori has no bidi algorithm. visualOrder() produces the glyph order an LTR
+// shaper needs, so Hebrew is readable and a later Latin word such as Kidsit
+// is not reversed with it. The tagline is pure Hebrew, which happens to be a
+// full reverse; the helper still handles punctuation and mixed runs.
 
 // Read from disk at build time (the route is prerendered, see generateStaticParams above).
 const png = async (f: string) =>
@@ -73,7 +75,7 @@ export async function GET(_req: Request, { params }: { params: { lang: Lang } })
             style={{ borderRadius: 44 }}
           />
           <div style={{ fontSize: 84 }}>Kidsit AI</div>
-          <div style={{ fontSize: 40, color: colors.grape }}>{visual(t.tagline, t.dir)}</div>
+          <div style={{ fontSize: 40, color: colors.grape }}>{visualOrder(t.tagline, t.dir)}</div>
         </div>
         <div
           style={{
