@@ -3,6 +3,10 @@
 // and English) with several TTS providers so Omer can pick a voice by ear.
 // Generates only the comparison clips and prints the cost of voicing the blog.
 //
+// Keys live in a local, gitignored file (never in Vercel, never committed):
+//   node --env-file=../kidsit-website/.env.tts.local scripts/tts-compare.mjs
+// or exported in the shell:
+//
 //   OPENAI_API_KEY=... GOOGLE_TTS_API_KEY=... ELEVENLABS_API_KEY=... node scripts/tts-compare.mjs
 //
 // A provider without a key is skipped. Output: tmp/tts-compare/*.mp3 + index.html.
