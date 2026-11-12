@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogAudio } from "@/components/blog-audio";
 import { BlogInstallBar } from "@/components/blog-install-bar";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor, postShareImage } from "@/lib/seo";
 import { allSlugs, blogAlternate, formatPostDate, getPost, postLanguageAlternates } from "@/lib/blog";
+import { absoluteAudioUrl, blogAudioFor, isoDuration, listenLabel } from "@/lib/blog-audio";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 
 const COPY = {
@@ -54,6 +56,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
   const ui = COPY[lang];
   const shareImage = postShareImage(lang, post.slug, post.title);
   const alternate = blogAlternate(lang, post.slug);
+  const audio = blogAudioFor(lang, post.slug);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -69,6 +72,17 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
     publisher: { "@type": "Organization", name: "Kidsit AI", url: "https://kidsit.ai", logo: { "@type": "ImageObject", url: "https://kidsit.ai/icon-512.png" } },
     mainEntityOfPage: { "@type": "WebPage", "@id": `https://kidsit.ai${post.path}` },
     image: shareImage.url,
+    ...(audio
+      ? {
+          audio: {
+            "@type": "AudioObject",
+            contentUrl: absoluteAudioUrl(audio.src),
+            encodingFormat: "audio/mpeg",
+            duration: isoDuration(audio.duration),
+            inLanguage: lang,
+          },
+        }
+      : {}),
   };
   const faqLd =
     post.faq.length > 0
@@ -100,6 +114,12 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
             <p className="mt-1 text-sm font-bold text-ink-muted">{ui.reviewed(post.reviewer.name, post.reviewer.credential)}</p>
           ) : null}
           <h1 className="mt-2 min-w-0 text-balance break-words font-display text-4xl font-semibold">{post.title}</h1>
+          <BlogAudio
+            lang={lang}
+            slug={post.slug}
+            title={post.title}
+            audio={audio ? { src: audio.src, label: listenLabel(lang, audio.duration) } : null}
+          />
           <div className="blog-prose mt-8 text-ink/85" dangerouslySetInnerHTML={{ __html: post.html }} />
           {post.sources.length > 0 ? (
             <section className="blog-sources blog-prose mt-12 border-t-2 border-ink pt-8" aria-labelledby="post-sources-heading">

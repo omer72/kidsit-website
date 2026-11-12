@@ -35,3 +35,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+
+# blog audio comparison clips (scripts/tts-compare.mjs)
+/tmp/
+# blog audio: local copies; the served files are on Vercel Blob (scripts/generate-blog-audio.mjs)
+/public/audio/blog/
+# local secrets (never commit)
+.env

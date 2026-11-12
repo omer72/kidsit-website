@@ -1,0 +1,182 @@
+{
+  "en/kidsit-vs-chatgpt": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/en/kidsit-vs-chatgpt-9bbbb493.mp3",
+    "duration": 555,
+    "bytes": 4438143,
+    "hash": "9bbbb4932564be76c77d860dabb26c1a",
+    "provider": "google",
+    "model": "Chirp3-HD",
+    "voice": "en-US-Chirp3-HD-Aoede",
+    "generatedAt": "2026-11-12T12:33:19.986Z"
+  },
+  "en/parent-coaching": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/en/parent-coaching-2c61e29e.mp3",
+    "duration": 967,
+    "bytes": 7732497,
+    "hash": "2c61e29ebd12c5ce9df6a1ed185d4975",
+    "provider": "google",
+    "model": "Chirp3-HD",
+    "voice": "en-US-Chirp3-HD-Aoede",
+    "generatedAt": "2026-11-12T12:35:36.252Z"
+  },
+  "en/prepare-for-parent-coaching-session": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/en/prepare-for-parent-coaching-session-62eba26b.mp3",
+    "duration": 534,
+    "bytes": 4270541,
+    "hash": "62eba26b7d124552484587b03b9ccdae",
+    "provider": "google",
+    "model": "Chirp3-HD",
+    "voice": "en-US-Chirp3-HD-Aoede",
+    "generatedAt": "2026-11-12T12:36:52.725Z"
+  },
+  "en/screen-time-meltdown": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/en/screen-time-meltdown-8589d6c3.mp3",
+    "duration": 607,
+    "bytes": 4856520,
+    "hash": "8589d6c3d6f3a2a393ce0fab2c264878",
+    "provider": "google",
+    "model": "Chirp3-HD",
+    "voice": "en-US-Chirp3-HD-Aoede",
+    "generatedAt": "2026-11-12T12:38:20.197Z"
+  },
+  "he/gvulot-bli-tzeakot": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/gvulot-bli-tzeakot-a5bbf9d6.mp3",
+    "duration": 478,
+    "bytes": 3821444,
+    "hash": "a5bbf9d6ff7269358bdf69d3941dd9aa",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:36:04.812Z"
+  },
+  "he/hachana-lifgishat-hadracha": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hachana-lifgishat-hadracha-d5b57c07.mp3",
+    "duration": 635,
+    "bytes": 5080337,
+    "hash": "d5b57c07200319c2923a5ee9f5119627",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:39:33.285Z"
+  },
+  "he/hadrachat-horim": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hadrachat-horim-13c7c80c.mp3",
+    "duration": 928,
+    "bytes": 7421327,
+    "hash": "13c7c80c1b3c7d8df97992d284e5907a",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:44:12.791Z"
+  },
+  "he/hetkefei-zaam-gil-3": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hetkefei-zaam-gil-3-bd57407e.mp3",
+    "duration": 344,
+    "bytes": 2755857,
+    "hash": "bd57407e0e04c031ae05cdc6fec136d9",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:46:00.620Z"
+  },
+  "he/hitkef-zaam-super": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hitkef-zaam-super-3cd99aab.mp3",
+    "duration": 482,
+    "bytes": 3853418,
+    "hash": "3cd99aab5f8bfd0097f2a5b439969fda",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:48:34.136Z"
+  },
+  "he/kibui-masach": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/kibui-masach-570db9d7.mp3",
+    "duration": 680,
+    "bytes": 5442499,
+    "hash": "570db9d762a968ee8978296795f35c0b",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:52:00.037Z"
+  },
+  "he/kidsit-vs-chatgpt": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/kidsit-vs-chatgpt-92ac2462.mp3",
+    "duration": 606,
+    "bytes": 4846698,
+    "hash": "92ac2462f30fcdbdac6b815c84e857f1",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:55:02.847Z"
+  },
+  "he/ma-lehagid-hitkef-zaam": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/ma-lehagid-hitkef-zaam-2dcbb6ec.mp3",
+    "duration": 435,
+    "bytes": 3483524,
+    "hash": "2dcbb6ec0ea7eb78ae9423456e373494",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:57:15.464Z"
+  },
+  "he/maan-horut-ai": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/maan-horut-ai-6e17f46f.mp3",
+    "duration": 551,
+    "bytes": 4410767,
+    "hash": "6e17f46fb9f62dc128a924dbf8298414",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T13:59:55.575Z"
+  },
+  "he/milchamot-shena": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/milchamot-shena-fcdf2ce0.mp3",
+    "duration": 348,
+    "bytes": 2787204,
+    "hash": "fcdf2ce012e93a034f297e69fcd3c99c",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T14:36:14.190Z"
+  },
+  "he/preida-bagan": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/preida-bagan-5b780385.mp3",
+    "duration": 674,
+    "bytes": 5390045,
+    "hash": "5b7803856dbd77eb20aa08bba6d2fde0",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T14:39:45.604Z"
+  },
+  "he/rivim-bein-achim": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/rivim-bein-achim-3d08b5d7.mp3",
+    "duration": 326,
+    "bytes": 2609781,
+    "hash": "3d08b5d763e27af0eee1b692bd692235",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T14:41:35.409Z"
+  },
+  "he/tzakti-al-hayeled": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/tzakti-al-hayeled-7f83d6db.mp3",
+    "duration": 654,
+    "bytes": 5228713,
+    "hash": "7f83d6db933b8bcd81195f6352027193",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T14:45:03.327Z"
+  },
+  "he/yeled-marbitz": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/yeled-marbitz-25544535.mp3",
+    "duration": 725,
+    "bytes": 5798391,
+    "hash": "25544535c93c4fcfb6d0e71feb653ebc",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-12T14:48:42.662Z"
+  }
+}

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx --test src/lib/insights/*.test.ts src/lib/funnel/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts src/lib/rtl-visual.test.ts src/lib/store-links.test.ts src/lib/attribution.test.ts src/lib/admin/*.test.ts"
+    "blog:audio": "node --env-file-if-exists=.env.tts.local --import tsx scripts/generate-blog-audio.mjs",
+    "test": "tsx --test src/lib/insights/*.test.ts src/lib/funnel/*.test.ts src/lib/meta-pixel.test.ts src/lib/blog-covers.test.ts src/lib/rtl-visual.test.ts src/lib/store-links.test.ts src/lib/attribution.test.ts src/lib/admin/*.test.ts src/lib/blog-audio*.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
@@ -22,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vercel/blob": "2.8.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
