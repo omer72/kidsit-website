@@ -10,7 +10,10 @@
 // The voice per post language is in content/blog/tts-voices.json; pronunciation fixes in
 // content/blog/tts-lexicon.<lang>.json. Hebrew needs ELEVENLABS_API_KEY, English GOOGLE_TTS_API_KEY or
 // GOOGLE_APPLICATION_CREDENTIALS (the npm script reads .env.tts.local). A language whose key is missing
-// is skipped and reported. Output: public/audio/blog/<lang>/<slug>.mp3 + content/blog/audio-manifest.json.
+// is skipped and reported. Each file is rendered to public/audio/blog/<lang>/<slug>.mp3 (gitignored, a
+// local copy) and, with BLOB_READ_WRITE_TOKEN set, uploaded to Vercel Blob; content/blog/audio-manifest.json
+// then holds the Blob URL. Without the token the manifest points at the local copy (dev only): rerun with
+// the token to upload what was generated, at no API cost, before committing the manifest.
 
 import { execFileSync, spawnSync } from "node:child_process";
 import {
@@ -24,6 +27,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { dirname, join } from "node:path";
+import { del, put } from "@vercel/blob";
 import { createInterface } from "node:readline/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { applyLexicon, audioHash, chunkText, needsAudio, speechFromMarkdown } from "../src/lib/blog-audio-text.ts";
@@ -33,7 +37,6 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BLOG = join(ROOT, "content/blog");
 const MANIFEST = join(BLOG, "audio-manifest.json");
 const OUT_DIR = join(ROOT, "public/audio/blog");
-const SIZE_LIMIT = 25 * 1024 * 1024; // above this, the files go to Blob or LFS instead of git
 const LANGS = ["he", "en"];
 const PAUSE_SECONDS = 0.4; // between chunks
 
@@ -62,6 +65,18 @@ const readJson = (file) => JSON.parse(readFileSync(file, "utf8"));
 const mb = (bytes) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 const money = (n) => `$${n.toFixed(2)}`;
 const kbps = (bitrate) => Number.parseInt(bitrate, 10) || 64;
+const isRemote = (src) => /^https:\/\//.test(src || "");
+
+/** Uploads under a path named by the hash, so it can be cached for a year, and deletes the file it replaces. */
+async function upload(item, previous) {
+  const { url } = await put(
+    `blog-audio/${item.lang}/${item.slug}-${item.hash.slice(0, 8)}.mp3`,
+    readFileSync(item.outFile),
+    { access: "public", contentType: "audio/mpeg", addRandomSuffix: false, allowOverwrite: true, cacheControlMaxAge: 31536000 },
+  );
+  if (isRemote(previous) && previous !== url) await del(previous);
+  return url;
+}
 
 function hasTool(name) {
   return spawnSync(name, ["-version"], { stdio: "ignore" }).status === 0;
@@ -152,8 +167,9 @@ async function main() {
       const hash = audioHash(text, voice, config.output);
       const key = `${lang}/${slug}`;
       const outFile = join(OUT_DIR, lang, `${slug}.mp3`);
-      const current = !needsAudio(manifest[key], hash, existsSync(outFile), opts.force.has(slug));
-      plan.push({ lang, slug, key, voice, text, hash, outFile, current });
+      const src = manifest[key]?.src;
+      const current = !needsAudio(manifest[key], hash, isRemote(src) || existsSync(outFile), opts.force.has(slug));
+      plan.push({ lang, slug, key, voice, text, hash, outFile, current, localOnly: current && !isRemote(src) });
     }
   }
   const unknown = [...opts.slugs].filter((s) => !found.has(s));
@@ -183,11 +199,15 @@ async function main() {
     );
   }
   const runnable = todo.filter((p) => !skippedLangs.has(p.lang));
-  if (!todo.length) return console.log("Nothing to generate: every selected post is up to date.");
+  const blob = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  const uploads = blob ? plan.filter((p) => p.localOnly) : [];
+  console.log(blob ? "Files go to Vercel Blob." : "BLOB_READ_WRITE_TOKEN not set: files stay local (dev only).");
+  if (uploads.length) console.log(`${uploads.length} generated post(s) to upload, no API cost.`);
+  if (!todo.length && !uploads.length) return console.log("Nothing to generate: every selected post is up to date.");
   if (opts.dryRun) return console.log("Dry run: nothing generated.");
-  if (!runnable.length) throw new Error("Every language with work to do is missing its key.");
+  if (!runnable.length && !uploads.length) throw new Error("Every language with work to do is missing its key.");
 
-  if (!opts.yes) {
+  if (runnable.length && !opts.yes) {
     if (!process.stdin.isTTY) throw new Error("Pass --yes to generate without a prompt.");
     const rl = createInterface({ input: process.stdin, output: process.stdout });
     const answer = await rl.question(`Generate ${runnable.length} post(s) for about ${money(totalCost)}? [y/N] `);
@@ -214,6 +234,7 @@ async function main() {
       else writeFileSync(item.outFile, Buffer.concat(files.map((f) => readFileSync(f))));
       const bytes = statSync(item.outFile).size;
       const seconds = duration(item.outFile, bytes, config.output);
+      const previous = manifest[item.key]?.src;
       manifest[item.key] = {
         src: `/audio/blog/${item.lang}/${item.slug}.mp3`,
         duration: Math.round(seconds),
@@ -224,7 +245,12 @@ async function main() {
         voice: item.voice.voice,
         generatedAt: new Date().toISOString(),
       };
-      writeManifest(manifest); // after every post, so an interrupted run keeps what it finished
+      // Written before the upload too, so an interrupted run or a failed upload never pays for the audio twice.
+      writeManifest(manifest);
+      if (blob) {
+        manifest[item.key].src = await upload(item, previous);
+        writeManifest(manifest);
+      }
       console.log(`  ✓ ${item.key}  ${chunks.length} chunk(s), ${Math.round(seconds)} s, ${mb(bytes)}`);
     } catch (err) {
       failures.push(`${item.key}: ${err.message}`);
@@ -234,18 +260,27 @@ async function main() {
     }
   }
 
-  const total = LANGS.flatMap((lang) =>
-    existsSync(join(OUT_DIR, lang))
-      ? readdirSync(join(OUT_DIR, lang)).map((f) => statSync(join(OUT_DIR, lang, f)).size)
-      : [],
-  ).reduce((a, b) => a + b, 0);
+  for (const item of uploads) {
+    try {
+      manifest[item.key].src = await upload(item, null);
+      writeManifest(manifest);
+      console.log(`  ↑ ${item.key}  uploaded`);
+    } catch (err) {
+      failures.push(`${item.key}: upload: ${err.message}`);
+      console.log(`  ✗ ${item.key}: upload: ${err.message}`);
+    }
+  }
+
   console.log(
     `\nGenerated ${runnable.length - failures.length}, failed ${failures.length}, up to date ${plan.length - todo.length}.`,
   );
   for (const [lang, reason] of skippedLangs) console.log(`Skipped ${lang}: ${reason}`);
-  console.log(`public/audio/blog holds ${mb(total)}.`);
-  if (total > SIZE_LIMIT) {
-    console.log(`That is over ${mb(SIZE_LIMIT)}: do not commit these files; store them in Vercel Blob or Git LFS.`);
+  const local = Object.keys(manifest).filter((k) => !isRemote(manifest[k].src));
+  if (local.length) {
+    console.log(
+      `${local.length} manifest entr${local.length === 1 ? "y points" : "ies point"} at local files that are not deployed. ` +
+        "Set BLOB_READ_WRITE_TOKEN and rerun to upload them before committing the manifest.",
+    );
   }
   if (failures.length) process.exitCode = 1;
 }

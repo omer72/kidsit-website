@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import manifest from "../../content/blog/audio-manifest.json";
 import { isoDuration, listenLabel, absoluteAudioUrl } from "./blog-audio";
 import { applyLexicon, audioHash, chunkText, measure, needsAudio, speechFromMarkdown, type VoiceConfig } from "./blog-audio-text";
 
@@ -150,4 +151,10 @@ test("ISO 8601 duration and absolute audio URL for schema.org", () => {
   assert.equal(isoDuration(0), "PT0S");
   assert.equal(absoluteAudioUrl("/audio/blog/he/x.mp3"), "https://kidsit.ai/audio/blog/he/x.mp3");
   assert.equal(absoluteAudioUrl("https://cdn.example/x.mp3"), "https://cdn.example/x.mp3");
+});
+
+test("audio manifest: every file is on Vercel Blob, never a local path (public/audio/blog is not deployed)", () => {
+  for (const [key, entry] of Object.entries(manifest as Record<string, { src: string }>)) {
+    assert.match(entry.src, /^https:\/\/[^/]+\.public\.blob\.vercel-storage\.com\//, key);
+  }
 });
