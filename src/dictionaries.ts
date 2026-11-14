@@ -207,7 +207,7 @@ const en = {
         a: "In app 1.0.13, Settings turns it on and chooses weekly or daily. The summary is built on the device for the open child from moments already stored there, covering either the current week or today, and it does not call a model. It counts each situation by whether it helped, did not help, or has no rating, and adds up to three fixed sentences about what stands out. On the phone a local reminder can also be set, and its text is a fixed line with no child's name.",
       },
       {
-        q: "How does the free trial work?",
+        q: "What can I do for free?",
         a: "Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
@@ -437,7 +437,7 @@ const he: Dict = {
         a: "באפליקציה 1.0.13 מפעילים את הסיכום בהגדרות ובוחרים שבועי או יומי. הסיכום נבנה במכשיר עבור הילד הפתוח, מהרגעים שכבר שמורים שם, לשבוע הנוכחי או להיום, בלי קריאה למודל. הוא סופר כל סוג מצב לפי עזר, לא עזר או בלי דירוג, ומוסיף עד שלושה משפטים קבועים על מה שבולט. באפליקציה אפשר גם לקבוע תזכורת מקומית עם משפט קבוע, בלי שם הילד.",
       },
       {
-        q: "איך עובד הניסיון החינמי?",
+        q: "מה אפשר לעשות בחינם?",
         a: "3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
       },
       {
