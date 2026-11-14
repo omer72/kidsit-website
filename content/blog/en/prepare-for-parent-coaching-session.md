@@ -1,6 +1,6 @@
 ---
 date: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-12
 slug: /en/blog/prepare-for-parent-coaching-session
 title_tag: "How to Prepare for a Parent Coaching or Therapy Session: What to Note Between Sessions | Kidsit AI"
 meta_description: "The week fades before the session. A 4-line template for hard moments, what to bring to parent coaching or your child's therapist, and how to open the session."
@@ -165,7 +165,7 @@ If there is a safety concern, a sharp change, or a parent in distress, do not wa
 
 ## Start now
 
-Next time there's a hard moment, tell Kidsit what happened. Your first child is free, and saving moments doesn't need a subscription. Turn on the daily or weekly summary in Settings, and open it before your session to remember. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Next time there's a hard moment, tell Kidsit what happened. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Turn on the daily or weekly summary in Settings, and open it before your session to remember. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 ---
 
