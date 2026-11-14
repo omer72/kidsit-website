@@ -1,6 +1,6 @@
 ---
 date: 2026-10-19
-updated: 2026-10-30
+updated: 2026-11-12
 slug: /he/blog/rivim-bein-achim
 title_tag: "ריבים בין אחים: מתי להתערב ומה להגיד | Kidsit AI"
 meta_description: "האחים שוב רבים? איך להפסיק להיות שופטים, מתי כן להתערב, ומשפטים מעשיים שעוזרים לילדים ללמוד לפתור מריבות בעצמם."
@@ -74,7 +74,7 @@ secondary_queries: ["מריבות בין אחים מה עושים", "קנאת א
 
 עם שני ילדים או יותר, מה שעובד עם אחד לא תמיד עובד עם השני. ב-**Kidsit AI** לכל ילד יש פרופיל משלו. מספרים מה קרה ("הגדול בן 6 דחף את הקטנה בת 3 בגלל הלגו") ומקבלים הסבר קצר, שלושה דברים לנסות ומה להגיד, ומשפט חם לפני השינה. האפליקציה זוכרת את הרגעים של כל ילד ומתאימה את עצמה לאורך זמן.
 
-**אפשר להתחיל בחינם עם ילד אחד. ילדים נוספים ב-Premium, עם 7 ימי ניסיון חינם.** [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ---
 

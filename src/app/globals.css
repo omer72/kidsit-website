@@ -325,6 +325,19 @@ html[dir="rtl"] .cookie-table code {
 .blog-prose .behavior-log li {
   overflow-wrap: anywhere;
 }
+/* Distinct closing note (e.g. "more than a hard moment"), not a screenshot. */
+.blog-prose .blog-note {
+  margin-top: 1rem;
+  border: 2px solid theme("colors.ink");
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+}
+.blog-prose .blog-note > :first-child {
+  margin-top: 0;
+}
+.blog-prose .blog-note li {
+  overflow-wrap: anywhere;
+}
 .blog-sources a {
   overflow-wrap: anywhere;
 }

@@ -1,6 +1,6 @@
 ---
 date: 2026-10-19
-updated: 2026-10-30
+updated: 2026-11-12
 slug: /he/blog/hetkefei-zaam-gil-3
 title_tag: "התקפי זעם בגיל 3: למה ילד בן 3 מתפרץ | Kidsit AI"
 meta_description: "התקפי זעם בגיל 3 נפוצים כשהרצון גדול והוויסות עוד קטן. מה קורה לילד בן 3 בסערה, ומה עוזר בלי לצעוק."
@@ -69,7 +69,7 @@ secondary_queries: ["איך להרגיע ילד בהתקף זעם", "ילד בן
 
 לפעמים הבעיה היא לא שאתם לא יודעים מה לעשות, אלא שבאמצע הרעש קשה להיזכר. ב-**Kidsit AI** לוחצים על המיקרופון, לוחשים מה קרה, ותוך כמה שניות מקבלים: הסבר קצר למה זה אולי קרה, שלושה דברים לנסות (כולל משפט שאפשר להגיד), ומשפט חם לפני השינה. האפליקציה זוכרת את הרגעים של כל ילד, ואם סימנתם "לא עזר", התשובה הבאה תנסה כיוון אחר.
 
-**אפשר להתחיל בחינם עם ילד אחד, ללא הגבלת זמן.** [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ---
 

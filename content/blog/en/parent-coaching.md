@@ -1,6 +1,6 @@
 ---
 date: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-12
 slug: /en/blog/parent-coaching
 title_tag: "Parent Coaching: What It Is, When to Reach Out | Kidsit AI"
 meta_description: "What parent coaching is, how it differs from therapy, when to reach out, and which options exist in Israel, including at no cost. Kidsit is an AI tool, not parent coaching and not therapy."
@@ -65,7 +65,7 @@ No option fits everyone. This is a map, not a ranking.
 | A workshop or a parents' group | You want shared tools and other parents | Meetings by topic or by age | It varies |
 | A public service | You want to start through a health fund, the Ministry of Health, or a municipality | A group meeting, a series of meetings, or a phone line | Some at no cost, some paid. Check eligibility |
 | A book or a recorded course | You want to understand at your own pace, in the evening | Reading or watching | It varies |
-| An AI app for the moment (Kidsit) | You need words now, inside the moment | You say out loud what happened, and you get a short plan | One child is free, with no time limit. Premium includes a 7-day free trial |
+| An AI app for the moment (Kidsit) | You need words now, inside the moment | You say out loud what happened, and you get a short plan | Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. |
 
 ### A private parent coach
 
@@ -169,7 +169,7 @@ Do not copy a phone number from here to somewhere else without opening the page.
 
 ## Start now
 
-Want words for the next moment? Try Kidsit. One child is free, with no time limit. Premium includes a 7-day free trial. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Want words for the next moment? Try Kidsit. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 And if you have decided on coaching, the checklist above will help in the first conversation. You can do both: a person for the process, and an AI tool for the moment itself.
 

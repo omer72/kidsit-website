@@ -156,11 +156,11 @@ const en = {
     ],
   },
   pricing: {
-    heading: "One child without a subscription. Premium may include a trial when one is offered.",
-    sub: "Premium may start with a trial when one is offered. Availability, length, and eligibility can vary — check the current offer in the app. Cancel anytime from your App Store or Google Play subscriptions.",
+    heading: "Your first 3 guidance answers are free.",
+    sub: "After that, new guidance needs Premium, which also adds unlimited children. Cancel anytime from your App Store or Google Play subscriptions.",
     toggleLabel: "Billing period",
-    yearlyNote: "That’s $5.00/month, billed yearly after any trial that is offered and for which you are eligible.",
-    monthlyNote: "Billed monthly after any trial that is offered and for which you are eligible.",
+    yearlyNote: "That’s $5.00/month, billed yearly after a 7-day free trial for new subscribers.",
+    monthlyNote: "Billed monthly.",
     monthly: "Monthly",
     yearly: "Yearly · save 50%",
     perMonth: "/month",
@@ -170,16 +170,15 @@ const en = {
     free: {
       name: "Try it",
       desc: "For getting to know the coach.",
-      price: "Start without a subscription",
-      cadence: "one child",
-      features: ["One child profile", "Voice or typed moments", "New guidance requires an active subscription or trial"],
+      price: "3 guidance answers free",
+      cadence: "one child, no account",
+      features: ["One child profile", "Voice or typed moments", "Then new guidance needs Premium"],
     },
     premium: {
       name: "Premium",
       desc: "Everything, for the whole crew.",
       badge: "Best value",
       features: [
-        "A trial may be offered — check eligibility in the app",
         "Track every child",
         "Unlimited moments",
         "Memory for each child",
@@ -209,7 +208,7 @@ const en = {
       },
       {
         q: "How does the free trial work?",
-        a: "You can start Kidsit AI with one child without a subscription, and no account is required to start. Generating new guidance requires an active subscription or trial. This is not unlimited free guidance, and a free trial is not guaranteed. Premium supports more than one child. A trial may be offered to some new subscribers; availability, length, and eligibility can vary, so check the current offer in the app. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
+        a: "Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
         q: "Is it on Android?",
@@ -383,11 +382,11 @@ const he: Dict = {
     ],
   },
   pricing: {
-    heading: "חינם לילד אחד. פרימיום חינם ל-7 ימים.",
-    sub: "פרימיום מתחיל בשבוע ניסיון חינם. אפשר לבטל בכל רגע דרך המנויים ב-App Store או ב-Google Play.",
+    heading: "3 תשובות ההדרכה הראשונות בחינם.",
+    sub: "אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. אפשר לבטל בכל רגע דרך המנויים ב-App Store או ב-Google Play.",
     toggleLabel: "תקופת חיוב",
-    yearlyNote: "זה $5.00 לחודש, בחיוב שנתי אחרי 7 ימי ניסיון חינם.",
-    monthlyNote: "חיוב חודשי אחרי 7 ימי ניסיון חינם.",
+    yearlyNote: "זה $5.00 לחודש, בחיוב שנתי אחרי 7 ימי ניסיון חינם למנויים חדשים.",
+    monthlyNote: "חיוב חודשי.",
     monthly: "חודשי",
     yearly: "שנתי · חוסכים 50%",
     perMonth: "לחודש",
@@ -397,16 +396,15 @@ const he: Dict = {
     free: {
       name: "לנסות",
       desc: "בשביל להכיר את המאמן.",
-      price: "חינם",
-      cadence: "ללא הגבלת זמן",
-      features: ["פרופיל לילד אחד", "רגעים בקול או בהקלדה", "תשובות הדרכה מלאות"],
+      price: "3 תשובות בחינם",
+      cadence: "ילד אחד, בלי חשבון",
+      features: ["פרופיל לילד אחד", "רגעים בקול או בהקלדה", "אחר כך, הדרכה חדשה דורשת Premium"],
     },
     premium: {
       name: "פרימיום",
       desc: "הכול, לכל החבורה.",
       badge: "הכי משתלם",
       features: [
-        "שבוע ניסיון חינם",
         "מעקב אחרי כל הילדים",
         "רגעים ללא הגבלה",
         "זיכרון לכל ילד",
@@ -440,7 +438,7 @@ const he: Dict = {
       },
       {
         q: "איך עובד הניסיון החינמי?",
-        a: "אפשר להשתמש ב-Kidsit AI חינם עם ילד אחד, ללא הגבלת זמן. פרימיום (מעקב אחרי כל הילדים ורגעים ללא הגבלה) מגיע במנוי חודשי או שנתי, ושניהם מתחילים בשבוע ניסיון חינם למנויים חדשים. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
+        a: "3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. ביטול בכל רגע. באייפון: הגדרות ← [השם שלכם] ← מנויים. באנדרואיד: Google Play ← פרופיל ← תשלומים ומנויים ← מנויים.",
       },
       {
         q: "יש גרסה לאנדרואיד?",

@@ -1,6 +1,6 @@
 ---
 date: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-12
 slug: /he/blog/hachana-lifgishat-hadracha
 title_tag: "מה להביא לפגישת הדרכת הורים או לפסיכולוג הילדים: מה לרשום בין הפגישות | Kidsit AI"
 meta_description: "בפגישה קל לשכוח מה קרה השבוע. תבנית של 4 שורות לרגע קשה, רשימה למה להביא להדרכת הורים או לפסיכולוג/ית הילדים, ואיך פותחים את הפגישה."
@@ -167,7 +167,7 @@ secondary_queries: ["הכנה לפגישת הדרכת הורים", "יומן ה�
 
 ## להתחיל עכשיו
 
-בפעם הבאה שיש רגע קשה, ספרו ל־Kidsit מה קרה. הילד הראשון בחינם, ורישום רגעים לא דורש מנוי. הפעילו בהגדרות את הסיכום היומי או השבועי, ולפני הפגישה פתחו אותו כדי להיזכר. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
+בפעם הבאה שיש רגע קשה, ספרו ל־Kidsit מה קרה. 3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. הפעילו בהגדרות את הסיכום היומי או השבועי, ולפני הפגישה פתחו אותו כדי להיזכר. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 date: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-12
 slug: /he/blog/preida-bagan
 title_tag: "ילד בוכה בפרידה בגן? משפט פרידה קצר שעובד בבוקר | Kidsit AI"
 meta_description: "הילד נצמד ובוכה בדלת הגן? משפט פרידה קצר לפי גיל, מה עושים עם הגוף, למה לא להתגנב, ומה אומרים באיסוף ולפני השינה. פרידה קצרה, בעברית."
@@ -190,7 +190,7 @@ NHS מתאר חרדת פרידה כשכיחה מגיל 6 חודשים עד גי�
 
 עוד על הכלי: [מאמן הורות AI](/he/blog/maan-horut-ai).
 
-ילד אחד בחינם, ללא הגבלת זמן. Premium עם 7 ימי ניסיון חינם. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
+3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he)
 
 ---
 
