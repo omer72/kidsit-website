@@ -143,3 +143,21 @@ test("helpers", () => {
   assert.equal(APP_STORE_URL, "https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099");
   assert.equal(PLAY_STORE_URL, "https://play.google.com/store/apps/details?id=ai.kidsit.app");
 });
+
+test("shared campaign: HE/EN toddler-hug posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "lo-rotze-leneshek-et-savta", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "toddler-wont-hug-relatives", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "toddler-wont-hug-relatives");
+  assert.equal(defaultCt(enPost), "toddler-wont-hug-relatives");
+  assert.equal(defaultCt(heBar), "toddler-wont-hug-relatives-bar");
+  assert.equal(defaultCt(enBar), "toddler-wont-hug-relatives-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=toddler-wont-hug-relatives&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "toddler-wont-hug-relatives");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "toddler-wont-hug-relatives-bar");
+  // other posts stay lang-prefixed
+  assert.equal(defaultCt(post), "en-kidsit-vs-chatgpt");
+});
