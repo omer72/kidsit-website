@@ -1,11 +1,11 @@
 ---
 date: 2026-11-02
-updated: 2026-11-12
+updated: 2026-11-16
 slug: /en/blog/parent-coaching
 title_tag: "Parent Coaching: What It Is, When to Reach Out | Kidsit AI"
 meta_description: "What parent coaching is, how it differs from therapy, when to reach out, and which options exist in Israel, including at no cost. Kidsit is an AI tool, not parent coaching and not therapy."
 primary_query: "parent coaching"
-secondary_queries: ["what is parent coaching", "when to get parent coaching", "parent coaching for young children", "parent coaching at no cost", "difference between parent coaching and therapy"]
+secondary_queries: ["what is parent coaching", "when to get parent coaching", "parent coaching for young children", "parent coaching at no cost", "difference between parent coaching and therapy", "how much does parent coaching cost in Israel", "parent coaching online"]
 ---
 
 # Parent coaching: what it is, when to reach out, and which help fits you
@@ -71,7 +71,7 @@ No option fits everyone. This is a map, not a ranking.
 
 According to Midrag, a private meeting is you and the coach, or you, the child, and the coach. They describe one meeting a week, 50 minutes, in a clinic or on Zoom, and the number of meetings is flexible: some people need a long process and some are looking for a single meeting. Zoom is one format within the coaching, not a separate kind of product.
 
-The cost varies from coach to coach. Midrag publishes averages and price lists on its page, as of a reading of the page on November 2, 2026. Ask the price in the introductory conversation, including whether there is a package, and what happens between the meetings.
+The cost varies from coach to coach. According to [Midrag's price page](https://www.midrag.co.il/Content/Price/21684) (checked on 16 November 2026), a session costs 350–500 NIS and lasts 45–60 minutes. [Midrag's guide page](https://www.midrag.co.il/Content/Tip/21078) lists an average of 350–450 NIS for a private session, and 100–150 NIS for a group meeting. According to the price page, an online session usually costs about the same as a clinic session, and a meeting in your home usually costs more or includes a travel surcharge. Ask the price in the introductory conversation, including whether there is a package, and what happens between the meetings. These are ranges Midrag publishes, not a Kidsit price list.
 
 ### A workshop or a parents' group
 
@@ -158,12 +158,42 @@ Do not copy a phone number from here to somewhere else without opening the page.
 
 <!-- faq
 [
-  {"q": "What is parent coaching?", "a": "Parent coaching is a process with a professional that focuses on the parents, not on the child. You come with a specific challenge, such as sleep, limits, tantrums, or fights between siblings, and you leave with tools and a way of acting that fit the family. It can be individual or in a group, in a clinic or on Zoom. It is not psychological therapy for the child and not a diagnosis. According to Midrag, it can stand on its own and it can also be added to individual therapy for the child."},
-  {"q": "What is the difference between parent coaching and therapy?", "a": "Parent coaching gives parents tools for dealing with a challenge. Emotional or psychological therapy works in depth with the child or with the family, and includes a diagnosis when one is needed. According to Midrag, coaching focuses on parenting and the relationship with the child, as distinct from therapy that focuses on the person. When there is a concern about development, health, or safety, talk to a pediatrician or a mental-health professional, and do not rely on coaching or an app alone."},
-  {"q": "Is there parent coaching at no cost in Israel?", "a": "There are several options, and eligibility and cost are not the same. The Ministry of Health runs Tiponet: group Zoom meetings for parents led by Tipat Halav nurses, at no cost, in Hebrew and in Arabic. Maccabi offers its members parent coaching in the upapp app, up to 8 meetings per series including an introductory meeting, at no cost, according to a page updated on July 8, 2026. At the Keshet Early Childhood Center of the Tel Aviv-Yafo Municipality, the parent coaching described on the page is paid (35 NIS for a one-time meeting, 350 NIS for the full coaching, checked on November 2, 2026), and the same page has a postpartum mothers' group at no cost. On the Kol Sherut site you can see more services for parents, including parent coaching, and check where each service operates. Read the terms on each service's page."},
-  {"q": "Can an app replace a parent coach?", "a": "No. An AI app like Kidsit is a tool for the moment itself: you say out loud what happened, and you get a short plan with exact words. It is not parent coaching. It does not know the family in depth, it does not diagnose, and it does not accompany a process, and it does not replace a professional. It can help between meetings, or when there is no one to turn to right now."},
-  {"q": "What do you talk about in parent coaching for young children?", "a": "Usually the moments that come back every day: tantrums, sleep, saying goodbye at daycare in the morning, fights between siblings, hitting, limits, and transitions such as the end of screen time. The coach helps you understand what is behind the behavior and build a steady way to respond to it. According to Midrag, an early-childhood specialty is described by them as from about age 2 until elementary school, and the division depends on the child."},
-  {"q": "How do you choose a parent coach?", "a": "In the introductory conversation, ask about the training and the experience, whether there is a specialty in the child's age, which approach the work uses, what the goal is and roughly how many meetings, whether you meet in person or on Zoom, and what you do between meetings. According to Midrag, parent coaching does not require a license or a formal certificate, so the training and the fit matter. According to an article on Walla Health by Dr. Moran Influs Adler, updated January 7, 2024, clinical, developmental, and educational psychologists and clinical social workers who specialize in children hold a license from the Ministry of Health."}
+  {
+    "q": "How much does parent coaching cost in Israel, and what does the process include?",
+    "a": "According to Midrag's price page, parent coaching costs 350–500 NIS per session of 45–60 minutes (checked on 16 November 2026). Midrag's guide page lists an average of 350–450 NIS for a private session, and 100–150 NIS for a group meeting. According to Midrag, a private process is described as a weekly meeting of about 50–60 minutes, in a clinic or on Zoom, often over two to three months, and the number of meetings is flexible. There are also no-cost or lower-cost options: the Ministry of Health's Tiponet (group Zoom meetings at no cost), Maccabi parent coaching in the upapp app for members (up to 8 meetings at no cost, according to a page updated on 8 July 2026), and the Keshet Early Childhood Center of the Tel Aviv-Yafo Municipality (35 NIS for a one-time meeting and 350 NIS for the full coaching, checked on 16 November 2026). The price varies from coach to coach. Ask for the final price in the introductory conversation. These are ranges published by those sources, not a Kidsit price list."
+  },
+  {
+    "q": "What does the parent coaching process include?",
+    "a": "According to Midrag, a private session is you and the coach, or you, the child, and the coach: one meeting a week, about 50 minutes, in a clinic or on Zoom. The number of meetings is flexible, and some people look for a single meeting. A group workshop is described by them as a weekly meeting of about two hours, usually 4–10 meetings, with content set in advance. The process itself is described by them as usually two to three months. In the introductory conversation, ask what the goal is, roughly how many meetings are expected, and what happens between meetings."
+  },
+  {
+    "q": "Is online parent coaching different from meeting in person?",
+    "a": "According to Midrag, Zoom is one format within coaching, not a separate kind of service. According to their price page, the price of an online session is usually not different from a clinic session, though some coaches offer a discount for online meetings. A meeting in your home usually costs more or includes a travel surcharge. Choose according to convenience, privacy, and whether both parents can take part."
+  },
+  {
+    "q": "What is parent coaching?",
+    "a": "Parent coaching is a process with a professional that focuses on the parents, not on the child. You come with a specific challenge, such as sleep, limits, tantrums, or fights between siblings, and you leave with tools and a way of acting that fit the family. It can be individual or in a group, in a clinic or on Zoom. It is not psychological therapy for the child and not a diagnosis. According to Midrag, it can stand on its own and it can also be added to individual therapy for the child."
+  },
+  {
+    "q": "What is the difference between parent coaching and therapy?",
+    "a": "Parent coaching gives parents tools for dealing with a challenge. Emotional or psychological therapy works in depth with the child or with the family, and includes a diagnosis when one is needed. According to Midrag, coaching focuses on parenting and the relationship with the child, as distinct from therapy that focuses on the person. When there is a concern about development, health, or safety, talk to a pediatrician or a mental-health professional, and do not rely on coaching or an app alone."
+  },
+  {
+    "q": "Is there parent coaching at no cost in Israel?",
+    "a": "There are several options, and eligibility and cost are not the same. The Ministry of Health runs Tiponet: group Zoom meetings for parents led by Tipat Halav nurses, at no cost, in Hebrew and in Arabic. Maccabi offers its members parent coaching in the upapp app, up to 8 meetings per series including an introductory meeting, at no cost, according to a page updated on July 8, 2026. At the Keshet Early Childhood Center of the Tel Aviv-Yafo Municipality, the parent coaching described on the page is paid (35 NIS for a one-time meeting, 350 NIS for the full coaching, checked on November 16, 2026), and the same page has a postpartum mothers' group at no cost. On the Kol Sherut site you can see more services for parents, including parent coaching, and check where each service operates. Read the terms on each service's page."
+  },
+  {
+    "q": "Can an app replace a parent coach?",
+    "a": "No. An AI app like Kidsit is a tool for the moment itself: you say out loud what happened, and you get a short plan with exact words. It is not parent coaching. It does not know the family in depth, it does not diagnose, and it does not accompany a process, and it does not replace a professional. It can help between meetings, or when there is no one to turn to right now."
+  },
+  {
+    "q": "What do you talk about in parent coaching for young children?",
+    "a": "Usually the moments that come back every day: tantrums, sleep, saying goodbye at daycare in the morning, fights between siblings, hitting, limits, and transitions such as the end of screen time. The coach helps you understand what is behind the behavior and build a steady way to respond to it. According to Midrag, an early-childhood specialty is described by them as from about age 2 until elementary school, and the division depends on the child."
+  },
+  {
+    "q": "How do you choose a parent coach?",
+    "a": "In the introductory conversation, ask about the training and the experience, whether there is a specialty in the child's age, which approach the work uses, what the goal is and roughly how many meetings, whether you meet in person or on Zoom, and what you do between meetings. According to Midrag, parent coaching does not require a license or a formal certificate, so the training and the fit matter. According to an article on Walla Health by Dr. Moran Influs Adler, updated January 7, 2024, clinical, developmental, and educational psychologists and clinical social workers who specialize in children hold a license from the Ministry of Health."
+  }
 ]
 -->
 
