@@ -72,6 +72,8 @@ If tickling or play continues after "stop," stop immediately: "He said stop, so 
 | (Grandma keeps tickling after "stop") | "He said stop, so we stop. Want to show Grandma your truck?" | Stop means stop, plus a warm next step. |
 | (to Grandma) "Sorry, he's just being difficult." | (to Grandma) "He's warming up. Give him ten minutes." | Protects both: no label on the child, no blame on her. |
 
+<!-- cta -->
+
 ## Linked, not merged: Hanukkah with toddlers
 
 This page is only about greetings and affection at the door — at Hanukkah, Thanksgiving, Christmas, or any family dinner — not about gifts, sugar, or overload. When a separate page on that exists, we'll link it here.

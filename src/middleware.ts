@@ -18,7 +18,7 @@ function prefersHebrew(header: string | null): boolean {
 }
 
 // Pages that exist under both /he and /en; their bare form redirects to the visitor's language.
-const LOCALIZED = new Set(["/", "/privacy", "/terms", "/support", "/accessibility"]);
+const LOCALIZED = new Set(["/", "/privacy", "/terms", "/support", "/accessibility", "/about", "/editorial-policy"]);
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;

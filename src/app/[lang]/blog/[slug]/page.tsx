@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogAudio } from "@/components/blog-audio";
+import { ArticleCta, splitAtCta } from "@/components/article-cta";
 import { BlogInstallBar } from "@/components/blog-install-bar";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
@@ -9,6 +10,7 @@ import { ogFor, postShareImage } from "@/lib/seo";
 import { allSlugs, blogAlternate, formatPostDate, getPost, postLanguageAlternates } from "@/lib/blog";
 import { absoluteAudioUrl, blogAudioFor, isoDuration, listenLabel } from "@/lib/blog-audio";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
+import { smartBannerContent } from "@/lib/store-links";
 
 const COPY = {
   he: {
@@ -44,6 +46,13 @@ export function generateMetadata({ params }: { params: { lang: Lang; slug: strin
     description: post.description,
     ...ogFor(params.lang, post.titleTag, post.description, `/blog/${post.slug}`, "article", image),
     alternates: postLanguageAlternates(params.lang, post.slug, post.path),
+    // iOS Smart App Banner for this page: app-argument = the page URL, affiliate-data = pt + ct (<lang>-<slug>-banner).
+    other: {
+      "apple-itunes-app": smartBannerContent(
+        { medium: "blog", lang: params.lang, page: post.slug, placement: "banner" },
+        `https://kidsit.ai${post.path}`,
+      ),
+    },
   };
 }
 
@@ -57,6 +66,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
   const shareImage = postShareImage(lang, post.slug, post.title);
   const alternate = blogAlternate(lang, post.slug);
   const audio = blogAudioFor(lang, post.slug);
+  const [htmlBefore, htmlAfter] = splitAtCta(post.html);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -120,7 +130,10 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
             title={post.title}
             audio={audio ? { src: audio.src, label: listenLabel(lang, audio.duration) } : null}
           />
-          <div className="blog-prose mt-8 text-ink/85" dangerouslySetInnerHTML={{ __html: post.html }} />
+          <div className="blog-prose mt-8 text-ink/85" dangerouslySetInnerHTML={{ __html: htmlBefore }} />
+          {/* Posts with a <!-- cta --> marker get the call to action right after their practical advice; the rest get it after the text. */}
+          <ArticleCta lang={lang} slug={post.slug} />
+          {htmlAfter !== null ? <div className="blog-prose text-ink/85" dangerouslySetInnerHTML={{ __html: htmlAfter }} /> : null}
           {post.sources.length > 0 ? (
             <section className="blog-sources blog-prose mt-12 border-t-2 border-ink pt-8" aria-labelledby="post-sources-heading">
               <h2 id="post-sources-heading">{ui.sources}</h2>

@@ -11,6 +11,8 @@ const PAGES = [
   { path: "/terms", lastModified: "2026-10-19" },
   { path: "/support", lastModified: "2026-10-19" },
   { path: "/accessibility", lastModified: "2026-10-19" },
+  { path: "/about", lastModified: "2026-11-19" },
+  { path: "/editorial-policy", lastModified: "2026-11-19" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
