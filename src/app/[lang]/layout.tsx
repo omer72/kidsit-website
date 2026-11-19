@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { NagishLi } from "@/components/nagishli";
 import { CookieConsent } from "@/components/cookie-consent";
 import { Analytics } from "@/components/analytics";
+import { AndroidInstallBanner } from "@/components/android-install-banner";
 import { StoreAttribution } from "@/components/store-attribution";
 import { MetaPixelPageView } from "@/components/meta-pixel-pageview";
 import { META_PIXEL_BOOTSTRAP } from "@/lib/meta-pixel-bootstrap";
@@ -71,6 +72,7 @@ export default async function RootLayout({
         className={`${fontClass} overflow-x-clip bg-paper font-body text-ink antialiased`}
         style={{ "--font-body": he ? "var(--font-rubik)" : "var(--font-nunito)" } as React.CSSProperties}
       >
+        <AndroidInstallBanner lang={params.lang} />
         {children}
         <NagishLi lang={params.lang} />
         <CookieConsent lang={params.lang} />

@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["ZZT9HHZQNA.ai.kidsit.app"],
+        "components": [
+          { "/": "/he/blog/*", "comment": "Hebrew blog articles" },
+          { "/": "/en/blog/*", "comment": "English blog articles" },
+          { "/": "/app", "comment": "Smart store link used by the desktop QR code" }
+        ]
+      }
+    ]
+  }
+}

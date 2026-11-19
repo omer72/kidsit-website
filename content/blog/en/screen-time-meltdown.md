@@ -101,6 +101,8 @@ Do not suggest they punch a pillow. HealthyChildren says not to keep a tantrum g
 
 Stay close, keep everyone safe, and do not give the device back. HealthyChildren suggests a calm spot at home; with a younger child, lead them by the hand. The AAP's Q&A on tech limits says to stay calm, not let the behavior win the device back, and allow a calm-down period.
 
+<!-- cta -->
+
 ## After: the first five minutes
 
 In the first five minutes, do not say "go play." Be part of the next thing.

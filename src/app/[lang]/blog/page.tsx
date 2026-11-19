@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogInstallBar } from "@/components/blog-install-bar";
-import { BLOG_INDEX_PAGE } from "@/lib/store-links";
+import { BLOG_INDEX_PAGE, smartBannerContent } from "@/lib/store-links";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor } from "@/lib/seo";
@@ -38,6 +38,12 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
     description: copy.description,
     ...ogFor(params.lang, copy.title, copy.description, "/blog"),
     alternates: blogIndexAlternates(params.lang),
+    other: {
+      "apple-itunes-app": smartBannerContent(
+        { medium: "blog", lang: params.lang, page: BLOG_INDEX_PAGE, placement: "banner" },
+        `https://kidsit.ai/${params.lang}/blog`,
+      ),
+    },
   };
 }
 

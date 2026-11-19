@@ -17,8 +17,9 @@ import { MAX_VALUE, token, type Touch } from "./attribution";
  */
 export type StoreMedium = "blog" | "home";
 export type StoreKind = "apple" | "play";
-/** Where on the page the button sits. ct shortens pricing_free/pricing_premium to "pricing" and drops "article". */
-export type StorePlacement = "hero" | "pricing_free" | "pricing_premium" | "article" | "bar";
+/** Where on the page the button sits. ct shortens pricing_free/pricing_premium to "pricing" and drops "article".
+ *  banner = the Android install banner and the iOS Smart App Banner, inline = the in-article call to action, qr = the desktop QR code. */
+export type StorePlacement = "hero" | "pricing_free" | "pricing_premium" | "article" | "bar" | "banner" | "inline" | "qr";
 export type StoreLink = {
   medium: StoreMedium;
   lang: "he" | "en";
@@ -39,6 +40,9 @@ const PL_CT: Record<StorePlacement, string> = {
   pricing_premium: "pricing",
   article: "",
   bar: "bar",
+  banner: "banner",
+  inline: "inline",
+  qr: "qr",
 };
 
 /** The fixed provider token from src/dictionaries.ts; only digits are accepted, anything else counts as empty (pt left out). */
@@ -174,7 +178,7 @@ export function storeLinkData(kind: StoreKind, link: StoreLink): Record<string, 
 }
 
 const MEDIUMS: StoreMedium[] = ["blog", "home"];
-const PLACEMENTS: StorePlacement[] = ["hero", "pricing_free", "pricing_premium", "article", "bar"];
+const PLACEMENTS: StorePlacement[] = ["hero", "pricing_free", "pricing_premium", "article", "bar", "banner", "inline", "qr"];
 
 /** Read the data-* attributes back; null if anything is missing or unknown. */
 export function storeLinkFromData(get: (name: string) => string | null): { kind: StoreKind; link: StoreLink } | null {
@@ -186,4 +190,25 @@ export function storeLinkFromData(get: (name: string) => string | null): { kind:
   if ((kind !== "apple" && kind !== "play") || !medium || !MEDIUMS.includes(medium)) return null;
   if ((lang !== "he" && lang !== "en") || !page || !placement || !PLACEMENTS.includes(placement)) return null;
   return { kind, link: { medium, lang, page, placement } };
+}
+
+/** App Store numeric id, read from APP_STORE_URL (…/id6769443099). */
+export function appStoreId(base: string = APP_STORE_URL): string {
+  return /\/id(\d+)/.exec(base)?.[1] ?? "";
+}
+
+/**
+ * Content of the iOS Smart App Banner meta tag (<meta name="apple-itunes-app">) for one page:
+ * app-argument = the page's own URL (handed to the app when the banner opens it),
+ * affiliate-data = pt + the same ct the page's store buttons use, with placement "banner" (e.g. he-hetkefei-zaam-gil-3-banner).
+ * Safari ignores app-argument it cannot parse as a URL, so only an absolute https URL is passed.
+ */
+export function smartBannerContent(link: StoreLink, pageUrl: string, providerToken: string = resolveProviderToken()): string {
+  const parts = [`app-id=${appStoreId()}`];
+  if (/^https:\/\/[^\s,]+$/.test(pageUrl)) parts.push(`app-argument=${pageUrl}`);
+  const aff = new URLSearchParams();
+  if (providerToken) aff.set("pt", providerToken);
+  aff.set("ct", ctFor({ ...link, placement: "banner" }));
+  parts.push(`affiliate-data=${aff.toString()}`);
+  return parts.join(", ");
 }

@@ -9,7 +9,13 @@ import type { Dict, Lang } from "@/dictionaries";
 import { HOME_PAGE } from "@/lib/store-links";
 import { StoreBadges } from "./store-badges";
 
-const PREMIUM_PRICE = { monthly: "$9.99", yearly: "$59.99" };
+// English: the US prices. Hebrew: the Google Play Israel prices (₪29.90 / ₪175), labeled as Google Play in the dictionary
+// (perMonth/perYear and the notes). The App Store price in shekels is not verified and is deliberately not shown;
+// the note says the current price is shown in the store.
+const PREMIUM_PRICE: Record<Lang, { monthly: string; yearly: string }> = {
+  en: { monthly: "$9.99", yearly: "$59.99" },
+  he: { monthly: "₪29.90", yearly: "₪175" },
+};
 
 function BillingToggle({
   yearly,
@@ -117,7 +123,7 @@ export function Pricing({ t, lang }: { t: Dict["pricing"]; lang: Lang }) {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
               >
-                {PREMIUM_PRICE[period]}
+                {PREMIUM_PRICE[lang][period]}
               </m.span>{" "}
               <span className="font-bold text-white/90">
                 {yearly ? t.perYear : t.perMonth}

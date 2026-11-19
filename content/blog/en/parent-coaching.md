@@ -51,7 +51,7 @@ In the language of an ordinary evening, it looks like this:
 - The two parents do not agree on the approach, and the child hears two messages.
 - A big change arrives: a brother or a sister, a move, a separation.
 
-If you yelled and you are looking for a repair sentence, there is a separate guide: [I yelled at my child](/he/blog/tzakti-al-hayeled). A repair sentence is not a substitute for a process, if the yelling has become the routine.
+If you yelled and you are looking for a repair sentence, there is a separate guide: <a href="/he/blog/tzakti-al-hayeled" hreflang="he">I yelled at my child</a>. A repair sentence is not a substitute for a process, if the yelling has become the routine.
 
 This page does not diagnose. Diagnosed difficulties, such as attention deficit, are a reason Midrag mentions for reaching out, and the diagnosis itself stays with a professional.
 
@@ -103,14 +103,14 @@ According to Midrag, coaching for young children is described by them as a speci
 
 These are moments that come back, and each one is already written here as a page for the moment itself. The pages give words for the moment. They do not replace a process with a coach.
 
-- Tantrums: [tantrums at age 3](/he/blog/hetkefei-zaam-gil-3) and [what to say in a tantrum](/he/blog/ma-lehagid-hitkef-zaam).
-- Sleep: [bedtime battles](/he/blog/milchamot-shena).
-- Goodbye at daycare: [goodbye at daycare](/he/blog/preida-bagan).
-- Fights between siblings: [fights between siblings](/he/blog/rivim-bein-achim).
-- Hitting: [a child who hits](/he/blog/yeled-marbitz).
-- Limits: [limits without yelling](/he/blog/gvulot-bli-tzeakot).
+- Tantrums: <a href="/he/blog/hetkefei-zaam-gil-3" hreflang="he">tantrums at age 3</a> and <a href="/he/blog/ma-lehagid-hitkef-zaam" hreflang="he">what to say in a tantrum</a>.
+- Sleep: <a href="/he/blog/milchamot-shena" hreflang="he">bedtime battles</a>.
+- Goodbye at daycare: <a href="/he/blog/preida-bagan" hreflang="he">goodbye at daycare</a>.
+- Fights between siblings: <a href="/he/blog/rivim-bein-achim" hreflang="he">fights between siblings</a>.
+- Hitting: <a href="/he/blog/yeled-marbitz" hreflang="he">a child who hits</a>.
+- Limits: <a href="/he/blog/gvulot-bli-tzeakot" hreflang="he">limits without yelling</a>.
 - The end of screen time: [a child falls apart when the screen goes off](/en/blog/screen-time-meltdown).
-- A tantrum at the supermarket: [a tantrum at the supermarket](/he/blog/hitkef-zaam-super).
+- A tantrum at the supermarket: <a href="/he/blog/hitkef-zaam-super" hreflang="he">a tantrum at the supermarket</a>.
 
 ## How do you choose a parent coach?
 
@@ -140,7 +140,7 @@ Kidsit is an AI app for the hard moment. It is not parent coaching, not counseli
 
 How it works, briefly: a long press on the microphone, you say what happened, and you get a short plan. In the plan: a summary, why this might be happening, three actions with exact words, and a connecting line before bed. The recording is transcribed temporarily and is not saved. Profiles are stored on the device. There are no ads. The app is available for iPhone and for Android.
 
-More about the tool, without mixing it up with coaching: [what an AI parenting coach is](/he/blog/maan-horut-ai).
+More about the tool, without mixing it up with coaching: <a href="/he/blog/maan-horut-ai" hreflang="he">what an AI parenting coach is</a>.
 
 ## When not to rely on any of these alone
 

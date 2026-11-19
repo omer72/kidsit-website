@@ -5,6 +5,22 @@ const nextConfig = {
   // /admin is private: never indexed, never stored by shared caches.
   async headers() {
     return [
+      // Universal Links: Apple fetches this extension-less file and needs JSON with a 200 and no redirect.
+      // The path has a dot (.well-known), so the locale middleware does not touch it.
+      {
+        source: "/.well-known/apple-app-site-association",
+        headers: [
+          { key: "Content-Type", value: "application/json" },
+          { key: "Cache-Control", value: "public, max-age=3600" },
+        ],
+      },
+      {
+        source: "/.well-known/assetlinks.json",
+        headers: [
+          { key: "Content-Type", value: "application/json" },
+          { key: "Cache-Control", value: "public, max-age=3600" },
+        ],
+      },
       {
         source: "/admin/:path*",
         headers: [
