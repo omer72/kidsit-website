@@ -1,10 +1,13 @@
 import { LANGS, PLATFORMS } from "@/lib/insights/constants";
 import {
+  FUNNEL_ENTRIES,
+  FUNNEL_ENTRY_STEP,
   FUNNEL_FIELDS,
   FUNNEL_SCHEMA_V,
   FUNNEL_SOURCE_RE,
   FUNNEL_STEPS,
   FUNNEL_VERSION_RE,
+  type FunnelEntry,
   type FunnelStep,
 } from "./constants";
 
@@ -17,6 +20,8 @@ export type ValidatedFunnelEvent = {
   lang: "" | (typeof LANGS)[number];
   app_version: string;
   source: string;
+  /** Only ever set on paywall_shown. */
+  entry: "" | FunnelEntry;
 };
 
 export type FunnelValidation = { ok: true; value: ValidatedFunnelEvent } | { ok: false; issues: FunnelIssue[] };
@@ -52,6 +57,13 @@ export function validateFunnelEvent(input: unknown): FunnelValidation {
   const app_version = optional("app_version", matches(FUNNEL_VERSION_RE));
   const source = optional("source", matches(FUNNEL_SOURCE_RE));
 
+  // `entry` belongs to paywall_shown alone. On any other step it is not an unknown field, but it is not allowed.
+  let entry: "" | FunnelEntry = "";
+  if (body.entry !== undefined) {
+    if (body.step !== FUNNEL_ENTRY_STEP) issues.push({ path: "entry", code: "not_allowed_for_step" });
+    else entry = optional("entry", (v): v is FunnelEntry => isOneOf(FUNNEL_ENTRIES, v));
+  }
+
   if (issues.length) return { ok: false, issues };
-  return { ok: true, value: { step: body.step as FunnelStep, platform, lang, app_version, source } };
+  return { ok: true, value: { step: body.step as FunnelStep, platform, lang, app_version, source, entry } };
 }
