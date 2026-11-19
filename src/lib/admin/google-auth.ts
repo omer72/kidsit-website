@@ -1,4 +1,5 @@
 import { createHash, createPrivateKey, createSign, type KeyObject } from "node:crypto";
+import { tr, type Lang } from "./lang";
 
 // Service-account auth for Google APIs without the googleapis package: an RS256-signed JWT exchanged for an
 // access token (https://developers.google.com/identity/protocols/oauth2/service-account#httprest). Server-only.
@@ -8,35 +9,36 @@ export const SCOPE_GSC = "https://www.googleapis.com/auth/webmasters.readonly";
 export const SCOPE_GA4 = "https://www.googleapis.com/auth/analytics.readonly";
 
 export type ServiceAccount = { clientEmail: string; key: KeyObject; fingerprint: string };
-export type Parsed = { ok: true; sa: ServiceAccount } | { ok: false; error: string };
+export type Parsed = { ok: true; sa: ServiceAccount } | { ok: false; error: string; errorEn: string };
 type Fetch = (url: string, init?: RequestInit) => Promise<Response>;
 
 /** Validates GOOGLE_SERVICE_ACCOUNT_JSON. Error texts never include the key or any other field value. */
 export function parseServiceAccount(raw: string | undefined): Parsed {
-  if (!raw || !raw.trim()) return { ok: false, error: "GOOGLE_SERVICE_ACCOUNT_JSON חסר." };
+  const fail = (error: string, errorEn: string): Parsed => ({ ok: false, error, errorEn });
+  if (!raw || !raw.trim()) return fail("GOOGLE_SERVICE_ACCOUNT_JSON חסר.", "GOOGLE_SERVICE_ACCOUNT_JSON is missing.");
   let j: unknown;
   try {
     j = JSON.parse(raw);
   } catch {
-    return { ok: false, error: "GOOGLE_SERVICE_ACCOUNT_JSON אינו JSON תקין. הדביקו את כל קובץ המפתח כמו שהוא." };
+    return fail("GOOGLE_SERVICE_ACCOUNT_JSON אינו JSON תקין. הדביקו את כל קובץ המפתח כמו שהוא.", "GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON. Paste the whole key file as is.");
   }
-  if (typeof j !== "object" || j === null) return { ok: false, error: "GOOGLE_SERVICE_ACCOUNT_JSON אינו אובייקט JSON." };
+  if (typeof j !== "object" || j === null) return fail("GOOGLE_SERVICE_ACCOUNT_JSON אינו אובייקט JSON.", "GOOGLE_SERVICE_ACCOUNT_JSON is not a JSON object.");
   const o = j as Record<string, unknown>;
   if (o.type !== undefined && o.type !== "service_account")
-    return { ok: false, error: "GOOGLE_SERVICE_ACCOUNT_JSON אינו מפתח של חשבון שירות (type ≠ service_account)." };
+    return fail("GOOGLE_SERVICE_ACCOUNT_JSON אינו מפתח של חשבון שירות (type ≠ service_account).", "GOOGLE_SERVICE_ACCOUNT_JSON is not a service-account key (type ≠ service_account).");
   const email = typeof o.client_email === "string" ? o.client_email.trim() : "";
   if (!/^[^@\s]{1,200}@[a-z0-9.-]{1,200}\.iam\.gserviceaccount\.com$/i.test(email))
-    return { ok: false, error: "חסר client_email תקין של חשבון שירות ב-GOOGLE_SERVICE_ACCOUNT_JSON." };
+    return fail("חסר client_email תקין של חשבון שירות ב-GOOGLE_SERVICE_ACCOUNT_JSON.", "GOOGLE_SERVICE_ACCOUNT_JSON has no valid service-account client_email.");
   // Some env editors keep "\n" as two characters; turn them back into newlines.
   const pem = typeof o.private_key === "string" ? o.private_key.replace(/\\n/g, "\n") : "";
-  if (!pem.includes("-----BEGIN PRIVATE KEY-----")) return { ok: false, error: "חסר private_key ב-GOOGLE_SERVICE_ACCOUNT_JSON." };
+  if (!pem.includes("-----BEGIN PRIVATE KEY-----")) return fail("חסר private_key ב-GOOGLE_SERVICE_ACCOUNT_JSON.", "GOOGLE_SERVICE_ACCOUNT_JSON has no private_key.");
   let key: KeyObject;
   try {
     key = createPrivateKey(pem);
   } catch {
-    return { ok: false, error: "ה-private_key ב-GOOGLE_SERVICE_ACCOUNT_JSON לא נקרא כמפתח תקין." };
+    return fail("ה-private_key ב-GOOGLE_SERVICE_ACCOUNT_JSON לא נקרא כמפתח תקין.", "The private_key in GOOGLE_SERVICE_ACCOUNT_JSON could not be read as a valid key.");
   }
-  if (key.asymmetricKeyType !== "rsa") return { ok: false, error: "ה-private_key אינו מפתח RSA." };
+  if (key.asymmetricKeyType !== "rsa") return fail("ה-private_key אינו מפתח RSA.", "The private_key is not an RSA key.");
   const fingerprint = createHash("sha256").update(email).update("\0").update(pem).digest("hex").slice(0, 12);
   return { ok: true, sa: { clientEmail: email, key, fingerprint } };
 }
@@ -50,9 +52,18 @@ export function signJwt(sa: ServiceAccount, scope: string, nowS: number): string
   return `${head}.${claims}.${b64url(sig)}`;
 }
 
-export class GoogleApiError extends Error {}
+/** `message` is the Hebrew text; `en` the English text of the same error. Both are safe to show. */
+export class GoogleApiError extends Error {
+  constructor(message: string, public en: string = message) {
+    super(message);
+  }
+}
 /** Bad or incomplete configuration; the message is safe to show. */
-export class ConfigError extends Error {}
+export class ConfigError extends Error {
+  constructor(message: string, public en: string = message) {
+    super(message);
+  }
+}
 
 // Access tokens are reused in memory until 2 minutes before they expire.
 const tokenCache = new Map<string, { token: string; exp: number }>();
@@ -74,25 +85,32 @@ export async function getAccessToken(sa: ServiceAccount, scope: string, fetchImp
       cache: "no-store",
     });
   } catch {
-    throw new GoogleApiError("החיבור לשרת ההרשאות של Google נכשל.");
+    throw new GoogleApiError("החיבור לשרת ההרשאות של Google נכשל.", "The connection to Google's authorization server failed.");
   }
   const body = (await res.json().catch(() => null)) as { access_token?: unknown; expires_in?: unknown; error?: unknown } | null;
   if (!res.ok || !body || typeof body.access_token !== "string") {
     const code = typeof body?.error === "string" ? body.error.replace(/[^a-z_]/gi, "").slice(0, 40) : "";
-    throw new GoogleApiError(`Google דחה את מפתח חשבון השירות (HTTP ${res.status}${code ? `, ${code}` : ""}).`);
+    const detail = `HTTP ${res.status}${code ? `, ${code}` : ""}`;
+    throw new GoogleApiError(`Google דחה את מפתח חשבון השירות (${detail}).`, `Google rejected the service-account key (${detail}).`);
   }
   const ttl = typeof body.expires_in === "number" ? body.expires_in : 3600;
   tokenCache.set(cacheKey, { token: body.access_token, exp: nowMs + ttl * 1000 });
   return body.access_token;
 }
 
-export function describeGoogleHttpError(api: string, status: number, sa: ServiceAccount): string {
-  if (status === 401) return `${api}: הטוקן נדחה (401).`;
+export function describeGoogleHttpError(api: string, status: number, sa: ServiceAccount, lang: Lang = "he"): string {
+  if (status === 401) return tr(lang, `${api}: הטוקן נדחה (401).`, `${api}: the token was rejected (401).`);
   if (status === 403)
-    return `${api}: אין הרשאה (403). ודאו שה-API מופעל בפרויקט ושהחשבון ${sa.clientEmail} נוסף כמשתמש בנכס.`;
-  if (status === 404) return `${api}: הנכס לא נמצא (404). בדקו את מזהה הנכס / כתובת האתר.`;
-  if (status === 429) return `${api}: חריגה ממכסת הקריאות (429). נסו שוב מאוחר יותר.`;
-  return `${api}: שגיאה (HTTP ${status}).`;
+    return tr(
+      lang,
+      `${api}: אין הרשאה (403). ודאו שה-API מופעל בפרויקט ושהחשבון ${sa.clientEmail} נוסף כמשתמש בנכס.`,
+      `${api}: permission denied (403). Make sure the API is enabled in the project and that ${sa.clientEmail} was added as a user on the property.`,
+    );
+  if (status === 404)
+    return tr(lang, `${api}: הנכס לא נמצא (404). בדקו את מזהה הנכס / כתובת האתר.`, `${api}: property not found (404). Check the property ID / site URL.`);
+  if (status === 429)
+    return tr(lang, `${api}: חריגה ממכסת הקריאות (429). נסו שוב מאוחר יותר.`, `${api}: quota exceeded (429). Try again later.`);
+  return tr(lang, `${api}: שגיאה (HTTP ${status}).`, `${api}: error (HTTP ${status}).`);
 }
 
 /** POST JSON to a Google API with a bearer token; throws GoogleApiError with a safe message. */
@@ -107,12 +125,12 @@ export async function googlePost(api: string, url: string, body: unknown, sa: Se
       cache: "no-store",
     });
   } catch {
-    throw new GoogleApiError(`${api}: החיבור נכשל.`);
+    throw new GoogleApiError(`${api}: החיבור נכשל.`, `${api}: the connection failed.`);
   }
-  if (!res.ok) throw new GoogleApiError(describeGoogleHttpError(api, res.status, sa));
+  if (!res.ok) throw new GoogleApiError(describeGoogleHttpError(api, res.status, sa), describeGoogleHttpError(api, res.status, sa, "en"));
   try {
     return await res.json();
   } catch {
-    throw new GoogleApiError(`${api}: תשובה בפורמט לא צפוי.`);
+    throw new GoogleApiError(`${api}: תשובה בפורמט לא צפוי.`, `${api}: unexpected response format.`);
   }
 }

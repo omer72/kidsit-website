@@ -8,11 +8,21 @@ type Fetch = (url: string, init?: RequestInit) => Promise<Response>;
 export type GscRow = { keys: string[]; clicks: number; impressions: number; ctr: number; position: number };
 
 /** URL-prefix property with a trailing slash, e.g. https://kidsit.ai/ (not sc-domain:). */
-export function validateSiteUrl(raw: string | undefined): { ok: true; siteUrl: string } | { ok: false; error: string } {
+export function validateSiteUrl(raw: string | undefined): { ok: true; siteUrl: string } | { ok: false; error: string; errorEn: string } {
   const v = raw?.trim() ?? "";
-  if (!v) return { ok: false, error: "GSC_SITE_URL חסר." };
-  if (v.startsWith("sc-domain:")) return { ok: false, error: "GSC_SITE_URL צריך להיות נכס URL-prefix, למשל https://kidsit.ai/ (לא sc-domain:)." };
-  if (!/^https?:\/\/[a-z0-9.-]+(:\d+)?\/$/i.test(v)) return { ok: false, error: "GSC_SITE_URL צריך להיות בדיוק כתובת הנכס עם / בסוף, למשל https://kidsit.ai/." };
+  if (!v) return { ok: false, error: "GSC_SITE_URL חסר.", errorEn: "GSC_SITE_URL is missing." };
+  if (v.startsWith("sc-domain:"))
+    return {
+      ok: false,
+      error: "GSC_SITE_URL צריך להיות נכס URL-prefix, למשל https://kidsit.ai/ (לא sc-domain:).",
+      errorEn: "GSC_SITE_URL must be a URL-prefix property, e.g. https://kidsit.ai/ (not sc-domain:).",
+    };
+  if (!/^https?:\/\/[a-z0-9.-]+(:\d+)?\/$/i.test(v))
+    return {
+      ok: false,
+      error: "GSC_SITE_URL צריך להיות בדיוק כתובת הנכס עם / בסוף, למשל https://kidsit.ai/.",
+      errorEn: "GSC_SITE_URL must be exactly the property URL with a trailing /, e.g. https://kidsit.ai/.",
+    };
   return { ok: true, siteUrl: v };
 }
 
@@ -53,9 +63,9 @@ export type GscStats = {
 
 export async function loadGsc(env: Record<string, string | undefined>, fetchImpl: Fetch = fetch, now = new Date()): Promise<GscStats> {
   const parsed = parseServiceAccount(env.GOOGLE_SERVICE_ACCOUNT_JSON);
-  if (!parsed.ok) throw new ConfigError(parsed.error);
+  if (!parsed.ok) throw new ConfigError(parsed.error, parsed.errorEn);
   const site = validateSiteUrl(env.GSC_SITE_URL);
-  if (!site.ok) throw new ConfigError(site.error);
+  if (!site.ok) throw new ConfigError(site.error, site.errorEn);
   const range = gscWindow(28, now);
   const [totals, topQueries, topPages] = await Promise.all([
     gscQuery(parsed.sa, site.siteUrl, { ...range }, fetchImpl),
@@ -135,9 +145,9 @@ export function weeklyCsv(rows: WeeklyRow[]): string {
 
 export async function loadGscWeekly(env: Record<string, string | undefined>, fetchImpl: Fetch = fetch, now = new Date()) {
   const parsed = parseServiceAccount(env.GOOGLE_SERVICE_ACCOUNT_JSON);
-  if (!parsed.ok) throw new ConfigError(parsed.error);
+  if (!parsed.ok) throw new ConfigError(parsed.error, parsed.errorEn);
   const site = validateSiteUrl(env.GSC_SITE_URL);
-  if (!site.ok) throw new ConfigError(site.error);
+  if (!site.ok) throw new ConfigError(site.error, site.errorEn);
   const lastWeek = gscWindow(7, now);
   const prevWeek = gscWindow(7, now, 7);
   const q = (r: { startDate: string; endDate: string }) =>
