@@ -5,7 +5,7 @@ import { configuredSecret, SESSION_COOKIE, verifySessionToken } from "@/lib/admi
 import { allSectionsFailed, loadRevenueCat, resolveConfig, type DailyPoint, type RevenueCatStats, type Section, type SegmentTotal } from "@/lib/admin/revenuecat";
 import { loadMeta, metaAnyFailed, metaFingerprint, resolveMetaConfig, type MetaStats } from "@/lib/admin/meta";
 import { STATS_PROVIDERS, providerById, providerTitle, runProvider, type ProviderData, type ProviderResult, type Table } from "@/lib/admin/providers";
-import { localeOf, statsPath, tr, type Lang } from "@/lib/admin/lang";
+import { fmtInt, localeOf, statsPath, tr, type Lang } from "@/lib/admin/lang";
 import { login, logout } from "./actions";
 
 // The stats page body, shared by /admin/stats (lang "he", RTL) and /admin/stats/en (lang "en", LTR). The route files
@@ -120,7 +120,6 @@ const fmtTime = (iso: string, lang: Lang) =>
   new Intl.DateTimeFormat(localeOf(lang), { timeZone: TZ, day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
 // he: DD.MM · en: MM/DD
 const fmtDay = (d: string, lang: Lang) => (lang === "en" ? `${d.slice(5, 7)}/${d.slice(8, 10)}` : `${d.slice(8, 10)}.${d.slice(5, 7)}`);
-const fmtInt = (n: number, lang: Lang) => new Intl.NumberFormat(localeOf(lang)).format(n);
 const ISRAEL_TIME = (lang: Lang) => tr(lang, "שעון ישראל", "Israel time");
 
 const OVERVIEW_LABELS: Record<string, [string, string]> = {
@@ -184,14 +183,14 @@ function Bars({ points, label, lang }: { points: DailyPoint[]; label: string; la
   return (
     <figure>
       <figcaption className="mb-2 text-sm">
-        {label}: <b className="tabular-nums">{total}</b> {tr(lang, `ב-${points.length} ימים`, `over ${points.length} days`)}
+        {label}: <b className="tabular-nums">{fmtInt(total, lang)}</b> {tr(lang, `ב-${points.length} ימים`, `over ${points.length} days`)}
       </figcaption>
       {/* dir=ltr so time runs left to right like every chart; the dates below say which end is which. */}
       <div dir="ltr" className="flex h-24 items-end gap-[2px]" role="img" aria-label={`${label}, ${tr(lang, "סדרה יומית", "daily series")}`}>
         {points.map((p) => (
           <div
             key={p.date}
-            title={`${fmtDay(p.date, lang)}: ${p.value}${p.incomplete ? ` (${tr(lang, "חלקי", "partial")})` : ""}`}
+            title={`${fmtDay(p.date, lang)}: ${fmtInt(p.value, lang)}${p.incomplete ? ` (${tr(lang, "חלקי", "partial")})` : ""}`}
             className={`flex-1 rounded-t-sm ${p.incomplete ? "bg-grape/40" : "bg-grape"}`}
             style={{ height: `${Math.max(2, (p.value / max) * 100)}%` }}
           />
@@ -446,7 +445,7 @@ function Shell({ children, lang }: { children: React.ReactNode; lang: Lang }) {
           href={statsPath(other)}
           lang={other}
           hrefLang={other}
-          className="rounded-full border-2 border-ink bg-white px-3 py-1 text-sm font-bold shadow-sticker-sm"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border-2 border-ink bg-white px-4 text-sm font-bold shadow-sticker-sm"
         >
           {other === "en" ? "English" : "עברית"}
         </a>

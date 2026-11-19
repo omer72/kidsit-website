@@ -220,3 +220,40 @@ test("no Meta /{pixel}/stats call anywhere in the admin libs", () => {
   const meta = readFileSync(new URL("./meta.ts", import.meta.url), "utf8");
   assert.ok(!/\/stats["'`]|pixelId\}\/stats|"stats"/.test(meta.replace(/^\/\/.*$/gm, "")));
 });
+
+// --- QA round: thousands separators, ?lang=en redirect, toggle size ---
+import { englishRedirectTarget, fmtInt } from "./lang";
+
+test("fmtInt: thousands separators per language", () => {
+  assert.equal(fmtInt(1234567, "en"), "1,234,567");
+  assert.equal(fmtInt(1234567, "he"), new Intl.NumberFormat("he-IL").format(1234567));
+  assert.equal(fmtInt(1234, "he"), "1,234");
+  assert.equal(fmtInt(999, "en"), "999");
+  assert.equal(fmtInt(0, "en"), "0");
+});
+
+test("series totals and bar tooltips use fmtInt (not raw numbers)", () => {
+  const src = read("_stats/StatsPage.tsx");
+  assert.match(src, /<b className="tabular-nums">\{fmtInt\(total, lang\)\}<\/b>/);
+  assert.match(src, /\$\{fmtDay\(p\.date, lang\)\}: \$\{fmtInt\(p\.value, lang\)\}/);
+  assert.ok(!/<b className="tabular-nums">\{total\}<\/b>/.test(src));
+  assert.ok(!/: \$\{p\.value\}/.test(src));
+});
+
+test("?lang=en redirect keeps every other query param and drops only lang", () => {
+  assert.equal(englishRedirectTarget({ lang: "en" }), "/admin/stats/en");
+  assert.equal(englishRedirectTarget({ lang: "en", e: "1" }), "/admin/stats/en?e=1");
+  assert.equal(englishRedirectTarget({ e: "1", lang: "en", utm_source: "a b", x: "é&=" }), "/admin/stats/en?e=1&utm_source=a+b&x=%C3%A9%26%3D");
+  assert.equal(englishRedirectTarget({ lang: ["en", "he"], k: ["1", "2"] }), "/admin/stats/en?k=1&k=2");
+  assert.equal(englishRedirectTarget({ lang: "he", e: "1" }), null);
+  assert.equal(englishRedirectTarget({ e: "1" }), null);
+  assert.equal(englishRedirectTarget({}), null);
+  assert.match(read("(he)/stats/page.tsx"), /englishRedirectTarget\(searchParams\)/);
+});
+
+test("language toggle is a ≥44px touch target", () => {
+  const src = read("_stats/StatsPage.tsx");
+  const link = src.slice(src.indexOf("href={statsPath(other)}"));
+  assert.match(link.slice(0, 400), /min-h-\[44px\]/);
+  assert.match(link.slice(0, 400), /min-w-\[44px\]/);
+});
