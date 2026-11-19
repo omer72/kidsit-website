@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ai.kidsit.app",
+      "sha256_cert_fingerprints": [
+        "7E:19:0C:5A:5B:E8:E2:D0:80:3D:AD:FD:50:DD:AF:6E:DE:53:31:7C:3A:70:E8:86:D5:95:27:9A:58:92:F9:C3",
+        "53:E6:03:67:14:A6:4B:EC:B9:63:A0:DF:27:4B:0A:E1:66:4C:0C:1E:6B:58:EE:58:C2:49:0F:C3:1F:EF:AC:16"
+      ]
+    }
+  }
+]

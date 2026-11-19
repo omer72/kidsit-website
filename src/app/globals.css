@@ -371,3 +371,22 @@ html[dir="rtl"] .cookie-table code {
     margin-right: 4.5rem;
   }
 }
+
+/* Desktop visitors only: wide screen AND a mouse-like pointer. Phones and tablets never show it. */
+.desktop-only {
+  display: none;
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* English articles that link to a Hebrew article (hreflang="he", no English version exists yet): say so. */
+html[lang="en"] .blog-prose a[hreflang="he"]::after {
+  content: " (in Hebrew)";
+  font-size: 0.85em;
+  color: theme("colors.ink-muted");
+  text-decoration: none;
+  display: inline-block;
+}
