@@ -5,7 +5,7 @@ slug: /en/blog/parent-coaching
 title_tag: "Parent Coaching: What It Is, When to Reach Out | Kidsit AI"
 meta_description: "What parent coaching is, how it differs from therapy, when to reach out, and which options exist in Israel, including at no cost. Kidsit is an AI tool, not parent coaching and not therapy."
 primary_query: "parent coaching"
-secondary_queries: ["what is parent coaching", "when to get parent coaching", "parent coaching for young children", "parent coaching at no cost", "difference between parent coaching and therapy", "how much does parent coaching cost in Israel", "parent coaching online"]
+secondary_queries: ["what is parent coaching", "when to get parent coaching", "parent coaching for young children", "parent coaching at no cost", "difference between parent coaching and therapy", "how much does parent coaching cost in Israel", "parent coaching online", "how to choose a good parent coach"]
 ---
 
 # Parent coaching: what it is, when to reach out, and which help fits you
@@ -13,6 +13,8 @@ secondary_queries: ["what is parent coaching", "when to get parent coaching", "p
 Parent coaching is a focused process with a professional that gives parents tools for a specific challenge with their child. It is not therapy for the child. On this page: when it is worth it, which options exist in Israel (some at no cost, and some paid), and what to do in the meantime, before there is an appointment.
 
 > Kidsit is an AI app for the hard moment, not a parent coach and not therapy. It does not replace a professional, and you can use it alongside coaching.
+
+**In short:** according to [Midrag's price page](https://www.midrag.co.il/Content/Price/21684) (checked on 16 November 2026), a parent coaching session costs 350–500 NIS and lasts 45–60 minutes. The process is described there as usually one meeting a week for two to three months, and the number of meetings is flexible. To choose a coach, check their specialty for your child's age, training and experience, their approach, and roughly how many meetings to expect. According to Midrag, parent coaching does not require a license, so training and fit matter. These are ranges Midrag publishes, not a Kidsit price list.
 
 ## What is parent coaching?
 
@@ -112,7 +114,7 @@ These are moments that come back, and each one is already written here as a page
 - The end of screen time: [a child falls apart when the screen goes off](/en/blog/screen-time-meltdown).
 - A tantrum at the supermarket: [a tantrum at the supermarket](/he/blog/hitkef-zaam-super).
 
-## How do you choose a parent coach?
+## How do you choose a good parent coach?
 
 The introductory conversation is the place to ask, not to close. The list fits a coach of any gender.
 
@@ -191,7 +193,7 @@ Do not copy a phone number from here to somewhere else without opening the page.
     "a": "Usually the moments that come back every day: tantrums, sleep, saying goodbye at daycare in the morning, fights between siblings, hitting, limits, and transitions such as the end of screen time. The coach helps you understand what is behind the behavior and build a steady way to respond to it. According to Midrag, an early-childhood specialty is described by them as from about age 2 until elementary school, and the division depends on the child."
   },
   {
-    "q": "How do you choose a parent coach?",
+    "q": "How do you choose a good parent coach?",
     "a": "In the introductory conversation, ask about the training and the experience, whether there is a specialty in the child's age, which approach the work uses, what the goal is and roughly how many meetings, whether you meet in person or on Zoom, and what you do between meetings. According to Midrag, parent coaching does not require a license or a formal certificate, so the training and the fit matter. According to an article on Walla Health by Dr. Moran Influs Adler, updated January 7, 2024, clinical, developmental, and educational psychologists and clinical social workers who specialize in children hold a license from the Ministry of Health."
   }
 ]
