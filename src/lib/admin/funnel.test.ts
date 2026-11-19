@@ -47,3 +47,37 @@ test("steps are summed across platforms and sources, with a share of the first s
     ["kidsit.ai", "8", "6", "2"],
   ]);
 });
+
+test("paywall entry table: counts per entry, and the rest of paywall_shown shown as not reported", () => {
+  const d = buildFunnelData(
+    [
+      { step: "paywall_shown", platform: "ios", source: "", n: 10 },
+      { step: "paywall_shown", platform: "android", source: "kidsit.ai", n: 6 },
+    ],
+    NOW,
+    [
+      { entry: "first_moment", platform: "ios", n: 5 },
+      { entry: "first_moment", platform: "android", n: 2 },
+      { entry: "settings", platform: "ios", n: 1 },
+      { entry: "unknown_entry", platform: "ios", n: 50 },
+      { entry: "add_child", platform: "ios", n: -3 },
+    ],
+  );
+  const t = d.tables[2];
+  assert.equal(t.title, "מאיפה נפתח מסך המנוי");
+  assert.deepEqual(t.rows, [
+    ["אחרי הרגע הראשון", "7", "5", "2"],
+    ["מההגדרות", "1", "1", "0"],
+    ["(לא דווח, גרסה ישנה)", "8", "4", "4"],
+  ]);
+});
+
+test("paywall entry table is empty until a version that sends entry reports, and the first two tables are unchanged", () => {
+  const rows = [{ step: "paywall_shown", platform: "ios", source: "", n: 4 }];
+  const without = buildFunnelData(rows, NOW);
+  const withEmpty = buildFunnelData(rows, NOW, []);
+  assert.deepEqual(without.tables[2].rows, []);
+  assert.deepEqual(withEmpty, without);
+  assert.equal(without.tables.length, 3);
+  assert.deepEqual(without.tables.slice(0, 2), buildFunnelData(rows, NOW, [{ entry: "settings", platform: "ios", n: 1 }]).tables.slice(0, 2));
+});

@@ -26,6 +26,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
 // Updated November 11, 2026: OpenAI models are gpt-6-luna (guidance) and gpt-transcribe (voice).
+// Updated November 19, 2026: funnel reports the full app version (major.minor.patch) and, on the paywall step, the entry point.
 // Updated November 11, 2026: anonymous funnel counts, the Android install source, and the free-answers counter.
 // Updated November 2026 for on-device digests and optional anonymous insights.
 // Updated November 9, 2026: disclose the session-only visit-source record (store-link attribution) in the cookie section.
@@ -36,7 +37,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 11, 2026",
+    updated: "November 19, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -141,7 +142,7 @@ const DOCS: Record<Lang, LegalDoc> = {
               finishing onboarding, adding a first child, sending a first moment, receiving a first answer, rating a
               moment, seeing or closing the subscription screen, and buying a subscription. Each step is sent once per
               install. A report contains only the step name, whether the device is iOS or Android, the app language, the
-              app version at major.minor only, and, on Android, the install source (the utm_source value from the Google
+              app version (for example 1.0.14), for the step of seeing the subscription screen which part of the app opened it (after the first moment, at the free-answer limit, when adding a child, or from settings), and, on Android, the install source (the utm_source value from the Google
               Play link, if there was one). It contains no user, device, install, or RevenueCat identifier, no child
               data, no story text, and no cookies. The server adds the day (UTC) and keeps only a daily counter for each
               combination; it does not keep a row per report. The counters are stored in Neon Postgres through Vercel.
@@ -302,7 +303,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "11 בנובמבר 2026",
+    updated: "19 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -402,7 +403,7 @@ const DOCS: Record<Lang, LegalDoc> = {
               ספירות משפך אנונימיות. האפליקציה מדווחת כשהתקנה מגיעה בפעם הראשונה לשלבים מסוימים: סיום ההיכרות עם
               האפליקציה, הוספת ילד ראשון, שליחת רגע ראשון, קבלת תשובה ראשונה, דירוג רגע, הצגה או סגירה של מסך המנוי,
               ורכישת מנוי. כל שלב נשלח פעם אחת לכל התקנה. הדיווח כולל רק את שם השלב, אם המכשיר הוא iOS או Android, את
-              שפת האפליקציה, את גרסת האפליקציה ברמת major.minor בלבד, וב-Android גם את מקור ההתקנה (ערך utm_source
+              שפת האפליקציה, את גרסת האפליקציה (למשל 1.0.14), בשלב הצגת מסך המנוי גם מאיזה חלק באפליקציה הוא נפתח (אחרי הרגע הראשון, בסוף התשובות בחינם, בהוספת ילד או מההגדרות), וב-Android גם את מקור ההתקנה (ערך utm_source
               מהקישור ל-Google Play, אם היה כזה). הוא אינו כולל מזהה משתמש, מכשיר, התקנה או RevenueCat, מידע על ילדים,
               טקסט של סיפור או עוגיות. השרת מוסיף את היום (UTC) ושומר רק מונה יומי לכל צירוף; הוא לא שומר רשומה לכל
               דיווח. המונים נשמרים ב-Neon Postgres דרך Vercel. בלוגי הבקשות של Vercel מופיעות כתובות IP, לפי משך השמירה
