@@ -8,6 +8,7 @@
 // errors are built from Meta's numeric codes, never from Meta's message text.
 import { createHash, createHmac } from "node:crypto";
 import { META_PIXEL_ID } from "../meta-pixel";
+import { tr, type Lang } from "./lang";
 import type { Section } from "./revenuecat";
 
 export const META_GRAPH = "https://graph.facebook.com";
@@ -31,16 +32,16 @@ export type MetaStats =
 
 export class MetaApiError extends Error {}
 
-export function resolveMetaConfig(env: Env): { ok: true; config: MetaConfig } | { ok: false; missing?: string[]; error?: string } {
+export function resolveMetaConfig(env: Env, lang: Lang = "he"): { ok: true; config: MetaConfig } | { ok: false; missing?: string[]; error?: string } {
   const token = env.META_ACCESS_TOKEN?.trim() || "";
   if (!token) return { ok: false, missing: ["META_ACCESS_TOKEN"] };
   const pixelId = env.META_PIXEL_ID?.trim() || META_PIXEL_ID;
-  if (!/^\d{5,25}$/.test(pixelId)) return { ok: false, error: "META_PIXEL_ID צריך להיות מספר (מזהה הפיקסל / ה-Dataset)." };
+  if (!/^\d{5,25}$/.test(pixelId)) return { ok: false, error: tr(lang, "META_PIXEL_ID צריך להיות מספר (מזהה הפיקסל / ה-Dataset).", "META_PIXEL_ID must be a number (the pixel / dataset ID).") };
   const rawAct = env.META_AD_ACCOUNT_ID?.trim() || "";
   const actDigits = rawAct.replace(/^act_/, "");
-  if (rawAct && !/^\d{3,25}$/.test(actDigits)) return { ok: false, error: "META_AD_ACCOUNT_ID צריך להיות בפורמט act_123 או מספר." };
+  if (rawAct && !/^\d{3,25}$/.test(actDigits)) return { ok: false, error: tr(lang, "META_AD_ACCOUNT_ID צריך להיות בפורמט act_123 או מספר.", "META_AD_ACCOUNT_ID must be in the format act_123 or a number.") };
   const version = env.META_GRAPH_VERSION?.trim() || DEFAULT_GRAPH_VERSION;
-  if (!/^v\d{1,3}\.\d$/.test(version)) return { ok: false, error: "META_GRAPH_VERSION צריך להיות בפורמט v25.0." };
+  if (!/^v\d{1,3}\.\d$/.test(version)) return { ok: false, error: tr(lang, "META_GRAPH_VERSION צריך להיות בפורמט v25.0.", "META_GRAPH_VERSION must be in the format v25.0.") };
   return {
     ok: true,
     config: { token, pixelId, adAccountId: rawAct ? `act_${actDigits}` : null, appSecret: env.META_APP_SECRET?.trim() || null, version },
@@ -64,31 +65,53 @@ export function redact(s: string, secrets: (string | null | undefined)[]): strin
   return out;
 }
 
-/** Hebrew, secret-free message from a Graph error code. Meta's own message text is never shown. */
-export function metaErrorMessage(status: number, code: number | null, subcode: number | null): string {
-  if (code === 190 || status === 401)
-    return `הטוקן של Meta לא תקף (פג תוקף, בוטל או שגוי; קוד 190${subcode ? `/${subcode}` : ""}). צריך ליצור טוקן חדש ל-System User ולעדכן את META_ACCESS_TOKEN.`;
+/** Secret-free message (Hebrew by default, or English) from a Graph error code. Meta's own message text is never shown. */
+export function metaErrorMessage(status: number, code: number | null, subcode: number | null, lang: Lang = "he"): string {
+  if (code === 190 || status === 401) {
+    const sub = subcode ? `/${subcode}` : "";
+    return tr(
+      lang,
+      `הטוקן של Meta לא תקף (פג תוקף, בוטל או שגוי; קוד 190${sub}). צריך ליצור טוקן חדש ל-System User ולעדכן את META_ACCESS_TOKEN.`,
+      `The Meta token is not valid (expired, revoked or wrong; code 190${sub}). Create a new System User token and update META_ACCESS_TOKEN.`,
+    );
+  }
   if (code === 10 || code === 200 || (code !== null && code >= 200 && code < 300) || status === 403)
-    return `אין הרשאה (קוד ${code ?? status}). ודאו שה-System User משויך לפיקסל עם הרשאת צפייה ושלטוקן יש ads_read.`;
+    return tr(
+      lang,
+      `אין הרשאה (קוד ${code ?? status}). ודאו שה-System User משויך לפיקסל עם הרשאת צפייה ושלטוקן יש ads_read.`,
+      `Permission denied (code ${code ?? status}). Make sure the System User is assigned to the pixel with view access and that the token has ads_read.`,
+    );
   if (code === 100 && subcode === 33)
-    return "Meta לא מוצאת את האובייקט או שאין הרשאה אליו (קוד 100/33). בדקו את המזהה ואת שיוך הנכס ל-System User.";
+    return tr(
+      lang,
+      "Meta לא מוצאת את האובייקט או שאין הרשאה אליו (קוד 100/33). בדקו את המזהה ואת שיוך הנכס ל-System User.",
+      "Meta cannot find the object, or there is no access to it (code 100/33). Check the ID and the asset assignment to the System User.",
+    );
   if (code === 4 || code === 17 || code === 32 || code === 613 || code === 80004 || status === 429)
-    return `Meta מגבילה כרגע את קצב הקריאות (קוד ${code ?? status}). ננסה שוב בטעינה הבאה.`;
-  if (code === 100) return "פרמטר לא תקין בבקשה ל-Meta (קוד 100).";
-  return `Meta החזירה שגיאה (${code !== null ? `קוד ${code}` : `HTTP ${status}`}).`;
+    return tr(
+      lang,
+      `Meta מגבילה כרגע את קצב הקריאות (קוד ${code ?? status}). ננסה שוב בטעינה הבאה.`,
+      `Meta is rate-limiting requests right now (code ${code ?? status}). We will retry on the next load.`,
+    );
+  if (code === 100) return tr(lang, "פרמטר לא תקין בבקשה ל-Meta (קוד 100).", "Invalid parameter in the request to Meta (code 100).");
+  return tr(
+    lang,
+    `Meta החזירה שגיאה (${code !== null ? `קוד ${code}` : `HTTP ${status}`}).`,
+    `Meta returned an error (${code !== null ? `code ${code}` : `HTTP ${status}`}).`,
+  );
 }
 
 const isObj = (x: unknown): x is Record<string, unknown> => typeof x === "object" && x !== null;
 const intOrNull = (x: unknown) => (typeof x === "number" && Number.isFinite(x) ? x : null);
 
-async function graphGet(c: MetaConfig, url: URL, fetchImpl: Fetch): Promise<unknown> {
+async function graphGet(c: MetaConfig, url: URL, fetchImpl: Fetch, lang: Lang): Promise<unknown> {
   url.searchParams.delete("access_token");
   if (c.appSecret) url.searchParams.set("appsecret_proof", appSecretProof(c.token, c.appSecret));
   let res: Response;
   try {
     res = await fetchImpl(url.toString(), { headers: { Authorization: `Bearer ${c.token}`, Accept: "application/json" }, cache: "no-store" });
   } catch {
-    throw new MetaApiError("אין תקשורת עם Meta כרגע.");
+    throw new MetaApiError(tr(lang, "אין תקשורת עם Meta כרגע.", "Cannot reach Meta right now."));
   }
   let body: unknown = null;
   try {
@@ -97,7 +120,7 @@ async function graphGet(c: MetaConfig, url: URL, fetchImpl: Fetch): Promise<unkn
     body = null;
   }
   const err = isObj(body) && isObj(body.error) ? body.error : null;
-  if (!res.ok || err) throw new MetaApiError(metaErrorMessage(res.status, intOrNull(err?.code), intOrNull(err?.error_subcode)));
+  if (!res.ok || err) throw new MetaApiError(metaErrorMessage(res.status, intOrNull(err?.code), intOrNull(err?.error_subcode), lang));
   if (!isObj(body)) throw new Error("unexpected Meta response");
   return body;
 }
@@ -108,35 +131,49 @@ const graphUrl = (c: MetaConfig, path: string, params: Record<string, string>) =
   return u;
 };
 
-const ACCOUNT_STATUS: Record<number, string> = { 1: "פעיל", 2: "מושבת", 3: "חוב פתוח", 7: "בבדיקת סיכון", 8: "ממתין לסגירה", 9: "בתקופת חסד", 100: "ממתין לסגירה", 101: "סגור" };
+const ACCOUNT_STATUS: Record<number, [string, string]> = {
+  1: ["פעיל", "Active"],
+  2: ["מושבת", "Disabled"],
+  3: ["חוב פתוח", "Unsettled"],
+  7: ["בבדיקת סיכון", "Pending risk review"],
+  8: ["ממתין לסגירה", "Pending settlement"],
+  9: ["בתקופת חסד", "In grace period"],
+  100: ["ממתין לסגירה", "Pending closure"],
+  101: ["סגור", "Closed"],
+};
 
-async function section<T>(fn: () => Promise<T>, secrets: (string | null)[]): Promise<Section<T>> {
+async function section<T>(fn: () => Promise<T>, secrets: (string | null)[], lang: Lang): Promise<Section<T>> {
   try {
     return { ok: true, data: await fn() };
   } catch (e) {
-    const msg = e instanceof MetaApiError ? e.message : e instanceof Error && /^unexpected /.test(e.message) ? "תשובה בפורמט לא צפוי מ-Meta." : "טעינת הנתונים מ-Meta נכשלה.";
+    const msg =
+      e instanceof MetaApiError
+        ? e.message
+        : e instanceof Error && /^unexpected /.test(e.message)
+          ? tr(lang, "תשובה בפורמט לא צפוי מ-Meta.", "Unexpected response format from Meta.")
+          : tr(lang, "טעינת הנתונים מ-Meta נכשלה.", "Loading the data from Meta failed.");
     return { ok: false, error: redact(msg, secrets) };
   }
 }
 
-export async function loadMeta(env: Env, fetchImpl: Fetch = fetch, now: Date = new Date()): Promise<MetaStats> {
-  const r = resolveMetaConfig(env);
-  if (!r.ok) return r.missing ? { state: "not_connected", missing: r.missing } : { state: "invalid_config", error: r.error ?? "הגדרה לא תקינה." };
+export async function loadMeta(env: Env, fetchImpl: Fetch = fetch, now: Date = new Date(), lang: Lang = "he"): Promise<MetaStats> {
+  const r = resolveMetaConfig(env, lang);
+  if (!r.ok) return r.missing ? { state: "not_connected", missing: r.missing } : { state: "invalid_config", error: r.error ?? tr(lang, "הגדרה לא תקינה.", "Invalid configuration.") };
   const c = r.config;
   const secrets = [c.token, c.appSecret, c.appSecret ? appSecretProof(c.token, c.appSecret) : null];
 
   const [pixel, adAccount] = await Promise.all([
     section(async () => {
-      const j = (await graphGet(c, graphUrl(c, c.pixelId, { fields: "name,last_fired_time" }), fetchImpl)) as Record<string, unknown>;
+      const j = (await graphGet(c, graphUrl(c, c.pixelId, { fields: "name,last_fired_time" }), fetchImpl, lang)) as Record<string, unknown>;
       const fired = typeof j.last_fired_time === "string" && !Number.isNaN(Date.parse(j.last_fired_time)) ? new Date(j.last_fired_time).toISOString() : null;
       return { name: typeof j.name === "string" ? j.name : null, lastFiredTime: fired };
-    }, secrets),
+    }, secrets, lang),
     c.adAccountId
       ? section(async () => {
-          const j = (await graphGet(c, graphUrl(c, c.adAccountId!, { fields: "name,account_status" }), fetchImpl)) as Record<string, unknown>;
+          const j = (await graphGet(c, graphUrl(c, c.adAccountId!, { fields: "name,account_status" }), fetchImpl, lang)) as Record<string, unknown>;
           const st = intOrNull(j.account_status);
-          return { id: c.adAccountId!, name: typeof j.name === "string" ? j.name : null, status: st === null ? "לא ידוע" : ACCOUNT_STATUS[st] ?? `סטטוס ${st}` };
-        }, secrets)
+          return { id: c.adAccountId!, name: typeof j.name === "string" ? j.name : null, status: st === null ? tr(lang, "לא ידוע", "Unknown") : tr(lang, ...(ACCOUNT_STATUS[st] ?? [`סטטוס ${st}`, `Status ${st}`])) };
+        }, secrets, lang)
       : Promise.resolve(null),
   ]);
 

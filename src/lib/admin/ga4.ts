@@ -5,11 +5,16 @@ import { ConfigError, googlePost, parseServiceAccount, SCOPE_GA4 } from "./googl
 export const GA4_API = "https://analyticsdata.googleapis.com/v1beta/properties";
 type Fetch = (url: string, init?: RequestInit) => Promise<Response>;
 
-export function validatePropertyId(raw: string | undefined): { ok: true; id: string } | { ok: false; error: string } {
+export function validatePropertyId(raw: string | undefined): { ok: true; id: string } | { ok: false; error: string; errorEn: string } {
   const v = raw?.trim().replace(/^properties\//, "") ?? "";
-  if (!v) return { ok: false, error: "GA4_PROPERTY_ID חסר." };
-  if (v.startsWith("G-")) return { ok: false, error: "GA4_PROPERTY_ID הוא המספר מ-Property details, לא ה-Measurement ID (G-…)." };
-  if (!/^\d{5,15}$/.test(v)) return { ok: false, error: "GA4_PROPERTY_ID צריך להיות מספר בלבד." };
+  if (!v) return { ok: false, error: "GA4_PROPERTY_ID חסר.", errorEn: "GA4_PROPERTY_ID is missing." };
+  if (v.startsWith("G-"))
+    return {
+      ok: false,
+      error: "GA4_PROPERTY_ID הוא המספר מ-Property details, לא ה-Measurement ID (G-…).",
+      errorEn: "GA4_PROPERTY_ID is the number from Property details, not the Measurement ID (G-…).",
+    };
+  if (!/^\d{5,15}$/.test(v)) return { ok: false, error: "GA4_PROPERTY_ID צריך להיות מספר בלבד.", errorEn: "GA4_PROPERTY_ID must be digits only." };
   return { ok: true, id: v };
 }
 
@@ -52,9 +57,9 @@ export function mapGa4(json: unknown): Ga4Stats {
 
 export async function loadGa4(env: Record<string, string | undefined>, fetchImpl: Fetch = fetch): Promise<Ga4Stats> {
   const parsed = parseServiceAccount(env.GOOGLE_SERVICE_ACCOUNT_JSON);
-  if (!parsed.ok) throw new ConfigError(parsed.error);
+  if (!parsed.ok) throw new ConfigError(parsed.error, parsed.errorEn);
   const prop = validatePropertyId(env.GA4_PROPERTY_ID);
-  if (!prop.ok) throw new ConfigError(prop.error);
+  if (!prop.ok) throw new ConfigError(prop.error, prop.errorEn);
   const json = await googlePost("Google Analytics", `${GA4_API}/${prop.id}:runReport`, ORGANIC_REPORT, parsed.sa, SCOPE_GA4, fetchImpl);
   return mapGa4(json);
 }

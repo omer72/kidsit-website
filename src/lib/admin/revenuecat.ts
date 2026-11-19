@@ -4,6 +4,8 @@
 //   GET /v2/projects/{id}/charts/{chart_name}  needs charts_metrics:charts:read
 // Charts & Metrics share a default limit of 25 requests/minute per project; one page load makes 7 calls, cached 15 min.
 
+import { tr, type Lang } from "./lang";
+
 export const RC_API = "https://api.revenuecat.com/v2";
 export const DEFAULT_PROJECT_ID = "projd8712292";
 export const WINDOW_DAYS = 28;
@@ -77,7 +79,7 @@ export function mapDaily(json: unknown): DailyPoint[] {
 }
 
 /** Segmented chart requested with aggregate=total: summary.total = { "<segment>": { "<measure>": n }, "Total": {...} }. */
-export function mapSegmentTotals(json: unknown): SegmentTotal[] {
+export function mapSegmentTotals(json: unknown, lang: Lang = "he"): SegmentTotal[] {
   if (!isObj(json) || !isObj(json.summary) || !isObj(json.summary.total)) throw new Error("unexpected segmented response");
   const totalNames = new Set<string>(["Total"]);
   if (Array.isArray(json.segments))
@@ -87,17 +89,19 @@ export function mapSegmentTotals(json: unknown): SegmentTotal[] {
     if (totalNames.has(label) || !isObj(measures)) continue;
     const first = Object.values(measures).map(num).find((n) => n !== null);
     if (first === undefined || first === null) continue;
-    out.push({ label: label.trim() || "(ללא ערך)", value: first });
+    out.push({ label: label.trim() || tr(lang, "(ללא ערך)", "(no value)"), value: first });
   }
   return out.sort((a, b) => b.value - a.value);
 }
 
-export function describeHttpError(status: number): string {
-  if (status === 401) return "המפתח נדחה (401). בדקו את REVENUECAT_SECRET_KEY.";
-  if (status === 403) return "אין הרשאה (403). למפתח חסרה הרשאת קריאה ל-Charts & Metrics.";
-  if (status === 404) return "הפרויקט לא נמצא (404). בדקו את REVENUECAT_PROJECT_ID.";
-  if (status === 429) return "חריגה ממגבלת הקריאות של RevenueCat (429). נסו שוב בעוד דקה.";
-  return `שגיאה מ-RevenueCat (HTTP ${status}).`;
+export function describeHttpError(status: number, lang: Lang = "he"): string {
+  if (status === 401) return tr(lang, "המפתח נדחה (401). בדקו את REVENUECAT_SECRET_KEY.", "The key was rejected (401). Check REVENUECAT_SECRET_KEY.");
+  if (status === 403)
+    return tr(lang, "אין הרשאה (403). למפתח חסרה הרשאת קריאה ל-Charts & Metrics.", "Permission denied (403). The key lacks read access to Charts & Metrics.");
+  if (status === 404) return tr(lang, "הפרויקט לא נמצא (404). בדקו את REVENUECAT_PROJECT_ID.", "Project not found (404). Check REVENUECAT_PROJECT_ID.");
+  if (status === 429)
+    return tr(lang, "חריגה ממגבלת הקריאות של RevenueCat (429). נסו שוב בעוד דקה.", "RevenueCat rate limit exceeded (429). Try again in a minute.");
+  return tr(lang, `שגיאה מ-RevenueCat (HTTP ${status}).`, `RevenueCat error (HTTP ${status}).`);
 }
 
 const isoDate = (d: Date) => d.toISOString().slice(0, 10);
@@ -106,10 +110,11 @@ export async function loadRevenueCat(
   env: Record<string, string | undefined>,
   fetchImpl: Fetch = fetch,
   now: Date = new Date(),
+  lang: Lang = "he",
 ): Promise<RevenueCatStats> {
   const { key, projectId } = resolveConfig(env);
   if (!key) return { state: "not_connected", missing: ["REVENUECAT_SECRET_KEY"] };
-  if (!isProjectId(projectId)) return { state: "invalid_config", error: "REVENUECAT_PROJECT_ID לא בפורמט proj…" };
+  if (!isProjectId(projectId)) return { state: "invalid_config", error: tr(lang, "REVENUECAT_PROJECT_ID לא בפורמט proj…", "REVENUECAT_PROJECT_ID is not in the proj… format.") };
 
   const base = `${RC_API}/projects/${encodeURIComponent(projectId)}`;
   const get = async <T>(path: string, map: (j: unknown) => T): Promise<Section<T>> => {
@@ -119,11 +124,14 @@ export async function loadRevenueCat(
         headers: { Authorization: `Bearer ${key}`, Accept: "application/json" },
         cache: "no-store",
       });
-      if (!res.ok) return { ok: false, error: describeHttpError(res.status) };
+      if (!res.ok) return { ok: false, error: describeHttpError(res.status, lang) };
       return { ok: true, data: map(await res.json()) };
     } catch (e) {
       // Never echo request details (they carry the key header); only a short reason.
-      const msg = e instanceof Error && /^unexpected /.test(e.message) ? "תשובה בפורמט לא צפוי מ-RevenueCat." : "החיבור ל-RevenueCat נכשל.";
+      const msg =
+        e instanceof Error && /^unexpected /.test(e.message)
+          ? tr(lang, "תשובה בפורמט לא צפוי מ-RevenueCat.", "Unexpected response format from RevenueCat.")
+          : tr(lang, "החיבור ל-RevenueCat נכשל.", "The connection to RevenueCat failed.");
       return { ok: false, error: msg };
     }
   };
@@ -144,10 +152,10 @@ export async function loadRevenueCat(
       }),
       get(chart("customers_new"), mapDaily),
       get(chart("trials_new"), mapDaily),
-      get(chart("customers_new", totals("platform")), mapSegmentTotals),
-      get(chart("trials_new", totals("platform")), mapSegmentTotals),
-      get(chart("customers_new", totals("attribution_source")), mapSegmentTotals),
-      get(chart("customers_new", totals("attribution_campaign")), mapSegmentTotals),
+      get(chart("customers_new", totals("platform")), (j) => mapSegmentTotals(j, lang)),
+      get(chart("trials_new", totals("platform")), (j) => mapSegmentTotals(j, lang)),
+      get(chart("customers_new", totals("attribution_source")), (j) => mapSegmentTotals(j, lang)),
+      get(chart("customers_new", totals("attribution_campaign")), (j) => mapSegmentTotals(j, lang)),
     ]);
 
   return {
