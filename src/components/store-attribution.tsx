@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { clickId, firstTouch, type Touch } from "@/lib/attribution";
 import { readConsent } from "@/lib/consent";
-import { storeHref, storeLinkFromData } from "@/lib/store-links";
+import { storeHrefFor, storeLinkFromData } from "@/lib/store-links";
 
 const SELECTOR = "a[data-store]";
 
@@ -21,7 +21,8 @@ const allowClickIds = () => !!readConsent()?.analytics;
 function rebuild(a: HTMLAnchorElement, touch: Touch) {
   const parsed = storeLinkFromData((n) => a.getAttribute(n));
   if (!parsed) return null;
-  const href = storeHref(parsed.kind, parsed.link, touch, { includeClickId: allowClickIds() });
+  // Android Chrome & co: the Play button opens the app when installed (intent link), else Google Play (fallback).
+  const href = storeHrefFor(parsed.kind, parsed.link, navigator.userAgent, touch, { includeClickId: allowClickIds() });
   if (a.getAttribute("href") !== href) a.setAttribute("href", href);
   return parsed;
 }
