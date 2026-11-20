@@ -1,8 +1,8 @@
 import { formatPostDate } from "@/lib/blog";
 import { listApproved } from "@/lib/comments/db";
 
-// Approved comments for one post, read by the static post page in the browser. Approving a comment shows up
-// here within the CDN cache window below, without rebuilding the page.
+// Approved comments for one post, read by the static post page in the browser. Not cached, so approving or
+// deleting a comment at /admin/comments shows on the post at once.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -20,5 +20,5 @@ export async function GET(req: Request) {
     iso: new Date(c.created_at).toISOString(),
     date: formatPostDate(new Date(c.created_at).toISOString().slice(0, 10), lang),
   }));
-  return Response.json({ comments }, { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" } });
+  return Response.json({ comments }, { headers: { "Cache-Control": "no-store" } });
 }

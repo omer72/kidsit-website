@@ -20,9 +20,10 @@ test("comments route: rejects an unknown language or a malformed slug", async ()
   assert.equal((await get("lang=he")).status, 400);
 });
 
-test("comments route: a valid post with no storage gives an empty, CDN-cacheable list", async () => {
+test("comments route: a valid post with no storage gives an empty, uncached list", async () => {
   const r = await get("lang=he&slug=milchamot-shena");
   assert.equal(r.status, 200);
   assert.deepEqual(r.json, { comments: [] });
-  assert.match(r.cache ?? "", /s-maxage=60/);
+  // Moderation must show at once: no CDN copy of a deleted comment.
+  assert.equal(r.cache, "no-store");
 });
