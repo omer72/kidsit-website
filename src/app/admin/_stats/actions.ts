@@ -9,14 +9,16 @@ import { parseLang, statsPath } from "@/lib/admin/lang";
 // Authentication is identical for both: same STATS_PASSWORD check, same cookie (path /admin).
 export async function login(formData: FormData) {
   const lang = parseLang(formData.get("lang"));
+  // The comments admin reuses this login; only that exact path is honored, so it can't become an open redirect.
+  const back = formData.get("next") === "/admin/comments" ? "/admin/comments" : statsPath(lang);
   const secret = configuredSecret(process.env.STATS_PASSWORD);
   if (!verifyPassword(formData.get("password"), secret)) {
     // Small fixed delay to slow down guessing.
     await new Promise((r) => setTimeout(r, 600));
-    redirect(`${statsPath(lang)}?e=1`);
+    redirect(`${back}?e=1`);
   }
   cookies().set(SESSION_COOKIE, createSessionToken(secret as string), sessionCookieOptions);
-  redirect(statsPath(lang));
+  redirect(back);
 }
 
 export async function logout(formData: FormData) {
