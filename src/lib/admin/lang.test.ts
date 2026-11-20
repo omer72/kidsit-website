@@ -211,7 +211,9 @@ test("the shared page checks the session before loading any data, for both langu
 test("login/logout keep the language and still use the same session cookie + password check", () => {
   const src = read("_stats/actions.ts");
   assert.match(src, /verifyPassword\(formData\.get\("password"\), secret\)/);
-  assert.match(src, /redirect\(`\$\{statsPath\(lang\)\}\?e=1`\)/);
+  assert.match(src, /redirect\(`\$\{back\}\?e=1`\)/);
+  // The only redirect target besides the stats page is the exact comments admin path (no open redirect).
+  assert.match(src, /formData\.get\("next"\) === "\/admin\/comments" \? "\/admin\/comments" : statsPath\(lang\)/);
   assert.match(src, /parseLang\(formData\.get\("lang"\)\)/);
   assert.match(src, /createSessionToken\(secret as string\), sessionCookieOptions/);
 });

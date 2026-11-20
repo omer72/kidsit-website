@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BlogAudio } from "@/components/blog-audio";
 import { ArticleCta, splitAtCta } from "@/components/article-cta";
 import { BlogInstallBar } from "@/components/blog-install-bar";
+import { BlogComments } from "@/components/blog-comments";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ogFor, postShareImage } from "@/lib/seo";
@@ -151,6 +152,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
             </section>
           ) : null}
         </article>
+        <BlogComments lang={lang} slug={post.slug} />
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {faqLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} /> : null}
