@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence } from "framer-motion";
 import { colors } from "@/colors";
 import { m, spring } from "./motion";
 import type { Dict } from "@/dictionaries";
@@ -105,35 +104,29 @@ export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
         </div>
       </nav>
 
-      <div id="mobile-menu" className="lg:hidden">
-        <AnimatePresence>
-          {open && (
-            <m.ul
-              className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-2xl border-2 border-ink bg-white shadow-sticker"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              {t.links.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={hrefOf(l.href)}
-                    className="flex min-h-11 items-center px-5 font-bold hover:bg-paper"
-                    onClick={() => setOpen(false)}
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a {...switchLink} className="flex min-h-11 items-center px-5 font-bold hover:bg-paper">
-                  {t.switchLabel}
+      {/* Out of flow so the open list overlays the page instead of growing the sticky header.
+          Enter animation is CSS (see .mobile-nav-panel): the resting style is fully visible. */}
+      <div id="mobile-menu" className="pointer-events-none absolute inset-x-0 top-full z-50 px-3 sm:px-6 lg:hidden">
+        {open && (
+          <ul className="mobile-nav-panel pointer-events-auto mx-auto mt-2 max-h-[calc(100dvh-5.5rem)] max-w-6xl overflow-y-auto rounded-2xl border-2 border-ink bg-white shadow-sticker">
+            {t.links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={hrefOf(l.href)}
+                  className="flex min-h-11 items-center px-5 font-bold hover:bg-paper"
+                  onClick={() => setOpen(false)}
+                >
+                  {l.label}
                 </a>
               </li>
-            </m.ul>
-          )}
-        </AnimatePresence>
+            ))}
+            <li>
+              <a {...switchLink} className="flex min-h-11 items-center px-5 font-bold hover:bg-paper">
+                {t.switchLabel}
+              </a>
+            </li>
+          </ul>
+        )}
       </div>
     </header>
   );

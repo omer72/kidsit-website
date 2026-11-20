@@ -46,6 +46,28 @@
   }
 }
 
+/* Mobile nav enter. Opacity 1 is the resting style, so the links are visible
+   even when the animation does not run (prefers-reduced-motion, or a browser
+   that drops it). Framer's `m` cannot do that on pages without LazyMotion:
+   it writes initial opacity:0 inline and never applies `animate`. */
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.mobile-nav-panel {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-nav-panel {
+    animation: mobile-nav-in 0.2s ease-out;
+  }
+}
+
 /* Content must show without JS: the layout script adds .js before first paint,
    and framer's SSR opacity:0 start state only applies once it's set. */
 html:not(.js) [style*="opacity:0"],
