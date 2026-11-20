@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { colors } from "@/colors";
-import { m, spring } from "./motion";
+import { m, MotionRoot, spring } from "./motion";
 import type { Dict } from "@/dictionaries";
 import { rememberLocale } from "./lang-switch";
 
@@ -14,7 +14,18 @@ const Icon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-export function Navbar({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
+// The navbar brings its own LazyMotion provider. It is rendered on pages that have no <MotionRoot> (blog index, posts,
+// legal and other pages); without the provider the `m.*` elements never run their animations, so the mobile menu
+// stayed at its initial opacity 0 after opening: invisible, but still taking up its height (an empty gap under the header).
+export function Navbar(props: { t: Dict["nav"]; base?: string }) {
+  return (
+    <MotionRoot>
+      <NavbarInner {...props} />
+    </MotionRoot>
+  );
+}
+
+function NavbarInner({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
   const hrefOf = (h: string) => (h.startsWith("#") ? base + h : h);
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
