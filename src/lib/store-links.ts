@@ -1,6 +1,10 @@
 import { APP_STORE_PROVIDER_TOKEN as APP_STORE_PROVIDER_TOKEN_CONSTANT, APP_STORE_URL, PLAY_STORE_URL } from "../dictionaries";
 import { MAX_VALUE, token, type Touch } from "./attribution";
 
+export const ANDROID_PACKAGE = "ai.kidsit.app";
+/** The origin the app claims (iOS applinks:kidsit.ai, Android autoVerify filter). www.kidsit.ai is NOT claimed. */
+export const APP_LINK_ORIGIN = "https://kidsit.ai";
+
 /**
  * The one place that builds clickable App Store / Google Play links. Every store button and every
  * store link in a blog post goes through storeHref(); JSON-LD keeps the clean APP_STORE_URL / PLAY_STORE_URL.
@@ -211,4 +215,58 @@ export function smartBannerContent(link: StoreLink, pageUrl: string, providerTok
   aff.set("ct", ctFor({ ...link, placement: "banner" }));
   parts.push(`affiliate-data=${aff.toString()}`);
   return parts.join(", ");
+}
+
+
+// ---------------------------------------------------------------------------------------------------------------
+// Open the app when it is installed (Android). The app (kidsai-app 1.0.18) claims https://kidsit.ai/he/blog/*,
+// /en/blog/* and /app as App Links. A plain https link on a kidsit.ai page does not reliably open it (same-site
+// navigation stays in the browser), so on Android browsers that support it, Play buttons become an intent:// link:
+// installed → the app opens at https://kidsit.ai/app?l&p&ct&utm_* (the app stores those as its attribution);
+// not installed (or an older app without the filter) → the browser follows S.browser_fallback_url, which is the
+// normal Play link with the same referrer. The server-rendered href stays the plain Play link.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** In-app browsers and WebViews where intent:// is unreliable (ERR_UNKNOWN_URL_SCHEME, or the fallback is ignored). */
+const NO_INTENT_UA =
+  /; wv\)|\bVersion\/\d|FBAN|FBAV|FB_IAB|FBIOS|Instagram|\bLine\/|Snapchat|musical_ly|BytedanceWebview|TikTok|LinkedInApp|Twitter|Pinterest|MicroMessenger|Telegram|DuckDuckGo|GSA\/|Firefox|OPR\/|OPT\/|YaBrowser|UCBrowser|Puffin|KAKAOTALK|NAVER/i;
+
+/** Android Chrome (also Custom Tabs, Edge, Samsung Internet): intent:// with a browser fallback is supported. */
+export function androidIntentEligible(ua: string): boolean {
+  if (!/Android/i.test(ua) || NO_INTENT_UA.test(ua)) return false;
+  return /\b(Chrome|SamsungBrowser|EdgA)\/\d+/.test(ua);
+}
+
+/** Query for https://kidsit.ai/app: page + attribution, the same values the Play referrer carries (no click ids). */
+export function appOpenQuery(link: StoreLink, touch?: Touch | null): URLSearchParams {
+  const q = new URLSearchParams({ l: link.lang, p: campaignToken(link.page, 80) });
+  q.set("ct", ctFor(link, touch));
+  new URLSearchParams(playReferrer(link, touch)).forEach((v, k) => q.set(k, v));
+  return q;
+}
+
+/** https://kidsit.ai/app?… (what the app is opened with). */
+export function appOpenUrl(link: StoreLink, touch?: Touch | null): string {
+  return `${APP_LINK_ORIGIN}/app?${appOpenQuery(link, touch).toString()}`;
+}
+
+/**
+ * intent://kidsit.ai/app?…#Intent;scheme=https;package=ai.kidsit.app;S.browser_fallback_url=<Play link>;end
+ * `fallback` is the normal Play store link (with the referrer), used when the app is not installed.
+ */
+export function androidIntentHref(link: StoreLink, touch?: Touch | null, opts: { includeClickId?: boolean } = {}): string {
+  const fallback = playStoreHref(link, touch, opts);
+  const u = new URL(appOpenUrl(link, touch));
+  return `intent://${u.host}${u.pathname}${u.search}#Intent;scheme=https;package=${ANDROID_PACKAGE};S.browser_fallback_url=${encodeURIComponent(fallback)};end`;
+}
+
+/** The href a store link should have in this browser: Play links become intent links on eligible Android browsers. */
+export function storeHrefFor(kind: StoreKind, link: StoreLink, ua: string, touch?: Touch | null, opts: { includeClickId?: boolean } = {}): string {
+  if (kind === "play" && androidIntentEligible(ua)) return androidIntentHref(link, touch, opts);
+  return storeHref(kind, link, touch, opts);
+}
+
+/** /app?ct=… override: a campaign token the caller chose (≤ 40 chars, [a-z0-9._-]); null if empty after cleaning. */
+export function cleanCampaignParam(raw: string | null, max = APP_STORE_CT_MAX): string | null {
+  return raw ? token(raw, max) || null : null;
 }

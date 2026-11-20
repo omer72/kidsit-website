@@ -9,6 +9,7 @@ import { StoreAttribution } from "@/components/store-attribution";
 import { MetaPixelPageView } from "@/components/meta-pixel-pageview";
 import { META_PIXEL_BOOTSTRAP } from "@/lib/meta-pixel-bootstrap";
 import { ogFor } from "@/lib/seo";
+import { appStoreId } from "@/lib/store-links";
 import { dictionaries, LANGS, type Lang } from "@/dictionaries";
 import { colors } from "@/colors";
 import "../globals.css";
@@ -32,7 +33,9 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
       canonical: `/${params.lang}`,
       languages: { en: "/en", he: "/he", "x-default": "/en" },
     },
-    other: { "apple-itunes-app": "app-id=6769443099" },
+    // Fallback for pages without their own banner (legal, about, …). Home, blog index and posts set their own
+    // `other` (page-level metadata replaces this key, so there is never a second tag): see smartBannerContent().
+    other: { "apple-itunes-app": `app-id=${appStoreId()}` },
     ...ogFor(params.lang, t.title, t.description, ""),
   };
 }
