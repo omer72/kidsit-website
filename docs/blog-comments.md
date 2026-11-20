@@ -2,7 +2,7 @@
 
 Every blog post ends with a comment form. Name and comment are required; email and phone are optional. Only the name and the comment are ever shown publicly. A new comment is stored as `pending` in `blog_comments` and appears on the post after it is approved at **/admin/comments**, which uses the same `STATS_PASSWORD` and session as /admin/stats.
 
-Post pages stay static. The comment list is loaded in the browser from `GET /api/comments?lang=…&slug=…`, which the CDN caches for 60 seconds, so an approved comment shows up within about a minute without a rebuild.
+Post pages stay static. The comment list is loaded in the browser from `GET /api/comments?lang=…&slug=…`, which is not cached, so approving or deleting a comment shows on the post at once, without a rebuild.
 
 ## Setup (once)
 
