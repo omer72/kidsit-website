@@ -1,4 +1,64 @@
 {
+  "shoad-madbekot-prasim": [
+    {
+      "title": "Undermining Children's Intrinsic Interest with Extrinsic Reward: A Test of the \"Overjustification\" Hypothesis",
+      "publisher": "Lepper, Greene & Nisbett (1973), Journal of Personality and Social Psychology, 28(1)",
+      "url": "https://doi.org/10.1037/h0035519",
+      "supports": "מחקר שדה קלאסי: ילדים שציפו לפרס מראש על ציור הראו ירידה משמעותית בעניין הספונטני שלהם בפעילות, לעומת ילדים שקיבלו פרס לא-צפוי או לא קיבלו פרס כלל.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "A Meta-Analytic Review of Experiments Examining the Effects of Extrinsic Rewards on Intrinsic Motivation",
+      "publisher": "Deci, Koestner & Ryan (1999), Psychological Bulletin, 125(6)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10589297/",
+      "supports": "מטה-אנליזה של 128 מחקרים: פרסים התלויים בביצוע פוגעים באופן עקבי במוטיבציה הפנימית; מחמאה מילולית, בניגוד לפרס מוחשי, בדרך כלל מחזקת מוטיבציה פנימית.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Detrimental Effects of Reward: Reality or Myth?",
+      "publisher": "Eisenberger & Cameron (1996), American Psychologist, 51(11)",
+      "url": "https://doi.org/10.1037/0003-066X.51.11.1153",
+      "supports": "ההשפעה השלילית על מוטיבציה פנימית מוגבלת בעיקרה לפרס מוחשי, צפוי מראש ולא תלוי ברמת הביצוע. מובא לצד המקור המרכזי כדי להציג את נקודת המחלוקת בספרות; לא אותרה גישה לטקסט המלא, רק לתקצירו.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    }
+  ],
+  "sfira-ad-shalosh": [
+    {
+      "title": "The Effect of Praise, Positive Nonverbal Response, Reprimand, and Negative Nonverbal Response on Child Compliance: A Systematic Review",
+      "publisher": "Owen, Slep & Heyman (2012), Clinical Child and Family Psychology Review, 15(4)",
+      "url": "https://link.springer.com/doi/10.1007/s10567-012-0120-0",
+      "supports": "סקירה שיטתית של 41 מחקרים שמצאה שנזיפה ותגובה שלילית לא-מילולית מביאות באופן עקבי לציות גבוה יותר באותו רגע.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Parenting Behaviors That Shape Child Compliance: A Multilevel Meta-Analysis",
+      "publisher": "Leijten, Gardner, Melendez-Torres et al. (2018), PLoS ONE",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6173420/",
+      "supports": "טיים-אאוט והתעלמות הראו את ההשפעות החזקות ביותר על ציות; נזיפה מילולית תרמה גם היא לעלייה בציות.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Spanking and Child Outcomes: Old Controversies and New Meta-Analyses",
+      "publisher": "Gershoff & Grogan-Kaylor (2016), Journal of Family Psychology, 30(4)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8323829/",
+      "supports": "מחקר על ענישה פיזית, לא על ספירה עד 3 במישרין: ככל שילדים חוו יותר ענישה גופנית, עלה הסיכוי להתנהגות מתריסה ובעיות חיצוניות לטווח ארוך. מובא כהרחבה זהירה לגבי כלים מבוססי-כוח בכלל.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Current Patterns of Parental Authority",
+      "publisher": "Baumrind, D. (1971), Developmental Psychology Monographs, 4(1, Pt.2)",
+      "url": "https://psycnet.apa.org/record/1971-07757-001",
+      "supports": "המודל הקלאסי של שלושת סגנונות ההורות: אוטוריטרית, מתירנית וסמכותית.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Naughty or Nice? Many Parents Rely on Threats to Manage Misbehavior",
+      "publisher": "C.S. Mott Children's Hospital National Poll on Children's Health, University of Michigan",
+      "url": "https://www.michiganmedicine.org/health-lab/naughty-or-nice-many-parents-rely-threats-manage-misbehavior",
+      "supports": "סקר ארצי: רוב ההורים משתמשים באיומים כדרך משמעת, אבל איומים שלא מתממשים פוגעים באמון ובסמכות ההורה לאורך זמן.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    }
+  ],
   "tzakti-al-hayeled": [
     {
       "title": "התפרצויות זעם (טנטרום) של ילדים",
