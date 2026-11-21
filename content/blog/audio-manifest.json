@@ -159,6 +159,26 @@
     "voice": "EXAVITQu4vr4xnSDxMaL",
     "generatedAt": "2026-11-12T14:41:35.409Z"
   },
+  "he/sfira-ad-shalosh": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/sfira-ad-shalosh-a29e9b08.mp3",
+    "duration": 818,
+    "bytes": 6546538,
+    "hash": "a29e9b08689ee818917c8087daf8c80f",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-21T20:39:16.758Z"
+  },
+  "he/shoad-madbekot-prasim": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/shoad-madbekot-prasim-81973347.mp3",
+    "duration": 415,
+    "bytes": 3319684,
+    "hash": "819733470fabf66013280dd74065c7cf",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-21T20:40:54.543Z"
+  },
   "he/tzakti-al-hayeled": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/tzakti-al-hayeled-7f83d6db.mp3",
     "duration": 654,
