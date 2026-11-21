@@ -30,6 +30,18 @@ const COVERS: Record<string, { dir: TextDir; lines: string[] }> = {
     dir: "rtl",
     lines: ["הילד מתפרק כשמכבים את המסך?", "מה אומרים לפני, בזמן ואחרי"],
   },
+  "en/time-out-vs-time-in": {
+    dir: "ltr",
+    lines: ["Time-Out or Time-In?", "What to Say at Ages 2–7"],
+  },
+  "he/sfira-ad-shalosh": {
+    dir: "rtl",
+    lines: ["לספור עד 3 כבר לא עובד?", "מה להגיד במקום, ולמה זה משנה"],
+  },
+  "he/shoad-madbekot-prasim": {
+    dir: "rtl",
+    lines: ["מדבקה על כל דבר טוב?", "מה המחקר אומר על \"שוחד הורי\""],
+  },
 };
 
 const AFFECTED = ["he/preida-bagan", "he/kibui-masach"];

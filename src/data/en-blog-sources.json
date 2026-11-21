@@ -1,4 +1,76 @@
 {
+  "time-out-vs-time-in": [
+    {
+      "title": "How to Give a Time-Out",
+      "publisher": "American Academy of Pediatrics (HealthyChildren.org)",
+      "url": "https://www.healthychildren.org/English/family-life/family-dynamics/communication-discipline/Pages/Time-Outs-101.aspx",
+      "supports": "Warn once, name the behavior, move to a quiet place, not the bedroom, about a minute per year of age; from 3, \"come back when ready\" can replace a timer; a parent can use a time-out too; walk a child back and restart the timer if they get up.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "How to Use Time-Out",
+      "publisher": "CDC",
+      "url": "https://www.cdc.gov/parenting-toddlers/time-out/steps.html",
+      "supports": "Reserve time-out for dangerous, harmful or rule-breaking behavior; no lecture, arguing or eye contact during it; consider time-in when the child is distressed rather than defiant.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Disciplining Your Toddler",
+      "publisher": "Nemours KidsHealth",
+      "url": "https://kidshealth.org/en/parents/toddler-tantrums.html",
+      "supports": "A kitchen chair works for time-out; 3–5 minutes is plenty at any age.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Positive discipline techniques for kids under 5",
+      "publisher": "Arizona PBS",
+      "url": "https://azpbs.org/2026/11/positive-discipline-techniques-for-kids-under-5/",
+      "supports": "Leans toward redirection and praise over time-out; \"for many toddlers, time-in works better.\"",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Positive discipline for young children",
+      "publisher": "Caring for Kids (Canadian Paediatric Society)",
+      "url": "https://caringforkids.cps.ca/handouts/behavior-and-development/positive-discipline-for-young-children",
+      "supports": "Time-in as the go-to approach; recommends no time-out under age 3.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Are Timeouts Helpful or Harmful to Young Children?",
+      "publisher": "PBS KIDS for Parents (Claire Lerner, 2016)",
+      "url": "https://www.pbs.org/parents/thrive/are-time-outs-helpful-or-harmful-to-young-children",
+      "supports": "A shaming time-out can backfire; children under 3 cannot yet \"reflect\" the way a time-out assumes.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "General parenting strategies: a review",
+      "publisher": "Kavan, Saxena & Rafiq (2018), American Family Physician, 97(10)",
+      "url": "https://www.aafp.org/afp/2018/0515/p642",
+      "supports": "About one minute per year of age for a time-out, up to five minutes; never a closet.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Parental use of time out revisited: a useful or harmful parenting strategy?",
+      "publisher": "Morawska & Sanders (2011), Journal of Child and Family Studies, 20(1)",
+      "url": "https://doi.org/10.1007/s10826-010-9371-x",
+      "supports": "Time-out can be effective as part of comprehensive positive parenting, is not uniformly accepted, and has contraindications. Abstract only; full text not accessed, cited only for this general conclusion.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Tuning in to Kids: improving emotion socialization practices in parents of preschool children",
+      "publisher": "Havighurst et al., Journal of Child Psychology and Psychiatry",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20735794/",
+      "supports": "Emotion-coaching program trial supporting improved parent-reported child behavior; background for the emotion-coaching idea behind time-in, not a head-to-head test of time-out versus time-in.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    },
+    {
+      "title": "Tuning in to Toddlers: a randomized controlled trial of an emotion-focused parenting program",
+      "publisher": "Havighurst et al.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35007962/",
+      "supports": "Emotion-coaching program trial for toddlers; background for the emotion-coaching idea behind time-in, not a head-to-head test of time-out versus time-in.",
+      "checkedAt": "2026-11-21T09:00:00+02:00"
+    }
+  ],
   "screen-time-meltdown": [
     {
       "title": "Screen Time & Temper Tantrums: Helpful Tips for Parents",
