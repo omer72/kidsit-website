@@ -76,7 +76,7 @@ secondary_queries: ["איך להרגיע ילד בהתקף זעם", "ילד בן
 
 לפעמים הבעיה היא לא שאתם לא יודעים מה לעשות, אלא שבאמצע הרעש קשה להיזכר. ב-**Kidsit AI** לוחצים על המיקרופון, לוחשים מה קרה, ותוך כמה שניות מקבלים: הסבר קצר למה זה אולי קרה, שלושה דברים לנסות (כולל משפט שאפשר להגיד), ומשפט חם לפני השינה. האפליקציה זוכרת את הרגעים של כל ילד, ואם סימנתם "לא עזר", התשובה הבאה תנסה כיוון אחר.
 
-3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+3 תשובות ההדרכה הראשונות בחינם, בלי חשבון ובלי הגבלת מספר ילדים. אחרי זה, הדרכה חדשה דורשת Premium. [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ---
 

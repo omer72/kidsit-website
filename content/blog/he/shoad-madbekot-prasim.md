@@ -55,7 +55,7 @@ secondary_queries: ["לוח מדבקות ילדים", "פרסים על התנה�
 
 לפעמים הקושי הוא לנסח בשטח משוב מילולי ספציפי במקום "כל הכבוד" כללי. ב-**Kidsit AI** לוחצים על המיקרופון, מתארים מה קרה, ותוך כמה שניות מקבלים ניסוח מדויק שאפשר להגיד עכשיו, בלי להפוך את הרגע לעסקה.
 
-**אפשר להתחיל בחינם עם ילד אחד, ללא הגבלת זמן.** [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+**אפשר להתחיל בחינם, בלי הגבלת מספר ילדים ובלי הגבלת זמן.** [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ## שאלות נפוצות
 

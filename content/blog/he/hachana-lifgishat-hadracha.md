@@ -167,7 +167,7 @@ secondary_queries: ["הכנה לפגישת הדרכת הורים", "יומן ה�
 
 ## להתחיל עכשיו
 
-בפעם הבאה שיש רגע קשה, ספרו ל־Kidsit מה קרה. 3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. הפעילו בהגדרות את הסיכום היומי או השבועי, ולפני הפגישה פתחו אותו כדי להיזכר. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
+בפעם הבאה שיש רגע קשה, ספרו ל־Kidsit מה קרה. 3 תשובות ההדרכה הראשונות בחינם, בלי חשבון ובלי הגבלת מספר ילדים. אחרי זה, הדרכה חדשה דורשת Premium. הפעילו בהגדרות את הסיכום היומי או השבועי, ולפני הפגישה פתחו אותו כדי להיזכר. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
 
 ---
 

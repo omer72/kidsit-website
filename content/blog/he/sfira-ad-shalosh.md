@@ -95,7 +95,7 @@ secondary_queries: ["למה ספירה עד 3 לא עובדת", "מה להגיד
 
 ברגע שהגבול צריך להיאמר עכשיו, קשה לנסח מחדש משפט שלם. ב-**Kidsit AI** לוחצים על המיקרופון, אומרים מה קורה, ותוך כמה שניות מקבלים: הסבר קצר, שלוש פעולות עם משפט מדויק להגיד, ומשפט חם לפני השינה. האפליקציה זוכרת את הרגעים של כל ילד.
 
-**אפשר להתחיל בחינם עם ילד אחד, ללא הגבלת זמן.** [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+**אפשר להתחיל בחינם, בלי הגבלת מספר ילדים ובלי הגבלת זמן.** [להורדה ב-App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [להורדה ב-Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ## שאלות נפוצות
 

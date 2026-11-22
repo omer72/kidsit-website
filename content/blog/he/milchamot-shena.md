@@ -77,7 +77,7 @@ secondary_queries: ["מלחמות שינה ילדים", "ילד יוצא מהמ�
 
 בפעם הרביעית שהדלת נפתחת, קשה להיזכר בכל זה. ב-**Kidsit AI** מספרים בקול או בהקלדה מה קרה ("בת 4, יוצאת מהמיטה כל ערב, היום חמש פעמים"), ומקבלים הסבר קצר, שלושה דברים לנסות (כולל המשפט המדויק), ומשפט חם לפני השינה. לכל ילד יש פרופיל, והאפליקציה זוכרת מה כבר ניסיתם.
 
-3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
+3 תשובות ההדרכה הראשונות בחינם, בלי חשבון ובלי הגבלת מספר ילדים. אחרי זה, הדרכה חדשה דורשת Premium. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app)
 
 ---
 
