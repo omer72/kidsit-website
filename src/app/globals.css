@@ -412,3 +412,53 @@ html[lang="en"] .blog-prose a[hreflang="he"]::after {
   text-decoration: none;
   display: inline-block;
 }
+
+/* Printable behavior journal (/behavior-journal): plain boxes with blank rules, one entry per printed card.
+   On screen it renders at normal page width; @media print hides everything else and lays out a clean A4 page. */
+.journal-entry {
+  border: 2px solid theme("colors.ink");
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  break-inside: avoid;
+}
+.journal-entry-label {
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+.journal-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.journal-line-label {
+  font-weight: 700;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+.journal-line-rule {
+  flex: 1;
+  border-bottom: 1px solid theme("colors.ink-muted");
+  height: 1.4em;
+}
+@media print {
+  .journal-screen-only {
+    display: none !important;
+  }
+  .journal-print {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+  .journal-page {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  .journal-entry {
+    border-color: #000;
+  }
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}
