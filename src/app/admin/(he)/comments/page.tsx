@@ -44,9 +44,9 @@ function Comment({ c }: { c: AdminComment }) {
           {path}
         </a>
       </p>
-      {c.email || c.phone ? (
+      {c.email ? (
         <p className="text-sm text-ink-muted" dir="ltr">
-          {[c.email, c.phone].filter(Boolean).join(" · ")}
+          {c.email}
         </p>
       ) : null}
       <p dir="auto" className="mt-2 whitespace-pre-line break-words">

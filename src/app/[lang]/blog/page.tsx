@@ -56,7 +56,7 @@ export default function BlogIndex({ params }: { params: { lang: Lang } }) {
   const other: Lang = lang === "he" ? "en" : "he";
   return (
     <>
-      <Navbar t={d.nav} base={`/${lang}`} />
+      <Navbar t={d.nav} base={`/${lang}`} switchTo={`/${other}/blog`} />
       <main className="mx-auto max-w-5xl px-5 py-16 sm:px-6">
         <h1 className="min-w-0 text-balance break-words font-display text-4xl font-semibold sm:text-5xl">{copy.h1}</h1>
         <p className="mt-4 max-w-xl text-lg font-bold text-ink/80">{copy.intro}</p>

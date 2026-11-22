@@ -4,7 +4,7 @@ import type { Lang } from "@/dictionaries";
 import type { CommentInput } from "./validate";
 
 export type PublicComment = { id: string; name: string; body: string; created_at: string };
-export type AdminComment = PublicComment & { lang: Lang; slug: string; email: string | null; phone: string | null; status: "pending" | "approved" };
+export type AdminComment = PublicComment & { lang: Lang; slug: string; email: string | null; status: "pending" | "approved" };
 
 function db() {
   const url = insightsDatabaseUrl();
@@ -14,7 +14,7 @@ function db() {
 }
 
 export async function insertComment(c: CommentInput): Promise<void> {
-  await db()`INSERT INTO blog_comments (lang, slug, name, email, phone, body) VALUES (${c.lang}, ${c.slug}, ${c.name}, ${c.email}, ${c.phone}, ${c.body})`;
+  await db()`INSERT INTO blog_comments (lang, slug, name, email, body) VALUES (${c.lang}, ${c.slug}, ${c.name}, ${c.email}, ${c.body})`;
 }
 
 /** Approved comments for a post, oldest first. Never throws: the post shows no comments if storage is missing. */
@@ -31,7 +31,7 @@ export async function listApproved(lang: Lang, slug: string): Promise<PublicComm
 
 /** Every comment, pending first, newest first within each group. */
 export async function listAll(): Promise<AdminComment[]> {
-  return (await db()`SELECT id, lang, slug, name, email, phone, body, status, created_at FROM blog_comments
+  return (await db()`SELECT id, lang, slug, name, email, body, status, created_at FROM blog_comments
     ORDER BY status = 'approved', created_at DESC LIMIT 500`) as AdminComment[];
 }
 
