@@ -6,6 +6,8 @@ title_tag: "Kidsit מול ChatGPT: מה מתאים ברגע הקשה עם היל
 meta_description: "ChatGPT חינמי וגמיש. Kidsit בנויה לרגע עצמו: לוחצים, אומרים מה קרה, ומקבלים מילים להגיד בלי לכתוב פרומפט. מתי כל אחד מתאים, ופרומפט מוכן."
 primary_query: "Kidsit מול ChatGPT"
 secondary_queries: ["ChatGPT להורים", "פרומפט ל-ChatGPT להתקף זעם", "אפליקציית הורות או ChatGPT"]
+topic: coaching-tools
+age_range: 2-10
 ---
 
 # Kidsit מול ChatGPT: מה מתאים לכם ברגע הקשה עם הילד?

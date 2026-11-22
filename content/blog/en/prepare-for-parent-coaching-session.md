@@ -6,6 +6,8 @@ title_tag: "How to Prepare for a Parent Coaching or Therapy Session: What to Not
 meta_description: "The week fades before the session. A 4-line template for hard moments, what to bring to parent coaching or your child's therapist, and how to open the session."
 primary_query: "how to prepare for a parent coaching session"
 secondary_queries: ["what to tell your child's therapist", "behavior log for therapist", "behavior diary for parents", "how to track child behavior between therapy sessions", "what to bring to a child psychologist appointment"]
+topic: coaching-tools
+age_range: 2-10
 ---
 
 # How to prepare for a parent coaching or child therapy session: what to note between sessions

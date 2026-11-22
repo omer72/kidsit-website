@@ -6,6 +6,8 @@ title_tag: "Time-Out or Time-In? What to Say at Ages 2–7 | Kidsit AI"
 meta_description: "Time-out or time-in? What the AAP, CDC and others say, plus exact words for ages 2–3, 3–5 and 5–7, and what to do when your child hits a sibling."
 primary_query: "time out vs time in"
 secondary_queries: ["time out vs time in toddler", "is time out ok for a 2 year old", "what to say instead of time out", "how to do a time-in at home"]
+topic: boundaries-family
+age_range: 2-7
 ---
 
 # Time-Out or Time-In? What to Say at Ages 2–7
