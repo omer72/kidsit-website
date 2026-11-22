@@ -457,6 +457,12 @@ html[lang="en"] .blog-prose a[hreflang="he"]::after {
   .journal-entry {
     border-color: #000;
   }
+  /* NagishLi mounts its floating toggle as a bare <nagishli> element at the end of <body>
+     (see src/components/nagishli.tsx); it has no class/id and must not be moved, so it is
+     targeted by tag here to keep it off the printed page. */
+  nagishli {
+    display: none !important;
+  }
   @page {
     size: A4;
     margin: 1.5cm;
