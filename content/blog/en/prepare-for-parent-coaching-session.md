@@ -165,7 +165,7 @@ If there is a safety concern, a sharp change, or a parent in distress, do not wa
 
 ## Start now
 
-Next time there's a hard moment, tell Kidsit what happened. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Turn on the daily or weekly summary in Settings, and open it before your session to remember. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Next time there's a hard moment, tell Kidsit what happened. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. Turn on the daily or weekly summary in Settings, and open it before your session to remember. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 ---
 

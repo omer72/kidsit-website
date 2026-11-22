@@ -170,7 +170,7 @@ Kidsit is not therapy, and it is not medical or psychological advice.
 
 Sometimes the moment is not on the list. Hold the mic in [Kidsit AI](https://kidsit.ai/en), say what just happened, and in about 10 seconds you get a recap, a short why, three actions with exact words, and a bedtime line. Help while your hands are full. An everyday tool, not therapy and not medical advice, on iPhone and Android.
 
-Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en)
+Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en)
 
 ---
 

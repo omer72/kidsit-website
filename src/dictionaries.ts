@@ -157,7 +157,7 @@ const en = {
   },
   pricing: {
     heading: "Your first 3 guidance answers are free.",
-    sub: "After that, new guidance needs Premium, which also adds unlimited children. Cancel anytime from your App Store or Google Play subscriptions.",
+    sub: "No account, no limit on the number of children. After your first 3 answers, new guidance needs Premium. Cancel anytime from your App Store or Google Play subscriptions.",
     toggleLabel: "Billing period",
     yearlyNote: "That’s $5.00/month, billed yearly after a 7-day free trial for new subscribers.",
     monthlyNote: "Billed monthly.",
@@ -171,15 +171,14 @@ const en = {
       name: "Try it",
       desc: "For getting to know the coach.",
       price: "3 guidance answers free",
-      cadence: "one child, no account",
-      features: ["One child profile", "Voice or typed moments", "Then new guidance needs Premium"],
+      cadence: "no account, no limit on children",
+      features: ["Profile for every child", "Voice or typed moments", "Then new guidance needs Premium"],
     },
     premium: {
       name: "Premium",
       desc: "Everything, for the whole crew.",
       badge: "Best value",
       features: [
-        "Track every child",
         "Unlimited moments",
         "Memory for each child",
         "Cancel anytime",
@@ -208,7 +207,7 @@ const en = {
       },
       {
         q: "What can I do for free?",
-        a: "Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
+        a: "Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. If you have a subscription, cancel anytime through your App Store or Google Play subscriptions. On iPhone: Settings → [your name] → Subscriptions. On Android: Google Play → Profile → Payments & subscriptions → Subscriptions.",
       },
       {
         q: "Is it on Android?",
