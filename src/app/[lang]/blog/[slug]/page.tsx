@@ -111,7 +111,7 @@ export default function BlogPost({ params }: { params: { lang: Lang; slug: strin
       : null;
   return (
     <>
-      <Navbar t={d.nav} base={`/${lang}`} />
+      <Navbar t={d.nav} base={`/${lang}`} switchTo={alternate?.path} />
       <main className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
         <Link href={`/${lang}/blog`} className="inline-flex min-h-11 items-center font-bold text-grape hover:underline active:text-ink">
           {ui.back}

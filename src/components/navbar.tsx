@@ -16,7 +16,7 @@ const Icon = ({ open }: { open: boolean }) => (
 // The navbar brings its own LazyMotion provider. It is rendered on pages that have no <MotionRoot> (blog index, posts,
 // legal and other pages); without the provider the `m.*` elements never run their animations, so the mobile menu
 // stayed at its initial opacity 0 after opening: invisible, but still taking up its height (an empty gap under the header).
-export function Navbar(props: { t: Dict["nav"]; base?: string }) {
+export function Navbar(props: { t: Dict["nav"]; base?: string; switchTo?: string }) {
   return (
     <MotionRoot>
       <NavbarInner {...props} />
@@ -24,7 +24,7 @@ export function Navbar(props: { t: Dict["nav"]; base?: string }) {
   );
 }
 
-function NavbarInner({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
+function NavbarInner({ t, base = "", switchTo }: { t: Dict["nav"]; base?: string; switchTo?: string }) {
   const hrefOf = (h: string) => (h.startsWith("#") ? base + h : h);
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -42,7 +42,7 @@ function NavbarInner({ t, base = "" }: { t: Dict["nav"]; base?: string }) {
   }, [open]);
 
   const switchLink = {
-    href: t.switchHref,
+    href: switchTo ?? t.switchHref,
     lang: t.switchLang,
     hrefLang: t.switchLang,
     onClick: rememberLocale,

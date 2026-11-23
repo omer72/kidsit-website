@@ -1,16 +1,16 @@
 import type { Lang } from "@/dictionaries";
 
-export const COMMENT_LIMITS = { name: 80, email: 254, phone: 30, body: 2000 } as const;
+export const COMMENT_LIMITS = { name: 80, email: 254, body: 2000 } as const;
 
-export type CommentInput = { lang: Lang; slug: string; name: string; email: string | null; phone: string | null; body: string };
-export type CommentError = "name" | "email" | "phone" | "body" | "post" | "spam";
+export type CommentInput = { lang: Lang; slug: string; name: string; email: string | null; body: string };
+export type CommentError = "name" | "email" | "body" | "post" | "spam";
 
 const field = (form: FormData, key: string) => {
   const v = form.get(key);
   return typeof v === "string" ? v.trim() : "";
 };
 
-/** Reader comment form → row to insert. Name and body are required; email and phone are optional. */
+/** Reader comment form → row to insert. Name and body are required; email is optional. */
 export function validateComment(form: FormData): { ok: true; value: CommentInput } | { ok: false; error: CommentError } {
   // Honeypot: hidden from people, filled in by naive bots.
   if (field(form, "confirm_url")) return { ok: false, error: "spam" };
@@ -23,7 +23,5 @@ export function validateComment(form: FormData): { ok: true; value: CommentInput
   if (!body || body.length > COMMENT_LIMITS.body) return { ok: false, error: "body" };
   const email = field(form, "email");
   if (email && (email.length > COMMENT_LIMITS.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) return { ok: false, error: "email" };
-  const phone = field(form, "phone");
-  if (phone && (phone.length > COMMENT_LIMITS.phone || !/^\+?[0-9\s().-]{6,}$/.test(phone))) return { ok: false, error: "phone" };
-  return { ok: true, value: { lang, slug, name, email: email || null, phone: phone || null, body } };
+  return { ok: true, value: { lang, slug, name, email: email || null, body } };
 }
