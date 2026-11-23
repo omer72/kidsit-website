@@ -149,7 +149,7 @@ Kidsit היא לא טיפול, לא ייעוץ רפואי ולא מדריך/ה �
 
 ## בפעם הבאה
 
-בדרך לארוחת חנוכה? אם רגע הכניסה נהיה מתוח, פתחו את Kidsit וספרו מה קורה. תוך כ־10 שניות תקבלו מילים רגועות לילד ולסבתא. 3 תשובות ההדרכה הראשונות בחינם, עם ילד אחד, בלי חשבון. אחרי זה, הדרכה חדשה דורשת Premium, שגם מוסיף ילדים ללא הגבלה. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
+בדרך לארוחת חנוכה? אם רגע הכניסה נהיה מתוח, פתחו את Kidsit וספרו מה קורה. תוך כ־10 שניות תקבלו מילים רגועות לילד ולסבתא. 3 תשובות ההדרכה הראשונות בחינם, בלי חשבון ובלי הגבלת מספר ילדים. אחרי זה, הדרכה חדשה דורשת Premium. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [לאתר בעברית](https://kidsit.ai/he).
 
 ---
 
