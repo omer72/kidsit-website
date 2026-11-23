@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
 };
 
-export const viewport: Viewport = { themeColor: "#0b0b10" };
+export const viewport: Viewport = { themeColor: "#f7f4ef" };
 
 export default function MarketingLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" dir="ltr" className={fontClass}>
-      <body className="bg-[#0b0b10] font-body text-[#f5f4f0] antialiased">{children}</body>
+      <body className="bg-[#f7f4ef] font-body text-[#15151a] antialiased">{children}</body>
     </html>
   );
 }
