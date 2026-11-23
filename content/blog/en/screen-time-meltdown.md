@@ -6,6 +6,8 @@ title_tag: "Toddler Meltdown When Screen Time Ends? Exact Words | Kidsit AI"
 meta_description: "Toddler screaming when the tablet goes off? Ready-to-say lines for before, during and after, what to do when they won't let go, and how to repair if you yelled."
 primary_query: "toddler meltdown when screen time ends"
 secondary_queries: ["how to end screen time without a fight", "what to say when screen time is over", "toddler tantrum when TV is turned off", "child screams when iPad is taken away"]
+topic: screens-sleep
+age_range: 2-6
 ---
 
 # Toddler Meltdown When Screen Time Ends? Exact Words for Before, During and After

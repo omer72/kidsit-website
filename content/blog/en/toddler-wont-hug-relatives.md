@@ -6,6 +6,8 @@ title_tag: "Toddler Won't Hug Grandma? What to Say to Your Child (and to Grandma
 meta_description: "Your toddler hides when grandma opens her arms. One line for your child, one for grandma, a one-minute prep before the visit, and what to do about bribes and tickling."
 primary_query: "toddler won't hug grandparents"
 secondary_queries: ["should I make my child hug relatives", "child doesn't want to kiss grandma", "kids forced hugs holidays", "how to tell grandparents my child doesn't want hugs", "toddler shy with relatives", "child won't say hello to family"]
+topic: boundaries-family
+age_range: 2-7
 ---
 
 # Toddler won't hug grandma: what to say to your child, and what to say to grandma

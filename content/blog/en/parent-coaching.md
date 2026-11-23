@@ -6,6 +6,8 @@ title_tag: "Parent Coaching: What It Is, When to Reach Out | Kidsit AI"
 meta_description: "What parent coaching is, how it differs from therapy, when to reach out, and which options exist in Israel, including at no cost. Kidsit is an AI tool, not parent coaching and not therapy."
 primary_query: "parent coaching"
 secondary_queries: ["what is parent coaching", "when to get parent coaching", "parent coaching for young children", "parent coaching at no cost", "difference between parent coaching and therapy", "how much does parent coaching cost in Israel", "parent coaching online", "how to choose a good parent coach"]
+topic: coaching-tools
+age_range: 0-6
 ---
 
 # Parent coaching: what it is, when to reach out, and which help fits you

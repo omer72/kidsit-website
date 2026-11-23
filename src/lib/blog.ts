@@ -85,6 +85,9 @@ export type Reviewer = { name: string; credential: string };
  */
 export type Source = { title: string; url: string; publisher?: string };
 
+export const TOPICS = ["tantrums", "screens-sleep", "boundaries-family", "coaching-tools"] as const;
+export type Topic = (typeof TOPICS)[number];
+
 export type PostMeta = {
   slug: string; // path segment, e.g. hetkefei-zaam-gil-3
   path: string; // /he/blog/hetkefei-zaam-gil-3
@@ -93,6 +96,9 @@ export type PostMeta = {
   description: string;
   date: string; // YYYY-MM-DD, datePublished
   dateModified: string; // YYYY-MM-DD
+  topic: Topic | null; // editorial tag, frontmatter `topic`
+  ageRange: string | null; // e.g. "2-5", frontmatter `age_range`
+  readingMinutes: number; // from word count, ~200 words/minute
 };
 
 export type FaqItem = { q: string; a: string };
@@ -241,6 +247,22 @@ function requireIsoDate(value: string | undefined, slug: string, field: string):
   return value;
 }
 
+function topicFor(slug: string, meta: Record<string, string>): Topic | null {
+  const raw = meta.topic?.trim();
+  if (!raw) return null;
+  if (!(TOPICS as readonly string[]).includes(raw)) throw new Error(`Blog post ${slug} has an unknown topic: ${raw}`);
+  return raw as Topic;
+}
+
+/** Plain markdown word count, ~200 words/minute, rounded up, minimum 1. Works for both Hebrew and English: whitespace splits words the same way in either script. */
+function readingMinutesFor(bodyMd: string): number {
+  const words = bodyMd
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 function isCdcSource(entry: RawSource): boolean {
   const url = (entry.url ?? "").toLowerCase();
   if (url.includes("cdc.gov")) return true;
@@ -331,6 +353,9 @@ function loadFile(file: string, lang: Lang): Post {
     faq: expanded.faq,
     reviewer: reviewerFor(slug, meta),
     sources: sourcesFor(slug, lang),
+    topic: topicFor(slug, meta),
+    ageRange: meta.age_range?.trim() || null,
+    readingMinutes: readingMinutesFor(expanded.body),
   };
 }
 
@@ -347,6 +372,9 @@ export function listPosts(lang: Lang = "he"): PostMeta[] {
         description: p.description,
         date: p.date,
         dateModified: p.dateModified,
+        topic: p.topic,
+        ageRange: p.ageRange,
+        readingMinutes: p.readingMinutes,
       };
     })
     .sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
