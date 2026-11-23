@@ -1,0 +1,29 @@
+/* Scoped to /marketing only (imported from this route's layout, not globals.css). */
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 61, 0.45), 0 0 80px rgba(255, 77, 61, 0.35); }
+  70% { box-shadow: 0 0 0 28px rgba(255, 77, 61, 0), 0 0 80px rgba(255, 77, 61, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 61, 0), 0 0 80px rgba(255, 77, 61, 0.35); }
+}
+
+@keyframes count-tick {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.press-button {
+  animation: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.timer-digit {
+  animation: count-tick 1.6s ease-in-out infinite;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
