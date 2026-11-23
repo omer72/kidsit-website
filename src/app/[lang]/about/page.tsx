@@ -37,7 +37,7 @@ const DOCS: Record<Lang, (path: string) => LegalDoc> = {
       {
         id: "what",
         h: "What Kidsit AI does",
-        p: "Hold the mic, tell the app what just happened, and get a short plan with words you can say right now. It is built by a parent, for parents, and it works on iPhone and Android. The first 3 guidance answers are free, for one child, with no account. After that, a new answer needs Premium.",
+        p: "Hold the mic, tell the app what just happened, and get a short plan with words you can say right now. It is built by a parent, for parents, and it works on iPhone and Android. The first 3 guidance answers are free, with no account and no limit on the number of children. After that, a new answer needs Premium.",
       },
       {
         id: "not",

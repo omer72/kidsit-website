@@ -149,7 +149,7 @@ Where to turn:
 
 ## Try it next time
 
-Heading to a family dinner? If the doorway gets tense, open Kidsit and say what's happening. In about 10 seconds you get calm words for your child and for grandma. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Heading to a family dinner? If the doorway gets tense, open Kidsit and say what's happening. In about 10 seconds you get calm words for your child and for grandma. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 ---
 

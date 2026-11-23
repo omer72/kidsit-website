@@ -10,7 +10,7 @@ secondary_queries: ["ChatGPT for parenting advice", "ChatGPT parenting prompt", 
 
 # Kidsit vs ChatGPT: Which Helps More in a Hard Moment With Your Child?
 
-ChatGPT is a general-purpose AI assistant: free, flexible, and good for general questions, planning and thinking things through. Kidsit is an app built for the hard moment itself. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. You press and hold the mic, say what happened, and in about 10 seconds you get a plan in a fixed shape — a recap, why it's happening, three actions with the exact words to say, and a bedtime reconnect. No prompt to write. You can use both.
+ChatGPT is a general-purpose AI assistant: free, flexible, and good for general questions, planning and thinking things through. Kidsit is an app built for the hard moment itself. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. You press and hold the mic, say what happened, and in about 10 seconds you get a plan in a fixed shape — a recap, why it's happening, three actions with the exact words to say, and a bedtime reconnect. No prompt to write. You can use both.
 
 Neither is therapy or medical advice, and neither replaces a professional.
 
@@ -57,7 +57,7 @@ Kidsit is not an open chat about everything. It will not plan your weekly meals 
 
 ### Context per child
 
-Each child has a profile, and moments are kept per child. After you mark that something "didn't help," Kidsit offers a different approach. That is not a promise the next suggestion will work. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. You can also keep a dedicated ChatGPT chat per child; Kidsit structures that context for you.
+Each child has a profile, and moments are kept per child. After you mark that something "didn't help," Kidsit offers a different approach. That is not a promise the next suggestion will work. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. You can also keep a dedicated ChatGPT chat per child; Kidsit structures that context for you.
 
 ### A daily or weekly summary
 
@@ -68,13 +68,13 @@ Kidsit can show a daily or weekly summary, computed on the device from stored mo
 | What matters to you | ChatGPT | Kidsit |
 | --- | --- | --- |
 | What it is | General AI assistant for any topic | App for hard moments with your child |
-| Cost | Free; paid plans available (per OpenAI) | Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Daily or weekly summaries are computed on device and are not Premium-exclusive |
-| How you start | Type or talk; you decide what to ask and how | Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Press and hold the mic and say what happened |
+| Cost | Free; paid plans available (per OpenAI) | Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. Daily or weekly summaries are computed on device and are not Premium-exclusive |
+| How you start | Type or talk; you decide what to ask and how | Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. Press and hold the mic and say what happened |
 | Need to write a prompt? | Answers depend on the question; context and a role help | No |
 | Shape of the answer | Whatever you ask for; varies chat to chat | Fixed: recap, why, 3 actions with exact words, bedtime reconnect |
 | Speed | (not compared here) | A plan in about 10 seconds |
 | Voice | Has a voice mode | Voice-first, press-and-hold; typing is also supported |
-| Per-child context | Memory and saved chats you manage | A profile per child; unlimited children with Premium |
+| Per-child context | Memory and saved chats you manage | A profile per child, with no limit on the number of children |
 | Summary | You can ask it to summarize a chat | Daily or weekly summary, computed on device; not Premium-exclusive |
 | Breadth | Almost anything: meals, emails, planning, explanations | Everyday parenting moments only |
 | Therapy / medical | Not a replacement for a professional | Not a replacement for a professional |
@@ -117,8 +117,8 @@ Kidsit includes a fixed disclaimer and About notice that points to a pediatricia
 
 <!-- faq
 [
-  {"q": "What's the difference between Kidsit and ChatGPT?", "a": "ChatGPT is a general AI assistant that can answer almost anything, and the shape of its answer depends on what you ask. Kidsit is built for the hard moment with your child. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Press and hold the mic, say what happened, and in about 10 seconds you get a plan in a fixed shape — a recap, why it's happening, three actions with the exact words to say, and a bedtime reconnect line."},
-  {"q": "Why use Kidsit if ChatGPT is free?", "a": "Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. ChatGPT is great for general questions and calm planning. Kidsit saves you the hardest part mid-meltdown: writing a good prompt. There's nothing to type, the answer comes in the same shape every time, and moments are kept per child. You can use both."},
+  {"q": "What's the difference between Kidsit and ChatGPT?", "a": "ChatGPT is a general AI assistant that can answer almost anything, and the shape of its answer depends on what you ask. Kidsit is built for the hard moment with your child. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. Press and hold the mic, say what happened, and in about 10 seconds you get a plan in a fixed shape — a recap, why it's happening, three actions with the exact words to say, and a bedtime reconnect line."},
+  {"q": "Why use Kidsit if ChatGPT is free?", "a": "Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. ChatGPT is great for general questions and calm planning. Kidsit saves you the hardest part mid-meltdown: writing a good prompt. There's nothing to type, the answer comes in the same shape every time, and moments are kept per child. You can use both."},
   {"q": "What prompt should I use in ChatGPT when my toddler has a tantrum?", "a": "Give your child's age, what happened, and your situation, then ask for a structure: a one-sentence recap, why it might be happening without a diagnosis, three actions each with one exact sentence to say, and a bedtime reconnect line — under 150 words. Don't share identifying details."},
   {"q": "Can ChatGPT or Kidsit replace a parenting coach or therapist?", "a": "No. Both are tools, not therapy or diagnosis. If you're worried about your child's safety, development or health, or you're struggling yourself, talk to your pediatrician or a licensed professional."},
   {"q": "Can I use both ChatGPT and Kidsit?", "a": "Yes. For example, Kidsit for the moment itself (a meltdown in the living room, a hard drop-off) and ChatGPT in the evening to plan a routine, draft a note to daycare, or dig into a topic."},
@@ -128,7 +128,7 @@ Kidsit includes a fixed disclaimer and About notice that points to a pediatricia
 
 ## Try it next time
 
-Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. Press and hold and say what happened.
+Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. Press and hold and say what happened.
 
 Kidsit AI is on iPhone and Android.
 

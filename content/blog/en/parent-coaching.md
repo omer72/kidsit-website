@@ -67,7 +67,7 @@ No option fits everyone. This is a map, not a ranking.
 | A workshop or a parents' group | You want shared tools and other parents | Meetings by topic or by age | It varies |
 | A public service | You want to start through a health fund, the Ministry of Health, or a municipality | A group meeting, a series of meetings, or a phone line | Some at no cost, some paid. Check eligibility |
 | A book or a recorded course | You want to understand at your own pace, in the evening | Reading or watching | It varies |
-| An AI app for the moment (Kidsit) | You need words now, inside the moment | You say out loud what happened, and you get a short plan | Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. |
+| An AI app for the moment (Kidsit) | You need words now, inside the moment | You say out loud what happened, and you get a short plan | Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. |
 
 ### A private parent coach
 
@@ -201,7 +201,7 @@ Do not copy a phone number from here to somewhere else without opening the page.
 
 ## Start now
 
-Want words for the next moment? Try Kidsit. Your first 3 guidance answers are free, with one child and no account. After that, new guidance needs Premium, which also adds unlimited children. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
+Want words for the next moment? Try Kidsit. Your first 3 guidance answers are free, with no account and no limit on the number of children. After that, new guidance needs Premium. [App Store](https://apps.apple.com/us/app/parent-coach-ai-kidsit/id6769443099) · [Google Play](https://play.google.com/store/apps/details?id=ai.kidsit.app) · [Kidsit in English](https://kidsit.ai/en).
 
 And if you have decided on coaching, the checklist above will help in the first conversation. You can do both: a person for the process, and an AI tool for the moment itself.
 
