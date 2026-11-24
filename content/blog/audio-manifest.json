@@ -159,6 +159,16 @@
     "voice": "EXAVITQu4vr4xnSDxMaL",
     "generatedAt": "2026-11-14T22:18:19.996Z"
   },
+  "he/meltdown-chushi-o-hitkef-zaam": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/meltdown-chushi-o-hitkef-zaam-84b70912.mp3",
+    "duration": 703,
+    "bytes": 5628073,
+    "hash": "84b70912cae9bb89f4a266b106c644a4",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-24T14:15:29.441Z"
+  },
   "he/milchamot-shena": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/milchamot-shena-fcdf2ce0.mp3",
     "duration": 348,
