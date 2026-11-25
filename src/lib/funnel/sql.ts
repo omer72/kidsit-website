@@ -34,16 +34,16 @@ export function funnelUpsertWithEntryParams(value: ValidatedFunnelEvent): string
 
 // Last 28 UTC days including today.
 export const FUNNEL_SUMMARY_SQL = `
-SELECT step, platform, source, SUM(n)::int AS n
+SELECT step, platform, source, app_version, SUM(n)::int AS n
 FROM funnel_counts
 WHERE day >= (now() AT TIME ZONE 'utc')::date - 27
-GROUP BY step, platform, source
+GROUP BY step, platform, source, app_version
 `;
 
 // Same 28 days, for the paywall entry table on /admin/stats.
 export const FUNNEL_ENTRY_SUMMARY_SQL = `
-SELECT entry, platform, SUM(n)::int AS n
+SELECT entry, platform, app_version, SUM(n)::int AS n
 FROM funnel_entry_counts
 WHERE day >= (now() AT TIME ZONE 'utc')::date - 27
-GROUP BY entry, platform
+GROUP BY entry, platform, app_version
 `;

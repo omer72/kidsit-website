@@ -10,8 +10,8 @@ import {
 } from "./sql";
 import type { ValidatedFunnelEvent } from "./validate";
 
-export type FunnelRow = { step: string; platform: string; source: string; n: number };
-export type FunnelEntryRow = { entry: string; platform: string; n: number };
+export type FunnelRow = { step: string; platform: string; source: string; app_version: string; n: number };
+export type FunnelEntryRow = { entry: string; platform: string; app_version: string; n: number };
 
 export async function recordFunnelStep(value: ValidatedFunnelEvent): Promise<void> {
   const url = insightsDatabaseUrl();
@@ -26,6 +26,7 @@ export async function loadFunnelRows(databaseUrl: string): Promise<FunnelRow[]> 
     step: String(r.step ?? ""),
     platform: String(r.platform ?? ""),
     source: String(r.source ?? ""),
+    app_version: String(r.app_version ?? ""),
     n: Number(r.n ?? 0),
   }));
 }
@@ -42,6 +43,7 @@ export async function loadFunnelEntryRows(databaseUrl: string): Promise<FunnelEn
   return (rows as Record<string, unknown>[]).map((r) => ({
     entry: String(r.entry ?? ""),
     platform: String(r.platform ?? ""),
+    app_version: String(r.app_version ?? ""),
     n: Number(r.n ?? 0),
   }));
 }
