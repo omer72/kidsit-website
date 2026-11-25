@@ -376,6 +376,29 @@ html[dir="rtl"] .cookie-table code {
   }
 }
 
+/* content-visibility:auto for below-the-fold home sections, phone width only (≥md it bought
+   nothing in Lighthouse and only risked a placeholder/real-height mismatch). contain-intrinsic-size
+   is set per html[lang] because the two locales render each section's real height differently
+   (longer English copy). Chrome sizes contain-intrinsic-size as the box's CONTENT size even
+   though these boxes are box-sizing:border-box, so each value below is the section's measured
+   real border-box height at 375px for that locale, minus its own padding/border (py-20 = 160px
+   for features/summary/demo/pricing/faq; #parents has no padding of its own, just border-y-2 = 4px) -
+   otherwise the placeholder renders ~160px taller than reality and still jumps on reveal. */
+@media (max-width: 767px) {
+  html[lang="he"] #features { content-visibility: auto; contain-intrinsic-size: auto 808px; }
+  html[lang="en"] #features { content-visibility: auto; contain-intrinsic-size: auto 952px; }
+  html[lang="he"] #summary { content-visibility: auto; contain-intrinsic-size: auto 1405px; }
+  html[lang="en"] #summary { content-visibility: auto; contain-intrinsic-size: auto 1545px; }
+  html[lang="he"] #demo { content-visibility: auto; contain-intrinsic-size: auto 751px; }
+  html[lang="en"] #demo { content-visibility: auto; contain-intrinsic-size: auto 799px; }
+  html[lang="he"] #parents { content-visibility: auto; contain-intrinsic-size: auto 988px; }
+  html[lang="en"] #parents { content-visibility: auto; contain-intrinsic-size: auto 1046px; }
+  html[lang="he"] #pricing { content-visibility: auto; contain-intrinsic-size: auto 1228px; }
+  html[lang="en"] #pricing { content-visibility: auto; contain-intrinsic-size: auto 1276px; }
+  html[lang="he"] #faq { content-visibility: auto; contain-intrinsic-size: auto 484px; }
+  html[lang="en"] #faq { content-visibility: auto; contain-intrinsic-size: auto 632px; }
+}
+
 /* Blog index titles at phone width (≤640px). #NagishLiTrigger is position:fixed;
    right:10px; 60×60 in both directions, so its column is the physical right.
    The overlap check measures the title link's border box. Padding sits inside

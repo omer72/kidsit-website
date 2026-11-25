@@ -16,7 +16,7 @@ export function Summary({ t, lang }: { t: Dict["summary"]; lang: Lang }) {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="summary" className="mx-auto max-w-6xl px-5 py-20 sm:px-6 [content-visibility:auto] [contain-intrinsic-size:auto_1710px] md:[contain-intrinsic-size:auto_1380px] xl:[contain-intrinsic-size:auto_1450px]">
+    <section id="summary" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       {/* Nagish trigger is fixed at the physical bottom-right (60px + 10px).
           padding-right keeps this copy and the screen switcher out of that column, LTR and RTL. */}
       <Reveal className="max-lg:pr-[4.5rem]">

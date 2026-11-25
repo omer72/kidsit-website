@@ -11,7 +11,7 @@ const SHOTS = [
 
 export function Showcase({ t, lang }: { t: Dict["showcase"]; lang: Lang }) {
   return (
-    <section id="demo" className="mx-auto max-w-6xl px-5 py-20 sm:px-6 lg:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_970px] md:[contain-intrinsic-size:auto_1540px] xl:[contain-intrinsic-size:auto_960px]">
+    <section id="demo" className="mx-auto max-w-6xl px-5 py-20 sm:px-6 lg:py-24">
       <Reveal>
         <h2 className="min-w-0 text-balance break-words font-display text-3xl font-semibold sm:text-4xl lg:text-5xl">{t.heading}</h2>
         <p className="mt-3 max-w-md text-lg font-bold text-ink/70">{t.sub}</p>
