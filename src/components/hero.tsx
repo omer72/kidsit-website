@@ -92,7 +92,9 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
         <Chip className="-end-4 bottom-36 rotate-3 sm:-end-14 lg:-end-6 xl:-end-14" delay={0.7}>
           {t.chipTime}
         </Chip>
-        <div className="animate-fade-up-late rotate-1 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-white shadow-sticker-lg">
+        {/* No entrance animation here: this wraps the LCP element, and an animated transform delays when Lighthouse
+            considers it painted. The chips above still animate in; this lands in its resting position immediately. */}
+        <div className="rotate-1 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-white shadow-sticker-lg">
           <Image
             src={lang === "he" ? "/app-mic-he.png" : "/app-mic.png"}
             alt={t.screenshotAlt}

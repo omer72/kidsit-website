@@ -35,13 +35,8 @@
   animation: fade-up 0.7s ease-out both;
 }
 
-.animate-fade-up-late {
-  animation: fade-up 0.7s ease-out 0.15s both;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-up-late {
+  .animate-fade-up {
     animation: none;
   }
 }
