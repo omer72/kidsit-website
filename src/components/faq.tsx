@@ -52,7 +52,7 @@ function Item({ q, a, link, i }: FaqItem & { i: number }) {
 
 export function Faq({ t }: { t: Dict["faq"] }) {
   return (
-    <section id="faq" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
+    <section id="faq" className="mx-auto max-w-6xl px-5 py-20 sm:px-6 [content-visibility:auto] [contain-intrinsic-size:auto_700px]">
       <Reveal>
         <h2 className="min-w-0 text-balance break-words font-display text-3xl font-semibold sm:text-4xl lg:text-5xl">{t.heading}</h2>
       </Reveal>

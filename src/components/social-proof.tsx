@@ -32,7 +32,7 @@ export function SocialProof({ t }: { t: Dict["social"] }) {
   const [lead, ...rest] = t.quotes;
 
   return (
-    <section id="parents" className="border-y-2 border-ink bg-sunny">
+    <section id="parents" className="border-y-2 border-ink bg-sunny [content-visibility:auto] [contain-intrinsic-size:auto_1200px]">
       {/* the page's one colour band: reviews on sunny, ink text throughout */}
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 lg:py-24">
         <Reveal>
