@@ -90,14 +90,14 @@
     "generatedAt": "2026-11-19T09:44:25.049Z"
   },
   "he/hetkefei-zaam-gil-3": {
-    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hetkefei-zaam-gil-3-82a50682.mp3",
-    "duration": 422,
-    "bytes": 3372765,
-    "hash": "82a50682d0ed36c31ee213f8dca92158",
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hetkefei-zaam-gil-3-2cd29e14.mp3",
+    "duration": 436,
+    "bytes": 3486659,
+    "hash": "2cd29e14941af162eeed146b0c3c34d2",
     "provider": "elevenlabs",
     "model": "eleven_v4",
     "voice": "EXAVITQu4vr4xnSDxMaL",
-    "generatedAt": "2026-11-19T09:46:20.817Z"
+    "generatedAt": "2026-11-25T13:11:44.322Z"
   },
   "he/hitkef-zaam-super": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/hitkef-zaam-super-3cd99aab.mp3",
@@ -140,14 +140,14 @@
     "generatedAt": "2026-11-12T15:12:13.569Z"
   },
   "he/ma-lehagid-hitkef-zaam": {
-    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/ma-lehagid-hitkef-zaam-2dcbb6ec.mp3",
-    "duration": 435,
-    "bytes": 3483524,
-    "hash": "2dcbb6ec0ea7eb78ae9423456e373494",
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/ma-lehagid-hitkef-zaam-ba7e559d.mp3",
+    "duration": 539,
+    "bytes": 4316099,
+    "hash": "ba7e559da18c8b29c17698e9bda4727b",
     "provider": "elevenlabs",
     "model": "eleven_v4",
     "voice": "EXAVITQu4vr4xnSDxMaL",
-    "generatedAt": "2026-11-12T13:57:15.464Z"
+    "generatedAt": "2026-11-25T13:17:38.370Z"
   },
   "he/maan-horut-ai": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/maan-horut-ai-6471a91c.mp3",
@@ -160,14 +160,14 @@
     "generatedAt": "2026-11-14T22:18:19.996Z"
   },
   "he/meltdown-chushi-o-hitkef-zaam": {
-    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/meltdown-chushi-o-hitkef-zaam-84b70912.mp3",
-    "duration": 703,
-    "bytes": 5628073,
-    "hash": "84b70912cae9bb89f4a266b106c644a4",
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/meltdown-chushi-o-hitkef-zaam-7a0942c3.mp3",
+    "duration": 739,
+    "bytes": 5914166,
+    "hash": "7a0942c34a7325d8cddebfc4a8748c7c",
     "provider": "elevenlabs",
     "model": "eleven_v4",
     "voice": "EXAVITQu4vr4xnSDxMaL",
-    "generatedAt": "2026-11-24T14:15:29.441Z"
+    "generatedAt": "2026-11-25T13:21:24.108Z"
   },
   "he/milchamot-shena": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/milchamot-shena-fcdf2ce0.mp3",
