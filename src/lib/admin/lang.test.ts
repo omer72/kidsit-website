@@ -29,23 +29,23 @@ test("lang helpers: only 'en' selects English, everything else is Hebrew", () =>
 
 test("number formatting follows the language (he-IL vs en-US)", () => {
   assert.equal(new Intl.NumberFormat(localeOf("en")).format(1234567), "1,234,567");
-  const rows = [{ step: "onboarding_done", platform: "ios", source: "", n: 1234 }];
+  const rows = [{ step: "onboarding_done", platform: "ios", source: "", app_version: "", n: 1234 }];
   assert.equal(buildFunnelData(rows, NOW, [], "en").totals[0].value, "1,234");
   assert.equal(buildFunnelData(rows, NOW, [], "he").totals[0].value, new Intl.NumberFormat("he-IL").format(1234));
 });
 
 test("funnel: English has no Hebrew anywhere, Hebrew output is unchanged by default", () => {
   const rows = [
-    { step: "onboarding_done", platform: "ios", source: "", n: 20 },
-    { step: "paywall_shown", platform: "android", source: "kidsit.ai", n: 6 },
+    { step: "onboarding_done", platform: "ios", source: "", app_version: "", n: 20 },
+    { step: "paywall_shown", platform: "android", source: "kidsit.ai", app_version: "", n: 6 },
   ];
-  const entries = [{ entry: "first_moment", platform: "ios", n: 2 }];
+  const entries = [{ entry: "first_moment", platform: "ios", app_version: "", n: 2 }];
   const en = buildFunnelData(rows, NOW, entries, "en");
   noHebrew("funnel en", en);
   assert.equal(en.tables[0].rows[0][0], FUNNEL_STEP_LABELS_EN.onboarding_done);
-  assert.equal(en.tables[1].rows[0][0], "(unknown)");
-  assert.equal(en.tables[2].rows[0][0], FUNNEL_ENTRY_LABELS_EN.first_moment);
-  assert.match(en.tables[2].rows[1][0], /not reported/);
+  assert.equal(en.tables[2].rows[0][0], "(unknown)");
+  assert.equal(en.tables[3].rows[0][0], FUNNEL_ENTRY_LABELS_EN.first_moment);
+  assert.match(en.tables[3].rows[1][0], /not reported/);
   const empty = buildFunnelData([], NOW, [], "en");
   noHebrew("funnel en empty", empty);
   assert.equal(empty.tables[0].empty, "No data yet.");

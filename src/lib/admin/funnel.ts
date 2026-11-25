@@ -46,6 +46,108 @@ const entryLabels = (lang: Lang) => (lang === "en" ? FUNNEL_ENTRY_LABELS_EN : FU
 const intFor = (lang: Lang) => (x: number) => new Intl.NumberFormat(localeOf(lang)).format(Math.round(x));
 const share = (n: number, base: number) => (base > 0 ? `${((n / base) * 100).toFixed(0)}%` : "—");
 const SOURCE_ROWS = 10;
+const MAX_VERSIONS = 4;
+const OLDER_COL = "older";
+const UNKNOWN_COL = "unknown";
+
+/** Descending by major.minor[.patch], missing parts treated as 0 ("1.0" sorts as "1.0.0"). */
+function compareVersionsDesc(a: string, b: string): number {
+  const pa = a.split(".").map(Number);
+  const pb = b.split(".").map(Number);
+  for (let i = 0; i < 3; i++) {
+    const d = (pb[i] ?? 0) - (pa[i] ?? 0);
+    if (d) return d;
+  }
+  return 0;
+}
+
+/** The newest `max` distinct non-empty versions seen, newest first. */
+function topVersions(versions: string[], max = MAX_VERSIONS): string[] {
+  const set = new Set<string>();
+  for (const v of versions) if (v) set.add(v);
+  return Array.from(set).sort(compareVersionsDesc).slice(0, max);
+}
+
+/** '' (not sent) buckets as "unknown"; a real version outside the kept top set buckets as "older". */
+const versionColumnOf = (kept: readonly string[], v: string): string => (v === "" ? UNKNOWN_COL : kept.includes(v) ? v : OLDER_COL);
+
+const versionColumnLabel = (lang: Lang) => (col: string) =>
+  col === OLDER_COL ? tr(lang, "גרסאות ישנות יותר", "Older versions") : col === UNKNOWN_COL ? tr(lang, "לא ידוע", "Unknown") : col;
+
+/** Column order: the kept versions newest first, then "older", then "unknown" — each only if it has any data. */
+function versionColumnOrder(kept: readonly string[], present: ReadonlySet<string>): string[] {
+  return [...kept.filter((v) => present.has(v)), ...([OLDER_COL, UNKNOWN_COL] as const).filter((c) => present.has(c))];
+}
+
+/** Rows are funnel steps; columns are app versions (newest first, at most MAX_VERSIONS, the rest grouped as
+ *  "Older"/"Unknown"); each cell is that version's own share of its "Finished onboarding" count, so versions
+ *  with very different install counts stay comparable. Empty when no row carries an app version. */
+function versionFunnelTable(rows: FunnelRow[], lang: Lang) {
+  const kept = topVersions(rows.map((r) => r.app_version));
+  const perCol = new Map<string, Map<string, number>>();
+  for (const r of rows) {
+    if (!(FUNNEL_STEPS as readonly string[]).includes(r.step) || !Number.isFinite(r.n) || r.n <= 0) continue;
+    const col = versionColumnOf(kept, r.app_version);
+    const m = perCol.get(col) ?? new Map<string, number>();
+    m.set(r.step, (m.get(r.step) ?? 0) + r.n);
+    perCol.set(col, m);
+  }
+  const cols = versionColumnOrder(kept, new Set(perCol.keys()));
+  const label = versionColumnLabel(lang);
+  const baseFor = (c: string) => perCol.get(c)?.get("onboarding_done") ?? 0;
+  return {
+    title: tr(lang, "משפך לפי גרסת אפליקציה", "Funnel by app version"),
+    columns: [tr(lang, "שלב", "Step"), ...cols.map(label)],
+    rows: cols.length
+      ? FUNNEL_STEPS.map((step) => [stepLabels(lang)[step], ...cols.map((c) => share(perCol.get(c)?.get(step) ?? 0, baseFor(c)))])
+      : [],
+    empty: tr(lang, "עדיין אין נתונים עם גרסת אפליקציה.", "No data yet with an app version."),
+  };
+}
+
+/** Same version bucketing as above, applied to "where the paywall was opened from": rows are entry points,
+ *  columns are app versions, cells are raw counts (matching the existing by-platform table's style). */
+function versionEntryTable(entryRows: FunnelEntryRow[], funnelRows: FunnelRow[], lang: Lang) {
+  const int = intFor(lang);
+  const kept = topVersions([...entryRows.map((r) => r.app_version), ...funnelRows.filter((r) => r.step === "paywall_shown").map((r) => r.app_version)]);
+
+  const paywallByCol = new Map<string, number>();
+  for (const r of funnelRows) {
+    if (r.step !== "paywall_shown" || !Number.isFinite(r.n) || r.n <= 0) continue;
+    const col = versionColumnOf(kept, r.app_version);
+    paywallByCol.set(col, (paywallByCol.get(col) ?? 0) + r.n);
+  }
+
+  const perCol = new Map<string, Map<string, number>>();
+  for (const r of entryRows) {
+    if (!(FUNNEL_ENTRIES as readonly string[]).includes(r.entry) || !Number.isFinite(r.n) || r.n <= 0) continue;
+    const col = versionColumnOf(kept, r.app_version);
+    const m = perCol.get(col) ?? new Map<string, number>();
+    m.set(r.entry, (m.get(r.entry) ?? 0) + r.n);
+    perCol.set(col, m);
+  }
+
+  const present = new Set<string>([...Array.from(perCol.keys()), ...Array.from(paywallByCol.keys())]);
+  const cols = versionColumnOrder(kept, present);
+  const label = versionColumnLabel(lang);
+  const sumCol = (c: string) => Array.from(perCol.get(c)?.values() ?? []).reduce((a, b) => a + b, 0);
+
+  const rows = FUNNEL_ENTRIES.filter((e) => cols.some((c) => (perCol.get(c)?.get(e) ?? 0) > 0)).map((e) => [
+    entryLabels(lang)[e],
+    ...cols.map((c) => int(perCol.get(c)?.get(e) ?? 0)),
+  ]);
+  const missing = cols.map((c) => Math.max(0, (paywallByCol.get(c) ?? 0) - sumCol(c)));
+  if (rows.length && missing.some((m) => m > 0)) {
+    rows.push([tr(lang, "(לא דווח, גרסה ישנה)", "(not reported, older version)"), ...missing.map(int)]);
+  }
+
+  return {
+    title: tr(lang, "מאיפה נפתח מסך המנוי, לפי גרסה", "Where the paywall was opened from, by app version"),
+    columns: [tr(lang, "נקודת כניסה", "Entry point"), ...cols.map(label)],
+    rows,
+    empty: tr(lang, "עדיין אין נתונים מגרסה שמדווחת נקודת כניסה.", "No data yet from a version that reports the entry point."),
+  };
+}
 
 /** Where the paywall was opened from. Older app versions send paywall_shown without an entry, so the
  *  remainder of the paywall_shown count is shown as "not reported" instead of being hidden. */
@@ -136,6 +238,7 @@ export function buildFunnelData(rows: FunnelRow[], now = new Date(), entryRows: 
         ]),
         empty: tr(lang, "עדיין אין נתונים.", "No data yet."),
       },
+      versionFunnelTable(rows, lang),
       {
         title: tr(lang, "לפי מקור התקנה (Android)", "By install source (Android)"),
         columns: [tr(lang, "מקור", "Source"), L.onboarding_done, L.answer_received, L.purchase],
@@ -144,6 +247,7 @@ export function buildFunnelData(rows: FunnelRow[], now = new Date(), entryRows: 
         empty: tr(lang, "עדיין אין נתונים.", "No data yet."),
       },
       entryTable(entryRows, count("paywall_shown"), byPlatform.get("paywall_shown|ios") ?? 0, byPlatform.get("paywall_shown|android") ?? 0, lang),
+      versionEntryTable(entryRows, rows, lang),
     ],
     note: tr(
       lang,
