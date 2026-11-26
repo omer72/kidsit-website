@@ -46,6 +46,10 @@ const COVERS: Record<string, { dir: TextDir; lines: string[] }> = {
     dir: "rtl",
     lines: ["התקף זעם או קריסה חושית?", "איך מבדילים, ומה עושים בכל שלב"],
   },
+  "he/tayeem-aut-o-tayeem-ein": {
+    dir: "rtl",
+    lines: ["טיים אאוט או טיים אין?", "מה אומרים במקום לשלוח לחדר"],
+  },
 };
 
 const AFFECTED = ["he/preida-bagan", "he/kibui-masach"];

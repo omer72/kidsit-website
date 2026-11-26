@@ -82,7 +82,7 @@ test("CTA marker: split once, comment only (never spoken), present in the planne
       withMarker += n;
     }
   }
-  assert.equal(withMarker, 13);
+  assert.equal(withMarker, 14);
 });
 
 test("QR: scannable SVG for the smart store link, labelled, nothing external", () => {
