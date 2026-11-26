@@ -15,12 +15,16 @@ const COPY = {
     sending: "שולחים…",
     sent: "תודה! התגובה תופיע אחרי שנאשר אותה.",
     failed: "השליחה נכשלה. אפשר לנסות שוב בעוד רגע.",
+    privacy: "השם יוצג עם התגובה. כתובת האימייל לא חובה ולא תוצג באתר. התגובה תתפרסם רק אחרי אישור. פרטים נוספים ב",
+    privacyLink: "מדיניות הפרטיות",
+    privacyAfter: ".",
     errors: {
       name: "צריך למלא שם.",
       email: "כתובת האימייל לא תקינה.",
       body: "צריך לכתוב תגובה.",
       post: "הפוסט לא נמצא.",
       spam: "",
+      rate: "נשלחו יותר מדי תגובות מכתובת זו. אפשר לנסות שוב בעוד שעה.",
     },
   },
   en: {
@@ -32,12 +36,16 @@ const COPY = {
     sending: "Sending…",
     sent: "Thanks! Your comment will appear once we approve it.",
     failed: "Sending failed. Please try again in a moment.",
+    privacy: "Your name is shown with the comment. Email is optional and is not displayed on the site. Comments are published only after approval. See the ",
+    privacyLink: "privacy policy",
+    privacyAfter: " for details.",
     errors: {
       name: "Please enter your name.",
       email: "That email address doesn't look right.",
       body: "Please write a comment.",
       post: "Post not found.",
       spam: "",
+      rate: "Too many comments from this address. Please try again in an hour.",
     },
   },
 } satisfies Record<Lang, Record<string, unknown> & { errors: Record<CommentError, string> }>;
@@ -96,6 +104,13 @@ export function BlogCommentForm({ lang, slug }: { lang: Lang; slug: string }) {
           {error}
         </p>
       ) : null}
+      <p className="text-sm text-ink-muted">
+        {ui.privacy}
+        <a href={`/${lang}/privacy#comments`} className="font-bold text-grape underline underline-offset-2">
+          {ui.privacyLink}
+        </a>
+        {ui.privacyAfter}
+      </p>
       <Submit ui={ui} />
     </form>
   );

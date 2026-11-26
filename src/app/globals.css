@@ -149,13 +149,21 @@ html.consent-needed #NagishLiTrigger {
   margin-top: 1rem;
 }
 /* Legal pages (support, privacy, accessibility, terms) read like the articles: regular weight at 18px,
-   running text near 70 characters a line. */
+   running text near 70 characters a line.
+   Use rem, not ch: ch is the width of "0" in the current font, so it jumps when Rubik
+   swaps in for the Arial fallback (468px → 594px at 18px). That shrinks content above
+   in-page anchors after the browser has already aimed the hash scroll, and with
+   scroll-smooth the viewport overshoots on desktop Hebrew. 37.15rem is 52ch of loaded
+   18px Rubik; 35.1rem is 52ch of 18px Nunito. */
 .legal-prose {
   font-size: 1.125rem;
   line-height: 1.7;
 }
 .legal-prose :is(p, ul, ol) {
-  max-width: 52ch;
+  max-width: 35.1rem;
+}
+html[lang="he"] .legal-prose :is(p, ul, ol) {
+  max-width: 37.15rem;
 }
 /* Cookie names are Latin identifiers: isolate them LTR so "_fbp" does not read "fbp_" on /he. */
 .cookie-table code {
