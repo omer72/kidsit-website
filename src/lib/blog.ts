@@ -81,7 +81,9 @@ export type Reviewer = { name: string; credential: string };
  * Each entry is `{ title, url, publisher?, supports?, checkedAt? }`.
  * Only title, url, and publisher are rendered. `supports` and `checkedAt` stay in the file
  * and are not shown. A missing key or an empty array renders no «מקורות» section.
- * CDC pages (cdc.gov, or CDC / Centers for Disease Control in the title or publisher) are skipped.
+ * CDC pages (cdc.gov, or CDC / Centers for Disease Control in the title or publisher) are skipped
+ * unless the entry sets `listCdc: true`. That opt-in is only for a post that already cites the
+ * same CDC URL in the body and should also show it in the sources list.
  */
 export type Source = { title: string; url: string; publisher?: string };
 
@@ -122,6 +124,7 @@ const PAIRS: { he: string; en: string }[] = [
   { he: "kidsit-vs-chatgpt", en: "kidsit-vs-chatgpt" },
   { he: "hachana-lifgishat-hadracha", en: "prepare-for-parent-coaching-session" },
   { he: "lo-rotze-leneshek-et-savta", en: "toddler-wont-hug-relatives" },
+  { he: "tayeem-aut-o-tayeem-ein", en: "time-out-vs-time-in" },
 ];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {
@@ -203,7 +206,7 @@ export function formatPostDate(iso: string, lang: Lang): string {
   return `${month} ${day}, ${m[1]}`;
 }
 
-type RawSource = { title?: string; url?: string; publisher?: string };
+type RawSource = { title?: string; url?: string; publisher?: string; listCdc?: boolean };
 type RawReviewer = { name?: string; credential?: string };
 
 const sourcesByLang: Record<Lang, Record<string, RawSource[]>> = {
@@ -276,7 +279,7 @@ function sourcesFor(slug: string, lang: Lang): Source[] {
   if (!Array.isArray(raw)) throw new Error(`Sources for ${slug} must be an array`);
   const out: Source[] = [];
   raw.forEach((entry, i) => {
-    if (isCdcSource(entry)) return;
+    if (isCdcSource(entry) && entry.listCdc !== true) return;
     const title = entry?.title?.trim() ?? "";
     const url = entry?.url?.trim() ?? "";
     const publisher = entry?.publisher?.trim() ?? "";

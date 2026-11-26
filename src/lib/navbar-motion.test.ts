@@ -29,6 +29,12 @@ test("every page that renders <Navbar> gets the same menu behaviour (Navbar is t
 
 test("the mobile menu does not hide itself without JS animation: opacity is animated, never the only way to show it", () => {
   const nav = src(join(root, "components/navbar.tsx"));
-  assert.match(nav, /animate=\{\{ opacity: 1, y: 0 \}\}/);
+  const css = src(join(root, "app/globals.css"));
+  // The open list is a plain <ul class="mobile-nav-panel">, not a framer `m` node that can stick at opacity 0.
+  assert.match(nav, /className="mobile-nav-panel /);
+  assert.doesNotMatch(nav, /animate=\{\{ opacity: 1, y: 0 \}\}/);
   assert.match(nav, /<header className="sticky top-3 z-50/);
+  // Resting opacity is 1. The enter animation runs only when the user has not asked for reduced motion.
+  assert.match(css, /\.mobile-nav-panel \{\s*opacity: 1;/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.mobile-nav-panel \{\s*animation: mobile-nav-in /);
 });

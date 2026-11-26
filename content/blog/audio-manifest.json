@@ -219,6 +219,16 @@
     "voice": "EXAVITQu4vr4xnSDxMaL",
     "generatedAt": "2026-11-21T20:40:54.543Z"
   },
+  "he/tayeem-aut-o-tayeem-ein": {
+    "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/tayeem-aut-o-tayeem-ein-3fa08514.mp3",
+    "duration": 984,
+    "bytes": 7872513,
+    "hash": "3fa085149a33d967c160cf10f057f206",
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voice": "EXAVITQu4vr4xnSDxMaL",
+    "generatedAt": "2026-11-26T08:58:27.141Z"
+  },
   "he/tzakti-al-hayeled": {
     "src": "https://kzkqlmkjzjrtpqmf.public.blob.vercel-storage.com/blog-audio/he/tzakti-al-hayeled-7f83d6db.mp3",
     "duration": 654,
