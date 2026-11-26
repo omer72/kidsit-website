@@ -2,8 +2,8 @@
 date: 2026-11-26
 updated: 2026-11-26
 slug: /en/blog/instead-of-threats
-title_tag: "What to Say Instead of Threats: Swap \"If You Don't…\" for Words That Work | Kidsit AI"
-meta_description: "Threats work for a week, then stop. Four swaps (when/then, a real choice, \"here's what I'll do\", one small consequence), a table to screenshot, and what to do if you already threatened."
+title_tag: 'What to Say Instead of Threats | Kidsit AI'
+meta_description: 'Threats work for a week, then stop. Four swaps (when/then, a real choice, "here's what I'll do", one small consequence). What to do if you already threatened.'
 primary_query: "what to say instead of threats"
 secondary_queries: ["how to stop threatening my child", "empty threats parenting", "alternatives to threats toddler", "when then statements toddler", "if you don't parenting", "threatening to leave child at park"]
 topic: boundaries-family
