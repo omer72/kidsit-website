@@ -33,3 +33,19 @@ test("privacy page: comments section matches the current form (name + email, no 
   assert.equal(/We collect a phone number/i.test(p), false);
   assert.equal(/אנו אוספים מספר טלפון/.test(p), false);
 });
+
+test("legal-prose max-width is font-independent rem, not ch (hash-scroll stability)", () => {
+  const css = readFileSync(join(root, "src/app/globals.css"), "utf8");
+  const start = css.indexOf(".legal-prose {");
+  const blog = css.indexOf(".blog-prose {");
+  assert.ok(start >= 0 && blog > start);
+  const legalBlock = css.slice(start, blog);
+  assert.match(legalBlock, /max-width:\s*35\.1rem/);
+  assert.match(legalBlock, /html\[lang="he"\] \.legal-prose[\s\S]*max-width:\s*37\.15rem/);
+  assert.equal(/max-width:\s*[^;]*ch/.test(legalBlock), false);
+});
+
+test("Hebrew fonts are preloaded on /he (not preload: false)", () => {
+  const fontsHe = readFileSync(join(root, "src/app/[lang]/fonts-he.ts"), "utf8");
+  assert.equal(/preload:\s*false/.test(fontsHe), false);
+});
