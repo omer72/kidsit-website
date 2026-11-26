@@ -161,3 +161,19 @@ test("shared campaign: HE/EN toddler-hug posts use one ct and one utm_campaign",
   // other posts stay lang-prefixed
   assert.equal(defaultCt(post), "en-kidsit-vs-chatgpt");
 });
+
+test("shared campaign: HE/EN instead-of-threats posts use one ct and one utm_campaign", () => {
+  const hePost: StoreLink = { medium: "blog", lang: "he", page: "bimkom-iyumim", placement: "article" };
+  const enPost: StoreLink = { medium: "blog", lang: "en", page: "instead-of-threats", placement: "article" };
+  const heBar: StoreLink = { ...hePost, placement: "bar" };
+  const enBar: StoreLink = { ...enPost, placement: "bar" };
+  assert.equal(defaultCt(hePost), "instead-of-threats");
+  assert.equal(defaultCt(enPost), "instead-of-threats");
+  assert.equal(defaultCt(heBar), "instead-of-threats-bar");
+  assert.equal(defaultCt(enBar), "instead-of-threats-bar");
+  assert.equal(playReferrer(hePost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=article");
+  assert.equal(playReferrer(enPost), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=article");
+  assert.equal(playReferrer(heBar), "utm_source=kidsit.ai&utm_medium=blog&utm_campaign=instead-of-threats&utm_content=bar");
+  assert.equal(new URL(storeHref("apple", hePost)).searchParams.get("ct"), "instead-of-threats");
+  assert.equal(new URL(storeHref("apple", enBar)).searchParams.get("ct"), "instead-of-threats-bar");
+});

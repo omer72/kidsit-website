@@ -50,6 +50,14 @@ const COVERS: Record<string, { dir: TextDir; lines: string[] }> = {
     dir: "rtl",
     lines: ["טיים אאוט או טיים אין?", "מה אומרים במקום לשלוח לחדר"],
   },
+  "he/bimkom-iyumim": {
+    dir: "rtl",
+    lines: ["במקום איומים:", "מה להגיד במקום «אם לא… אז»"],
+  },
+  "en/instead-of-threats": {
+    dir: "ltr",
+    lines: ["What to Say Instead of Threats", "Swap “If You Don't…” for Words That Work"],
+  },
 };
 
 const AFFECTED = ["he/preida-bagan", "he/kibui-masach"];
