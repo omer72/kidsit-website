@@ -106,7 +106,7 @@ export function BlogCommentForm({ lang, slug }: { lang: Lang; slug: string }) {
       ) : null}
       <p className="text-sm text-ink-muted">
         {ui.privacy}
-        <a href={`/${lang}/privacy`} className="font-bold text-grape underline underline-offset-2">
+        <a href={`/${lang}/privacy#comments`} className="font-bold text-grape underline underline-offset-2">
           {ui.privacyLink}
         </a>
         {ui.privacyAfter}

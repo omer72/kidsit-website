@@ -19,4 +19,4 @@ The form has a honeypot field (`confirm_url`), enforced on the server. Submissio
 
 ## Privacy
 
-The form includes a short notice, in Hebrew and English, that links to the privacy policy. The policy describes what is collected (name and optional email; no phone), that email is never shown on the site, that comments are moderated, and how to request deletion.
+The form includes a short notice, in Hebrew and English, that links to the comments section of the privacy policy (`/{lang}/privacy#comments`). The policy describes what is collected (name and optional email; no phone), that email is never shown on the site, that comments are moderated, and how to request deletion.
