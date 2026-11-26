@@ -3,7 +3,7 @@ import type { Lang } from "@/dictionaries";
 export const COMMENT_LIMITS = { name: 80, email: 254, body: 2000 } as const;
 
 export type CommentInput = { lang: Lang; slug: string; name: string; email: string | null; body: string };
-export type CommentError = "name" | "email" | "body" | "post" | "spam";
+export type CommentError = "name" | "email" | "body" | "post" | "spam" | "rate";
 
 const field = (form: FormData, key: string) => {
   const v = form.get(key);

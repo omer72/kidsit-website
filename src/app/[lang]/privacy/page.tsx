@@ -26,6 +26,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 // Drafted from what the site, the app, and the FAQ already say. Needs a legal read before it's final.
 // The Hebrew version is a translation of the English one; keep the two in sync.
 // Updated November 11, 2026: OpenAI models are gpt-6-luna (guidance) and gpt-transcribe (voice).
+// Updated November 26, 2026: disclose blog comments (name and optional email; no phone; moderation and deletion).
 // Updated November 19, 2026: funnel reports the full app version (major.minor.patch) and, on the paywall step, the entry point.
 // Updated November 11, 2026: anonymous funnel counts, the Android install source, and the free-answers counter.
 // Updated November 2026 for on-device digests and optional anonymous insights.
@@ -37,7 +38,7 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
 const DOCS: Record<Lang, LegalDoc> = {
   en: {
     title: "Privacy Policy",
-    updated: "November 19, 2026",
+    updated: "November 26, 2026",
     intro: `Kidsit AI ("the app") is committed to protecting your privacy and the privacy of your children. This policy explains how we collect, use, and protect your information.`,
     sections: [
       {
@@ -66,8 +67,8 @@ const DOCS: Record<Lang, LegalDoc> = {
               <li>Netlify: hosts the guidance and transcription functions. Those requests pass through Netlify. Netlify&apos;s logs can include an IP address. Anonymous insights are not sent to Netlify, and we do not copy that IP into the insights database.</li>
               <li>RevenueCat: checks whether a subscription is active. The app sends RevenueCat an app user id, and the Netlify function can send that same id when it checks the entitlement. It also holds the Android install source and the free-answers counter described under “App usage counts, install source and free answers”. Apple or Google bills you. We never see your card number.</li>
               <li>Insert Affiliate: if you open the app from an affiliate link, an affiliate identifier is stored on the RevenueCat subscriber. It is not sent with anonymous insights.</li>
-              <li>Vercel: hosts this website (kidsit.ai) and the endpoints for anonymous insights and funnel counts. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our database.</li>
-              <li>Neon: Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send and the daily funnel counters. See “Weekly digest and anonymous insights” and “App usage counts, install source and free answers”.</li>
+              <li>Vercel: hosts this website (kidsit.ai) and the endpoints for anonymous insights, funnel counts, and blog comments. Vercel request logs include IP addresses for the retention period of the plan. We do not copy the IP address or the request body into our database.</li>
+              <li>Neon: Postgres, connected to our Vercel project, stores anonymous insight submissions you choose to send, the daily funnel counters, and blog comments. See “Weekly digest and anonymous insights”, “App usage counts, install source and free answers”, and “Blog comments”.</li>
               <li>Google: Google Analytics 4 and store-click measurement on this website only, after you accept cookies. They do not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
               <li>Meta Platforms: the Meta Pixel on this website only, after you accept analytics cookies, to measure our ads and site visits. It does not receive what you enter in the app. Details are under “Cookies and local storage”.</li>
             </ul>
@@ -77,7 +78,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "retention",
         h: "Data Storage and Retention",
-        p: "Moments, ratings, notes, and child profiles are stored on your device. We do not store those moments or profiles on our servers. If you delete the app, that on-device information is removed with it. The exception is anonymous insights you choose to send: the counts and the optional rating are kept, and free text is deleted after 90 days. Funnel counts are kept only as daily totals.",
+        p: "Moments, ratings, notes, and child profiles are stored on your device. We do not store those moments or profiles on our servers. If you delete the app, that on-device information is removed with it. The exception is anonymous insights you choose to send: the counts and the optional rating are kept, and free text is deleted after 90 days. Funnel counts are kept only as daily totals. Blog comments (name, optional email, and the comment text) are kept until a site administrator deletes them, or until you ask us to delete yours.",
       },
       {
         id: "insights",
@@ -163,6 +164,29 @@ const DOCS: Record<Lang, LegalDoc> = {
               one number, how many free answers have been used, as an attribute on your RevenueCat subscriber, linked to
               the RevenueCat app user id. It does not include the story, the answer, or anything about your child.
               Subscribers are not counted.
+            </p>
+          </>
+        ),
+      },
+      {
+        id: "comments",
+        h: "Blog comments",
+        p: (
+          <>
+            <p>
+              At the end of each blog post you can leave a comment. We collect your name (required) and your email
+              address (optional). We do not collect a phone number. The comment is stored as pending and appears on the
+              post only after a site administrator approves it. On the site we show only your name, the date, and the
+              comment text. Your email is never shown on the site; the administrator can see it when reviewing comments.
+            </p>
+            <p className="mt-2">
+              We use this information to publish approved comments on the post and to review submissions. Comments are
+              stored in Neon Postgres through Vercel, as described under “Third-Party Sharing”. We keep a comment until a
+              site administrator deletes it, or until you ask us to delete it.
+            </p>
+            <p className="mt-2">
+              To ask us to access, correct, or delete a comment, email {mail} and include the post, your name, and the
+              comment text, or the email you submitted with it.
             </p>
           </>
         ),
@@ -282,12 +306,12 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "delete",
         h: "How to delete your data",
-        p: <>Data stored on your device is removed when you delete the app, or when you use Clear all data in the app. Anonymous insights are not linked to you, so we cannot find one specific submission to delete it. Free text from those submissions is deleted automatically after 90 days. To ask us to remove a piece of free text sooner, or to ask about access, correction, or deletion of anything else, email {mail}.</>,
+        p: <>Data stored on your device is removed when you delete the app, or when you use Clear all data in the app. Anonymous insights are not linked to you, so we cannot find one specific submission to delete it. Free text from those submissions is deleted automatically after 90 days. To ask us to remove a piece of free text sooner, to delete a blog comment, or to ask about access, correction, or deletion of anything else, email {mail}.</>,
       },
       {
         id: "rights",
         h: "Your Rights",
-        p: "Under the Israeli Privacy Protection Law and the GDPR, you have the right to access, correct, or delete your data. On-device data is under your control in the app. Anonymous insights are not linked to an identity, so we cannot look up a specific send; free text is deleted after 90 days. Contact us using the address below to exercise these rights.",
+        p: "Under the Israeli Privacy Protection Law and the GDPR, you have the right to access, correct, or delete your data. On-device data is under your control in the app. Anonymous insights are not linked to an identity, so we cannot look up a specific send; free text is deleted after 90 days. For a blog comment, email us as described under “Blog comments”. Contact us using the address below to exercise these rights.",
       },
       {
         id: "security",
@@ -303,7 +327,7 @@ const DOCS: Record<Lang, LegalDoc> = {
   },
   he: {
     title: "מדיניות פרטיות",
-    updated: "19 בנובמבר 2026",
+    updated: "26 בנובמבר 2026",
     intro: `Kidsit AI‏ ("האפליקציה") מחויבת להגנה על פרטיותכם ועל פרטיות ילדיכם. מדיניות זו מסבירה כיצד אנו אוספים מידע, משתמשים בו ומגנים עליו.`,
     sections: [
       {
@@ -332,8 +356,8 @@ const DOCS: Record<Lang, LegalDoc> = {
               <li>Netlify: מארח את פונקציות ההדרכה והתמלול. הבקשות האלה עוברות דרך Netlify. בלוגים של Netlify עשויה להופיע כתובת IP. תובנות אנונימיות אינן נשלחות ל-Netlify, ואיננו מעתיקים את כתובת ה-IP הזו למסד התובנות.</li>
               <li>RevenueCat: בודק אם מנוי פעיל. האפליקציה שולחת ל-RevenueCat מזהה משתמש של האפליקציה, ופונקציית Netlify יכולה לשלוח את אותו מזהה כשהיא בודקת זכאות. אצלו נשמרים גם מקור ההתקנה ב-Android ומונה תשובות החינם, כמתואר בסעיף „ספירות שימוש, מקור ההתקנה ותשובות חינם”. Apple או Google מחייבות אתכם. איננו רואים את מספר כרטיס האשראי.</li>
               <li>Insert Affiliate: אם פתחתם את האפליקציה מקישור שותפים, מזהה שותף נשמר אצל המנוי ב-RevenueCat. הוא אינו נשלח עם תובנות אנונימיות.</li>
-              <li>Vercel: מארח את האתר הזה (kidsit.ai) ואת נקודות הקצה של התובנות האנונימיות ושל ספירות המשפך. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד שלנו.</li>
-              <li>Neon: ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח ואת מוני המשפך היומיים. ראו „סיכום שבועי ותובנות אנונימיות” ו„ספירות שימוש, מקור ההתקנה ותשובות חינם”.</li>
+              <li>Vercel: מארח את האתר הזה (kidsit.ai) ואת נקודות הקצה של התובנות האנונימיות, של ספירות המשפך ושל תגובות הבלוג. בלוגי הבקשות של Vercel מופיעות כתובות IP, למשך השמירה של התוכנית. איננו מעתיקים את כתובת ה-IP או את גוף הבקשה למסד שלנו.</li>
+              <li>Neon: ‏Postgres, המחובר לפרויקט Vercel שלנו, שומר שליחות של תובנות אנונימיות שאתם בוחרים לשלוח, את מוני המשפך היומיים ואת תגובות הבלוג. ראו „סיכום שבועי ותובנות אנונימיות”, „ספירות שימוש, מקור ההתקנה ותשובות חינם” ו„תגובות בבלוג”.</li>
               <li>Google: ‏Google Analytics 4 ומדידת לחיצה על חנות באתר הזה בלבד, אחרי שאתם מאשרים עוגיות. הם אינם מקבלים את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
               <li>Meta Platforms: הפיקסל של Meta באתר הזה בלבד, אחרי שאתם מאשרים עוגיות סטטיסטיקה, כדי למדוד את הפרסום שלנו וביקורים באתר. הוא אינו מקבל את מה שאתם מזינים באפליקציה. הפירוט נמצא בסעיף „עוגיות ואחסון מקומי”.</li>
             </ul>
@@ -343,7 +367,7 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "retention",
         h: "אחסון ושמירת מידע",
-        p: "הרגעים, הדירוגים, ההערות ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים את הרגעים או את הפרופילים האלה בשרתים שלנו. מחיקת האפליקציה מוחקת את המידע הזה יחד איתה. החריג הוא תובנות אנונימיות שאתם בוחרים לשלוח: הספירות והדירוג האופציונלי נשמרים, וטקסט חופשי נמחק אחרי 90 יום. ספירות המשפך נשמרות רק כסיכומים יומיים.",
+        p: "הרגעים, הדירוגים, ההערות ופרופילי הילדים נשמרים במכשיר שלכם. איננו שומרים את הרגעים או את הפרופילים האלה בשרתים שלנו. מחיקת האפליקציה מוחקת את המידע הזה יחד איתה. החריג הוא תובנות אנונימיות שאתם בוחרים לשלוח: הספירות והדירוג האופציונלי נשמרים, וטקסט חופשי נמחק אחרי 90 יום. ספירות המשפך נשמרות רק כסיכומים יומיים. תגובות בבלוג (שם, אימייל אופציונלי וטקסט התגובה) נשמרות עד שמנהל האתר מוחק אותן, או עד שתבקשו שנמחק את התגובה שלכם.",
       },
       {
         id: "insights",
@@ -422,6 +446,28 @@ const DOCS: Record<Lang, LegalDoc> = {
               מונה תשובות החינם. 3 תשובות ההדרכה הראשונות בחינם. כדי לספור אותן, פונקציית Netlify שלנו שומרת מספר אחד,
               כמה תשובות חינם כבר התקבלו, כמאפיין של המנוי שלכם ב-RevenueCat, מקושר למזהה המשתמש של האפליקציה
               ב-RevenueCat. הוא אינו כולל את הסיפור, את התשובה או מידע על הילד. אצל מנויים לא סופרים.
+            </p>
+          </>
+        ),
+      },
+      {
+        id: "comments",
+        h: "תגובות בבלוג",
+        p: (
+          <>
+            <p>
+              בסוף כל פוסט בבלוג אפשר להשאיר תגובה. אנו אוספים את השם (חובה) ואת כתובת האימייל (לא חובה). איננו אוספים
+              מספר טלפון. התגובה נשמרת כממתינה לאישור, ומופיעה בפוסט רק אחרי שמנהל האתר מאשר אותה. באתר מוצגים רק השם,
+              התאריך וטקסט התגובה. האימייל אינו מוצג באתר; מנהל האתר יכול לראות אותו כשהוא בוחן תגובות.
+            </p>
+            <p className="mt-2">
+              אנו משתמשים במידע הזה כדי לפרסם תגובות שאושרו בפוסט וכדי לבחון הגשות. התגובות נשמרות ב-Neon Postgres דרך
+              Vercel, כמתואר בסעיף „שיתוף מידע עם צדדים שלישיים”. התגובה נשמרת עד שמנהל האתר מוחק אותה, או עד שתבקשו
+              שנמחק אותה.
+            </p>
+            <p className="mt-2">
+              כדי לבקש עיון, תיקון או מחיקה של תגובה, כתבו אלינו לכתובת {mail} וציינו את הפוסט, את השם ואת טקסט
+              התגובה, או את האימייל שנשלח איתה.
             </p>
           </>
         ),
@@ -538,12 +584,12 @@ const DOCS: Record<Lang, LegalDoc> = {
       {
         id: "delete",
         h: "כיצד למחוק את המידע שלכם",
-        p: <>המידע השמור במכשיר שלכם נמחק עם מחיקת האפליקציה, או כשאתם משתמשים בניקוי כל הנתונים באפליקציה. תובנות אנונימיות אינן מקושרות אליכם, ולכן לא נוכל לאתר שליחה מסוימת כדי למחוק אותה. טקסט חופשי מהשליחות האלה נמחק אוטומטית אחרי 90 יום. כדי לבקש שנמחק טקסט חופשי מוקדם יותר, או לשאול על עיון, תיקון או מחיקה של כל דבר אחר, כתבו אלינו לכתובת {mail}.</>,
+        p: <>המידע השמור במכשיר שלכם נמחק עם מחיקת האפליקציה, או כשאתם משתמשים בניקוי כל הנתונים באפליקציה. תובנות אנונימיות אינן מקושרות אליכם, ולכן לא נוכל לאתר שליחה מסוימת כדי למחוק אותה. טקסט חופשי מהשליחות האלה נמחק אוטומטית אחרי 90 יום. כדי לבקש שנמחק טקסט חופשי מוקדם יותר, למחוק תגובה בבלוג, או לשאול על עיון, תיקון או מחיקה של כל דבר אחר, כתבו אלינו לכתובת {mail}.</>,
       },
       {
         id: "rights",
         h: "הזכויות שלכם",
-        p: "בהתאם לחוק הגנת הפרטיות הישראלי ולתקנה הכללית להגנה על מידע של האיחוד האירופי (GDPR), עומדת לכם הזכות לעיין במידע שלכם, לתקנו או למחוק אותו. המידע שבמכשיר נמצא בשליטתכם באפליקציה. תובנות אנונימיות אינן מקושרות לזהות, ולכן לא נוכל לאתר שליחה מסוימת; טקסט חופשי נמחק אחרי 90 יום. למימוש הזכויות האלה, פנו אלינו בכתובת המופיעה להלן.",
+        p: "בהתאם לחוק הגנת הפרטיות הישראלי ולתקנה הכללית להגנה על מידע של האיחוד האירופי (GDPR), עומדת לכם הזכות לעיין במידע שלכם, לתקנו או למחוק אותו. המידע שבמכשיר נמצא בשליטתכם באפליקציה. תובנות אנונימיות אינן מקושרות לזהות, ולכן לא נוכל לאתר שליחה מסוימת; טקסט חופשי נמחק אחרי 90 יום. לגבי תגובה בבלוג, כתבו אלינו כמתואר בסעיף „תגובות בבלוג”. למימוש הזכויות האלה, פנו אלינו בכתובת המופיעה להלן.",
       },
       {
         id: "security",
