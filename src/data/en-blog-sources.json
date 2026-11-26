@@ -286,5 +286,36 @@
       "supports": "December 2025, a pediatrician author. Kids shouldn't be forced to show physical affection; respect over offending; a short line to the relative plus an alternative for the child, then move on. Cited once, as a secondary source.",
       "checkedAt": "2026-11-10T15:10:00+02:00"
     }
+  ],
+  "instead-of-threats": [
+    {
+      "title": "Tips for Giving Directions — Essentials for Parenting Toddlers",
+      "publisher": "CDC",
+      "url": "https://www.cdc.gov/parenting-toddlers/directions/good-directions.html",
+      "listCdc": true,
+      "supports": "30 April 2026. Tell the child what to do, not just what to stop; offer two choices; use a neutral tone; give one warning, then follow through; before naming a consequence, check that you have the time and energy to follow through.",
+      "checkedAt": "2026-11-26T17:50:00+02:00"
+    },
+    {
+      "title": "Positive discipline for young children",
+      "publisher": "Caring for Kids — Canadian Paediatric Society",
+      "url": "https://caringforkids.cps.ca/handouts/behavior-and-development/positive-discipline-for-young-children",
+      "supports": "Last updated January 2020. Say what you mean, mean what you say, and follow through; use fewer words; tell children what they can do; talk to a health professional if the pattern is affecting the relationship.",
+      "checkedAt": "2026-11-26T17:50:00+02:00"
+    },
+    {
+      "title": "What's the Best Way to Discipline My Child?",
+      "publisher": "HealthyChildren.org — American Academy of Pediatrics",
+      "url": "https://www.healthychildren.org/english/family-life/family-dynamics/communication-discipline/pages/disciplining-your-child.aspx",
+      "supports": "Last updated 11/5/2018. Harsh verbal discipline and shaming are ineffective and harmful.",
+      "checkedAt": "2026-11-26T17:50:00+02:00"
+    },
+    {
+      "title": "Parental wellbeing — stepping out of the anger cycle (Hebrew)",
+      "publisher": "Israel Ministry of Health — parenting site",
+      "url": "https://me.health.gov.il/parenting/learn-more/family-parental-welfare/anger-management/",
+      "supports": "15 January 2025. Say what you will do to help the child keep the limit, and say what is allowed. Cited for meaning only.",
+      "checkedAt": "2026-11-26T17:50:00+02:00"
+    }
   ]
 }

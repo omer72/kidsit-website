@@ -84,6 +84,8 @@ function fit(prefix: string, variable: string, suffix: string, max: number, opti
 const SHARED_STORE_CAMPAIGN: Record<string, string> = {
   "lo-rotze-leneshek-et-savta": "toddler-wont-hug-relatives",
   "toddler-wont-hug-relatives": "toddler-wont-hug-relatives",
+  "bimkom-iyumim": "instead-of-threats",
+  "instead-of-threats": "instead-of-threats",
 };
 
 function sharedCampaign(page: string): string | undefined {

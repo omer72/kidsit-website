@@ -125,6 +125,7 @@ const PAIRS: { he: string; en: string }[] = [
   { he: "hachana-lifgishat-hadracha", en: "prepare-for-parent-coaching-session" },
   { he: "lo-rotze-leneshek-et-savta", en: "toddler-wont-hug-relatives" },
   { he: "tayeem-aut-o-tayeem-ein", en: "time-out-vs-time-in" },
+  { he: "bimkom-iyumim", en: "instead-of-threats" },
 ];
 
 export function blogAlternate(lang: Lang, slug: string): { lang: Lang; slug: string; path: string } | null {
