@@ -36,9 +36,15 @@ export function NagishLi({ lang }: { lang: Lang }) {
   }, [lang]);
 
   return (
-    <Script id="nagishli-loader" strategy="lazyOnload">
+    // L10: the config/gate setup below is a few lines and runs right after hydration (cheap, no LCP cost).
+    // The 61KB jQuery + nagishli_beta pair it gates is what was competing with LCP, so that chain only
+    // starts on the user's first interaction (mouse, touch or keyboard) or, failing that, once idle after
+    // load (bounded by a timeout) — so the trigger still appears and keyboard users can still reach it.
+    <Script id="nagishli-loader" strategy="afterInteractive">
       {`(function(){var l=${JSON.stringify(lang)};try{var k="${KEY}",st=JSON.parse(localStorage.getItem(k)||"null");if(st&&st.language!==l){st.language=l;localStorage.setItem(k,JSON.stringify(st))}}catch(e){}window.nagishli_config={language:l,color:"purple"};
-var q=["/nagishli/jquery.min.js","/nagishli/nagishli_beta.js?v=3.0b","/nagishli/site-patch.js"];(function n(){var u=q.shift();if(!u)return;var s=document.createElement("script");s.src=u;s.charset="utf-8";s.onload=n;document.body.appendChild(s)})();})();`}
+var started=false;function load(){if(started)return;started=true;var q=["/nagishli/jquery.min.js","/nagishli/nagishli_beta.js?v=3.0b","/nagishli/site-patch.js"];(function n(){var u=q.shift();if(!u)return;var s=document.createElement("script");s.src=u;s.charset="utf-8";s.onload=n;document.body.appendChild(s)})()}
+["pointerdown","mousemove","keydown","touchstart","scroll"].forEach(function(e){document.addEventListener(e,load,{capture:true,once:true,passive:true})});
+if("requestIdleCallback" in window){requestIdleCallback(load,{timeout:5000})}else{setTimeout(load,5000)}})();`}
     </Script>
   );
 }

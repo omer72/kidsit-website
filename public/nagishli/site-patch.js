@@ -11,6 +11,7 @@
      the vendor's own Enter/Space handling is kept (no extra key handler)
    - the widget's "Accessibility Statement" links go to this site's own statement page (not the vendor's generic dialog);
      Escape closes any vendor dialog first and returns focus to its opener
+   - L9: the trigger button's icon is swapped for a higher-resolution version, pinned to the same 40x40 display size
    NOTE: do not move the widget's DOM (an earlier tab-order patch re-inserted it after the header and caused a full-page layout shift, CLS ~2). */
 (function () {
   // kidsit.ai routes both languages under a prefix: /he/... and /en/... (anything else, e.g. a 404, falls back to <html lang>).
@@ -38,6 +39,9 @@
     // The widget root sits after the footer, outside every landmark (axe "region"): make it a labelled region.
     var root = document.querySelector('nagishli'); if (root && !root.hasAttribute('role')) { root.setAttribute('role', 'region'); root.setAttribute('aria-label', L.menu) }
     if (t && !t.__bvKey) { t.__bvKey = 1; t.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Spacebar') e.preventDefault() }); t.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); if (!isOpen()) t.click() } }) }
+    // L9: the vendor's trigger icon is a 40x40 raster (1x), too low-res for 2x/3x screens (Lighthouse image-size-responsive).
+    // Swap in a 120x120 (3x) version of the same artwork, pinned back to 40x40 on screen so nothing else moves.
+    if (t) { var ti = t.querySelector('img'); if (ti && !ti.__bvHiRes) { ti.__bvHiRes = 1; ti.setAttribute('width', '40'); ti.setAttribute('height', '40'); ti.src = '/nagishli/trigger-icon-2x.png' } }
     if (c && !c.__bvKey) { c.__bvKey = 1; c.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Spacebar') e.preventDefault() }); c.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); c.click(); var t2 = document.querySelector('#NagishLiTrigger .nagishli-trigger-icon'); if (t2) t2.focus() } }) }
     // Overlay close spans carry an aria-label without a role (axe aria-prohibited-attr): make them real buttons.
     asButton(document.querySelectorAll('.nagishli-overlay-content-close:not([role])'))
